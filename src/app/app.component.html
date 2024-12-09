@@ -1,15 +1,38 @@
-<!-- <app-header></app-header>
-<div class="container">
-  <app-sidebar></app-sidebar>
-  <router-outlet></router-outlet>
-</div> -->
+<div class="min-h-screen flex flex-col">
+  <app-header
+    class="fixed top-0 left-0 right-0 z-50 bg-white shadow rounded-b-lg"
+  ></app-header>
 
-<div class="flex flex-col min-h-screen">
-  <app-header></app-header>
-  <div class="flex flex-1 overflow-hidden">
-    <app-sidebar></app-sidebar>
-    <main class="flex-1 p-4 overflow-y-auto">
+  <div class="mt-16 flex flex-1 overflow-hidden">
+    <app-sidebar
+      class="fixed top-28 left-0 z-40 w-16 h-auto transition-transform rounded-lg bg-gradient-to-r from-gray-700 to-gray-900 overflow-hidden"
+    ></app-sidebar>
+
+    <main
+      class="ml-16 flex-1 bg-gradient-to-r w-auto from-gray-100 to-gray-200 rounded-lg overflow-y-auto"
+    >
+      <!-- <app-home-page></app-home-page> -->
       <router-outlet></router-outlet>
     </main>
   </div>
 </div>
+<!-- 
+<div class="h-screen flex flex-col overflow-hidden">
+  <app-header
+    class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md rounded-b-lg"
+  >
+  </app-header>
+
+  <div class="mt-16 flex flex-1 overflow-hidden">
+    <app-sidebar
+      class="h-full w-64 bg-gradient-to-r from-blue-900 to-purple-800 rounded-lg shadow-lg overflow-hidden"
+    ></app-sidebar>
+
+    <main
+      class="flex-1 bg-gray-50 rounded-lg shadow-inner m-2 p-4 overflow-y-auto"
+    >
+      <app-home-page></app-home-page>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div> -->
