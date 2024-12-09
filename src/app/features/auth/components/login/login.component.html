@@ -1,1 +1,140 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500"
+  >
+    <!-- <div class="w-full max-w-6xl p-4 sm:p-6 lg:p-8"> -->
+    <div class="w-full lg:w-1/2 py-8 px-6 sm:px-8 lg:px-12">
+      <div
+        class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row"
+      >
+        <!-- Left side with image (visible only on desktop) -->
+        <div
+          class="hidden lg:block lg:w-1/2 bg-cover bg-center"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1733411676590-951bda1c25b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          "
+        ></div>
+        <!-- Right side with form -->
+        <!-- class="w-full lg:w-1/2 py-8 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-white-400 to-blue-500 hover:from-yellow-500 hover:to-orange-500" -->
+
+        <div class="w-full lg:w-1/2 py-8 px-6 sm:px-8 lg:px-12">
+          <h1
+            class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
+          >
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
+              >Login</span
+            >
+          </h1>
+          <p class="mb-6 text-gray-600">
+            Welcome back! Please enter your details.
+          </p>
+          <form>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="john@example.com"
+                  required
+                  class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-700"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                  />
+                  <label
+                    for="remember-me"
+                    class="ml-2 block text-sm text-gray-900"
+                  >
+                    Remember me
+                  </label>
+                </div>
+                <div class="text-sm">
+                  <a
+                    href="#"
+                    class="font-medium text-purple-600 hover:text-purple-500"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
+              </div>
+              <div class="flex flex-row space-x-2">
+                <button
+                  type="button"
+                  class="min-w-[100px] bg-gradient-to-r from-teal-400 to-blue-500 max-w-[200px] flex justify-center py-2 px-4 border border-purple-600 rounded-md shadow-sm text-sm font-medium text-purple-600 bg-white hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  class="min-w-[100px] max-w-[200px] flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Reset Password
+                </button>
+                <button
+                  type="button"
+                  class="min-w-[100px] max-w-[200px] flex justify-center py-2 px-4 border border-purple-600 rounded-md shadow-sm text-sm font-medium text-purple-600 bg-white hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Sign up
+                </button>
+              </div>
+              <!-- <div class="flex flex-col space-y-2">
+                <button
+                  type="submit"
+                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  class="w-full flex justify-center py-2 px-4 border border-purple-600 rounded-md shadow-sm text-sm font-medium text-purple-600 bg-white hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Sign Up
+                </button>
+                <button
+                  type="button"
+                  class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Reset Password
+                </button>
+              </div> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
