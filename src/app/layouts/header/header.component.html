@@ -5,6 +5,7 @@
     <div class="flex flex-wrap justify-between items-center">
       <div class="flex justify-start items-center">
         <button
+          (click)="showDialog('topright')"
           routerLinkActive="router-link-active"
           id="toggleSidebar"
           aria-expanded="true"
@@ -47,7 +48,6 @@
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
-          <span class="sr-only">Toggle sidebar</span>
         </button>
         <a href="/signup" class="flex mr-4">
           <img
@@ -420,9 +420,12 @@
           </a>
         </div>
         <!-- Apps -->
+
         <button
-          type="button"
-          (click)="toggleAppDropDown()"
+          icon="pi pi-arrow-down-left"
+          label="TopRight"
+          severity="secondary"
+          styleClass="min-w-40"
           data-dropdown-toggle="apps-dropdown"
           class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         >
@@ -793,3 +796,94 @@
     </div>
   </nav>
 </header>
+
+<!-- header toggle -->
+<!-- <p-drawer
+  [(visible)]="visible"
+  [modal]="true"
+  [showCloseIcon]="false"
+  [style]="{ width: '120px' }"
+  class="top-28 left-0 z-40 transition-transform rounded-lg overflow-hidden shadow-lg"
+>
+  <section
+    class="w-64 h-auto max-h-[calc(100vh-7rem)] overflow-y-auto bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col"
+  >
+    <div class="w-full py-4 flex flex-col items-center gap-4">
+      <a
+        href="https://flowbite-svelte.com"
+        class="w-full text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-2"
+      >
+        <img
+          src="/images/technologies/svelte.svg"
+          alt="Flowbite Svelte"
+          class="w-10 h-10"
+        />
+        <h3 class="font-semibold text-sm text-gray-900 dark:text-white mt-2">
+          Flowbite Svelte
+        </h3>
+      </a>
+
+      <a
+        href="https://github.com/themesberg/flowbite-angular"
+        class="w-full text-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-2"
+      >
+        <svg
+          class="w-10 h-10 text-red-600"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          <path
+            d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z"
+          ></path>
+        </svg>
+        <h3 class="font-semibold text-sm text-gray-900 dark:text-white mt-2">
+          Flowbite Angular
+        </h3>
+      </a>
+    </div>
+  </section>
+</p-drawer> -->
+<p-drawer
+  [(visible)]="visible"
+  [modal]="true"
+  [showCloseIcon]="false"
+  [style]="{ width: '120px' }"
+  class="fixed top-28 left-0 z-40 h-[calc(100vh-7rem)] transition-transform rounded-r-lg overflow-hidden shadow-lg bg-gradient-to-b from-gray-800 to-gray-900"
+>
+  <section
+    class="h-full w-full flex flex-col justify-start items-center overflow-y-auto py-4 px-2 space-y-4"
+  >
+    <a
+      href="https://flowbite-svelte.com"
+      class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+    >
+      <svg
+        class="w-16 h-16 text-red-600 mb-2"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+      >
+        <path
+          d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z"
+        ></path>
+      </svg>
+    </a>
+
+    <a
+      href="https://github.com/themesberg/flowbite-angular"
+      class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+    >
+      <svg
+        class="w-16 h-16 text-red-600 mb-2"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+      >
+        <path
+          d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z"
+        ></path>
+      </svg>
+    </a>
+  </section>
+</p-drawer>
