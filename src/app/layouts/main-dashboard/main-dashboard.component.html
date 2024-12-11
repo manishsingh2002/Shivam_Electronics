@@ -1,14 +1,17 @@
-<div class="flex h-screen overflow-hidden">
-  <div class="min-h-screen flex flex-col">
-    <app-header
-      class="fixed top-0 left-0 right-0 z-50 bg-white shadow rounded-b-lg"
-    ></app-header>
-
-    <!-- <app-home-page></app-home-page> -->
-    <div
-      class="mt-16 flex-1 p-4 overflow-auto"
-      [class.ml-64]="showHeaderAndSidebar"
-    ></div>
-  </div>
-</div>
+<!-- 
+<div class="min-h-full">
+  <app-header></app-header>
+  <main>
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 <router-outlet></router-outlet>
+    </div>
+  </main>
+</div> -->
+<!-- <app-header></app-header> -->
+<!-- <div class="main-content">
+  <app-sidebar></app-sidebar>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div> -->
+<app-footer></app-footer>

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Custom styles for the main layout, if needed */
+/* Custom styles for the main layout, if needed */
+.main-content {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}

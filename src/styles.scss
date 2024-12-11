@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global styles for the layouts */
+main {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  aside {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 1rem;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .main-content {
+    display: flex;
+  }
+  

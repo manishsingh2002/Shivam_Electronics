@@ -3,12 +3,11 @@ import { Dialog } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DrawerModule } from 'primeng/drawer';
-
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [Dialog, ButtonModule, CommonModule, DrawerModule, InputTextModule],
+  imports: [ ButtonModule, CommonModule, DrawerModule, InputTextModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
