@@ -27,7 +27,6 @@ import { AuthGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   // Redirect to login by default
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
   // Authentication Routes (No header/footer)
   {
     path: '',
