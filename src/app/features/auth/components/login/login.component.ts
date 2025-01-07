@@ -1,40 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-@Component({
-  selector: 'app-login',
-  standalone: true, // Standalone component declaration
-  imports: [CommonModule, FormsModule], // Import required modules
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-})
-export class LoginComponent {
-  username = '';
-  password = '';
-
-  constructor(private authService: AuthService, private router: Router) {}
-
-  onLogin() {
-    const success = this.authService.login(this.username, this.password);
-
-    if (success) {
-      console.log('Login successful');
-      this.router.navigate(['/dashboard']);
-    } else {
-      console.log('Login failed');
-      alert('Invalid credentials');
-    }
-  }
-}
-
 // import { Component } from '@angular/core';
 // import { Router } from '@angular/router';
 // import { AuthService } from '../../../../core/services/auth.service';
 // import { CommonModule } from '@angular/common';
 // import { FormsModule } from '@angular/forms';
-
 // @Component({
 //   selector: 'app-login',
 //   standalone: true, // Standalone component declaration
@@ -43,29 +11,67 @@ export class LoginComponent {
 //   styleUrls: ['./login.component.scss'],
 // })
 // export class LoginComponent {
-//   username: string = '';
-//   password: string = '';
+//   constructor(private auth: AuthService, private router: Router) {}
+//   public errorMessage: string | null = null; // To display error messages
+//   //
+//   public logindetails = {
+//     email: '',
+//     password: '',
+//   };
 
-//   constructor(private authService: AuthService, private router: Router) {}
 //   onLogin() {
-//     if (this.authService.login(this.username, this.password)) {
-//       // Store a dummy token in local storage
-//       localStorage.setItem('authToken', 'dummyToken123');
-//       console.log('Token stored in localStorage');
-//       this.router.navigate(['/dashboard']);
-//     } else {
-//       alert('Invalid Username or Password');
-//     }
+//     this.auth.login(this.logindetails).subscribe((response: any) => {
+//       console.log(response);
+//       if (response && response.token) {
+//         // Check if token exists in the response
+//         this.router.navigate(['/dashboard']); // Navigate to the dashboard
+//       } else {
+//         this.errorMessage = 'Invalid credentials. Please try again.';
+//       }
+//     });
 //   }
-
-//   // onLogin() {
-//   //   if (this.authService.login(this.username, this.password)) {
-//   //     localStorage.setItem('authToken', 'dummyToken123');
-//   //     console.log('Token stored in localStorage');
-
-//   //     this.router.navigate(['/dashboard']); // Redirect to the dashboard
-//   //   } else {
-//   //     alert('Invalid credentials!');
-//   //   }
-//   // }
 // }
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MainDashboardComponent } from '../../../../layouts/main-dashboard/main-dashboard.component';
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class LoginComponent {
+  public logindetails = {
+    email: '',
+    password: '',
+  };
+  public errorMessage: string | null = null; // To display error messages
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  onLogin() {
+    this.errorMessage = null; // Clear any previous error messages
+    this.auth.login(this.logindetails).subscribe({
+      next: (response: any) => {
+        console.log('Login Response:', response);
+        if (response && response.token) {
+          // Check if token exists in the response
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.errorMessage = 'Invalid credentials. Please try again.';
+        }
+      },
+      error: (error) => {
+        console.error('Login Error:', error);
+        this.errorMessage = 'An error occurred during login.'; // Display a generic error message
+        if (error?.error?.message) {
+          this.errorMessage = error.error.message;
+        }
+      },
+    });
+  }
+}

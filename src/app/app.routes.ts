@@ -48,10 +48,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: MainDashboardComponent,
-        children: [
-          { path: '', component: GstInvoiceComponent },
-          // { path: '', component: HomePageComponent }, // Set HomePageComponent as the default for /dashboard
-        ],
+        // children: [
+        //   { path: '', component: GstInvoiceComponent },
+        //   // { path: '', component: HomePageComponent }, // Set HomePageComponent as the default for /dashboard
+        // ],
       },
       { path: 'home', component: HomePageComponent },
 
