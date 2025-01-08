@@ -1,46 +1,15 @@
-// import { Component } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { AuthService } from '../../../../core/services/auth.service';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// @Component({
-//   selector: 'app-login',
-//   standalone: true, // Standalone component declaration
-//   imports: [CommonModule, FormsModule], // Import required modules
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.scss'],
-// })
-// export class LoginComponent {
-//   constructor(private auth: AuthService, private router: Router) {}
-//   public errorMessage: string | null = null; // To display error messages
-//   //
-//   public logindetails = {
-//     email: '',
-//     password: '',
-//   };
 
-//   onLogin() {
-//     this.auth.login(this.logindetails).subscribe((response: any) => {
-//       console.log(response);
-//       if (response && response.token) {
-//         // Check if token exists in the response
-//         this.router.navigate(['/dashboard']); // Navigate to the dashboard
-//       } else {
-//         this.errorMessage = 'Invalid credentials. Please try again.';
-//       }
-//     });
-//   }
-// }
+
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MainDashboardComponent } from '../../../../layouts/main-dashboard/main-dashboard.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule,RouterModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
