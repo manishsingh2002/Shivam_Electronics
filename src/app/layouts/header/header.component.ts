@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Dialog } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DrawerModule } from 'primeng/drawer';
 import { CommonModule } from '@angular/common';
 import { TieredMenu } from 'primeng/tieredmenu';
 import { MenuItem } from 'primeng/api';
-import { Button } from 'primeng/button';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,7 +15,7 @@ import { Button } from 'primeng/button';
     ButtonModule,
     CommonModule,
     DrawerModule,
-    InputTextModule,
+    InputTextModule,RouterModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -48,16 +48,17 @@ export class HeaderComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'File',
+        label: 'Admin',
         icon: 'pi pi-file',
         items: [
           {
-            label: 'New',
+            label: 'Billing',
             icon: 'pi pi-plus',
             items: [
               {
-                label: 'Document',
+                label: 'invoice',
                 icon: 'pi pi-file',
+                routerLink: ['/admin/gst-invoice']
               },
               {
                 label: 'Image',
