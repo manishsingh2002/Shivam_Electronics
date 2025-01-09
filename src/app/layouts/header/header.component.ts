@@ -15,7 +15,8 @@ import { RouterModule } from '@angular/router';
     ButtonModule,
     CommonModule,
     DrawerModule,
-    InputTextModule,RouterModule
+    InputTextModule,
+    RouterModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -24,6 +25,8 @@ export class HeaderComponent {
   shownotificationdropdown: boolean = false;
   appsdropdown: boolean = false;
   openUserDrop: boolean = false;
+  visible: boolean = false;
+  position: string = 'topright';
 
   notificationdropdown() {
     this.shownotificationdropdown = !this.shownotificationdropdown;
@@ -35,18 +38,15 @@ export class HeaderComponent {
   openUserDropDown() {
     this.openUserDrop = !this.openUserDrop;
   }
-  visible: boolean = false;
-
-  position: string = 'topright';
 
   showDialog(position: string) {
     this.position = position;
     this.visible = true;
   }
-  items: MenuItem[] | undefined;
+  Admin: MenuItem[] | undefined;
 
   ngOnInit() {
-    this.items = [
+    this.Admin = [
       {
         label: 'Admin',
         icon: 'pi pi-file',
@@ -58,7 +58,7 @@ export class HeaderComponent {
               {
                 label: 'invoice',
                 icon: 'pi pi-file',
-                routerLink: ['/admin/gst-invoice']
+                routerLink: ['/admin/gst-invoice'],
               },
               {
                 label: 'Image',

@@ -1,5 +1,5 @@
 <!-- <header> -->
-<nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 rounded-full">
+<nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
   <div class="flex flex-wrap justify-between items-center">
     <div class="flex justify-start items-center">
       <button
@@ -26,8 +26,7 @@
           />
         </svg>
       </button>
-      <p-button label="Modules" (click)="menu.toggle($event)" />
-      <p-tieredmenu #menu [model]="items" [popup]="true" />
+
       <button
         aria-expanded="true"
         aria-controls="sidebar"
@@ -49,16 +48,16 @@
           />
         </svg>
       </button>
-      <a href="/home" class="flex mr-4">
+      <a class="flex mr-4">
         <img
-          src="https://flowbite.s3.amazonaws.com/logo.svg"
+          src="https://img.freepik.com/premium-photo/beautiful-digital-painting-serene-lord-shiva-exuding-compassion-white-backdrop_753333-8246.jpg?w=1380"
           class="mr-3 h-8"
           alt="FlowBite Logo"
         />
         <span
           href="/admin/reports"
           class="self-center text-primary-700 text-2xl font-semibold"
-          >Flowbite</span
+          >ShivamElectronics</span
         >
       </a>
       <form method="GET" class="hidden lg:block lg:pl-2">
@@ -119,12 +118,10 @@
       <!-- Notifications -->
       <button
         type="button"
-        href="/reset-password"
         (click)="notificationdropdown()"
         data-dropdown-toggle="notification-dropdown"
         class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
       >
-        <span class="sr-only">View notifications</span>
         <!-- Bell icon -->
         <svg
           class="w-5 h-5"
@@ -139,59 +136,8 @@
           />
         </svg>
       </button>
-      <div
-        href="/admin/stats"
-        class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700"
-        *ngIf="shownotificationdropdown"
-      >
-        <div
-          class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
-          Notifications
-        </div>
-
-        <div>
-          <a
-            routerLink="['/admin/report']"
-            routerLinkActive="router-link-active"
-            ="/admin/report"
-            class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
-          >
-            <div class="flex-shrink-0">
-              <img
-                class="w-11 h-11 rounded-full"
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                alt="Bonnie Green avatar"
-              />
-            </div>
-          </a>
-        </div>
-        <!-- tiredmenu -->
-        <a
-          class="block py-2 text-base font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline"
-        >
-          <div class="inline-flex items-center">
-            <svg
-              aria-hidden="true"
-              class="mr-2 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-              <path
-                fill-rule="evenodd"
-                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            View all
-          </div>
-        </a>
-      </div>
-      <!-- Apps -->
-
       <button
+        (click)="menu.toggle($event)"
         type="button"
         class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         id="user-menu-button"
@@ -206,6 +152,8 @@
           alt="user photo"
         />
       </button>
+      <!-- <p-button label="Modules"  /> -->
+      <p-tieredmenu #menu [model]="Admin" [popup]="true" />
     </div>
   </div>
 </nav>

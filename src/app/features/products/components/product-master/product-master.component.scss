@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Component-specific styles (my-component.component.scss) - Best practice */
+:host ::ng-deep .p-floatlabel .p-inputtext {
+  color: black; /* Text color */
+  background-color: white; /* Background color */
+}
+
+/* Or, more targeted (if needed) */
+.detailed-descriptions-container :host ::ng-deep .p-inputtext {
+  color: black;
+  background-color: white;
+}
+
+/*If you want to apply this to all inputs across your application*/
+:host ::ng-deep .p-inputtext {
+  color: black;
+  background-color: white;
+}

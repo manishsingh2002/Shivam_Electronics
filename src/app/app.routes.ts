@@ -21,13 +21,74 @@ import { OrderListComponent } from './features/orders/components/order-list/orde
 import { OrderDetailComponent } from './features/orders/components/order-detail/order-detail.component';
 import { ProductListComponent } from './features/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from './features/products/components/product-detail/product-detail.component';
+import { ProductMasterComponent } from './features/products/components/product-master/product-master.component';
+import { ProductLayoutComponent } from './features/products/components/product-layout/product-layout.component';
 // Route Guards
 import { AuthGuard } from './core/guards/auth.guard';
 
+// export const routes: Routes = [
+//   // Redirect to login by default
+//   { path: '', redirectTo: 'login', pathMatch: 'full' },
+//   // Authentication Routes (No header/footer)
+//   {
+//     path: '',
+//     component: AuthLayoutComponent,
+//     children: [
+//       { path: 'login', component: LoginComponent },
+//       { path: 'signup', component: SignupComponent },
+//       { path: 'reset-password', component: ResetPasswordComponent },
+//       { path: 'update-password', component: UpdatePasswordComponent },
+//     ],
+//   },
+
+//   // Main Layout Routes (Requires authentication)
+//   {
+//     path: '',
+//     component: MainLayoutComponent,
+//     canActivate: [AuthGuard],
+//     children: [
+//       {
+//         path: 'dashboard',
+//         component: MainDashboardComponent,
+//         // children: [
+//         //   { path: '', component: GstInvoiceComponent },
+//         //   // { path: '', component: HomePageComponent }, // Set HomePageComponent as the default for /dashboard
+//         // ],
+//       },
+//       { path: 'home', component: HomePageComponent },
+
+//       // Admin Dashboard Routes
+//       { path: 'admin/reports', component: AdminReportsComponent },
+//       { path: 'admin/stats', component: AdminStatsComponent },
+//       { path: 'admin/users', component: AdminUserListComponent },
+//       { path: 'admin/gst-invoice', component: GstInvoiceComponent },
+
+//       // Cart Routes
+//       { path: 'cart', component: CartViewComponent },
+
+//       // Checkout Routes
+//       { path: 'checkout', component: CheckoutPageComponent },
+
+//       // Orders Routes
+//       { path: 'orders', component: OrderListComponent },
+//       { path: 'orders/:id', component: OrderDetailComponent },
+//       { path: 'gstCreate', component: GstInvoiceComponent },
+
+//       // Products Routes
+//       { path: 'products', component: ProductListComponent },
+//       { path: 'products/:id', component: ProductDetailComponent },
+//     ],
+//   },
+
+//   // Wildcard Route for 404 Page
+//   { path: '**', redirectTo: 'login' },
+// ];
+
 export const routes: Routes = [
-  // Redirect to login by default
+  // Redirect root to login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // Authentication Routes (No header/footer)
+
+  // Authentication Routes (Auth Layout)
   {
     path: '',
     component: AuthLayoutComponent,
@@ -39,20 +100,12 @@ export const routes: Routes = [
     ],
   },
 
-  // Main Layout Routes (Requires authentication)
   {
     path: '',
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {
-        path: 'dashboard',
-        component: MainDashboardComponent,
-        // children: [
-        //   { path: '', component: GstInvoiceComponent },
-        //   // { path: '', component: HomePageComponent }, // Set HomePageComponent as the default for /dashboard
-        // ],
-      },
+      { path: 'dashboard', component: MainDashboardComponent },
       { path: 'home', component: HomePageComponent },
 
       // Admin Dashboard Routes
@@ -70,15 +123,24 @@ export const routes: Routes = [
       // Orders Routes
       { path: 'orders', component: OrderListComponent },
       { path: 'orders/:id', component: OrderDetailComponent },
-      { path: 'gstCreate', component: GstInvoiceComponent },
-
-      // Products Routes
-      { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent },
+      {
+        path: 'products',
+        component: ProductLayoutComponent,
+        children: [
+          { path: '', redirectTo: 'productMaster', pathMatch: 'full' },
+          { path: 'list', component: ProductListComponent },
+          { path: ':id', component: ProductDetailComponent },
+          {path:'productMaster',component:ProductMasterComponent}
+        ],
+      },
+      // {path:'productMaster',component:ProductMasterComponent},
+      // { path: 'products', component: ProductListComponent },
+      // { path: 'products/:id', component: ProductDetailComponent },
+      // {path:'productlayout',component:ProductLayoutComponent}
     ],
   },
 
-  // Wildcard Route for 404 Page
+  // Wildcard Route for 404
   { path: '**', redirectTo: 'login' },
 ];
 

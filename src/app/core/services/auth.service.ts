@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -34,10 +33,11 @@ export class AuthService {
     this.userSubject = new BehaviorSubject<any | null>(storedUser);
     this.user = this.userSubject.asObservable();
   }
-
+  // http://localhost:4000/api/v1/users/login
+  // https://4000-idx-shivamelectronicsbackend-1736329366153.cluster-e3wv6awer5h7kvayyfoein2u4a.cloudworkstations.dev/api/v1/users/login
   login(data: any): Observable<any> {
     return this.http
-      .post<any>('https://4000-idx-shivamelectronicsbackend-1736329366153.cluster-e3wv6awer5h7kvayyfoein2u4a.cloudworkstations.dev/api/v1/users/login', data)
+      .post<any>(' http://localhost:4000/api/v1/users/login', data)
       .pipe(
         map((response) => {
           if (isPlatformBrowser(this.platformId) && response.token) {
@@ -55,7 +55,7 @@ export class AuthService {
 
   signUp(data: any): Observable<any> {
     return this.http
-      .post<any>('https://4000-idx-shivamelectronicsbackend-1736329366153.cluster-e3wv6awer5h7kvayyfoein2u4a.cloudworkstations.dev/api/v1/users/signup', data)
+      .post<any>(' http://localhost:4000/api/v1/users/signup', data)
       .pipe(
         map((response) => {
           if (isPlatformBrowser(this.platformId) && response.token) {

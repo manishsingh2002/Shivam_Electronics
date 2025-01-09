@@ -33,4 +33,22 @@ main {
   .main-content {
     display: flex;
   }
-  
+  /* Global styles (styles.css or styles.scss) - Use with caution */
+.p-inputtext {
+  color: black; /* Or #000; */
+}
+
+/* More specific approach (recommended) - Add a class to a parent element */
+.my-form .p-inputtext {
+  color: black;
+}
+
+/* Targeting inputs inside p-floatLabel */
+.p-floatlabel .p-inputtext {
+    color: black;
+}
+
+/* Component-specific styles (my-component.component.scss) - Best practice */
+:host ::ng-deep .p-inputtext{ /*for view encapsulation*/
+  color: black;
+}
