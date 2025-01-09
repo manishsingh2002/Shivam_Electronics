@@ -105,9 +105,10 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: MainDashboardComponent },
+      { path: 'dashboard', component: MainDashboardComponent,children: [
+        { path: '', component: HomePageComponent },
+      ] },
       { path: 'home', component: HomePageComponent },
-
       // Admin Dashboard Routes
       { path: 'admin/reports', component: AdminReportsComponent },
       { path: 'admin/stats', component: AdminStatsComponent },
