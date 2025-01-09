@@ -92,7 +92,7 @@ export class ProductMasterComponent {
     title: '',
     description: '',
     detailedDescriptions: [{ id: '', detail: '' }],
-    category: '',
+    category: 'manish',
     rate: '',
     cgst: '9',
     sgst: '9',

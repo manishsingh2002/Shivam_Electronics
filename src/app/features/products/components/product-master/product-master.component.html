@@ -42,8 +42,9 @@
         </div>
         <!-- category -->
         <div>
-                <p-floatlabel variant="on">
-            <input pInputText id="category" [(ngModel)]="product.category" autocomplete="on"  class="w-full p-2 border border-gray-300 rounded" required maxlength="200" />
+          {{product.category}}
+          <p-floatlabel variant="on">
+            <input pInputText id="category" [(ngModel)]="product.category" autocomplete="on" class="w-full p-2 border border-gray-300 rounded" required maxlength="200" />
             <label for="category">Category</label>
           </p-floatlabel>
         </div>

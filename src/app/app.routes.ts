@@ -99,7 +99,7 @@ export const routes: Routes = [
       { path: 'update-password', component: UpdatePasswordComponent },
     ],
   },
-
+  
   {
     path: '',
     component: MainLayoutComponent,
