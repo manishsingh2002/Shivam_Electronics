@@ -8,6 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 // import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { TextareaModule } from 'primeng/textarea';
+import { ApiService } from '../../../../core/services/api.service';
+
 interface DetailedDescription {
   id: string;
   detail: string;
@@ -113,6 +115,10 @@ export class ProductMasterComponent {
     thumbnail: '',
     salesPerson: [],
   };
+  constructor(private apiService:ApiService) {
+    
+  }
+ngOnInit() {}
 
   addDetailedDescription() {
     this.product.detailedDescriptions.push({ id: '', detail: '' });
@@ -132,135 +138,8 @@ export class ProductMasterComponent {
 
   onSubmit() {
     console.log(this.product);
+    this.apiService.createNewProduct(this.product).subscribe((res:any)=>{
+      console.log(res);
+    })
   }
 }
-// import { Component } from '@angular/core';
-// import { FloatLabelModule } from 'primeng/floatlabel';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-
-// import { CommonModule } from '@angular/common';
-// interface DetailedDescription {
-//   id: string;
-//   detail: string;
-// }
-
-// interface Dimensions {
-//   width: string;
-//   height: string;
-//   depth: string;
-// }
-
-// interface Location {
-//   type: 'Point';
-//   coordinates: number[];
-//   address?: string;
-//   description?: string;
-//   day?: string;
-// }
-
-// interface Image {
-//   id?: string;
-//   detail?: string;
-//   link?: string;
-// }
-
-// interface Meta {
-//   createdAt: Date;
-//   updatedAt: Date;
-//   barcode: string;
-//   qrCode?: string;
-// }
-
-// interface StartLocation {
-//   type: 'Point';
-//   coordinates: number[];
-//   address?: string;
-//   description?: string;
-// }
-
-// interface Product {
-//   title: string;
-//   description: string;
-//   detailedDescriptions: DetailedDescription[];
-//   category: string;
-//   rate: string;
-//   cgst: string;
-//   sgst: string;
-//   price: string;
-//   discountPercentage?: string;
-//   ratingAverage?: string;
-//   ratingQuantity?: string;
-//   stock: string;
-//   tags: string[];
-//   brand: string;
-//   sku: string;
-//   weight: string;
-//   dimensions: Dimensions;
-//   warrantyInformation: string;
-//   shippingInformation: string;
-//   availabilityStatus: 'In Stock' | 'Low Stock' | 'Out of Stock';
-//   startLocation: StartLocation;
-//   locations: Location[];
-//   returnPolicy: string;
-//   minimumOrderQuantity?: string;
-//   meta: Meta;
-//   images?: Image[];
-//   thumbnail: string;
-//   salesPerson?: any[]; // Use appropriate type for ObjectId if available
-// }
-
-// @Component({
-//   selector: 'app-product-master',
-//   standalone: true,
-//   imports: [FloatLabelModule,CommonModule,FormsModule,RouterModule],
-//   templateUrl: './product-master.component.html',
-//   styleUrl: './product-master.component.scss'
-// })
-
-// export class ProductMasterComponent {
-
-
-//     product: Product = {
-//       title: '',
-//       description: '',
-//       detailedDescriptions: [{ id: '', detail: '' }], // Initialize as an array with one empty object
-//       category: '',
-//       rate: '',
-//       cgst: '9',
-//       sgst: '9',
-//       price: '',
-//       stock: '',
-//       discountPercentage:'',
-//       tags: [], // Initialize as empty array
-//       brand: '',
-//       sku: '',
-//       weight: '',
-//       dimensions: { width: '', height: '', depth: '' }, // Initialize nested object
-//       warrantyInformation: '',
-//       shippingInformation: '',
-//       availabilityStatus: 'In Stock',
-//       startLocation: { type: 'Point', coordinates: [] },
-//       locations: [], // Initialize as empty array
-//       returnPolicy: '',
-//       images:[],
-//       meta: { createdAt: new Date(), updatedAt: new Date(), barcode: '' }, // Initialize Date objects
-//       thumbnail: '',
-//     };
-  
-//     addDetailedDescription() {
-//       this.product.detailedDescriptions.push({ id: '', detail: '' });
-//     }
-  
-//     addLocation(){
-//       this.product.locations.push({ type: 'Point', coordinates: [] });
-//     }
-//     addImage() {
-//       this.product.images.push({ id: '', detail: '', link: '' });
-//     }
-  
-//     onSubmit() {
-//       console.log(this.product);
-//       // Handle form submission
-//     }
-//   }

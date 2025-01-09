@@ -1,203 +1,369 @@
 <!-- <header> -->
-<nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-  <div class="flex flex-wrap justify-between items-center">
-    <div class="flex justify-start items-center">
-      <button
-        (click)="showDialog('topright')"
-        routerLinkActive="router-link-active"
-        id="toggleSidebar"
-        aria-expanded="true"
-        aria-controls="sidebar"
-        class="hidden p-2 mr-3 text-gray-600 rounded cursor-pointer lg:inline hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
-      >
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 16 12"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h14M1 6h14M1 11h7"
-          />
-        </svg>
-      </button>
+  <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+    <div class="flex flex-wrap justify-between items-center">
+      <div class="flex justify-start items-center">
+        <p-button (click)="visible = true"  >
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H4m0 0v4m0-4 5 5m7-5h4m0 0v4m0-4-5 5M8 20H4m0 0v-4m0 4 5-5m7 5h4m0 0v-4m0 4-5-5"/>
+          </svg>
+          
+        </p-button>
 
-      <button
-        aria-expanded="true"
-        aria-controls="sidebar"
-        class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
-        <svg
-          class="w-[18px] h-[18px]"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
+        <button
+          aria-expanded="true"
+          aria-controls="sidebar"
+          class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"
-          />
-        </svg>
-      </button>
-      <a class="flex mr-4">
-        <img
-          src="https://img.freepik.com/premium-photo/beautiful-digital-painting-serene-lord-shiva-exuding-compassion-white-backdrop_753333-8246.jpg?w=1380"
-          class="mr-3 h-8"
-          alt="FlowBite Logo"
-        />
-        <span
-          href="/admin/reports"
-          class="self-center text-primary-700 text-2xl font-semibold"
-          >ShivamElectronics</span
-        >
-      </a>
-      <form method="GET" class="hidden lg:block lg:pl-2">
-        <label for="topbar-search" class="sr-only">Search</label>
-        <div class="relative mt-1 lg:w-96">
-          <div
-            class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+          <svg
+            class="w-[18px] h-[18px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
           >
-            <svg
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+        <a class="flex mr-4">
+          <img
+            src="https://img.freepik.com/premium-photo/beautiful-digital-painting-serene-lord-shiva-exuding-compassion-white-backdrop_753333-8246.jpg?w=1380"
+            class="mr-3 h-8"
+            alt="FlowBite Logo"
+          />
+          <span
+            href="/admin/reports"
+            class="self-center text-primary-700 text-2xl font-semibold"
+            >ShivamElectronics</span
+          >
+        </a>
+        <form method="GET" class="hidden lg:block lg:pl-2">
+          <label for="topbar-search" class="sr-only">Search</label>
+          <div class="relative mt-1 lg:w-96">
+            <div
+              class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              name="email"
+              id="topbar-search"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Search"
+            />
           </div>
-          <input
-            type="text"
-            name="email"
-            id="topbar-search"
-            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Search"
-          />
-        </div>
-      </form>
-    </div>
-    <div class="flex items-center lg:order-2">
-      <button
-        id="toggleSidebarMobileSearch"
-        type="button"
-        class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
-        <span class="sr-only">Search</span>
-        <svg
-          class="w-4 h-4"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
+        </form>
+      </div>
+      <div class="flex items-center lg:order-2">
+        <button
+          id="toggleSidebarMobileSearch"
+          type="button"
+          class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
-      </button>
-      <!-- Notifications -->
-      <button
-        type="button"
-        (click)="notificationdropdown()"
-        data-dropdown-toggle="notification-dropdown"
-        class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-      >
-        <!-- Bell icon -->
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 14 20"
+          <span class="sr-only">Search</span>
+          <svg
+            class="w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </button>
+        <!-- Notifications -->
+        <button
+          type="button"
+          (click)="notificationdropdown()"
+          data-dropdown-toggle="notification-dropdown"
+          class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         >
-          <path
-            href="/home"
-            d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"
+          <!-- Bell icon -->
+          <svg
+            class="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 14 20"
+          >
+            <path
+              href="/home"
+              d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"
+            />
+          </svg>
+        </button>
+        <button
+          (click)="menu.toggle($event)"
+          type="button"
+          class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+          id="user-menu-button"
+          aria-expanded="false"
+          data-dropdown-toggle="dropdown"
+        >
+          <span class="sr-only">Open user menu</span>
+          <img
+            (click)="openUserDropDown()"
+            class="w-8 h-8 rounded-full"
+            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+            alt="user photo"
           />
-        </svg>
-      </button>
-      <button
-        (click)="menu.toggle($event)"
-        type="button"
-        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        id="user-menu-button"
-        aria-expanded="false"
-        data-dropdown-toggle="dropdown"
-      >
-        <span class="sr-only">Open user menu</span>
-        <img
-          (click)="openUserDropDown()"
-          class="w-8 h-8 rounded-full"
-          src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-          alt="user photo"
-        />
-      </button>
-      <!-- <p-button label="Modules"  /> -->
-      <p-tieredmenu #menu [model]="Admin" [popup]="true" />
+        </button>
+        <p-tieredmenu #menu [model]="Admin" [popup]="true" />
+      </div>
     </div>
-  </div>
-</nav>
-
-<!-- ////----------------------------------------------------------------------------------------------------------------------------- -->
-<!-- //sidebar overlay drawer -->
-<p-drawer
-  [(visible)]="visible"
-  [modal]="true"
-  [showCloseIcon]="false"
-  [style]="{ width: '120px' }"
-  class="fixed top-28 left-0 z-40 h-[calc(100vh-7rem)] transition-transform rounded-r-lg overflow-hidden shadow-lg bg-gradient-to-b from-gray-800 to-gray-900"
->
-  <section
-    class="h-full w-full flex flex-col justify-start items-center overflow-y-auto py-4 px-2 space-y-4"
-  >
-    <a
-      class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
-    >
-      <svg
-        class="w-16 h-16 text-red-600 mb-2"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-        <path
-          d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z"
-        ></path>
-      </svg>
-    </a>
-
-    <a
-      class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light flex flex-col items-center p-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
-    >
-      <svg
-        class="w-16 h-16 text-red-600 mb-2"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-        <path
-          d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z"
-        ></path>
-      </svg>
-    </a>
-  </section>
-</p-drawer>
+  </nav>
+  
+  <!-- ////----------------------------------------------------------------------------------------------------------------------------- -->
+  <!-- //sidebar overlay drawer -->
+  <div class="card flex justify-center">
+    <p-drawer #drawerRef [(visible)]="visible">
+        <ng-template #headless>
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between px-6 pt-4 shrink-0">
+                    <span class="inline-flex items-center gap-2">
+                        <svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg" class="block mx-auto">
+                            <path
+                                d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z"
+                                fill="var(--p-primary-color)"
+                            />
+                            <mask id="mask0_1_52" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="33">
+                                <path
+                                    d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z"
+                                    fill="var(--ground-background)"
+                                />
+                            </mask>
+                            <g mask="url(#mask0_1_52)">
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M15.1935 0V3.5994V3.58318V20.0075V20.0075V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1935 0Z"
+                                    fill="var(--p-primary-color)"
+                                />
+                            </g>
+                            <path
+                                d="M19.6399 15.3776L18.1861 15.0547L19.3169 16.6695V21.6755L23.1938 18.4458V12.9554L21.4169 13.6013L19.6399 15.3776Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                d="M10.5936 15.3776L12.0474 15.0547L10.9166 16.6695V21.6755L7.03966 18.4458V12.9554L8.81661 13.6013L10.5936 15.3776Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M11.3853 16.9726L12.6739 15.0309L13.4793 15.5163H16.7008L17.5061 15.0309L18.7947 16.9726V24.254L17.8283 25.7103L16.7008 26.843H13.4793L12.3518 25.7103L11.3853 24.254V16.9726Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path d="M19.3168 24.7437L21.4168 22.6444V20.5451L19.3168 22.3214V24.7437Z" fill="var(--ground-background)" />
+                            <path d="M10.9166 24.7437L8.81662 22.6444V20.5451L10.9166 22.3214V24.7437Z" fill="var(--ground-background)" />
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M13.0167 5.68861L11.7244 8.7568L13.8244 14.8932H14.7936V5.68861H13.0167ZM15.4397 5.68861V14.8932H16.5706L18.5091 8.7568L17.2167 5.68861H15.4397Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                d="M13.8244 14.8932L6.87813 12.3094L5.90888 8.27235L11.8859 8.7568L13.9859 14.8932H13.8244Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                d="M16.5706 14.8932L23.5169 12.3094L24.4861 8.27235L18.3476 8.7568L16.4091 14.8932H16.5706Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                d="M18.8321 8.27235L22.2245 7.94938L19.9629 5.68861H17.7013L18.8321 8.27235Z"
+                                fill="var(--ground-background)"
+                            />
+                            <path
+                                d="M11.4013 8.27235L8.00893 7.94938L10.2705 5.68861H12.5321L11.4013 8.27235Z"
+                                fill="var(--ground-background)"
+                            />
+                        </svg>
+                        <span class="font-semibold text-2xl text-primary">Your Logo</span>
+                    </span>
+                    <span>
+                        <p-button type="button" (click)="closeCallback($event)" icon="pi pi-times" rounded="true" outlined="true" styleClass="h-8 w-8"></p-button>
+                    </span>
+                </div>
+                <div class="overflow-y-auto">
+                    <ul class="list-none p-4 m-0">
+                        <li>
+                            <div
+                                pRipple
+                                pStyleClass="@next"
+                                enterFromClass="hidden"
+                                enterActiveClass="animate-slidedown"
+                                leaveToClass="hidden"
+                                leaveActiveClass="animate-slideup"
+                                class="p-4 flex items-center justify-between text-surface-600 dark:text-surface-200 cursor-pointer p-ripple"
+                            >
+                                <span class="font-medium">FAVORITES</span>
+                                <i class="pi pi-chevron-down"></i>
+                            </div>
+                            <ul class="list-none p-0 m-0 overflow-hidden">
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-home mr-2"></i>
+                                        <span class="font-medium">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-bookmark mr-2"></i>
+                                        <span class="font-medium">Bookmarks</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        pRipple
+                                        pStyleClass="@next"
+                                        enterFromClass="hidden"
+                                        enterActiveClass="animate-slidedown"
+                                        leaveToClass="hidden"
+                                        leaveActiveClass="animate-slideup"
+                                        class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                                    >
+                                        <i class="pi pi-chart-line mr-2"></i>
+                                        <span class="font-medium">Reports</span>
+                                        <i class="pi pi-chevron-down ml-auto"></i>
+                                    </a>
+                                    <ul class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out">
+                                        <li>
+                                            <a
+                                                pRipple
+                                                pStyleClass="@next"
+                                                enterFromClass="hidden"
+                                                enterActiveClass="animate-slidedown"
+                                                leaveToClass="hidden"
+                                                leaveActiveClass="animate-slideup"
+                                                class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+                                            >
+                                                <i class="pi pi-chart-line mr-2"></i>
+                                                <span class="font-medium">Revenue</span>
+                                                <i class="pi pi-chevron-down ml-auto"></i>
+                                            </a>
+                                            <ul class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out">
+                                                <li>
+                                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                                        <i class="pi pi-table mr-2"></i>
+                                                        <span class="font-medium">View</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                                        <i class="pi pi-search mr-2"></i>
+                                                        <span class="font-medium">Search</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-chart-line mr-2"></i>
+                                                <span class="font-medium">Expenses</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-users mr-2"></i>
+                                        <span class="font-medium">Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-comments mr-2"></i>
+                                        <span class="font-medium">Messages</span>
+                                        <span class="inline-flex items-center justify-center ml-auto bg-primary text-primary-contrast rounded-full" style="min-width: 1.5rem; height: 1.5rem">3</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-calendar mr-2"></i>
+                                        <span class="font-medium">Calendar</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-cog mr-2"></i>
+                                        <span class="font-medium">Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="list-none p-4 m-0">
+                        <li>
+                            <div
+                                pRipple
+                                pStyleClass="@next"
+                                enterFromClass="hidden"
+                                enterActiveClass="animate-slidedown"
+                                leaveToClass="hidden"
+                                leaveActiveClass="animate-slideup"
+                                class="p-4 flex items-center justify-between text-surface-600 dark:text-surface-200 cursor-pointer p-ripple"
+                            >
+                                <span class="font-medium">APPLICATION</span>
+                                <i class="pi pi-chevron-down"></i>
+                            </div>
+                            <ul class="list-none p-0 m-0 overflow-hidden">
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-folder mr-2"></i>
+                                        <span class="font-medium">Projects</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-chart-bar mr-2"></i>
+                                        <span class="font-medium">Performance</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a pRipple class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-cog mr-2"></i>
+                                        <span class="font-medium">Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <hr class="mb-4 mx-4 border-t border-0 border-surface" />
+                    <a pRipple class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+                        <span class="font-bold">Amy Elsner</span>
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+    </p-drawer>
+    </div>

@@ -1,16 +1,10 @@
-
+<!-- 
 <div class="min-h-screen flex flex-col">
   <div class="flex flex-1 mt-[64px] overflow-hidden">
     <main class=" fixed flex-1 ml-20 px-4 pt-8 overflow-y-auto">
         <div class="bg-gray-100 w-full mx-auto p-6 shadow-md rounded-lg font-roboto mb-8"> <--- Moved and added mb-8
             <div class="flex space-x-4">
-                <!-- <button *ngFor="let item of componentNavItems"
-                        (click)="navigateToComponent(item.component)"
-                        [ngClass]="{'bg-blue-500 text-white': activeComponent === item.component, 'text-gray-700': activeComponent !== item.component}"
-                        class="px-4 py-2 rounded hover:bg-blue-200 transition duration-300">
-                  {{ item.label }}
-                </button> -->
-                <div class="bg-gray-100 w-full mx-auto p-6 shadow-md rounded-lg font-roboto mb-8">
+                               <div class="bg-gray-100 w-full mx-auto p-6 shadow-md rounded-lg font-roboto mb-8">
                   <div class="card flex justify-center">
                     <p-selectButton [options]="componentNavItems" [(ngModel)]="activeComponent" optionLabel="label" optionValue="component" aria-labelledby="basic" (onChange)="navigateToComponent(activeComponent)"></p-selectButton>
                   </div>
@@ -23,4 +17,51 @@
         </div>
     </main>
      </div>
-</div>
+</div> -->
+<!-- <div class="min-h-screen flex flex-col">
+
+  <div class="flex flex-1 mt-[64px]"> <--- Removed overflow-hidden
+    <aside class="fixed top-[64px] left-0 w-20 bg-gray-200 z-10 h-[calc(100vh-64px)] pt-0.625rem overflow-y-auto">
+      <div class="flex flex-col items-center py-4">
+        <ng-container *ngFor="let navItem of navItems">
+          <a [routerLink]="[navItem.path]" class="mb-4" title="{{navItem.label}}">
+            <svg class="w-8 h-8 text-gray-800 dark:text-white hover:text-blue-500 transition duration-300" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" [innerHTML]="navItem.icon"></svg>
+          </a>
+        </ng-container>
+      </div>
+    </aside>
+
+    <main class="flex-1 ml-20 px-4 pt-8 overflow-y-auto w-full"> 
+      <div class="bg-gray-100 p-6 shadow-md rounded-lg font-roboto mb-8"> 
+        <div class="card flex justify-center">
+          <p-selectButton [options]="componentNavItems" [(ngModel)]="activeComponent" optionLabel="label" optionValue="component" aria-labelledby="basic" (onChange)="navigateToComponent(activeComponent)"></p-selectButton>
+        </div>
+      </div>
+
+      <div class="mt-8"> 
+        <ng-container *ngComponentOutlet="activeComponent"></ng-container>
+      </div>
+    </main>
+  </div>
+</div> -->
+<!-- <main class="flex-1 px-4 pt-8 overflow-y-auto w-full">
+  <div class="bg-gray-100 p-6 shadow-md rounded-lg font-roboto ">
+    <div class="card flex justify-center">
+      <p-selectButton [options]="componentNavItems" [(ngModel)]="activeComponent" optionLabel="label" optionValue="component" aria-labelledby="basic" (onChange)="navigateToComponent(activeComponent)"></p-selectButton>
+    </div>
+  </div>
+  <div class="mt-1">
+    <ng-container *ngComponentOutlet="activeComponent"></ng-container>
+  </div>
+</main> -->
+<main class="flex-1 px-4 pt-8 overflow-y-auto w-full relative">
+  <div class="bg-gray-100 p-6 shadow-md rounded-lg font-roboto  sticky top-8 z-10">
+    <div class="card flex justify-center">
+      <p-selectButton [options]="componentNavItems" [(ngModel)]="activeComponent" optionLabel="label" optionValue="component" aria-labelledby="basic" (onChange)="navigateToComponent(activeComponent)"></p-selectButton>
+    </div>
+  </div>
+
+  <div class="mt-1">
+    <ng-container *ngComponentOutlet="activeComponent"></ng-container>
+  </div>
+</main>

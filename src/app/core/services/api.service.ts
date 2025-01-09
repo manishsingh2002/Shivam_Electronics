@@ -17,7 +17,7 @@ export class ApiService {
   private baseUrl = 'http://localhost:4000/api';
   public headers: any;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
   ngOnInit(): void {
     this.headers = this.authService.getAuthHeaders();
   }
@@ -37,7 +37,6 @@ export class ApiService {
     );
   }
 
-  //-----
   // Fetch data
   getData(): Observable<any> {
     return this.http
@@ -49,18 +48,24 @@ export class ApiService {
   getAllProductData(): Observable<Product[]> {
     return this.http
       .get<Product[]>(`${this.baseUrl}/v1/products`)
-      .pipe(
-        catchError((error) => this.handleError('getAllProductData', error))
-      );
+      .pipe(catchError((error) => this.handleError('getAllProductData', error)));
   }
 
   // Create a new product
   createNewProduct(data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products`;
-    return this.http
-      .post(endpoint, data)
-      .pipe(catchError((error) => this.handleError('createNewProduct', error)));
+    const token = localStorage.getItem('authToken'); 
+    if (!token) {
+      console.error("No token found. User not authenticated.");
+      return new Observable(observer => observer.error("No token found"));
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Add the Authorization header
+    });
+    return this.http.post<any>(endpoint, data, { headers });
   }
+
+
 
   // Update a product
   updateProduct(productId: string, data: any): Observable<any> {
@@ -86,47 +91,3 @@ export class ApiService {
     return throwError(() => new Error(`${method} failed: ${errorMessage}`));
   }
 }
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable, throwError } from 'rxjs';
-// import { map, catchError } from 'rxjs/operators';
-
-// @Injectable({ providedIn: 'root' })
-// export class ApiService {
-//   private baseUrl = 'http://localhost:4000/api';
-
-//   constructor(private http: HttpClient) {}
-//   // Generic GET method
-//   getData(): Observable<any> {
-//     return this.http.get(`${this.baseUrl}/data`).pipe(
-//       map((response) => response),
-//       catchError((error) => this.handleError('getData', error))
-//     );
-//   }
-
-//   // Fetch product data
-//   getAllProductData(): Observable<any> {
-//     return this.http.get(`${this.baseUrl}/v1/products`).pipe(
-//       map((response) => response),
-//       catchError((error) => this.handleError('getProductData', error))
-//     );
-//   }
-
-//   createNewProduct(data: any): Observable<any> {
-//     const endpoint = `${this.baseUrl}/v1/products`;
-//     return this.http.post(endpoint, data).pipe(
-//       map((response) => response),
-//       catchError((error) => this.handleError('UpdateDynamicMaster', error))
-//     );
-//   }
-
-//   // Centralized error handling
-//   private handleError(method: string, error: any): Observable<never> {
-//     console.error(`Error in ${method}:`, error);
-//     // Optionally, transform the error into a user-friendly message
-//     return throwError(
-//       () => new Error(`Error in ${method}: ${error.message || error}`)
-//     );
-//   }
-// }
