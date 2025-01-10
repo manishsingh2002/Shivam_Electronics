@@ -14,7 +14,7 @@ export interface Product {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private baseUrl = 'http://localhost:4000/api';
+  private baseUrl = 'https://4000-idx-shivamelectronicsbackendgit-1736444920605.cluster-a3grjzek65cxex762e4mwrzl46.cloudworkstations.dev/api';
   public headers: any;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
