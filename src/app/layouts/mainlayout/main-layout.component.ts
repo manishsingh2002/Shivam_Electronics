@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { RouterModule } from '@angular/router';
 @Component({
-  selector: 'app-main-layout',
-  template: `
+    selector: 'app-main-layout',
+    template: `
     <div class="min-h-full flex flex-col">
       <app-header
         class="fixed top-0 left-0 w-full bg-white z-20 shadow-md"
@@ -39,11 +39,10 @@ import { RouterModule } from '@angular/router';
     </div>
     <!-- <router-outlet></router-outlet> -->
   `,
-  styleUrl: './main-layout.component.scss',
-  standalone: true,
-  imports: [
-    RouterModule,
-    HeaderComponent,
-  ],
+    styleUrl: './main-layout.component.scss',
+    imports: [
+        RouterModule,
+        HeaderComponent,
+    ]
 })
 export class MainLayoutComponent {}

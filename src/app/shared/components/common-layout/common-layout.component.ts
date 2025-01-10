@@ -6,11 +6,10 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-common-layout',
-  standalone: true,
-  imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
-  templateUrl: './common-layout.component.html',
-  styleUrls: ['./common-layout.component.scss']
+    selector: 'app-common-layout',
+    imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
+    templateUrl: './common-layout.component.html',
+    styleUrls: ['./common-layout.component.scss']
 })
 export class CommonLayoutComponent {
   @Input() components: any;

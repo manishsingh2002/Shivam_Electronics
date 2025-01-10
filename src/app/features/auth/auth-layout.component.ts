@@ -3,10 +3,9 @@ import { RouterModule } from '@angular/router';
 // import { LoginComponent } from './components/login/login.component';
 
 @Component({
-  selector: 'app-auth-layout',
-  standalone: true,
-  imports: [RouterModule],
-  template: `
+    selector: 'app-auth-layout',
+    imports: [RouterModule],
+    template: `
     <div class="bg-gray-100 min-h-screen">
       <header class="bg-white rounded-b-2xl shadow-md p-6 mb-8">
         <nav class="flex justify-around items-center">
@@ -33,7 +32,7 @@ import { RouterModule } from '@angular/router';
         <router-outlet></router-outlet>
       </main>
     </div>
-  `,
+  `
 })
 export class AuthLayoutComponent {}
 // ---------------------------------------------------------------------

@@ -7,19 +7,18 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { MainDashboardComponent } from './layouts/main-dashboard/main-dashboard.component';
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    ButtonModule,
-    HeaderComponent,
-    SidebarComponent,
-    HomePageComponent,
-    LoginComponent,
-    MainDashboardComponent,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [
+        RouterOutlet,
+        ButtonModule,
+        HeaderComponent,
+        SidebarComponent,
+        HomePageComponent,
+        LoginComponent,
+        MainDashboardComponent,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'shivam_Electronics';

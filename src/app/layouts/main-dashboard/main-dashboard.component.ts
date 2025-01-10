@@ -9,11 +9,10 @@ import { GstInvoiceComponent } from '../../adminDashboard/gst-invoice/gst-invoic
 import { ProductListComponent } from '../../features/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '../../features/products/components/product-detail/product-detail.component';
 @Component({
-  selector: 'app-main-dashboard',
-  standalone: true,
-  imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule],
-  templateUrl: './main-dashboard.component.html',
-  styleUrl: './main-dashboard.component.scss',
+    selector: 'app-main-dashboard',
+    imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule],
+    templateUrl: './main-dashboard.component.html',
+    styleUrl: './main-dashboard.component.scss'
 })
 export class MainDashboardComponent {
   showHeaderAndSidebar: boolean = true;

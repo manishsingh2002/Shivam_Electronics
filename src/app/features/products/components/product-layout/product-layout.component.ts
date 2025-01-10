@@ -8,11 +8,10 @@ import { Routes } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
 @Component({
-  selector: 'app-product-layout',
-  standalone: true,
-  imports: [CommonModule,RouterModule,SelectButtonModule,FormsModule],
-  templateUrl: './product-layout.component.html',
-  styleUrl: './product-layout.component.scss'
+    selector: 'app-product-layout',
+    imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
+    templateUrl: './product-layout.component.html',
+    styleUrl: './product-layout.component.scss'
 })
 
 export class ProductLayoutComponent {

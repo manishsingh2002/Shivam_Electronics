@@ -81,11 +81,10 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-product-master',
-  standalone: true,
-  imports: [FloatLabelModule, CommonModule, FormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
-  templateUrl: './product-master.component.html',
-  styleUrl: './product-master.component.scss'
+    selector: 'app-product-master',
+    imports: [FloatLabelModule, CommonModule, FormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
+    templateUrl: './product-master.component.html',
+    styleUrl: './product-master.component.scss'
 })
 export class ProductMasterComponent {
   product: Product = {

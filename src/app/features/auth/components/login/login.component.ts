@@ -7,11 +7,10 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule,RouterModule, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    imports: [CommonModule, RouterModule, FormsModule],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   public logindetails = {
