@@ -30,8 +30,8 @@ import { RouterModule } from '@angular/router';
           </div>
         </aside>
 
-        <main class="flex-1 ml-20 px-1 py-[64px] overflow-y-auto">
-          <div class="mx-auto w-full py-6">
+        <main class="flex-1 ml-20 px-1  overflow-y-auto">
+          <div class="mx-auto w-full py-2">
             <router-outlet></router-outlet>
           </div>
         </main>

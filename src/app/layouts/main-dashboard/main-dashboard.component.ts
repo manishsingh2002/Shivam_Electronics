@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { GstInvoiceComponent } from '../../adminDashboard/gst-invoice/gst-invoice.component';
 import { ProductListComponent } from '../../features/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '../../features/products/components/product-detail/product-detail.component';
+import { AppNavigationComponent } from "../../shared/components/common-layout/common-layout.component";
 @Component({
     selector: 'app-main-dashboard',
-    imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule],
+    imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule, AppNavigationComponent],
     templateUrl: './main-dashboard.component.html',
     styleUrl: './main-dashboard.component.scss'
 })
@@ -31,10 +32,8 @@ export class MainDashboardComponent {
     { label: 'home', component: HomePageComponent },
     { label: 'invoice', component: GstInvoiceComponent }, // Corrected key
     { label: 'Product List', component: ProductListComponent },
-    { label: 'Product detail', component: ProductDetailComponent }
+  
   ];
-  
-  
       navigateToComponent(component: any) {
         this.activeComponent = component;
       }
