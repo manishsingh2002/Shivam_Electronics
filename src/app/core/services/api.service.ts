@@ -38,9 +38,9 @@ export class ApiService {
   }
 
   // Fetch data
-  getData(): Observable<any> {
+  getAutopopulateData(): Observable<any> {
     return this.http
-      .get(`${this.baseUrl}/data`)
+      .get(`${this.baseUrl}/v1/products/autopopulate`)
       .pipe(catchError((error) => this.handleError('getData', error)));
   }
 
@@ -49,6 +49,13 @@ export class ApiService {
     return this.http
       .get<Product[]>(`${this.baseUrl}/v1/products`)
       .pipe(catchError((error) => this.handleError('getAllProductData', error)));
+  }
+
+  getProductDatawithId(Id: any): Observable<Product> { // Return Observable<Product>
+    return this.http.get<Product>(`${this.baseUrl}/v1/products/${Id}`) // Get a single Product
+      .pipe(
+        catchError((error, caught) => this.handleError('getProductDatawithId', error))
+      );
   }
 
   // Create a new product
@@ -65,14 +72,31 @@ export class ApiService {
     return this.http.post<any>(endpoint, data, { headers });
   }
 
-
-
   // Update a product
+  // updateProduct(productId: string, data: any): Observable<any> {
+  //   const endpoint = `${this.baseUrl}/v1/products/${productId}`;
+  //   return this.http
+  //     .put(endpoint, data)
+  //     .pipe(catchError((error) => this.handleError('updateProduct', error)));
+  // }
+
+
   updateProduct(productId: string, data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/${productId}`;
-    return this.http
-      .put(endpoint, data)
-      .pipe(catchError((error) => this.handleError('updateProduct', error)));
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      console.error("No token found. User not authenticated.");
+      return throwError(() => new Error("No token found")); // Use throwError directly
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.patch(endpoint, data, { headers }).pipe(
+      catchError((error, caught) => this.handleError('updateProduct', error))
+      // tap(response => console.log('Product updated successfully:', response)) // Optional success logging
+    );
   }
 
   // Delete a product

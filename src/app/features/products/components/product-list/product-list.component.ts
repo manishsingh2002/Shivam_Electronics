@@ -9,11 +9,10 @@ import { RatingModule } from 'primeng/rating';
 import { DrawerModule } from 'primeng/drawer';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [TableModule,CommonModule,ButtonModule,TagModule,RatingModule,FormsModule,DrawerModule],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+    selector: 'app-product-list',
+    imports: [TableModule, CommonModule, ButtonModule, TagModule, RatingModule, FormsModule, DrawerModule],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
   visible: boolean = false;

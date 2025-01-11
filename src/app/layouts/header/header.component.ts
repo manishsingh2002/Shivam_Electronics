@@ -13,18 +13,17 @@ import { AvatarModule } from 'primeng/avatar';
 import { StyleClass } from 'primeng/styleclass';
 import { Drawer } from 'primeng/drawer';
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [
-    TieredMenu,
-    ButtonModule,
-    CommonModule,
-    DrawerModule,AvatarModule,
-    InputTextModule,
-    RouterModule,
-  ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+    selector: 'app-header',
+    imports: [
+        TieredMenu,
+        ButtonModule,
+        CommonModule,
+        DrawerModule, AvatarModule,
+        InputTextModule,
+        RouterModule,
+    ],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   shownotificationdropdown: boolean = false;

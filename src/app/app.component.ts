@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from './layouts/header/header.component';
-import { HomePageComponent } from './layouts/dashboard/home-page/home-page.component';
-import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-import { LoginComponent } from './features/auth/components/login/login.component';
-import { MainDashboardComponent } from './layouts/main-dashboard/main-dashboard.component';
+import { ApiService } from './core/services/api.service';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    ButtonModule,
-    HeaderComponent,
-    SidebarComponent,
-    HomePageComponent,
-    LoginComponent,
-    MainDashboardComponent,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [
+        RouterOutlet,
+        ButtonModule,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'shivam_Electronics';
+
+  constructor(private ApiServide:ApiService,@Inject(PLATFORM_ID) private platformId: Object){}
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+    this.ApiServide.getAutopopulateData().subscribe((res)=>{
+      localStorage.setItem('autopopulate', JSON.stringify(res.data));
+    })}
+}
 }

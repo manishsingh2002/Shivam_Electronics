@@ -1,39 +1,13 @@
 
-
-<main class="flex-1 px-4 pt-8 overflow-y-auto w-full relative">
-  <div class="bg-gray-100 p-6 shadow-md rounded-lg font-roboto  sticky top-8 z-10">
-    <div class="card flex justify-center">
-      <p-selectButton [options]="componentNavItems" [(ngModel)]="activeComponent" optionLabel="label" optionValue="component" aria-labelledby="basic" (onChange)="navigateToComponent(activeComponent)"></p-selectButton>
-    </div>
+ <main class="flex-1 overflow-y-auto w-full relative">
+  <div class="sticky top-0 z-10 w-full shadow-md rounded-lg font-roboto">
+    <app-common-layout
+      [navItems]="componentNavItems"
+      [activeItem]="activeComponent"
+      (activeItemChange)="activeComponent = $event"
+    ></app-common-layout>
   </div>
-
-  <div class="mt-1">
+  <div class="mt-4">
     <ng-container *ngComponentOutlet="activeComponent"></ng-container>
   </div>
 </main>
-
-
-<!-- <div class="bg-gray-100 min-h-screen">
-  <header class="bg-white rounded-b-2xl shadow-md p-6 mb-8">
-    <nav class="flex justify-around items-center">
-      <a
-        routerLink="/home"
-        class="text-lg font-semibold text-gray-800 hover:text-blue-500"
-        >Home</a
-      >
-      <a
-        routerLink="/about"
-        class="text-lg font-semibold text-gray-800 hover:text-blue-500"
-        >About</a
-      >
-      <a
-        routerLink="/contact"
-        class="text-lg font-semibold text-gray-800 hover:text-blue-500"
-        >Contact</a
-      >
-    </nav>
-  </header>
-  <main class="container mx-auto px-4 py-8">
-    <router-outlet></router-outlet>
-  </main>
-</div> -->
