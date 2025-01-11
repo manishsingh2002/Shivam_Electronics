@@ -40,7 +40,7 @@ export class ApiService {
   // Fetch data
   getAutopopulateData(): Observable<any> {
     return this.http
-      .get(`${this.baseUrl}/v1/products/autopopulate`)
+      .get(`${this.baseUrl}/v1/products/productstitle`)
       .pipe(catchError((error) => this.handleError('getData', error)));
   }
 
@@ -112,6 +112,6 @@ export class ApiService {
     const errorMessage =
       error?.error?.message || 'An unexpected error occurred';
     console.error(`Error in ${method}: ${errorMessage}`);
-    return throwError(() => new Error(`${method} failed: ${errorMessage}`));
+    return throwError((err:any) => new Error(`${method} ${err} failed: ${errorMessage}`));
   }
 }
