@@ -40,7 +40,7 @@ export class ApiService {
   // Fetch data
   getAutopopulateData(): Observable<any> {
     return this.http
-      .get(`${this.baseUrl}/v1/products/productstitle`)
+      .get(`${this.baseUrl}/v1/products/autopopulate`)
       .pipe(catchError((error) => this.handleError('getData', error)));
   }
 
@@ -100,18 +100,30 @@ export class ApiService {
   }
 
   // Delete a product
-  deleteProduct(productId: string): Observable<any> {
-    const endpoint = `${this.baseUrl}/v1/products/${productId}`;
-    return this.http
-      .delete(endpoint)
+  deleteProduct(productId: any): Observable<any> {
+    const endpoint = `${this.baseUrl}/v1/products/deletemany`;
+    const body = { ids: productId };
+    console.log(body);
+    return this.http.delete(endpoint, { // Correct DELETE request
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: body // Correctly send the body
+  })
       .pipe(catchError((error) => this.handleError('deleteProduct', error)));
   }
+
 
   // Centralized error handling
   private handleError(method: string, error: any): Observable<never> {
     const errorMessage =
       error?.error?.message || 'An unexpected error occurred';
     console.error(`Error in ${method}: ${errorMessage}`);
-    return throwError((err:any) => new Error(`${method} ${err} failed: ${errorMessage}`));
+    
+    // Add specific check for invalid ObjectId in error
+    if (error.message.includes("Cast to ObjectId failed")) {
+      console.error("Invalid ObjectId format detected.");
+    }
+    
+    return throwError(() => new Error(`${method} failed: ${errorMessage}`));
   }
+  
 }

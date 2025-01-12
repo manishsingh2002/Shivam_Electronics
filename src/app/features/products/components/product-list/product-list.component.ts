@@ -93,22 +93,14 @@ interface ExportColumn {
     providers: [MessageService, ConfirmationService, ApiService],
     })
     export class ProductListComponent implements OnInit{
-    productDialog: boolean = false;
-
-    products!: any[];
-
-    product!: any;
-
-    selectedProducts!: any[] | null;
-
-    submitted: boolean = false;
-
-    statuses!: any[];
-
     @ViewChild('dt') dt!: Table;
-
+    productDialog: boolean = false;
+    products!: any[];
+    product!: any;
+    selectedProducts!: any[] | null;
+    submitted: boolean = false;
+    statuses!: any[];
     cols!: Column[];
-
     exportColumns!: ExportColumn[];
 
     constructor(
@@ -122,9 +114,7 @@ interface ExportColumn {
   ngOnInit() { this.getProductData(),this.loadDemoData()   }
   
   getProductData() {
-  //  this.apiService.getAllProductData().subscribe((res:any)=>{
-  //   this.products=res.data.doc;
-  //  })
+
   }
 
   // product-list.component.ts
@@ -178,7 +168,15 @@ filterSearch(event: Event): void {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter((val) => !this.selectedProducts?.includes(val));
+                    const ids = this.selectedProducts ? this.selectedProducts.map(product => product.id) : []; // Extract IDs
+                  console.log(ids); 
+                    this.apiService.deleteProduct(ids).subscribe(
+                        res => {
+                            console.log('Deletion Success:', res);
+                            this.products = this.products.filter(product => !ids.includes(product.id));
+                        },
+                        err => console.error('Deletion Error:', err)
+                    );           
                 this.selectedProducts = null;
                 this.messageService.add({
                     severity: 'success',
@@ -245,20 +243,7 @@ filterSearch(event: Event): void {
                   return 'success';
             }
           }
-    // getSeverity(status: string) {
-    //     switch (status) {
-    //         case 'INSTOCK':
-    //             return 'success';
-    //         case 'LOWSTOCK':
-    //             return 'warning';
-    //         case 'OUTOFSTOCK':
-    //             return 'danger';
-    //             default:
-    //                           return 'success';
-    //     }
-    // }
-
-    saveProduct() {
+     saveProduct() {
         this.submitted = true;
 
         if (this.product.name?.trim()) {
