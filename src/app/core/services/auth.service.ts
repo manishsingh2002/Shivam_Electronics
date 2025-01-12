@@ -55,7 +55,7 @@ export class AuthService {
         })
       );
   }
--
+
   signUp(data: any): Observable<any> {
     return this.http
       .post<any>(' http://localhost:4000/api/v1/users/signup', data)

@@ -19,22 +19,22 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
   ngOnInit(): void {
-    // this.headers = this.authService.getAuthHeaders();
+    this.headers = this.authService.getAuthHeaders();
   }
 
   //User authentication rlated
   getUserData() {
-    // const headers = this.authService.getAuthHeaders();
-    // return this.http.get('http://localhost:3000/api/v1/users/me', { headers });
+    const headers = this.authService.getAuthHeaders();
+    return this.http.get('http://localhost:3000/api/v1/users/me', { headers });
   }
 
   updatePassword(data: any) {
-    // const headers = this.authService.getAuthHeaders();
-    // return this.http.patch(
-    //   'http://localhost:3000/api/v1/users/updatePassword',
-    //   data,
-    //   { this.headers }
-    // );
+    const headers = this.authService.getAuthHeaders();
+    return this.http.patch(
+      'http://localhost:3000/api/v1/users/updatePassword',
+      data,
+      { headers }
+    );
   }
 
   // Fetch data
