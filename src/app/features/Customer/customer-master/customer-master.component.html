@@ -1,0 +1,118 @@
+<!-- <p>customer-master works!</p>
+<div class="card">
+  <form (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+          <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" pInputText [(ngModel)]="customer.email" name="email" required #email="ngModel">
+              <small *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">Email is required and must be valid.</small>
+          </div>
+          <div class="field">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" pInputText [(ngModel)]="customer.firstName" name="firstName" required #firstName="ngModel">
+              <small *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="p-error">First Name is required.</small>
+          </div>
+          <div class="field">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" pInputText [(ngModel)]="customer.lastName" name="lastName" required #lastName="ngModel">
+              <small *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="p-error">Last Name is required.</small>
+          </div>
+          <div class="field">
+              <label for="birthDate">Birth Date</label>
+              <p-calendar id="birthDate" [(ngModel)]="customer.birthDate" name="birthDate" dateFormat="mm/dd/yy" [showIcon]="true" required #birthDate="ngModel"></p-calendar>
+              <small *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="p-error">Birth Date is required.</small>
+          </div>
+          <div class="field">
+              <label for="gender">Gender</label>
+              <p-dropdown [options]="genders" [(ngModel)]="customer.gender" name="gender" placeholder="Select a Gender" [showClear]="true" required #gender="ngModel"></p-dropdown>
+              <small *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="p-error">Gender is required.</small>
+          </div>
+
+          <h3>Phone Numbers</h3>
+          <div *ngFor="let phoneNumber of customer.phoneNumbers; let i = index">
+              <div class="field grid grid-cols-3 gap-2">
+                  <div class="col">
+                      <label for="number{{i}}">Number</label>
+                      <input type="tel" id="number{{i}}" pInputText [(ngModel)]="phoneNumber.number" name="phoneNumber{{i}}" required #number="ngModel">
+                      <small *ngIf="number.invalid && (number.dirty || number.touched)" class="p-error">Phone Number is required.</small>
+                  </div>
+                  <div class="col">
+                      <label for="type{{i}}">Type</label>
+                      <p-dropdown [options]="phoneTypes" [(ngModel)]="phoneNumber.type" name="phoneType{{i}}" placeholder="Type" [showClear]="true" required #type="ngModel"></p-dropdown>
+                      <small *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">Type is required.</small>
+                  </div>
+                  <div class="col">
+                      <p-checkbox [(ngModel)]="phoneNumber.primary" name="primaryPhone{{i}}" [binary]="true" label="Primary"></p-checkbox>
+                  </div>
+              </div>
+              <button pButton type="button" icon="pi pi-minus" class="p-button-danger" (click)="removePhoneNumber(i)"></button>
+          </div>
+          <button pButton type="button" icon="pi pi-plus" label="Add Phone Number" (click)="addPhoneNumber()"></button>
+
+          <h3>Addresses</h3>
+          <div *ngFor="let address of customer.addresses; let i = index">
+              <div class="field grid grid-cols-3 gap-2">
+                  <div class="col">
+                      <label for="street{{i}}">Street</label>
+                      <input type="text" id="street{{i}}" pInputText [(ngModel)]="address.street" name="street{{i}}" required #street="ngModel">
+                      <small *ngIf="street.invalid && (street.dirty || street.touched)" class="p-error">Street is required.</small>
+                  </div>
+                  <div class="col">
+                      <label for="city{{i}}">City</label>
+                      <input type="text" id="city{{i}}" pInputText [(ngModel)]="address.city" name="city{{i}}" required #city="ngModel">
+                      <small *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">City is required.</small>
+                  </div>
+                  <div class="col">
+                      <label for="state{{i}}">State</label>
+                      <input type="text" id="state{{i}}" pInputText [(ngModel)]="address.state" name="state{{i}}" required #state="ngModel">
+                      <small *ngIf="state.invalid && (state.dirty || state.touched)" class="p-error">State is required.</small>
+                  </div>
+              </div>
+              <div class="field grid grid-cols-3 gap-2">
+                  <div class="col">
+                      <label for="zipCode{{i}}">Zip Code</label>
+                      <input type="text" id="zipCode{{i}}" pInputText [(ngModel)]="address.zipCode" name="zipCode{{i}}" required #zipCode="ngModel">
+                      <small *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="p-error">Zip Code is required.</small>
+                  </div>
+                  <div class="col">
+                      <label for="country{{i}}">Country</label>
+                      <input type="text" id="country{{i}}" pInputText [(ngModel)]="address.country" name="country{{i}}" required #country="ngModel">
+                      <small *ngIf="country.invalid && (country.dirty || country.touched)" class="p-error">Country is required.</small>
+                  </div>
+                  <div class="col">
+                      <p-checkbox [(ngModel)]="address.isDefault" name="isDefault{{i}}" [binary]="true" label="Default"></p-checkbox>
+                  </div>
+              </div>
+              <div class="field">
+                  <label for="type{{i}}">Type</label>
+                  <p-dropdown [options]="addressTypes" [(ngModel)]="address.type" name="addressType{{i}}" placeholder="Type" [showClear]="true" required #addressType="ngModel"></p-dropdown>
+                  <small *ngIf="addressType.invalid && (addressType.dirty || addressType.touched)" class="p-error">Type is required.</small>
+              </div>
+              <button pButton type="button" icon="pi pi-minus" class="p-button-danger" (click)="removeAddress(i)"></button>
+          </div>
+          <button pButton type="button" icon="pi pi-plus" label="Add Address" (click)="addAddress()"></button>
+
+          <h3>Preferences</h3>
+          <div>
+              <div class="field-checkbox">
+                  <p-checkbox [(ngModel)]="customer.preferences.marketingEmails" name="marketingEmails" [binary]="true" label="Receive Marketing Emails"></p-checkbox>
+              </div>
+              <div class="field">
+                  <label for="communicationLanguage">Communication Language</label>
+                  <p-dropdown [options]="communicationLanguages" [(ngModel)]="customer.preferences.communicationLanguage" name="communicationLanguage" placeholder="Select Language" [showClear]="true"></p-dropdown>
+              </div>
+              <div class="field">
+                  <label for="currency">Currency</label>
+                  <p-dropdown [options]="currencies" [(ngModel)]="customer.preferences.currency" name="currency" placeholder="Select Currency" [showClear]="true"></p-dropdown>
+              </div>
+              <div class="field-checkbox">
+                  <p-checkbox [(ngModel)]="customer.preferences.newsletterSubscription" name="newsletterSubscription" [binary]="true" label="Subscribe to Newsletter"></p-checkbox>
+              </div>
+              <div class="field-checkbox">
+                  <p-checkbox [(ngModel)]="customer.preferences.productNotifications" name="productNotifications" [binary]="true" label="Receive Product Notifications"></p-checkbox>
+              </div>
+          </div>
+
+          <div class="field">
+              <label for="metadata">Metadata (key=value)</label>
+              <textarea id="metadata" pInputTextarea [(ngModel)]="customer.metadata" name=" -->
