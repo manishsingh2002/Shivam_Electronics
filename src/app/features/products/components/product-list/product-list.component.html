@@ -174,115 +174,10 @@ preview
                 products.</div>
         </ng-template>
     </p-table>
-    <!-- <p-dialog [(visible)]="productDialog" [style]="{ width: '700px' }" header="Product Details" [modal]="true">
+    <p-dialog [(visible)]="productDialog" [style]="{ width: 'auto' }" header="Product Details" [modal]="true">
         <ng-template #content>
-            <div class="flex flex-col gap-6">
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-4">
-                        <img [src]="product.images && product.images.length > 0 ? product.images[0].link : 'placeholder-image.jpg'"
-                            [alt]="product.title" class="block m-auto pb-4 max-h-48" />
-                        <input type="file" (change)="onFileChange($event)" accept="image/*" multiple/>
-                    </div>
-                    <div class="col-span-8">
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-6">
-                                <label for="title" class="block font-bold mb-3">Title</label>
-                                <input type="text" pInputText id="title" [(ngModel)]="product.title" required autofocus
-                                    class="w-full" />
-                            </div>
-                            <div class="col-span-6">
-                                <label for="brand" class="block font-bold mb-3">Brand</label>
-                                <input type="text" pInputText id="brand" [(ngModel)]="product.brand" class="w-full" />
-                            </div>
-                            <div class="col-span-12">
-                                <label for="description" class="block font-bold mb-3">Description</label>
-                                <textarea id="description" pTextarea [(ngModel)]="product.description" rows="3"
-                                    class="w-full"></textarea>
-                            </div>
-                            <div class="col-span-12">
-                                <label for="detailedDescriptions" class="block font-bold mb-3">Detailed Descriptions</label>
-                                <div *ngFor="let detail of product.detailedDescriptions; let i = index" class="mb-2">
-                                    <input type="text" pInputText [(ngModel)]="detail.detail" class="w-full" />
-                                    <button type="button" (click)="removeDetailedDescription(i)" class="ml-2">Remove</button>
-                                </div>
-                                <button type="button" (click)="addDetailedDescription()" class="mt-2">Add Description</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
-                        <label for="category" class="block font-bold mb-3">Category</label>
-                        <input type="text" pInputText id="category" [(ngModel)]="product.category" class="w-full" />
-                    </div>
-                    <div class="col-span-3">
-                        <label for="price" class="block font-bold mb-3">Price</label>
-                        <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"
-                            class="w-full"></p-inputnumber>
-                    </div>
-                    <div class="col-span-3">
-                        <label for="stock" class="block font-bold mb-3">Stock</label>
-                        <p-inputnumber id="stock" [(ngModel)]="product.stock" class="w-full"></p-inputnumber>
-                    </div>
-                    <div class="col-span-3">
-                        <label for="sku" class="block font-bold mb-3">SKU</label>
-                        <input type="text" pInputText id="sku" [(ngModel)]="product.sku" class="w-full" />
-                    </div>
-    
-                    <div class="col-span-3">
-                        <label for="weight" class="block font-bold mb-3">Weight</label>
-                        <input type="text" pInputText id="weight" [(ngModel)]="product.weight" class="w-full" />
-                    </div>
-                    <div class="col-span-3">
-                        <label for="width" class="block font-bold mb-3">Width</label>
-                        <input type="text" pInputText id="width" [(ngModel)]="product.dimensions.width" class="w-full" />
-                    </div>
-                    <div class="col-span-3">
-                        <label for="height" class="block font-bold mb-3">Height</label>
-                        <input type="text" pInputText id="height" [(ngModel)]="product.dimensions.height"
-                            class="w-full" />
-                    </div>
-                    <div class="col-span-3">
-                        <label for="depth" class="block font-bold mb-3">Depth</label>
-                        <input type="text" pInputText id="depth" [(ngModel)]="product.dimensions.depth" class="w-full" />
-                    </div>
-                    <div class="col-span-6">
-                        <label for="warrantyInformation" class="block font-bold mb-3">Warranty Info</label>
-                        <textarea id="warrantyInformation" pTextarea [(ngModel)]="product.warrantyInformation" rows="3"
-                            class="w-full"></textarea>
-                    </div>
-                    <div class="col-span-6">
-                        <label for="shippingInformation" class="block font-bold mb-3">Shipping Info</label>
-                        <textarea id="shippingInformation" pTextarea [(ngModel)]="product.shippingInformation" rows="3"
-                            class="w-full"></textarea>
-                    </div>
-                    <div class="col-span-3">
-                        <label for="availabilityStatus" class="block font-bold mb-3">Availability</label>
-                        <p-dropdown [options]="availabilityStatuses" [(ngModel)]="product.availabilityStatus"
-                            placeholder="Select Status" optionLabel="label" optionValue="value" class="w-full"></p-dropdown>
-                    </div>
-                    <div class="col-span-3">
-                        <label for="minimumOrderQuantity" class="block font-bold mb-3">Min Order Qty</label>
-                        <p-inputnumber id="minimumOrderQuantity" [(ngModel)]="product.minimumOrderQuantity" class="w-full"></p-inputnumber>
-                    </div>
-                    <div class="col-span-6">
-                        <label for="returnPolicy" class="block font-bold mb-3">Return Policy</label>
-                        <textarea id="returnPolicy" pTextarea [(ngModel)]="product.returnPolicy" rows="3"
-                            class="w-full"></textarea>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-    
-        <ng-template #footer>
-            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-            <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
-        </ng-template>
-    </p-dialog> -->
-    <p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
-        <ng-template #content>
-            <div class="flex flex-col gap-6">
+            <app-product-master [redirectedData]="redirectedProduct"></app-product-master>
+            <!-- <div class="flex flex-col gap-6">
                 <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image"
                     [alt]="product.image" class="block m-auto pb-4" *ngIf="product.image" />
                 <div>
@@ -339,7 +234,7 @@ preview
                         <p-inputnumber id="quantity" [(ngModel)]="product.quantity" fluid />
                     </div>
                 </div>
-            </div>
+            </div> -->
         </ng-template>
 
         <ng-template #footer>

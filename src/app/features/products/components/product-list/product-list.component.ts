@@ -65,16 +65,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { CommonModule } from '@angular/common';
 import { FileUpload } from 'primeng/fileupload';
-import { Select, SelectModule } from 'primeng/select';
+import {  SelectModule } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { RadioButton } from 'primeng/radiobutton';
+// import { RadioButton } from 'primeng/radiobutton';
 import { Rating } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
+// import { InputNumber } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
+import { ProductMasterComponent } from "../product-master/product-master.component";
 interface Column {
     field: string;
     header: string;
@@ -89,7 +90,7 @@ interface ExportColumn {
       selector: 'app-product-list',
     templateUrl: './product-list.component.html',
     styleUrl: './product-list.component.scss',
-    imports: [TableModule, Dialog,RatingModule, ButtonModule, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, Select, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule],
+    imports: [TableModule, Dialog, RatingModule, ButtonModule, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload,  Tag, Rating, InputTextModule, FormsModule,  IconFieldModule, InputIconModule, ProductMasterComponent],
     providers: [MessageService, ConfirmationService, ApiService],
     })
     export class ProductListComponent implements OnInit{
@@ -102,6 +103,7 @@ interface ExportColumn {
     statuses!: any[];
     cols!: Column[];
     exportColumns!: ExportColumn[];
+    redirectedProduct: any;
 
     constructor(
         // private productService: ProductService,
@@ -159,6 +161,7 @@ filterSearch(event: Event): void {
 
     editProduct(product: any) {
         this.product = { ...product };
+        this.redirectedProduct = { ...product }; 
         this.productDialog = true;
     }
 

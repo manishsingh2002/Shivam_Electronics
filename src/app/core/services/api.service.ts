@@ -38,27 +38,27 @@ export class ApiService {
   }
 
   // Fetch data
-  getAutopopulateData(): Observable<any> {
-    return this.http
-      .get(`${this.baseUrl}/v1/products/autopopulate`)
-      .pipe(catchError((error) => this.handleError('getData', error)));
-  }
 
-  // Fetch all products
-  getAllProductData(): Observable<Product[]> {
-    return this.http
-      .get<Product[]>(`${this.baseUrl}/v1/products`)
-      .pipe(catchError((error) => this.handleError('getAllProductData', error)));
-  }
-
-  getProductDatawithId(Id: any): Observable<Product> { // Return Observable<Product>
-    return this.http.get<Product>(`${this.baseUrl}/v1/products/${Id}`) // Get a single Product
-      .pipe(
-        catchError((error, caught) => this.handleError('getProductDatawithId', error))
-      );
-  }
-
-  // Create a new product
+// --------------------------------------------------------------------------------------------------------------------------------
+getAutopopulateData(): Observable<any> {
+  return this.http
+    .get(`${this.baseUrl}/v1/products/autopopulate`)
+    .pipe(catchError((error) => this.handleError('getData', error)));
+}
+// Fetch all products
+getAllProductData(): Observable<Product[]> {
+  return this.http
+    .get<Product[]>(`${this.baseUrl}/v1/products`)
+    .pipe(catchError((error) => this.handleError('getAllProductData', error)));
+}
+//get data with ID
+getProductDatawithId(Id: any): Observable<Product> { // Return Observable<Product>
+  return this.http.get<Product>(`${this.baseUrl}/v1/products/${Id}`) // Get a single Product
+    .pipe(
+      catchError((error, caught) => this.handleError('getProductDatawithId', error))
+    );
+}  
+// Create a new product
   createNewProduct(data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products`;
     const token = localStorage.getItem('authToken'); 
@@ -71,15 +71,6 @@ export class ApiService {
     });
     return this.http.post<any>(endpoint, data, { headers });
   }
-
-  // Update a product
-  // updateProduct(productId: string, data: any): Observable<any> {
-  //   const endpoint = `${this.baseUrl}/v1/products/${productId}`;
-  //   return this.http
-  //     .put(endpoint, data)
-  //     .pipe(catchError((error) => this.handleError('updateProduct', error)));
-  // }
-
 
   updateProduct(productId: string, data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/${productId}`;
@@ -98,8 +89,7 @@ export class ApiService {
       // tap(response => console.log('Product updated successfully:', response)) // Optional success logging
     );
   }
-
-  // Delete a product
+// 
   deleteProduct(productId: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/deletemany`;
     const body = { ids: productId };
@@ -114,16 +104,15 @@ export class ApiService {
 
   // Centralized error handling
   private handleError(method: string, error: any): Observable<never> {
-    const errorMessage =
-      error?.error?.message || 'An unexpected error occurred';
-    console.error(`Error in ${method}: ${errorMessage}`);
-    
+    const errorMessage =  error?.error?.message || 'An unexpected error occurred';
+    // console.error(`Error in ${method}: ${errorMessage}`);
+
     // Add specific check for invalid ObjectId in error
     if (error.message.includes("Cast to ObjectId failed")) {
       console.error("Invalid ObjectId format detected.");
     }
-    
     return throwError(() => new Error(`${method} failed: ${errorMessage}`));
   }
-  
 }
+
+

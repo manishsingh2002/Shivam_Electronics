@@ -1,5 +1,5 @@
 
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Input, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormControl, FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -84,6 +84,8 @@ interface Product {
 
 @Component({
   selector: 'app-product-master',
+  // imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
+
   imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
   templateUrl: './product-master.component.html',
   styleUrl: './product-master.component.scss'
@@ -117,6 +119,7 @@ export class ProductMasterComponent {
     thumbnail: '',
     salesPerson: [],
   };
+  @Input() redirectedData:any
   public productdata: any
   public productdropdwn: any
   public selectedProductId: any;
@@ -141,12 +144,15 @@ export class ProductMasterComponent {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.redirectedData)  this.product= this.redirectedData
+  }
+
   Update() {
     this.apiService.updateProduct(this.selectedProductId, this.product).subscribe((res: any) => {
       console.log(res);
     })
   }
-
 
   autopopulate() {
     if (this.selectedProductId) { // Check if a product ID is selected
