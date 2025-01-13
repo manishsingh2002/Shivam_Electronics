@@ -1,5 +1,5 @@
 
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Input, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormControl, FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -84,6 +84,8 @@ interface Product {
 
 @Component({
   selector: 'app-product-master',
+  // imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
+
   imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
   templateUrl: './product-master.component.html',
   styleUrl: './product-master.component.scss'
@@ -117,6 +119,7 @@ export class ProductMasterComponent {
     thumbnail: '',
     salesPerson: [],
   };
+  @Input() redirectedData:any
   public productdata: any
   public productdropdwn: any
   public selectedProductId: any;
@@ -141,12 +144,15 @@ export class ProductMasterComponent {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.redirectedData)  this.product= this.redirectedData
+  }
+
   Update() {
     this.apiService.updateProduct(this.selectedProductId, this.product).subscribe((res: any) => {
       console.log(res);
     })
   }
-
 
   autopopulate() {
     if (this.selectedProductId) { // Check if a product ID is selected
@@ -154,35 +160,7 @@ export class ProductMasterComponent {
         (res: any) => {
           this.productdata = res;
           this.product =res.data
-          //  {
-          //   ...this.product, // Keep default values for fields not in response
-          //   title: this.productdata.title || '',
-          //   description: this.productdata.description || '',
-          //   detailedDescriptions: this.productdata.detailedDescriptions || [{ id: '', detail: '' }], // Handle potential undefined
-          //   category: this.productdata.category || 'manish',
-          //   rate: this.productdata.rate || '',
-          //   cgst: this.productdata.cgst || '9',
-          //   sgst: this.productdata.sgst || '9',
-          //   price: this.productdata.price || '',
-          //   stock: this.productdata.stock || '',
-          //   tags: this.productdata.tags || [],
-          //   brand: this.productdata.brand || '',
-          //   sku: this.productdata.sku || '',
-          //   weight: this.productdata.weight || '',
-          //   dimensions: this.productdata.dimensions || { width: '', height: '', depth: '' },
-          //   warrantyInformation: this.productdata.warrantyInformation || '',
-          //   shippingInformation: this.productdata.shippingInformation || '',
-          //   availabilityStatus: this.productdata.availabilityStatus || 'In Stock',
-          //   startLocation: this.productdata.startLocation || { type: 'Point', coordinates: '' },
-          //   locations: this.productdata.locations || [{ type: 'Point', coordinates: '' }],
-          //   returnPolicy: this.productdata.returnPolicy || '',
-          //   minimumOrderQuantity: this.productdata.minimumOrderQuantity || '',
-          //   meta: this.productdata.meta || { createdAt: new Date(), updatedAt: new Date(), barcode: '' },
-          //   images: this.productdata.images || [{ id: '', detail: '', link: '' }],
-          //   thumbnail: this.productdata.thumbnail || '',
-          //   salesPerson: this.productdata.salesPerson || [],
-          // };
-          console.log("populated product", this.product)
+         console.log("populated product", this.product)
         },
         (error) => {
           console.error('Error fetching product data:', error);

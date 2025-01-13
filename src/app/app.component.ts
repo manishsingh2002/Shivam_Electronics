@@ -18,7 +18,8 @@ export class AppComponent {
   constructor(private ApiServide:ApiService,@Inject(PLATFORM_ID) private platformId: Object){}
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-    this.ApiServide.getAutopopulateData().subscribe((res)=>{
+      this.ApiServide.getAutopopulateData().subscribe((res)=>{
+      console.log(res)
       localStorage.setItem('autopopulate', JSON.stringify(res.data));
     })}
 }
