@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-// import { environment } from 'src/environments/environment'; // Adjust for environments
 
 export interface Product {
   id: string;
@@ -14,27 +13,19 @@ export interface Product {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private baseUrl = 'http://localhost:4000/api';
-  public headers: any;
+  // private baseUrl = 'http://localhost:4000/api';
+  // public headers: any;
+  private baseUrl = 'https://4000-idx-manish-testing-1736743032103.cluster-nx3nmmkbnfe54q3dd4pfbgilpc.cloudworkstations.dev/api';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
-  ngOnInit(): void {
-    this.headers = this.authService.getAuthHeaders();
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  //User authentication rlated
+  // User authentication related methods (use methods from AuthService)
   getUserData() {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get('http://localhost:3000/api/v1/users/me', { headers });
+    return this.http.get('http://localhost:3000/api/v1/users/me'); // Interceptor adds headers
   }
 
   updatePassword(data: any) {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.patch(
-      'http://localhost:3000/api/v1/users/updatePassword',
-      data,
-      { headers }
-    );
+    return this.http.patch('http://localhost:3000/api/v1/users/updatePassword', data); // Interceptor adds headers
   }
 
   // Fetch data
@@ -61,35 +52,43 @@ getProductDatawithId(Id: any): Observable<Product> { // Return Observable<Produc
 // Create a new product
   createNewProduct(data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products`;
-    const token = localStorage.getItem('authToken'); 
-    if (!token) {
-      console.error("No token found. User not authenticated.");
-      return new Observable(observer => observer.error("No token found"));
-    }
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Add the Authorization header
-    });
-    return this.http.post<any>(endpoint, data, { headers });
+    return this.http.post<any>(endpoint, data).pipe(
+      catchError((error) => this.handleError('createNewProduct', error))
+    );
   }
 
   updateProduct(productId: string, data: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/${productId}`;
-    const token = localStorage.getItem('authToken');
-
-    if (!token) {
-      console.error("No token found. User not authenticated.");
-      return throwError(() => new Error("No token found")); // Use throwError directly
-    }
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    return this.http.patch(endpoint, data, { headers }).pipe(
-      catchError((error, caught) => this.handleError('updateProduct', error))
-      // tap(response => console.log('Product updated successfully:', response)) // Optional success logging
+    return this.http.patch(endpoint, data).pipe(
+      catchError((error) => this.handleError('updateProduct', error))
     );
   }
-// 
+// <<<<<<< main
+
+//   deleteProduct(productId: any): Observable<any> {
+//     const endpoint = `${this.baseUrl}/v1/products/deletemany`;
+//     const body = JSON.stringify({ ids: productId }); // Stringify the body
+
+//     return this.http.delete(endpoint, {
+//       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+//       body: body,
+//     }).pipe(
+//       catchError((error) => this.handleError('deleteProduct', error))
+//     );
+//   }
+
+//   private handleError(method: string, error: any): Observable<never> {
+//     let errorMessage = error?.error?.message || 'An unexpected error occurred';
+
+//     if (error.message.includes("Cast to ObjectId failed")) {
+//       errorMessage = "Invalid ID format provided."; // More user-friendly message
+//       console.error("Invalid ObjectId format detected.", error); // Keep detailed error in console for debugging
+//     } else {
+//       console.error(`Error in ${method}:`, error); // Log the full error object
+//     }
+
+// =======
+// // 
   deleteProduct(productId: any): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/deletemany`;
     const body = { ids: productId };
