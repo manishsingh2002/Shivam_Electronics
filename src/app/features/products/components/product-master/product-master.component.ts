@@ -156,7 +156,7 @@ export class ProductMasterComponent {
 
   autopopulate() {
     if (this.selectedProductId) { // Check if a product ID is selected
-      this.apiService.getProductDatawithId(this.selectedProductId).subscribe(
+      this.apiService.getProductDataWithId(this.selectedProductId).subscribe(
         (res: any) => {
           this.productdata = res;
           this.product =res.data

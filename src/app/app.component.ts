@@ -3,11 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ApiService } from './core/services/api.service';
 import { isPlatformBrowser } from '@angular/common';
+import { AppMessageService } from './core/services/message.service';
+import { ToastModule } from 'primeng/toast';
 @Component({
     selector: 'app-root',
     imports: [
         RouterOutlet,
-        ButtonModule,
+        ButtonModule,ToastModule,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
