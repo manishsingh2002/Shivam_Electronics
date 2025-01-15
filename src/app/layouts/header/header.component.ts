@@ -36,6 +36,12 @@ export class HeaderComponent {
     this.shownotificationdropdown = !this.shownotificationdropdown;
   }
 
+  
+toggleDarkMode() {
+  const element = document.querySelector('html');
+  element?.classList.toggle('my-app-dark');
+}
+
   toggleAppDropDown() {
     this.appsdropdown = !this.appsdropdown;
   }

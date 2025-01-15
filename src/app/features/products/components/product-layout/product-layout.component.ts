@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
+import { AdminUserComponent } from '../../../Users/admin-user/admin-user.component';
 @Component({
     selector: 'app-product-layout',
     imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
@@ -19,7 +20,8 @@ export class ProductLayoutComponent {
 
     componentNavItems: any[] = [
       { label: 'Product Master', component: ProductMasterComponent },
-      { label: 'Product List', component: ProductListComponent       },
+      { label: 'Product List', component: ProductListComponent },
+      { label: 'User List', component: AdminUserComponent },
       { label: 'Product detail', component: ProductDetailComponent }
     ];
 

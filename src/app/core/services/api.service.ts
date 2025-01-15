@@ -14,7 +14,6 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private baseUrl = 'http://localhost:4000/api'; // Update with your API base URL
-
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   // === User Authentication Methods ===
@@ -24,12 +23,37 @@ export class ApiService {
       .pipe(catchError((error) => this.handleError('getUserData', error)));
   }
 
+  // updateUserPassword(): Observable<any> {
+  //   return this.http
+  //     .get(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
+  //     .pipe(catchError((error) => this.handleError('getUserData', error)));
+  // }
+
+  deleteUser(): Observable<any> {
+    return this.http
+      .delete(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
+      .pipe(catchError((error) => this.handleError('getUserData', error)));
+  }
+
+
+  getAllUserData(): Observable<any> {
+    return this.http
+      .get(`${this.baseUrl}/v1/users/allusers`) // Interceptor will add headers
+      .pipe(catchError((error) => this.handleError('getUserData', error)));
+  }
+
   updatePassword(data: any): Observable<any> {
     return this.http
       .patch(`${this.baseUrl}/v1/users/updatePassword`, data) // Interceptor will add headers
       .pipe(catchError((error) => this.handleError('updatePassword', error)));
   }
 
+
+
+
+
+
+  // -----------------------------------------------------------------------------------------------------------------------------------------------------------
   // === Product CRUD Methods ===
   getAutopopulateData(): Observable<any> {
     return this.http
@@ -54,7 +78,7 @@ export class ApiService {
       .post(`${this.baseUrl}/v1/products`, data)
       .pipe(catchError((error) => this.handleError('createNewProduct', error)));
   }
-
+  
   updateProduct(productId: string, data: any): Observable<any> {
     return this.http
       .patch(`${this.baseUrl}/v1/products/${productId}`, data)

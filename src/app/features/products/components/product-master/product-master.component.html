@@ -1,4 +1,183 @@
-<body class="bg-gray-100  w-5/6 mx-auto p-6shadow-md rounded-lg font-roboto">
+
+<body class="bg-gray-100 w-full mx-auto p-6 shadow-md rounded-lg font-roboto">
+    <div class="card flex justify-center mb-6">
+      <p-select [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title"  optionValue="_id"  class="w-1/2 md:w-56" />
+        <button class="ml-2 p-2 bg-blue-500 text-white rounded" (click)="autopopulate()">Search</button>
+    </div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl text-black font-bold mb-4">Product Input Form</h1>
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="title" class="block text-gray-700 font-semibold mb-2">Title</label>
+                    <input type="text" id="title" [(ngModel)]="product.title" name="title" class="max-w-96 p-2 border border-gray-300 rounded" required maxlength="200" />
+                </div>
+                <div>
+                    <label for="description" class="block text-gray-700 font-semibold mb-2">Description</label>
+                    <textarea id="description" name="description" class="max-w-96 p-2 border border-gray-300 rounded" required maxlength="500" [(ngModel)]="product.description"></textarea>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="detailedDescriptions" class="block text-gray-700 font-semibold mb-2">Detailed Descriptions</label>
+                    <div id="detailedDescriptions">
+                        <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
+                            <div class="flex flex-col md:flex-row md:space-x-4">
+                                <div class="flex-1">
+                                    <label for="id-{{i}}" class="block text-gray-700 font-semibold mb-2">ID {{i + 1}}</label>
+                                    <input type="text" id="id-{{i}}" [(ngModel)]="item.id" autocomplete="on" class="max-w-96 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required maxlength="200" />
+                                </div>
+                                <div class="flex-1">
+                                    <label for="item.detail" class="block text-gray-700 font-semibold mb-2">Description</label>
+                                    <textarea id="item.detail" name="item.detail" class="max-w-96 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required maxlength="500" [(ngModel)]="item.detail"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addDetailedDescription()" type="button" id="addDetail" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors duration-200">Add Detail</button>
+                </div>
+                <div>
+                    <label for="category" class="block text-gray-700 font-semibold mb-2">Category</label>
+                    <input type="text" id="category" [(ngModel)]="product.category" autocomplete="on" class="max-w-96 p-2 border border-gray-300 rounded" required maxlength="200" />
+                </div>
+                <div>
+                    <label for="rate" class="block text-gray-700 font-semibold mb-2">Rate</label>
+                    <input type="number" id="rate" [(ngModel)]="product.rate" name="rate" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div>
+                    <label for="cgst" class="block text-gray-700 font-semibold mb-2">CGST</label>
+                    <input type="number" id="cgst" [(ngModel)]="product.cgst" name="cgst" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div>
+                    <label for="sgst" class="block text-gray-700 font-semibold mb-2">SGST</label>
+                    <input type="number" id="sgst" [(ngModel)]="product.sgst" name="sgst" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div>
+                    <label for="price" class="block text-gray-700 font-semibold mb-2">Price</label>
+                    <input type="number" id="price" [(ngModel)]="product.price" name="price" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div>
+                    <label for="discountPercentage" class="block text-gray-700 font-semibold mb-2">Discount Percentage</label>
+                    <input type="number" id="discountPercentage" [(ngModel)]="product.discountPercentage" name="discountPercentage" class="max-w-96 p-2 border border-gray-300 rounded" min="0" max="100" />
+                </div>
+                <div>
+                    <label for="ratingAverage" class="block text-gray-700 font-semibold mb-2">Rating Average</label>
+                    <input type="number" id="ratingAverage" [(ngModel)]="product.ratingAverage" name="ratingAverage" class="max-w-96 p-2 border border-gray-300 rounded" min="0" max="5" />
+                </div>
+                <div>
+                    <label for="ratingQuantity" class="block text-gray-700 font-semibold mb-2">Rating Quantity</label>
+                    <input type="number" id="ratingQuantity" [(ngModel)]="product.ratingQuantity" name="ratingQuantity" class="max-w-96 p-2 border border-gray-300 rounded" min="0" />
+                </div>
+                <div>
+                    <label for="stock" class="block text-gray-700 font-semibold mb-2">Stock</label>
+                    <input type="number" id="stock" [(ngModel)]="product.stock" name="stock" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div>
+                    <label for="tags" class="block text-gray-700 font-semibold mb-2">Tags</label>
+                    <input type="text" id="tags" [(ngModel)]="product.tags" name="tags" class="max-w-96 p-2 border border-gray-300 rounded" />
+                </div>
+                <div>
+                    <label for="brand" class="block text-gray-700 font-semibold mb-2">Brand</label>
+                    <input type="text" id="brand" [(ngModel)]="product.brand" name="brand" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                </div>
+                <div>
+                    <label for="sku" class="block text-gray-700 font-semibold mb-2">SKU</label>
+                    <input type="text" id="sku" [(ngModel)]="product.sku" name="sku" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                </div>
+                <div>
+                    <label for="weight" class="block text-gray-700 font-semibold mb-2">Weight</label>
+                    <input type="number" id="weight" [(ngModel)]="product.weight" name="weight" class="max-w-96 p-2 border border-gray-300 rounded" required min="0" />
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="dimensions" class="block text-gray-700 font-bold mb-1">Dimensions</label>
+                    <div class="flex space-x-2">
+                        <div class="flex-1">
+                            <label for="width" class="block text-gray-700 font-semibold mb-2">Width</label>
+                            <input type="number" id="width" [(ngModel)]="product.dimensions.width" name="dimensions.width" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                        </div>
+                        <div class="flex-1">
+                            <label for="height" class="block text-gray-700 font-semibold mb-2">Height</label>
+                            <input type="number" id="height" [(ngModel)]="product.dimensions.height" name="dimensions.height" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                        </div>
+                        <div class="flex-1">
+                            <label for="depth" class="block text-gray-700 font-semibold mb-2">Depth</label>
+                            <input type="number" id="depth" [(ngModel)]="product.dimensions.depth" name="dimensions.depth" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="warrantyInformation" class="block text-gray-700 font-bold mb-1">Warranty Information</label>
+                    <textarea id="warrantyInformation" [(ngModel)]="product.warrantyInformation" name="warrantyInformation" class="max-w-96 p-2 border border-gray-300 rounded" required rows="5"></textarea>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="shippingInformation" class="block text-gray-700 font-bold mb-1">Shipping Information</label>
+                    <textarea id="shippingInformation" [(ngModel)]="product.shippingInformation" name="shippingInformation" class="max-w-96 p-2 border border-gray-300 rounded" required rows="5"></textarea>
+                </div>
+                <div>
+                    <label for="availabilityStatus" class="block text-gray-700 font-bold mb-1">Availability Status</label>
+                    <select id="availabilityStatus" name="availabilityStatus" class="max-w-96 p-2 border border-gray-300 rounded" required>
+                        <option value="In Stock">In Stock</option>
+                        <option value="Low Stock">Low Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="returnPolicy" class="block text-gray-700 font-bold mb-1">Return Policy</label>
+                    <textarea id="returnPolicy" [(ngModel)]="product.returnPolicy" name="returnPolicy" class="max-w-96 p-2 border border-gray-300 rounded" required rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="minimumOrderQuantity" class="block text-gray-700 font-bold mb-1">Minimum Order Quantity</label>
+                    <input type="number" id="minimumOrderQuantity" [(ngModel)]="product.minimumOrderQuantity" name="minimumOrderQuantity" class="max-w-96 p-2 border border-gray-300 rounded" min="1" />
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="meta" class="block text-gray-700 font-bold mb-1">Meta</label>
+                    <div class="flex space-x-2">
+                        <div class="flex-1">
+                            <label for="barcode" class="block text-gray-700 font-semibold mb-2">Barcode</label>
+                            <input type="text" id="barcode" [(ngModel)]="product.meta.barcode" name="meta.barcode" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                        </div>
+                        <div class="flex-1">
+                            <label for="qrCode" class="block text-gray-700 font-semibold mb-2">QR Code</label>
+                            <input type="text" id="qrCode" [(ngModel)]="product.meta.qrCode" name="meta.qrCode" class="max-w-96 p-2 border border-gray-300 rounded" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="images" class="block text-gray-700 font-bold mb-1">Images</label>
+                    <div id="images" *ngIf="product.images">
+                        <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
+                            <div class="flex-1">
+                                <label for="imageId{{i}}" class="block text-gray-700 font-semibold mb-2">ID</label>
+                                <input type="text" id="imageId{{i}}" [(ngModel)]="product.images[i].id" name="images[{{i}}].id" class="max-w-96 p-2 border border-gray-300 rounded" />
+                            </div>
+                            <div class="flex-1">
+                                <label for="imageDetail{{i}}" class="block text-gray-700 font-semibold mb-2">Detail</label>
+                                <input type="text" id="imageDetail{{i}}" [(ngModel)]="product.images[i].detail" name="images[{{i}}].detail" class="max-w-96 p-2 border border-gray-300 rounded" />
+                            </div>
+                            <div class="flex-1">
+                                <label for="imageLink{{i}}" class="block text-gray-700 font-semibold mb-2">Link</label>
+                                <input type="text" id="imageLink{{i}}" [(ngModel)]="product.images[i].link" name="images[{{i}}].link" class="max-w-96 p-2 border border-gray-300 rounded" />
+                            </div>
+                            <button class="p-2 bg-red-500 text-white rounded" (click)="removeImage(i)">Remove</button>
+                        </div>
+                        <button class="p-2 bg-blue-500 text-white rounded" (click)="addImage()">Add Image</button>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="thumbnail" class="block text-gray-700 font-bold mb-1">Thumbnail</label>
+                    <input type="text" id="thumbnail" [(ngModel)]="product.thumbnail" name="thumbnail" class="max-w-96 p-2 border border-gray-300 rounded" required />
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label for="salesPerson" class="block text-gray-700 font-bold mb-1">Sales Person</label>
+                    <input type="text" id="salesPerson" [(ngModel)]="product.salesPerson" name="salesPerson" class="max-w-96 p-2 border border-gray-300 rounded" />
+                </div>
+            </div>
+            <button type="submit" (click)="onSubmit()" class="bg-green-500 text-white px-4 py-2 rounded mt-4">Submit</button>
+        </div>
+    </div>
+    <button class="mt-4 p-2 bg-yellow-500 text-white rounded" (click)="Update()">Update</button>
+</body>
+
+<!--  -->
+<!-- <body class="bg-gray-100  w-5/6 mx-auto p-6shadow-md rounded-lg font-roboto">
   <div class="card flex justify-center">
     <p-select [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title"  optionValue="_id"  class="w-1/2 md:w-56" />
     <button pButton (click)="autopopulate()">search</button>
@@ -15,13 +194,7 @@
           </p-floatLabel>
         </div>
         <p-floatLabel >
-          <textarea 
-            id="description" 
-            name="description" 
-            class="w-1/2 p-2 border border-gray-300 rounded" 
-            required  placeholder="Description"
-            maxlength="500" 
-            [(ngModel)]="product.description">
+          <textarea id="description" name="description" class="w-1/2 p-2 border border-gray-300 rounded" required  placeholder="Description"maxlength="500" [(ngModel)]="product.description">
           </textarea>
         </p-floatLabel>
      <div class="col-span-1 md:col-span-2">
@@ -29,24 +202,19 @@
       
       <div id="detailedDescriptions">
         <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
-          
-          <div class="flex flex-col md:flex-row md:space-x-4">
-            
+            <div class="flex flex-col md:flex-row md:space-x-4">        
             <p-floatLabel variant="on" class="flex-1">
               <input pInputText id="id-{{i}}" [(ngModel)]="item.id" autocomplete="on" placeholder="ID {{i + 1}}"
                 class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required maxlength="200" />
             </p-floatLabel>
-    
             <p-floatLabel variant="on" class="flex-1">
               <textarea id="item.detail" placeholder="Description" name="item.detail"
                 class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required maxlength="500" [(ngModel)]="item.detail"></textarea>
             </p-floatLabel>
-            
           </div>
         </div>
       </div>
-    
-      <button (click)="addDetailedDescription()" type="button" id="addDetail" 
+          <button (click)="addDetailedDescription()" type="button" id="addDetail" 
         class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors duration-200">
         Add Detail
       </button>
@@ -210,63 +378,7 @@
             <option value="Out of Stock">Out of Stock</option>
           </select>
         </div>
-     <!-- <div class="col-span-1 md:col-span-2">
-          <label for="startLocation" class="block text-gray-700 font-bold mb-1">Start Location</label>
-          <div class="flex space-x-2">
-        
-            <input pInputText type="text" id="startLocationType" [(ngModel)]="product.startLocation.type" name="startLocation.type"
-                   class="w-1/4 p-2 border border-gray-300 rounded" readonly value="Point" />
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationCoordinates" [(ngModel)]="product.startLocation.coordinates" name="startLocation.coordinates"
-                     class="w-1/2 p-2 border border-gray-300 rounded"  />
-              <label for="startLocationCoordinates">Coordinates</label>
-            </p-floatLabel>
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationAddress" [(ngModel)]="product.startLocation.address" name="startLocation.address"
-                     class="w-1/2 p-2 border border-gray-300 rounded" />
-              <label for="startLocationAddress">Address</label>
-            </p-floatLabel>
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationDescription" [(ngModel)]="product.startLocation.description" name="startLocation.description"
-                     class="w-1/2 p-2 border border-gray-300 rounded"  />
-              <label for="startLocationDescription">Description</label>
-            </p-floatLabel>
-          </div>
-        </div>
-        
-        <div class="col-span-1 md:col-span-2">
-          <label for="locations" class="block text-gray-700 font-bold mb-1">Locations</label>
-          <div id="locations">
-            <div *ngFor="let location of product.locations; let i = index" class="flex mb-2 space-x-2">
-              <input pInputText type="text" name="locations[{{i}}].type" [(ngModel)]="product.locations[i].type" value="Point" class="w-1/4 p-2 border border-gray-300 rounded" readonly />
-      
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].coordinates" [(ngModel)]="product.locations[i].coordinates"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Coordinates</label>
-              </p-floatLabel>
-        
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].address" [(ngModel)]="product.locations[i].address"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Address</label>
-              </p-floatLabel>
-        
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].description" [(ngModel)]="product.locations[i].description"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Description</label>
-              </p-floatLabel>
-        
-               <p-floatLabel>
-                <input pInputText type="number" name="locations[{{i}}].day" [(ngModel)]="product.locations[i].day" class="w-1/4 p-2 border border-gray-300 rounded" />
-                <label>Day</label>
-              </p-floatLabel>
-            </div>
-          </div>
-          <button type="button" id="addLocation" (click)="addLocation()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Location</button>
-        </div> -->
-        
+
         <div class="col-span-1 md:col-span-2">
           <p-floatLabel>
             <textarea placeholder="return Policy" pInputTextarea id="returnPolicy" [(ngModel)]="product.returnPolicy" name="returnPolicy"
@@ -348,4 +460,62 @@
     </div>
   </div>
   <button pButton (click)="Update()">Update</button>
-</body>
+</body> -->
+
+     <!-- <div class="col-span-1 md:col-span-2">
+          <label for="startLocation" class="block text-gray-700 font-bold mb-1">Start Location</label>
+          <div class="flex space-x-2">
+        
+            <input pInputText type="text" id="startLocationType" [(ngModel)]="product.startLocation.type" name="startLocation.type"
+                   class="w-1/4 p-2 border border-gray-300 rounded" readonly value="Point" />
+        
+            <p-floatLabel>
+              <input pInputText type="text" id="startLocationCoordinates" [(ngModel)]="product.startLocation.coordinates" name="startLocation.coordinates"
+                     class="w-1/2 p-2 border border-gray-300 rounded"  />
+              <label for="startLocationCoordinates">Coordinates</label>
+            </p-floatLabel>
+        
+            <p-floatLabel>
+              <input pInputText type="text" id="startLocationAddress" [(ngModel)]="product.startLocation.address" name="startLocation.address"
+                     class="w-1/2 p-2 border border-gray-300 rounded" />
+              <label for="startLocationAddress">Address</label>
+            </p-floatLabel>
+        
+            <p-floatLabel>
+              <input pInputText type="text" id="startLocationDescription" [(ngModel)]="product.startLocation.description" name="startLocation.description"
+                     class="w-1/2 p-2 border border-gray-300 rounded"  />
+              <label for="startLocationDescription">Description</label>
+            </p-floatLabel>
+          </div>
+        </div>
+        
+        <div class="col-span-1 md:col-span-2">
+          <label for="locations" class="block text-gray-700 font-bold mb-1">Locations</label>
+          <div id="locations">
+            <div *ngFor="let location of product.locations; let i = index" class="flex mb-2 space-x-2">
+              <input pInputText type="text" name="locations[{{i}}].type" [(ngModel)]="product.locations[i].type" value="Point" class="w-1/4 p-2 border border-gray-300 rounded" readonly />
+      
+              <p-floatLabel>
+                <input pInputText type="text" name="locations[{{i}}].coordinates" [(ngModel)]="product.locations[i].coordinates"  class="w-1/2 p-2 border border-gray-300 rounded" />
+                <label>Coordinates</label>
+              </p-floatLabel>
+        
+              <p-floatLabel>
+                <input pInputText type="text" name="locations[{{i}}].address" [(ngModel)]="product.locations[i].address"  class="w-1/2 p-2 border border-gray-300 rounded" />
+                <label>Address</label>
+              </p-floatLabel>
+        
+              <p-floatLabel>
+                <input pInputText type="text" name="locations[{{i}}].description" [(ngModel)]="product.locations[i].description"  class="w-1/2 p-2 border border-gray-300 rounded" />
+                <label>Description</label>
+              </p-floatLabel>
+        
+               <p-floatLabel>
+                <input pInputText type="number" name="locations[{{i}}].day" [(ngModel)]="product.locations[i].day" class="w-1/4 p-2 border border-gray-300 rounded" />
+                <label>Day</label>
+              </p-floatLabel>
+            </div>
+          </div>
+          <button type="button" id="addLocation" (click)="addLocation()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Location</button>
+        </div> -->
+        

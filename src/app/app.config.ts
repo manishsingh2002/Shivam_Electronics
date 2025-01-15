@@ -7,12 +7,11 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { AppMessageService } from './core/services/message.service';
-import Nora from "@primeng/themes/nora";
+import Aura from "@primeng/themes/aura";
 import { definePreset } from "@primeng/themes";
 import { MessageService } from 'primeng/api';
 import { authInterceptor, loggingInterceptor } from './core/interceptors/auth.interceptor';
-
-const MyPreset = definePreset(Nora, {
+const MyPreset = definePreset(Aura, {
     primitive: {
         borderRadius: {
             none: "0",
@@ -28,7 +27,7 @@ const MyPreset = definePreset(Nora, {
             200: "#a7f3d0",
             300: "#6ee7b7",
             400: "#34d399",
-            500: "#10b981",
+            500: "#10b981", 
             600: "#059669",
             700: "#047857",
             800: "#065f46",
