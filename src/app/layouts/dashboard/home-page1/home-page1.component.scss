@@ -1,0 +1,19 @@
+@keyframes infinite-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-infinite-scroll {
+    display: flex;
+    animation: infinite-scroll 20s linear infinite;
+    width: max-content; /* Prevent shrinking */
+}
+
+/* Adjust the overall spacing for smoother wrapping */
+ul[x-ref="logos"] > li {
+    margin-right: 20px; /* Space between logos */
+}
