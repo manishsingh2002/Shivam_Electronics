@@ -79,7 +79,7 @@ export class AuthService {
 
   login(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`http://localhost:4000/api/v1/users/login`, data)
+      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api/v1/users/login`, data)
       .pipe(
         tap((response) => this.handleTokens(response)) ,
         catchError((error) => {
@@ -92,7 +92,7 @@ export class AuthService {
 
   signUp(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`http://localhost:4000/api/v1/users/signup`, data)
+      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/v1/users/signup`, data)
       .pipe(
         tap((response) => this.handleTokens(response)),
         catchError((error) => {
