@@ -1,3 +1,91 @@
+
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Customer Management System</h1>
+    
+    <!-- Customer Form -->
+    <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+        <h2 class="text-2xl font-semibold mb-4">Add New Customer</h2>
+        <form id="customerForm">
+            <div class="flex flex-wrap -mx-2 mb-4">
+                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                    <label for="fullname" class="block text-gray-700">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                </div>
+                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                    <label for="guaranteer" class="block text-gray-700">Guaranteer</label>
+                    <input type="text" id="guaranteer" name="guaranteer" class="w-full p-2 border border-gray-300 rounded mt-1" >
+                </div>
+                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                </div>
+                <div class="w-full md:w-1/3 px-2">
+                    <label for="status" class="block text-gray-700">Status</label>
+                    <select id="status" name="status" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="pending">Pending</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="phoneNumbers" class="block text-gray-700">Phone Numbers</label>
+                <div id="phoneNumbers" class="flex items-center mb-2">
+                    <input type="text" name="phoneNumbers[0][number]" class="w-full p-2 border border-gray-300 rounded mt-1 mr-2" placeholder="Phone Number" required>
+                    <select name="phoneNumbers[0][type]" class="w-1/4 p-2 border border-gray-300 rounded mt-1 mr-2" required>
+                        <option value="home">Home</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="work">Work</option>
+                    </select>
+                    <input type="checkbox" name="phoneNumbers[0][primary]" class="ml-2 mt-3 mr-2">
+                    <button type="button" id="addPhoneNumber" class="bg-blue-500 text-white px-4 py-2 rounded">Add Phone Number</button>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="addresses" class="block text-gray-700">Addresses</label>
+                <div id="addresses">
+                    <div class="bg-gray-50 p-4 rounded-lg mb-2">
+                        <div class="flex flex-wrap -mx-2 mb-2">
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <input type="text" name="addresses[0][street]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Street" required>
+                            </div>
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <input type="text" name="addresses[0][city]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="City" required>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-2 mb-2">
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <input type="text" name="addresses[0][state]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="State" required>
+                            </div>
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <input type="text" name="addresses[0][zipCode]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Zip Code" required>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-2 mb-2">
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <input type="text" name="addresses[0][country]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Country" required>
+                            </div>
+                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                                <select name="addresses[0][type]" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                                    <option value="billing">Billing</option>
+                                    <option value="shipping">Shipping</option>
+                                    <option value="home">Home</option>
+                                    <option value="work">Work</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="addresses[0][isDefault]" class="ml-2 mt-3 mr-2"> Default Address
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="addAddress" class="bg-blue-500 text-white px-4 py-2 rounded">Add Address</button>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Customer</button>
+        </form>
+    </div>
 <!-- <p>customer-master works!</p>
 <div class="card">
   <form (ngSubmit)="onSubmit()">
