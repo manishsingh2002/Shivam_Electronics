@@ -19,7 +19,7 @@ export interface LoginResponse {
 })
 export class AuthService {
   private tokenKey = 'authToken';
-  private refreshTokenKey = 'refreshToken';
+  // private refreshTokenKey = 'refreshToken';
   private userKey = 'user';
 
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getStoredToken()?.token || null);
@@ -31,7 +31,13 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      const storedToken = this.getStoredToken()?.token || null;
+      this.userSubject.next(storedToken);
+      this.userDataSubject.next(this.getStoredToken()?.user || null);
+    }
+  }
 
   getToken(): string | null {
     return this.userSubject.value;
@@ -76,9 +82,9 @@ export class AuthService {
   private handleTokens(response: LoginResponse): void {
     if (isPlatformBrowser(this.platformId)) {
       this.setItem(this.tokenKey, response.token);
-      if (response.refresh_token) {
-        this.setItem(this.refreshTokenKey, response.refresh_token);
-      }
+      // if (response.refresh_token) {
+      //   this.setItem(this.refreshTokenKey, response.refresh_token);
+      // }
       this.setItem(this.userKey, response.data.user);
       this.userSubject.next(response.token);
       this.userDataSubject.next(response.data.user);
@@ -87,7 +93,7 @@ export class AuthService {
 
   login(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api/v1/users/login`, data)
+      .post<LoginResponse>(`http://localhost:4000/api/v1/users/login`, data)
       .pipe(
         tap((response) => this.handleTokens(response)) ,
         catchError((error) => {
@@ -100,7 +106,7 @@ export class AuthService {
 
   signUp(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/v1/users/signup`, data)
+      .post<LoginResponse>(`http://localhost:4000/api/v1/users/signup`, data)
       .pipe(
         tap((response) => this.handleTokens(response)),
         catchError((error) => {
@@ -127,7 +133,7 @@ export class AuthService {
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.removeItem(this.tokenKey);
-      this.removeItem(this.refreshTokenKey);
+      // this.removeItem(this.refreshTokenKey);
       this.removeItem(this.userKey);
     }
     this.userSubject.next(null);

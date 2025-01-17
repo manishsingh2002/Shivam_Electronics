@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
-import { AdminUserComponent } from '../../../Users/admin-user/admin-user.component';
+import { AdminUserComponent } from '../../../../adminDashboard/admin-user/admin-user.component';
 @Component({
     selector: 'app-product-layout',
     imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],

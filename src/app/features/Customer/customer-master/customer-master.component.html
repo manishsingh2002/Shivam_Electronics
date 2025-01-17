@@ -1,206 +1,116 @@
-
-<div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4">Customer Management System</h1>
-    
-    <!-- Customer Form -->
-    <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-        <h2 class="text-2xl font-semibold mb-4">Add New Customer</h2>
-        <form id="customerForm">
-            <div class="flex flex-wrap -mx-2 mb-4">
-                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <label for="fullname" class="block text-gray-700">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                </div>
-                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <label for="guaranteer" class="block text-gray-700">Guaranteer</label>
-                    <input type="text" id="guaranteer" name="guaranteer" class="w-full p-2 border border-gray-300 rounded mt-1" >
-                </div>
-                <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <label for="email" class="block text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                </div>
-                <div class="w-full md:w-1/3 px-2">
-                    <label for="status" class="block text-gray-700">Status</label>
-                    <select id="status" name="status" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="pending">Pending</option>
-                        <option value="suspended">Suspended</option>
-                        <option value="blocked">Blocked</option>
-                    </select>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="phoneNumbers" class="block text-gray-700">Phone Numbers</label>
-                <div id="phoneNumbers" class="flex items-center mb-2">
-                    <input type="text" name="phoneNumbers[0][number]" class="w-full p-2 border border-gray-300 rounded mt-1 mr-2" placeholder="Phone Number" required>
-                    <select name="phoneNumbers[0][type]" class="w-1/4 p-2 border border-gray-300 rounded mt-1 mr-2" required>
-                        <option value="home">Home</option>
-                        <option value="mobile">Mobile</option>
-                        <option value="work">Work</option>
-                    </select>
-                    <input type="checkbox" name="phoneNumbers[0][primary]" class="ml-2 mt-3 mr-2">
-                    <button type="button" id="addPhoneNumber" class="bg-blue-500 text-white px-4 py-2 rounded">Add Phone Number</button>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="addresses" class="block text-gray-700">Addresses</label>
-                <div id="addresses">
-                    <div class="bg-gray-50 p-4 rounded-lg mb-2">
-                        <div class="flex flex-wrap -mx-2 mb-2">
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <input type="text" name="addresses[0][street]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Street" required>
-                            </div>
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <input type="text" name="addresses[0][city]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="City" required>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-2 mb-2">
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <input type="text" name="addresses[0][state]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="State" required>
-                            </div>
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <input type="text" name="addresses[0][zipCode]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Zip Code" required>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-2 mb-2">
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <input type="text" name="addresses[0][country]" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Country" required>
-                            </div>
-                            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                                <select name="addresses[0][type]" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                                    <option value="billing">Billing</option>
-                                    <option value="shipping">Shipping</option>
-                                    <option value="home">Home</option>
-                                    <option value="work">Work</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" name="addresses[0][isDefault]" class="ml-2 mt-3 mr-2"> Default Address
-                        </div>
-                    </div>
-                </div>
-                <button type="button" id="addAddress" class="bg-blue-500 text-white px-4 py-2 rounded">Add Address</button>
-            </div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Customer</button>
-        </form>
+<div class="card bg-white">
+    <h2>Customer Details</h2>
+    <div class="row">
+      <p-iftalabel class="p-field">
+        <input pInputText id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
+        <label for="fullname">Full Name</label>
+      </p-iftalabel>
+  
+      <p-iftalabel class="p-field">
+        <input pInputText id="email" [(ngModel)]="customer.email" autocomplete="off" />
+        <label for="email">Email</label>
+      </p-iftalabel>
+  
+      <p-iftalabel class="p-field">
+        <input pInputText id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
+        <label for="guaranteer">Guaranteer Name</label>
+      </p-iftalabel>
+  
+      <div class="p-field">
+        <label for="status">Status</label>
+        <p-select [options]="statuses" [(ngModel)]="customer.status" placeholder="Select Status"></p-select>
+      </div>
+  
+      <div class="p-field">
+        <label>Phone Numbers</label>
+        <div *ngFor="let phone of customer.phoneNumbers; let i = index" class="p-d-flex">
+          <input pInputText [(ngModel)]="phone.number" placeholder="Phone Number" />
+          <p-select [options]="phoneTypes" [(ngModel)]="phone.type" placeholder="Type"></p-select>
+          <p-checkbox [(ngModel)]="phone.primary" binary="true" label="Primary"></p-checkbox>
+          <button pButton icon="pi pi-plus" (click)="addPhoneNumber()"></button>
+        </div>
+      </div>
+  
+      <div class="p-field">
+        <label>Addresses</label>
+        <div *ngFor="let address of customer.addresses; let j = index" class="p-d-flex">
+          <input pInputText [(ngModel)]="address.street" placeholder="Street" />
+          <input pInputText [(ngModel)]="address.city" placeholder="City" />
+          <input pInputText [(ngModel)]="address.state" placeholder="State" />
+          <input pInputText [(ngModel)]="address.zipCode" placeholder="Zip Code" />
+          <input pInputText [(ngModel)]="address.country" placeholder="Country" />
+          <p-select [options]="addressTypes" [(ngModel)]="address.type" placeholder="Type"></p-select>
+          <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="Default"></p-checkbox>
+          <button pButton icon="pi pi-plus" (click)="addAddress()"></button>
+        </div>
+      </div>
+  
+      <div class="p-field">
+        <label for="totalPurchasedAmount">Total Purchased Amount</label>
+        <input pInputText id="totalPurchasedAmount" type="number" [(ngModel)]="customer.totalPurchasedAmount" placeholder="Enter total purchased amount" />
+      </div>
+  
+      <div class="p-field">
+        <label for="remainingAmount">Remaining Amount</label>
+        <input pInputText id="remainingAmount" type="number" [(ngModel)]="customer.remainingAmount" placeholder="Enter remaining amount" />
+      </div>
     </div>
-<!-- <p>customer-master works!</p>
-<div class="card">
-  <form (ngSubmit)="onSubmit()">
-      <div class="p-fluid">
-          <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" pInputText [(ngModel)]="customer.email" name="email" required #email="ngModel">
-              <small *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">Email is required and must be valid.</small>
-          </div>
-          <div class="field">
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" pInputText [(ngModel)]="customer.firstName" name="firstName" required #firstName="ngModel">
-              <small *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="p-error">First Name is required.</small>
-          </div>
-          <div class="field">
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" pInputText [(ngModel)]="customer.lastName" name="lastName" required #lastName="ngModel">
-              <small *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="p-error">Last Name is required.</small>
-          </div>
-          <div class="field">
-              <label for="birthDate">Birth Date</label>
-              <p-calendar id="birthDate" [(ngModel)]="customer.birthDate" name="birthDate" dateFormat="mm/dd/yy" [showIcon]="true" required #birthDate="ngModel"></p-calendar>
-              <small *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="p-error">Birth Date is required.</small>
-          </div>
-          <div class="field">
-              <label for="gender">Gender</label>
-              <p-dropdown [options]="genders" [(ngModel)]="customer.gender" name="gender" placeholder="Select a Gender" [showClear]="true" required #gender="ngModel"></p-dropdown>
-              <small *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="p-error">Gender is required.</small>
-          </div>
-
-          <h3>Phone Numbers</h3>
-          <div *ngFor="let phoneNumber of customer.phoneNumbers; let i = index">
-              <div class="field grid grid-cols-3 gap-2">
-                  <div class="col">
-                      <label for="number{{i}}">Number</label>
-                      <input type="tel" id="number{{i}}" pInputText [(ngModel)]="phoneNumber.number" name="phoneNumber{{i}}" required #number="ngModel">
-                      <small *ngIf="number.invalid && (number.dirty || number.touched)" class="p-error">Phone Number is required.</small>
-                  </div>
-                  <div class="col">
-                      <label for="type{{i}}">Type</label>
-                      <p-dropdown [options]="phoneTypes" [(ngModel)]="phoneNumber.type" name="phoneType{{i}}" placeholder="Type" [showClear]="true" required #type="ngModel"></p-dropdown>
-                      <small *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">Type is required.</small>
-                  </div>
-                  <div class="col">
-                      <p-checkbox [(ngModel)]="phoneNumber.primary" name="primaryPhone{{i}}" [binary]="true" label="Primary"></p-checkbox>
-                  </div>
-              </div>
-              <button pButton type="button" icon="pi pi-minus" class="p-button-danger" (click)="removePhoneNumber(i)"></button>
-          </div>
-          <button pButton type="button" icon="pi pi-plus" label="Add Phone Number" (click)="addPhoneNumber()"></button>
-
-          <h3>Addresses</h3>
-          <div *ngFor="let address of customer.addresses; let i = index">
-              <div class="field grid grid-cols-3 gap-2">
-                  <div class="col">
-                      <label for="street{{i}}">Street</label>
-                      <input type="text" id="street{{i}}" pInputText [(ngModel)]="address.street" name="street{{i}}" required #street="ngModel">
-                      <small *ngIf="street.invalid && (street.dirty || street.touched)" class="p-error">Street is required.</small>
-                  </div>
-                  <div class="col">
-                      <label for="city{{i}}">City</label>
-                      <input type="text" id="city{{i}}" pInputText [(ngModel)]="address.city" name="city{{i}}" required #city="ngModel">
-                      <small *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">City is required.</small>
-                  </div>
-                  <div class="col">
-                      <label for="state{{i}}">State</label>
-                      <input type="text" id="state{{i}}" pInputText [(ngModel)]="address.state" name="state{{i}}" required #state="ngModel">
-                      <small *ngIf="state.invalid && (state.dirty || state.touched)" class="p-error">State is required.</small>
-                  </div>
-              </div>
-              <div class="field grid grid-cols-3 gap-2">
-                  <div class="col">
-                      <label for="zipCode{{i}}">Zip Code</label>
-                      <input type="text" id="zipCode{{i}}" pInputText [(ngModel)]="address.zipCode" name="zipCode{{i}}" required #zipCode="ngModel">
-                      <small *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="p-error">Zip Code is required.</small>
-                  </div>
-                  <div class="col">
-                      <label for="country{{i}}">Country</label>
-                      <input type="text" id="country{{i}}" pInputText [(ngModel)]="address.country" name="country{{i}}" required #country="ngModel">
-                      <small *ngIf="country.invalid && (country.dirty || country.touched)" class="p-error">Country is required.</small>
-                  </div>
-                  <div class="col">
-                      <p-checkbox [(ngModel)]="address.isDefault" name="isDefault{{i}}" [binary]="true" label="Default"></p-checkbox>
-                  </div>
-              </div>
-              <div class="field">
-                  <label for="type{{i}}">Type</label>
-                  <p-dropdown [options]="addressTypes" [(ngModel)]="address.type" name="addressType{{i}}" placeholder="Type" [showClear]="true" required #addressType="ngModel"></p-dropdown>
-                  <small *ngIf="addressType.invalid && (addressType.dirty || addressType.touched)" class="p-error">Type is required.</small>
-              </div>
-              <button pButton type="button" icon="pi pi-minus" class="p-button-danger" (click)="removeAddress(i)"></button>
-          </div>
-          <button pButton type="button" icon="pi pi-plus" label="Add Address" (click)="addAddress()"></button>
-
-          <h3>Preferences</h3>
-          <div>
-              <div class="field-checkbox">
-                  <p-checkbox [(ngModel)]="customer.preferences.marketingEmails" name="marketingEmails" [binary]="true" label="Receive Marketing Emails"></p-checkbox>
-              </div>
-              <div class="field">
-                  <label for="communicationLanguage">Communication Language</label>
-                  <p-dropdown [options]="communicationLanguages" [(ngModel)]="customer.preferences.communicationLanguage" name="communicationLanguage" placeholder="Select Language" [showClear]="true"></p-dropdown>
-              </div>
-              <div class="field">
-                  <label for="currency">Currency</label>
-                  <p-dropdown [options]="currencies" [(ngModel)]="customer.preferences.currency" name="currency" placeholder="Select Currency" [showClear]="true"></p-dropdown>
-              </div>
-              <div class="field-checkbox">
-                  <p-checkbox [(ngModel)]="customer.preferences.newsletterSubscription" name="newsletterSubscription" [binary]="true" label="Subscribe to Newsletter"></p-checkbox>
-              </div>
-              <div class="field-checkbox">
-                  <p-checkbox [(ngModel)]="customer.preferences.productNotifications" name="productNotifications" [binary]="true" label="Receive Product Notifications"></p-checkbox>
-              </div>
-          </div>
-
-          <div class="field">
-              <label for="metadata">Metadata (key=value)</label>
-              <textarea id="metadata" pInputTextarea [(ngModel)]="customer.metadata" name=" -->
+  
+    <button pButton label="Save" (click)="saveCustomer()"></button>
+  </div>
+  <!--
+<div class="card bg-white p-4 shadow-lg">
+    <h2 class="text-lg font-bold mb-4">Customer Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  
+      <p-iftalabel class="p-field">
+        <input pInputText id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
+        <label for="fullname">Full Name</label>
+      </p-iftalabel>
+  
+      <p-iftalabel class="p-field">
+        <input pInputText id="email" [(ngModel)]="customer.email" autocomplete="off" />
+        <label for="email">Email</label>
+      </p-iftalabel>
+  
+      <p-iftalabel class="p-field">
+        <input pInputText id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
+        <label for="guaranteer">Guaranteer Name</label>
+      </p-iftalabel>
+  
+      <div class="p-field">
+        <label for="status" class="block font-medium mb-2">Status</label>
+        <p-select [options]="statuses" [(ngModel)]="customer.status" placeholder="Select Status"></p-select>
+      </div>
+  
+      <div class="p-field col-span-2">
+        <label class="block font-medium mb-2">Phone Numbers</label>
+        <div *ngFor="let phone of customer.phoneNumbers; let i = index" class="flex gap-2 items-center mb-2">
+          <input pInputText [(ngModel)]="phone.number" placeholder="Phone Number" class="flex-1" />
+          <p-select [options]="phoneTypes" [(ngModel)]="phone.type" placeholder="Type" class="flex-1"></p-select>
+          <p-checkbox [(ngModel)]="phone.primary" binary="true" label="Primary"></p-checkbox>
+          <button pButton icon="pi pi-plus" (click)="addPhoneNumber()" class="p-button-text"></button>
+        </div>
+      </div>
+  
+      <div class="p-field col-span-2">
+        <label class="block font-medium mb-2">Addresses</label>
+        <div *ngFor="let address of customer.addresses; let j = index" class="grid grid-cols-6 gap-2 mb-2">
+          <input pInputText [(ngModel)]="address.street" placeholder="Street" class="col-span-3" />
+          <input pInputText [(ngModel)]="address.city" placeholder="City" class="col-span-2" />
+          <input pInputText [(ngModel)]="address.state" placeholder="State" class="col-span-1" />
+          <input pInputText [(ngModel)]="address.zipCode" placeholder="Zip Code" class="col-span-1" />
+          <input pInputText [(ngModel)]="address.country" placeholder="Country" class="col-span-2" />
+          <p-select [options]="addressTypes" [(ngModel)]="address.type" placeholder="Type" class="col-span-2"></p-select>
+          <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="Default" class="col-span-1"></p-checkbox>
+          <button pButton icon="pi pi-plus" (click)="addAddress()" class="p-button-text col-span-1"></button>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="mt-4 text-right">
+      <button pButton label="Save" (click)="saveCustomer()" class="p-button-success"></button>
+    </div>
+  </div> -->
+  

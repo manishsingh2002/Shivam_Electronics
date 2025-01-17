@@ -1,0 +1,10 @@
+/* customer.component.css */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.p-field {
+  flex: 1 1 calc(33.333% - 1rem);
+  min-width: 200px;
+}

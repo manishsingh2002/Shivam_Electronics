@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
       const token = localStorage.getItem('authToken'); // Only access localStorage in the browser
       console.log('AuthGuard Check - Token Present:', !!token);
     }
-
     if (this.authService.isAuthenticated()) {
       console.log('User authenticated, allowing access');
       return true;

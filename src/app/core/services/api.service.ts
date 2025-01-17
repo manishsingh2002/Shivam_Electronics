@@ -14,7 +14,8 @@ export interface Product {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'; // Update with your API base URL
+  // private baseUrl='https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'
+  private baseUrl = 'http://localhost:4000/api'; // Update with your API base URL
   constructor(private http: HttpClient, private authService: AuthService ,private errorhandler:ErrorhandlingService) {}
 
   // === User Authentication Methods ===
@@ -35,7 +36,6 @@ export class ApiService {
       .delete(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
       .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   }
-
 
   getAllUserData(): Observable<any> {
     return this.http
@@ -165,6 +165,9 @@ export class ApiService {
       .delete(endpoint, {body:body}
     ).pipe(catchError((error) => this.errorhandler.handleError('delete payment ', error)));
   }
+
+
+
 }
 
 // import { Injectable } from '@angular/core';

@@ -21,7 +21,7 @@ import { InputNumber } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
-import { ApiService } from '../../../core/services/api.service';
+import { ApiService } from '../../core/services/api.service';
 
 interface Column {
     field: string;

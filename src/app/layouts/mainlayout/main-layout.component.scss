@@ -56,3 +56,18 @@ aside svg:active {
 aside:hover {
   background-color: #e5e7eb; /* Darken background on hover */
 }
+
+.dock-window {
+  position: fixed;
+  top: 64px; /* Align dock below header */
+  left: 0;
+  z-index: 10;
+  height: calc(100vh - 64px); /* Full screen height minus the header */
+  overflow-y: auto;
+}
+
+p-dock {
+  position: fixed;
+  top: 64px;
+  left: 0;
+}
