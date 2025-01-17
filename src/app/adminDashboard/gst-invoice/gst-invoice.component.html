@@ -1,4 +1,161 @@
-<div class="w-full mx-auto p-6 bg-white shadow-md mt-10 rounded-lg">
+
+<body class="bg-gray-100 p-4">
+    <div class="max-w-screen-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-6">Create Invoice</h1>
+        <form>
+            <!-- Invoice Details -->
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">Invoice Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Invoice Number</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="INV-12345"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Invoice Date</label>
+                        <input type="date" class="w-full p-2 border border-gray-300 rounded mt-1"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Due Date</label>
+                        <input type="date" class="w-full p-2 border border-gray-300 rounded mt-1"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seller Details -->
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">Seller Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Seller Name</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="ABC Corp"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Email</label>
+                        <input type="email" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="seller@example.com"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Phone</label>
+                        <input type="tel" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="(123) 456-7890"/>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700">Address</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="1234 Elm Street, Springfield, IL"/>
+                </div>
+            </div>
+
+            <!-- Buyer Details -->
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">Buyer Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Buyer Name</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="John Doe"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Email</label>
+                        <input type="email" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="buyer@example.com"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Phone</label>
+                        <input type="tel" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="(098) 765-4321"/>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700">Address</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="5678 Oak Street, Springfield, IL"/>
+                </div>
+            </div>
+
+            <!-- Items -->
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">Items</h2>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Product</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Product 1"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Quantity</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="2"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Rate</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="50.00"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">CGST Rate (%)</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="5"/>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">SGST Rate (%)</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="5"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner">
+                <h2 class="text-xl font-bold mb-2">Summary</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-end">
+                    <div class="text-right">
+                        <label class="block text-gray-700">Subtotal</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="180.00"/>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-gray-700">Total Discount</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="15.00"/>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-gray-700">CGST</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="9.00"/>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-gray-700">SGST</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="9.00"/>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-gray-700">Total Amount</label>
+                        <input type="number" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="183.00"/>
+                    </div>
+                    <div class="text-right">
+                        <label class="block text-gray-700">Status</label>
+                        <select class="w-full p-2 border border-gray-300 rounded mt-1">
+                            <option value="unpaid">Unpaid</option>
+                            <option value="paid">Paid</option>
+                            <option value="partially paid">Partially Paid</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner">
+                <h2 class="text-xl font-bold mb-2">Additional Information</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Payment Terms</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Payment is due within 7 days from the invoice date."></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Notes</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Thank you for your business!"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Place of Supply</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Springfield, IL"/>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-right">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Invoice</button>
+            </div>
+        </form>
+    </div>
+</body>
+/**<div class="w-full mx-auto p-6 bg-white shadow-md mt-10 rounded-lg">
   <div class="text-center mb-6">
     <h1 class="text-3xl font-bold text-purple-700">GST Invoice</h1>
   </div>
@@ -501,7 +658,7 @@
       Save & Continue
     </button>
   </div>
-</div>
+</div>**/
 
 <!-- <div class="max-w-5xl mx-auto p-6 bg-white shadow-md mt-10 rounded-lg">
   <div class="flex justify-between items-center">

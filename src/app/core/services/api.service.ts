@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import {ErrorhandlingService} from './errorhandling.service';
 
 export interface Product {
   id: string;
@@ -14,38 +15,38 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'; // Update with your API base URL
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService ,private errorhandler:ErrorhandlingService) {}
 
   // === User Authentication Methods ===
   getUserData(): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
-      .pipe(catchError((error) => this.handleError('getUserData', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   }
 
   // updateUserPassword(): Observable<any> {
   //   return this.http
   //     .get(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
-  //     .pipe(catchError((error) => this.handleError('getUserData', error)));
+  //     .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   // }
 
   deleteUser(): Observable<any> {
     return this.http
       .delete(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
-      .pipe(catchError((error) => this.handleError('getUserData', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   }
 
 
   getAllUserData(): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/v1/users/allusers`) // Interceptor will add headers
-      .pipe(catchError((error) => this.handleError('getUserData', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   }
 
   updatePassword(data: any): Observable<any> {
     return this.http
       .patch(`${this.baseUrl}/v1/users/updatePassword`, data) // Interceptor will add headers
-      .pipe(catchError((error) => this.handleError('updatePassword', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('updatePassword', error)));
   }
 
 
@@ -58,86 +59,111 @@ export class ApiService {
   getAutopopulateData(): Observable<any> {
     return this.http
       .get(`${this.baseUrl}/v1/products/autopopulate`)
-      .pipe(catchError((error) => this.handleError('getAutopopulateData', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getAutopopulateData', error)));
   }
 
   getAllProductData(): Observable<Product[]> {
     return this.http
       .get<Product[]>(`${this.baseUrl}/v1/products`)
-      .pipe(catchError((error) => this.handleError('getAllProductData', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error)));
   }
 
   getProductDataWithId(id: string): Observable<Product> {
     return this.http
       .get<Product>(`${this.baseUrl}/v1/products/${id}`)
-      .pipe(catchError((error) => this.handleError('getProductDataWithId', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('getProductDataWithId', error)));
   }
 
   createNewProduct(data: any): Observable<any> {
     return this.http
       .post(`${this.baseUrl}/v1/products`, data)
-      .pipe(catchError((error) => this.handleError('createNewProduct', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('createNewProduct', error)));
   }
   
   updateProduct(productId: string, data: any): Observable<any> {
     return this.http
       .patch(`${this.baseUrl}/v1/products/${productId}`, data)
-      .pipe(catchError((error) => this.handleError('updateProduct', error)));
+      .pipe(catchError((error) => this.errorhandler.handleError('updateProduct', error)));
   }
 
   deleteProduct(productIds: string[]): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/deletemany`;
     const body = { ids: productIds };
-
     return this.http
-      .delete(endpoint, {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-        body, // Pass the body correctly
-      })
-      .pipe(catchError((error) => this.handleError('deleteProduct', error)));
+      .delete(endpoint, {body:body}
+      //   {
+      //   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      //   body, // Pass the body correctly
+      // }
+    )
+      .pipe(catchError((error) => this.errorhandler.handleError('deletecustomer', error)));
+  }
+  // === Customer Service  ===
+
+  getAllCustomerData(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.baseUrl}/v1/customers`)
+      .pipe(catchError((error) => this.errorhandler.handleError('getAllcustomerData', error)));
   }
 
-  // === Error Handling ===
-  private handleError(method: string, error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unexpected error occurred';
-    let backendErrorCode: string | undefined;
+  getCustomerDataWithId(id: string): Observable<any> {
+    return this.http
+      .get<any>(`${this.baseUrl}/v1/customers/${id}`)
+      .pipe(catchError((error) => this.errorhandler.handleError('getcustomerDataWithId', error)));
+  }
 
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `Error in ${method} (Client): ${error.error.message}`;
-    } else {
-      // Server-side error
-      errorMessage = `Error in ${method} (Server - Status ${error.status}): `;
-      if (error.error) {
-        if (typeof error.error === 'string') {
-          errorMessage += error.error;
-        } else if (typeof error.error === 'object') {
-          if (error.error.message) errorMessage += error.error.message;
-          if (error.error.code) backendErrorCode = error.error.code;
-          if (error.error.errors && Array.isArray(error.error.errors)) {
-            errorMessage += '\nValidation Errors:\n';
-            error.error.errors.forEach((err: any) => {
-              errorMessage += `- ${err.msg || err.message || err.path}: ${err.value}\n`;
-            });
-          }
-        }
-      } else {
-        errorMessage += 'No error details provided by the server.';
-      }
+  createNewCustomer(data: any): Observable<any> {
+    return this.http
+      .post(`${this.baseUrl}/v1/customers`, data)
+      .pipe(catchError((error) => this.errorhandler.handleError('createNewcustomer', error)));
+  }
+  
+  updateCustomer(customerId: string, data: any): Observable<any> {
+    return this.http
+      .patch(`${this.baseUrl}/v1/customers/${customerId}`, data)
+      .pipe(catchError((error) => this.errorhandler.handleError('updatecustomer', error)));
+  }
 
-      // MongoDB-specific error handling
-      if (Number(backendErrorCode) === 11000) {
-        errorMessage = `${method} failed: Duplicate entry detected.`;
-      } else if (errorMessage.includes('Cast to ObjectId failed')) {
-        errorMessage = `${method} failed: Invalid ID format.`;
-      } else if (errorMessage.includes('Path `')) {
-        const match = errorMessage.match(/Path `([^`]*)`/);
-        if (match) errorMessage = `${method} failed: Invalid value for '${match[1]}'.`;
-      }
-    }
+  deleteCustomers(customerIds: string[]): Observable<any> {
+    const endpoint = `${this.baseUrl}/v1/customers/deletemany`;
+    const body = { ids: customerIds };
+    return this.http
+      .delete(endpoint, {body:body}
+    )
+      .pipe(catchError((error) => this.errorhandler.handleError('deleteProduct', error)));
+  }
+  //////////////////---------------------- Payment ----------------------\\\\\\\\\\\\\
 
-    console.error(`Error in ${method}:`, error); // Log detailed error to the console
-    return throwError(() => new Error(errorMessage));
+  getAllpaymentData(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.baseUrl}/v1/payments`)
+      .pipe(catchError((error) => this.errorhandler.handleError('getAllpaymentData', error)));
+  }
+
+  getpaymentDataWithId(id: string): Observable<any> {
+    return this.http
+      .get<any>(`${this.baseUrl}/v1/payments/${id}`)
+      .pipe(catchError((error) => this.errorhandler.handleError('getpaymentDataWithId', error)));
+  }
+
+  createNewpayment(data: any): Observable<any> {
+    return this.http
+      .post(`${this.baseUrl}/v1/payments`, data)
+      .pipe(catchError((error) => this.errorhandler.handleError('createNewpayment', error)));
+  }
+  
+  updatepayment(paymentId: string, data: any): Observable<any> {
+    return this.http
+      .patch(`${this.baseUrl}/v1/payments/${paymentId}`, data)
+      .pipe(catchError((error) => this.errorhandler.handleError('updatepayment', error)));
+  }
+
+  deletepayments(paymentIds: string[]): Observable<any> {
+    const endpoint = `${this.baseUrl}/v1/payments/deletemany`;
+    const body = { ids: paymentIds };
+    return this.http
+      .delete(endpoint, {body:body}
+    ).pipe(catchError((error) => this.errorhandler.handleError('delete payment ', error)));
   }
 }
 

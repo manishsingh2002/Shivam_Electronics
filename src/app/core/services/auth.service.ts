@@ -33,6 +33,14 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
+  getToken(): string | null {
+    return this.userSubject.value;
+  }
+
+  getUser(): any {
+    return this.userDataSubject.value;
+  }
+
   public setItem(key: string, value: any): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(key, JSON.stringify(value));
@@ -116,14 +124,6 @@ export class AuthService {
     }
   }
 
-  getToken(): string | null {
-    return this.userSubject.value;
-  }
-
-  getUser(): any {
-    return this.userDataSubject.value;
-  }
-
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.removeItem(this.tokenKey);
@@ -135,22 +135,5 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // refreshToken(): Observable<any> {
-  //   const refreshToken = this.getItem<string>(this.refreshTokenKey);
-  //   if (!refreshToken) {
-  //     this.logout();
-  //     return of(null);
-  //   }
-  //   return this.http
-  //     .post<any>('http://localhost:4000/api/v1/users/refreshToken', { refresh_token: refreshToken })
-  //     .pipe(
-  //       tap((response) => this.handleTokens(response)),
-  //       catchError((error) => {
-  //         console.error('Refresh token error:', error);
-  //         this.logout();
-  //         return of(null);
-  //       })
-  //     );
-  // }
 }
 
