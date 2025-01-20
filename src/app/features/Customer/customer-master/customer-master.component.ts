@@ -106,8 +106,10 @@ export class CustomerMasterComponent {
   }
 
   saveCustomer() {
-    console.log('Customer data:', this.customer);
-    alert('Customer data saved successfully!');
+    this.customer
+   this.apiService.createNewCustomer(this.customer).subscribe((res:any)=>{
+    console.log(res);
+   })
   }
 }
 
