@@ -96,13 +96,13 @@ interface ExportColumn {
     export class ProductListComponent implements OnInit{
     @ViewChild('dt') dt!: Table;
     productDialog: boolean = false;
-    products!: any[];
-    product!: any;
-    selectedProducts!: any[] | null;
+    products: any[]=[];
+    product: any=[];
+    selectedProducts: any[] =[];
     submitted: boolean = false;
-    statuses!: any[];
-    cols!: Column[];
-    exportColumns!: ExportColumn[];
+    statuses: any[]=[];
+    cols: Column[]=[];
+    exportColumns: ExportColumn[]=[];
     redirectedProduct: any;
 
     constructor(
@@ -113,13 +113,9 @@ interface ExportColumn {
         private cd: ChangeDetectorRef
     ) {}
 
-  ngOnInit() { this.getProductData(),this.loadDemoData()   }
-  
-  getProductData() {
-
-  }
-
-  // product-list.component.ts
+  ngOnInit() { 
+    this.loadDemoData()   
+}
 
 filterSearch(event: Event): void {
   const input = event.target as HTMLInputElement;
@@ -132,7 +128,8 @@ filterSearch(event: Event): void {
 
     loadDemoData() {
       this.apiService.getAllProductData().subscribe((res:any)=>{
-        this.products=res.data.doc;
+        console.log(res.data);
+        this.products = res.data;
         this.cd.markForCheck();
        })
 
@@ -180,7 +177,7 @@ filterSearch(event: Event): void {
                         },
                         err => console.error('Deletion Error:', err)
                     );           
-                this.selectedProducts = null;
+                this.selectedProducts = [];
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',

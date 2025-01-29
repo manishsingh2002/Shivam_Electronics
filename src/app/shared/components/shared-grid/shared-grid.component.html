@@ -1,0 +1,56 @@
+
+
+<div class="ag-theme-alpine rounded-lg shadow-lg overflow-hidden w-full">
+  <!-- Theme Selector Section -->
+  <!-- <div class="card flex justify-center mb-4">
+    <p-select 
+      [options]="themes" 
+      [(ngModel)]="theme" 
+      optionLabel="label" 
+      optionValue="value" 
+      placeholder="Select a theme" 
+      class="w-full sm:w-56" />
+  </div> -->
+
+  <!-- Ag-Grid Section -->
+  <div class="relative w-full h-[500px]">
+    <ag-grid-angular
+      class="ag-theme-alpine w-full h-full rounded-md shadow-md hover:bg-gray-50 transition-all"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [theme]="theme"
+      [defaultColDef]="defaultColDef"
+      [pagination]="true"
+      rowSelection="multiple"
+      [statusBar]="statusBar"
+      (cellValueChanged)="onCellValueChanged($event)"
+      (gridReady)="onGridReady($event)"
+      >
+    </ag-grid-angular>
+  </div>
+
+  <!-- Export Button -->
+  <div class="flex justify-end mt-4">
+    <button 
+      (click)="exportToCSV()" 
+      class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
+      Export CSV
+    </button>
+  </div>
+</div>
+
+<!-- <button (click)="exportToCSV()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 mb-4">
+  Export CSV
+</button>
+<div class="ag-theme-alpine rounded-lg shadow-lg overflow-hidden" style="height: 500px; width: 100%;">
+  <ag-grid-angular
+    class="ag-theme-alpine w-full h-full"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    rowSelection="multiple"
+    (cellValueChanged)="onCellValueChanged($event)"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+</div> -->
