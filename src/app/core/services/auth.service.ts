@@ -21,7 +21,8 @@ export class AuthService {
   private tokenKey = 'authToken';
   // private refreshTokenKey = 'refreshToken';
   private userKey = 'user';
-
+  // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
+  private baseUrl = 'http://localhost:4000/api'
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getStoredToken()?.token || null);
   public user: Observable<string | null> = this.userSubject.asObservable();
   private userDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.getStoredToken()?.user || null);
@@ -93,7 +94,7 @@ export class AuthService {
 
   login(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api/v1/users/login`, data)
+      .post<LoginResponse>(`${this.baseUrl}/v1/users/login`, data)
       .pipe(
         tap((response) => this.handleTokens(response)) ,
         catchError((error) => {
@@ -106,7 +107,7 @@ export class AuthService {
 
   signUp(data: any): Observable<LoginResponse | null> {
     return this.http
-      .post<LoginResponse>(`https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api/v1/users/signup`, data)
+      .post<LoginResponse>(`${this.baseUrl}/v1/users/signup`, data)
       .pipe(
         tap((response) => this.handleTokens(response)),
         catchError((error) => {

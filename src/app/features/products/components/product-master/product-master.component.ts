@@ -91,6 +91,10 @@ interface Product {
   styleUrl: './product-master.component.scss'
 })
 export class ProductMasterComponent {
+  darkMode:boolean=false
+darkModes() {
+  this.darkMode = !this.darkMode
+}
 
   product: Product = {
     title: '',

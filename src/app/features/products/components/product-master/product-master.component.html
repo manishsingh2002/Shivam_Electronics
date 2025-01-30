@@ -225,61 +225,462 @@
   </div>
 </body>
 
-
-     <!-- <div class="col-span-1 md:col-span-2">
-          <label for="startLocation" class="block text-gray-700 font-bold mb-1">Start Location</label>
-          <div class="flex space-x-2">
-        
-            <input pInputText type="text" id="startLocationType" [(ngModel)]="product.startLocation.type" name="startLocation.type"
-                   class="w-1/4 p-2 border border-gray-300 rounded" readonly value="Point" />
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationCoordinates" [(ngModel)]="product.startLocation.coordinates" name="startLocation.coordinates"
-                     class="w-1/2 p-2 border border-gray-300 rounded"  />
-              <label for="startLocationCoordinates">Coordinates</label>
-            </p-floatLabel>
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationAddress" [(ngModel)]="product.startLocation.address" name="startLocation.address"
-                     class="w-1/2 p-2 border border-gray-300 rounded" />
-              <label for="startLocationAddress">Address</label>
-            </p-floatLabel>
-        
-            <p-floatLabel>
-              <input pInputText type="text" id="startLocationDescription" [(ngModel)]="product.startLocation.description" name="startLocation.description"
-                     class="w-1/2 p-2 border border-gray-300 rounded"  />
-              <label for="startLocationDescription">Description</label>
-            </p-floatLabel>
-          </div>
-        </div>
-        
-        <div class="col-span-1 md:col-span-2">
-          <label for="locations" class="block text-gray-700 font-bold mb-1">Locations</label>
-          <div id="locations">
-            <div *ngFor="let location of product.locations; let i = index" class="flex mb-2 space-x-2">
-              <input pInputText type="text" name="locations[{{i}}].type" [(ngModel)]="product.locations[i].type" value="Point" class="w-1/4 p-2 border border-gray-300 rounded" readonly />
-      
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].coordinates" [(ngModel)]="product.locations[i].coordinates"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Coordinates</label>
-              </p-floatLabel>
-        
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].address" [(ngModel)]="product.locations[i].address"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Address</label>
-              </p-floatLabel>
-        
-              <p-floatLabel>
-                <input pInputText type="text" name="locations[{{i}}].description" [(ngModel)]="product.locations[i].description"  class="w-1/2 p-2 border border-gray-300 rounded" />
-                <label>Description</label>
-              </p-floatLabel>
-        
-               <p-floatLabel>
-                <input pInputText type="number" name="locations[{{i}}].day" [(ngModel)]="product.locations[i].day" class="w-1/4 p-2 border border-gray-300 rounded" />
-                <label>Day</label>
-              </p-floatLabel>
+<!-- <body class="bg-gray-100 w-6/6 mx-auto p-6 shadow-md rounded-lg font-roboto" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+    <div class="flex justify-end mb-4">
+        <button (click)="darkModes()" class="bg-gray-800 text-white px-4 py-2 rounded">
+            <i :class="darkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+        </button>
+    </div>
+    <div class="card flex justify-center mb-6">
+        <p-select [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title" optionValue="_id" class="w-1/2 md:w-56"></p-select>
+        <button pButton (click)="autopopulate()">Search</button>
+    </div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl text-black font-bold mb-4">Product Input Form</h1>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="title" [(ngModel)]="product.title" name="title" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                        <label for="title">Title</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <textarea id="description" name="description" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required placeholder="Description" maxlength="500" [(ngModel)]="product.description"></textarea>
+                    </p-floatLabel>
+                </div>
             </div>
-          </div>
-          <button type="button" id="addLocation" (click)="addLocation()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Location</button>
-        </div> -->
-        
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                <div>
+                    <p-floatLabel>
+                        <input pInputText id="category" [(ngModel)]="product.category" autocomplete="on" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                        <label for="category">Category</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="rate" [(ngModel)]="product.rate" name="rate" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                        <label for="rate">Rate</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="ratingAverage" [(ngModel)]="product.ratingAverage" name="ratingAverage" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0" max="5"/>
+                        <label for="ratingAverage">Rating Average</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="ratingQuantity" [(ngModel)]="product.ratingQuantity" name="ratingQuantity" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0"/>
+                        <label for="ratingQuantity">Rating Quantity</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Pricing and Tax Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="price" [(ngModel)]="product.price" name="price" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                        <label for="price">Price</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="discountPercentage" [(ngModel)]="product.discountPercentage" name="discountPercentage" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0" max="100"/>
+                        <label for="discountPercentage">Discount Percentage</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="cgst" [(ngModel)]="product.cgst" name="cgst" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                        <label for="cgst">CGST</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="sgst" [(ngModel)]="product.sgst" name="sgst" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                        <label for="sgst">SGST</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Stock and Product Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="number" id="stock" [(ngModel)]="product.stock" name="stock" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                        <label for="stock">Stock</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="tags" [(ngModel)]="product.tags" name="tags" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="tags">Tags</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="brand" [(ngModel)]="product.brand" name="brand" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                        <label for="brand">Brand</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="sku" [(ngModel)]="product.sku" name="sku" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                        <label for="sku">SKU</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Dimensions and Meta Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-1">
+                    <label for="dimensions" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Dimensions</label>
+                    <div class="flex space-x-2">
+                        <p-floatLabel>
+                            <input pInputText type="number" id="width" [(ngModel)]="product.dimensions.width" name="dimensions.width" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                            <label for="width">Width</label>
+                        </p-floatLabel>
+                        <p-floatLabel>
+                            <input pInputText type="number" id="height" [(ngModel)]="product.dimensions.height" name="dimensions.height" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                            <label for="height">Height</label>
+                        </p-floatLabel>
+                        <p-floatLabel>
+                            <input pInputText type="number" id="depth" [(ngModel)]="product.dimensions.depth" name="dimensions.depth" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                            <label for="depth">Depth</label>
+                        </p-floatLabel>
+                        <p-floatLabel>
+                            <input pInputText type="number" id="weight" [(ngModel)]="product.weight" name="dimensions.weight" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                            <label for="weight">Weight</label>
+                        </p-floatLabel>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-1">
+                    <label for="meta" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Meta</label>
+                    <div class="flex space-x-2">
+                        <p-floatLabel>
+                            <input pInputText type="text" id="barcode" [(ngModel)]="product.meta.barcode" name="meta.barcode" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                            <label for="barcode">Barcode</label>
+                        </p-floatLabel>
+                        <p-floatLabel>
+                            <input pInputText type="text" id="qrCode" [(ngModel)]="product.meta.qrCode" name="meta.qrCode" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                            <label for="qrCode">QR Code</label>
+                        </p-floatLabel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="thumbnail" [(ngModel)]="product.thumbnail" name="thumbnail" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                        <label for="thumbnail">Thumbnail</label>
+                    </p-floatLabel>
+                </div>
+                <div>
+                    <p-floatLabel>
+                        <input pInputText type="text" id="salesPerson" [(ngModel)]="product.salesPerson" name="salesPerson" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="salesPerson">Sales Person</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Detailed Descriptions</h2>
+            <div id="detailedDescriptions">
+                <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
+                    <div class="flex flex-col md:flex-row md:space-x-4">
+                        <p-floatLabel class="flex-1">
+                            <input pInputText id="id-{{i}}" [(ngModel)]="item.id" autocomplete="on" placeholder="ID {{i + 1}}" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                        </p-floatLabel>
+                        <p-floatLabel class="flex-1">
+                            <textarea id="item.detail" placeholder="Description" name="item.detail" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600" required maxlength="500" [(ngModel)]="item.detail"></textarea>
+                        </p-floatLabel>
+                    </div>
+                </div>
+            </div>
+            <button (click)="addDetailedDescription()" type="button" id="addDetail" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors duration-200">Add Detail</button>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Warranty, Shipping, and Return Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="col-span-1 md:col-span-2">
+                    <p-floatLabel>
+                        <textarea placeholder="Warranty Information" pInputTextarea id="warrantyInformation" [(ngModel)]="product.warrantyInformation" name="warrantyInformation" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="5"></textarea>
+                    </p-floatLabel>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <p-floatLabel>
+                        <textarea pInputTextarea placeholder="Shipping Information" id="shippingInformation" [(ngModel)]="product.shippingInformation" name="shippingInformation" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="5"></textarea>
+                        <label for="shippingInformation">Shipping Information</label>
+                    </p-floatLabel>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <p-floatLabel>
+                        <textarea placeholder="Return Policy" pInputTextarea id="returnPolicy" [(ngModel)]="product.returnPolicy" name="returnPolicy" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="3"></textarea>
+                        <label for="returnPolicy">Return Policy</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Images</h2>
+            <div id="images" *ngIf="product.images">
+                <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
+                    <body class="bg-gray-100 w-6/6 mx-auto p-6 shadow-md rounded-lg font-roboto" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+                        <div class="flex justify-end mb-4">
+                            <button (click)="darkModes()" class="bg-gray-800 text-white px-4 py-2 rounded">
+                                <i :class="darkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+                            </button>
+                        </div>
+                        <div class="card flex justify-center mb-6">
+                            <p-select [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title" optionValue="_id" class="w-1/2 md:w-56"></p-select>
+                            <button pButton (click)="autopopulate()">Search</button>
+                        </div>
+                        <div class="container mx-auto p-4">
+                            <h1 class="text-2xl text-black font-bold mb-4">Product Input Form</h1>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="title" [(ngModel)]="product.title" name="title" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                                            <label for="title">Title</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <textarea id="description" name="description" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required placeholder="Description" maxlength="500" [(ngModel)]="product.description"></textarea>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText id="category" [(ngModel)]="product.category" autocomplete="on" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                                            <label for="category">Category</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="rate" [(ngModel)]="product.rate" name="rate" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                                            <label for="rate">Rate</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="ratingAverage" [(ngModel)]="product.ratingAverage" name="ratingAverage" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0" max="5"/>
+                                            <label for="ratingAverage">Rating Average</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="ratingQuantity" [(ngModel)]="product.ratingQuantity" name="ratingQuantity" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0"/>
+                                            <label for="ratingQuantity">Rating Quantity</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Pricing and Tax Information</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="price" [(ngModel)]="product.price" name="price" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                                            <label for="price">Price</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="discountPercentage" [(ngModel)]="product.discountPercentage" name="discountPercentage" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" min="0" max="100"/>
+                                            <label for="discountPercentage">Discount Percentage</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="cgst" [(ngModel)]="product.cgst" name="cgst" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                                            <label for="cgst">CGST</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="sgst" [(ngModel)]="product.sgst" name="sgst" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                                            <label for="sgst">SGST</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Stock and Product Information</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="number" id="stock" [(ngModel)]="product.stock" name="stock" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required min="0"/>
+                                            <label for="stock">Stock</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="tags" [(ngModel)]="product.tags" name="tags" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                            <label for="tags">Tags</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="brand" [(ngModel)]="product.brand" name="brand" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                            <label for="brand">Brand</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="sku" [(ngModel)]="product.sku" name="sku" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                            <label for="sku">SKU</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Dimensions and Meta Information</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="md:col-span-1">
+                                        <label for="dimensions" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Dimensions</label>
+                                        <div class="flex space-x-2">
+                                            <p-floatLabel>
+                                                <input pInputText type="number" id="width" [(ngModel)]="product.dimensions.width" name="dimensions.width" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                                <label for="width">Width</label>
+                                            </p-floatLabel>
+                                            <p-floatLabel>
+                                                <input pInputText type="number" id="height" [(ngModel)]="product.dimensions.height" name="dimensions.height" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                                <label for="height">Height</label>
+                                            </p-floatLabel>
+                                            <p-floatLabel>
+                                                <input pInputText type="number" id="depth" [(ngModel)]="product.dimensions.depth" name="dimensions.depth" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                                <label for="depth">Depth</label>
+                                            </p-floatLabel>
+                                            <p-floatLabel>
+                                                <input pInputText type="number" id="weight" [(ngModel)]="product.weight" name="dimensions.weight" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                                <label for="weight">Weight</label>
+                                            </p-floatLabel>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-1 md:col-span-1">
+                                        <label for="meta" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Meta</label>
+                                        <div class="flex space-x-2">
+                                            <p-floatLabel>
+                                                <input pInputText type="text" id="barcode" [(ngModel)]="product.meta.barcode" name="meta.barcode" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                                <label for="barcode">Barcode</label>
+                                            </p-floatLabel>
+                                            <p-floatLabel>
+                                                <input pInputText type="text" id="qrCode" [(ngModel)]="product.meta.qrCode" name="meta.qrCode" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                                <label for="qrCode">QR Code</label>
+                                            </p-floatLabel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="thumbnail" [(ngModel)]="product.thumbnail" name="thumbnail" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
+                                            <label for="thumbnail">Thumbnail</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="salesPerson" [(ngModel)]="product.salesPerson" name="salesPerson" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                            <label for="salesPerson">Sales Person</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Detailed Descriptions</h2>
+                                <div id="detailedDescriptions">
+                                    <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
+                                        <div class="flex flex-col md:flex-row md:space-x-4">
+                                            <p-floatLabel class="flex-1">
+                                                <input pInputText id="id-{{i}}" [(ngModel)]="item.id" autocomplete="on" placeholder="ID {{i + 1}}" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600" required maxlength="200"/>
+                                            </p-floatLabel>
+                                            <p-floatLabel class="flex-1">
+                                                <textarea id="item.detail" placeholder="Description" name="item.detail" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600" required maxlength="500" [(ngModel)]="item.detail"></textarea>
+                                            </p-floatLabel>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button (click)="addDetailedDescription()" type="button" id="addDetail" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors duration-200">Add Detail</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Warranty, Shipping, and Return Information</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="col-span-1 md:col-span-2">
+                                        <p-floatLabel>
+                                            <textarea placeholder="Warranty Information" pInputTextarea id="warrantyInformation" [(ngModel)]="product.warrantyInformation" name="warrantyInformation" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="5"></textarea>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div class="col-span-1 md:col-span-2">
+                                        <p-floatLabel>
+                                            <textarea pInputTextarea placeholder="Shipping Information" id="shippingInformation" [(ngModel)]="product.shippingInformation" name="shippingInformation" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="5"></textarea>
+                                            <label for="shippingInformation">Shipping Information</label>
+                                        </p-floatLabel>
+                                    </div>
+                                    <div class="col-span-1 md:col-span-2">
+                                        <p-floatLabel>
+                                            <textarea placeholder="Return Policy" pInputTextarea id="returnPolicy" [(ngModel)]="product.returnPolicy" name="returnPolicy" class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required rows="3"></textarea>
+                                            <label for="returnPolicy">Return Policy</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Images</h2>
+                                <div id="images" *ngIf="product.images">
+                                    <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="imageId{{i}}" [(ngModel)]="product.images[i].id" name="images[{{i}}].id" class="w-1/4 p-2 border border-gray-300 rounded"/>
+                                            <label for="imageId{{i}}">ID</label>
+                                        </p-floatLabel>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="imageDetail{{i}}" [(ngModel)]="product.images[i].detail" name="images[{{i}}].detail" class="w-1/2 p-2 border border-gray-300 rounded"/>
+                                            <label for="imageDetail{{i}}">Detail</label>
+                                        </p-floatLabel>
+                                        <p-floatLabel variant="on">
+                                            <input pInputText type="text" id="imageLink{{i}}" [(ngModel)]="product.images[i].link" name="images[{{i}}].link" class="w-1/2 p-2 border border-gray-300 rounded"/>
+                                            <label for="imageLink{{i}}">Link</label>
+                                        </p-floatLabel>
+                                        <button pButton icon="pi pi-times" type="button" class="p-button-danger" (click)="removeImage(i)"></button>
+                                    </div>
+                                    <button pButton type="button" label="Add Image" class="text-black" (click)="addImage()"></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-end space-x-4 mt-4">
+                                <button type="submit" (click)="onSubmit()" class="bg-green-500 text-white px-4 py-2 rounded">Submit</button>
+                                <button pButton (click)="Update()" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+                            </div>
+                        </div>
+                      </body>
+                            <!-- <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                                <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Images</h2>
+                                <div id="images" *ngIf="product.images">
+                                    <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="imageId{{i}}" [(ngModel)]="product.images[i].id" name="images[{{i}}].id" class="w-1/4 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                            <label for="imageId{{i}}">ID</label>
+                                        </p-floatLabel>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="imageDetail{{i}}" [(ngModel)]="product.images[i].detail" name="images[{{i}}].detail" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                            <label for="imageDetail{{i}}">Detail</label>
+                                        </p-floatLabel>
+                                        <p-floatLabel>
+                                            <input pInputText type="text" id="imageLink{{i}}" [(ngModel)]="product.images[i].link" name="images[{{i}}].link" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"/>
+                                            <label for="imageLink{{i}}">Link</label>
+                                        </p-floatLabel>
+                                     </div>
+                                     </div> -->
+                                   
+   -->

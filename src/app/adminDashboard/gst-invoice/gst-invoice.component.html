@@ -1,9 +1,536 @@
+<!-- 
+<body class="bg-gray-900 text-white">
+  <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
+      <div class="text-center mb-6">
+          <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Invoice No*</label>
+                  <input type="text" placeholder="Enter Invoice No" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" value="A00001" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Invoice Date*</label>
+                  <input type="date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" value="2024-12-11" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Due Date</label>
+                  <input type="date" placeholder="Enter Due Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Billed Date</label>
+                  <input type="date" placeholder="Enter Billed Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" />
+              </div>
+          </div>
+          <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
+              <i class="fas fa-image text-gray-400 text-5xl"></i>
+              <p class="mt-2 text-gray-500">Add Business Logo</p>
+              <p class="text-xs text-gray-400 mt-2">Resolution up to 1080x1080px. PNG or JPEG format.</p>
+          </div>
+      </div>
+      <div class="flex justify-between mb-6">
+          <button class="text-blue-400 text-sm">+ Add More Fields</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+              <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Country</label>
+                      <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                          <option>India</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">State</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Your Business Name (Required)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
+                  <div class="flex">
+                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
+                      <input type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                  <input type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Your GSTIN (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">City (optional)</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">State (optional)</label>
+                  <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                      <option>Select State</option>
+                  </select>
+              </div>
+              <div class="flex justify-between text-blue-400 text-sm">
+                  <button>+ Add Email</button>
+                  <button>+ Add PAN</button>
+              </div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+              <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Country</label>
+                      <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                          <option>India</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">State</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Client's business name (Required)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
+                  <div class="flex">
+                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
+                      <input type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                  <input type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Client's GSTIN (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">City (optional)</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">State (optional)</label>
+                  <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                      <option>Select State</option>
+                  </select>
+              </div>
+              <div class="flex justify-between text-blue-400 text-sm">
+                  <button>+ Add Email</button>
+                  <button>+ Add PAN</button>
+              </div>
+          </div>
+      </div>
+      <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center space-x-4">
+              <button class="text-blue-400 text-sm">+ Edit GST</button>
+              <select class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                  <option>Indian Rupee(INR, ₹)</option>
+              </select>
+          </div>
+      </div>
+      <div class="max-w-full overflow-x-auto mb-6">
+          <table class="table-auto w-full bg-gray-700 text-white">
+              <thead class="bg-gray-800">
+                  <tr>
+                      <th class="py-2 px-4 border-b border-gray-600">Item</th>
+                      <th class="py-2 px-4 border-b border-gray-600">GST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Quantity</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Rate</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Amount</th>
+                      <th class="py-2 px-4 border-b border-gray-600">CGST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">SGST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Total</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="Item Name" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="18" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="1" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1.00" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 0.09" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 0.09" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1.18" />
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="bg-gray-700 p-4 rounded-md mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out">+ Add New Line</button>
+              <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out">+ Add Discounts/Additional Charges</button>
+              <label class="inline-flex items-center">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-400 border-gray-600 rounded focus:ring-blue-500" />
+                  <span class="ml-2 text-sm text-gray-300">Round Up</span>
+              </label>
+              <label class="inline-flex items-center">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-400 border-gray-600 rounded focus:ring-blue-500" />
+                  <span class="ml-2 text-sm text-gray-300">Round Down</span>
+              </label>
+              <label class="inline-flex items-center">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-400 border-gray-600 rounded focus:ring-blue-500" />
+                  <span class="ml-2 text-sm text-gray-300">Summarise Total Quantity</span>
+              </label>
+          </div>
+      </div>
+      <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
+          <table class="table-auto w-full">
+              <thead>
+                  <tr>
+                      <th class="py-2 px-4 text-left">Description</th>
+                      <th class="py-2 px-4 text-right">Amount</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">Amount</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 1.00</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">SGST</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 0.09</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">CGST</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 0.09</td>
+                  </tr>
+              </tbody>
+          </table>
+          <div class="flex justify-between items-center mt-4">
+              <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Add More Fields</button>
+              <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Show Total In Words</button>
+          </div>
+          <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
+              <h2 class="text-lg font-semibold">Total (INR)</h2>
+              <h2 class="text-lg font-semibold">₹ 1.18</h2>
+          </div>
+      </div>
+    </div>
+    <div class="text-center">
+        <button class="bg-pink-500 text-white py-2 px-4 rounded-md">Save & Continue</button>
+    </div>
+</body> -->
+<body class="bg-gray-900 text-white">
+  <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
+      <div class="text-center mb-6">
+          <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Invoice No*</label>
+                  <input type="text" placeholder="Enter Invoice No" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" value="A00001" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Invoice Date*</label>
+                  <input type="date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" value="2024-12-11" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Due Date</label>
+                  <input type="date" placeholder="Enter Due Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" />
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-300">Billed Date</label>
+                  <input type="date" placeholder="Enter Billed Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white" />
+              </div>
+          </div>
+          <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
+              <i class="fas fa-image text-gray-400 text-5xl"></i>
+              <p class="mt-2 text-gray-500">Add Business Logo</p>
+              <p class="text-xs text-gray-400 mt-2">Resolution up to 1080x1080px. PNG or JPEG format.</p>
+          </div>
+      </div>
+      <div class="flex justify-between mb-6">
+          <button class="text-blue-400 text-sm">+ Add More Fields</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+              <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Country</label>
+                      <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                          <option>India</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">State</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Your Business Name (Required)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
+                  <div class="flex">
+                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
+                      <input type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                  <input type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Your GSTIN (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">City (optional)</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">State (optional)</label>
+                  <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                      <option>Select State</option>
+                  </select>
+              </div>
+              <div class="flex justify-between text-blue-400 text-sm">
+                  <button>+ Add Email</button>
+                  <button>+ Add PAN</button>
+              </div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+              <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Country</label>
+                      <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                          <option>India</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">State</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Client's business name (Required)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
+                  <div class="flex">
+                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
+                      <input type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                  <input type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Client's GSTIN (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
+                  <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">City (optional)</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+                  <div>
+                      <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
+                      <input type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" />
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-300">State (optional)</label>
+                  <select class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                      <option>Select State</option>
+                  </select>
+              </div>
+              <div class="flex justify-between text-blue-400 text-sm">
+                  <button>+ Add Email</button>
+                  <button>+ Add PAN</button>
+              </div>
+          </div>
+      </div>
+      <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center space-x-4">
+              <button class="text-blue-400 text-sm">+ Edit GST</button>
+              <select class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white">
+                  <option>Indian Rupee(INR, ₹)</option>
+              </select>
+          </div>
+      </div>
+      <div class="max-w-full overflow-x-auto mb-6">
+          <table class="table-auto w-full bg-gray-700 text-white">
+              <thead class="bg-gray-800">
+                  <tr>
+                      <th class="py-2 px-4 border-b border-gray-600">Item</th>
+                      <th class="py-2 px-4 border-b border-gray-600">GST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Quantity</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Rate</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Amount</th>
+                      <th class="py-2 px-4 border-b border-gray-600">CGST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">SGST</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Total</th>
+                      <th class="py-2 px-4 border-b border-gray-600">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="Item Name" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="18" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="1" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1.00" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 0.09" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 0.09" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600">
+                          <input type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" value="₹ 1.18" />
+                      </td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-center">
+                          <button class="text-red-500 hover:text-red-700"><i class="fas fa-trash"></i></button>
+                          <button class="text-blue-500 hover:text-blue-700 ml-2"><i class="fas fa-plus"></i></button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+              <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out">+ Add New Line</button>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+              <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out">+ Add Discounts/Additional Charges</button>
+          </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+              <label class="inline-flex items-center">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-400 border-gray-600 rounded focus:ring-blue-500" />
+                  <span class="ml-2 text-sm text-gray-300">Round Up</span>
+              </label>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+              <label class="inline-flex items-center">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-400 border-gray-600 rounded focus:ring-blue-500" />
+                  <span class="ml-2 text-sm text-gray-300">Round Down</span>
+              </label>
+          </div>
+      </div>
+      <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
+          <table class="table-auto w-full">
+              <thead>
+                  <tr>
+                      <th class="py-2 px-4 text-left">Description</th>
+                      <th class="py-2 px-4 text-right">Amount</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">Amount</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 1.00</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">SGST</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 0.09</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-4 border-b border-gray-600">CGST</td>
+                      <td class="py-2 px-4 border-b border-gray-600 text-right">₹ 0.09</td>
+                  </tr>
+              </tbody>
+          </table>
+          <div class="flex justify-between items-center mt-4">
+            <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Add More Fields</button>
+            <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Show Total In Words</button>
+        </div>
+        <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
+            <h2 class="text-lg font-semibold">Total (INR)</h2>
+            <h2 class="text-lg font-semibold">₹ 1.18</h2>
+        </div>
+    </div>
+  </div>
+  <div class="text-center">
+      <button class="bg-pink-500 text-white py-2 px-4 rounded-md">Save & Continue</button>
+  </div>
+</body>
 
+  <!-- 
 <body class="bg-gray-100 p-4">
     <div class="max-w-screen-md mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl font-bold mb-6">Create Invoice</h1>
         <form>
-            <!-- Invoice Details -->
+            Invoice Details
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-2">Invoice Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -22,7 +549,7 @@
                 </div>
             </div>
 
-            <!-- Seller Details -->
+            Seller Details
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-2">Seller Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -45,7 +572,7 @@
                 </div>
             </div>
 
-            <!-- Buyer Details -->
+            Buyer Details
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-2">Buyer Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -68,7 +595,7 @@
                 </div>
             </div>
 
-            <!-- Items -->
+            Items
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-2">Items</h2>
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -95,7 +622,7 @@
                 </div>
             </div>
 
-            <!-- Summary -->
+            Summary
             <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner">
                 <h2 class="text-xl font-bold mb-2">Summary</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-end">
@@ -131,7 +658,7 @@
                 </div>
             </div>
 
-            <!-- Additional Information -->
+            Additional Information
             <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-inner">
                 <h2 class="text-xl font-bold mb-2">Additional Information</h2>
                 <div class="mb-4">
@@ -148,576 +675,10 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
+            Submit Button
             <div class="text-right">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Invoice</button>
             </div>
         </form>
     </div>
-</body>
-/**<div class="w-full mx-auto p-6 bg-white shadow-md mt-10 rounded-lg">
-  <div class="text-center mb-6">
-    <h1 class="text-3xl font-bold text-purple-700">GST Invoice</h1>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-    <!-- Left Section: Form Inputs -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Invoice No -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700"
-          >Invoice No*</label
-        >
-        <input
-          type="text"
-          placeholder="Enter Invoice No"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-          value="A00001"
-        />
-      </div>
-
-      <!-- Invoice Date -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700"
-          >Invoice Date*</label
-        >
-        <input
-          type="date"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-          value="2024-12-11"
-        />
-      </div>
-
-      <!-- Due Date -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Due Date</label>
-        <input
-          type="date"
-          placeholder="Enter Due Date"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-      </div>
-
-      <!-- Billed Date -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700"
-          >Billed Date</label
-        >
-        <input
-          type="date"
-          placeholder="Enter Billed Date"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-      </div>
-    </div>
-
-    <!-- Right Section: Logo Area -->
-    <div
-      class="border-2 border-dashed border-gray-300 rounded-md p-8 flex items-center justify-center"
-    >
-      <i class="fas fa-image text-gray-400 text-5xl"></i>
-      <p class="mt-2 text-gray-500">Add Business Logo</p>
-      <p class="text-xs text-gray-400 mt-2">
-        Resolution up to 1080x1080px. PNG or JPEG format.
-      </p>
-    </div>
-  </div>
-
-  <div class="flex justify-between mb-6">
-    <button class="text-blue-600 text-sm">+ Add More Fields</button>
-  </div>
-
-  <!-- billier name and details -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-    <div class="bg-blue-50 p-4 rounded-md">
-      <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Country</label>
-        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option>India</option>
-        </select>
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Your Business Name (Required)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div class="mb-4">
-        <!-- Phone Input -->
-        <label class="block text-sm font-medium text-gray-700 mb-2"
-          >Phone</label
-        >
-        <div class="flex">
-          <span
-            class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
-            >+91</span
-          >
-          <input
-            type="tel"
-            placeholder="Enter phone number"
-            class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 shadow-sm"
-          />
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <!-- Email Input -->
-        <label for="email" class="block text-sm font-medium text-gray-700"
-          >Email</label
-        >
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Your GSTIN (optional)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Address (optional)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div class="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >City (optional)</label
-          >
-          <input
-            type="text"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >Postal Code / Zip Code</label
-          >
-          <input
-            type="text"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >State (optional)</label
-        >
-        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option>Select State</option>
-        </select>
-      </div>
-      <div class="flex justify-between text-blue-600 text-sm">
-        <button>+ Add Email</button>
-        <button>+ Add PAN</button>
-      </div>
-      <button class="text-blue-600 text-sm mt-4">+ Add Custom Fields</button>
-    </div>
-    <div class="bg-blue-50 p-4 rounded-md">
-      <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Country</label>
-        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option>India</option>
-        </select>
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Client's business name (Required)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <!-- contact -->
-      <div class="mb-4">
-        <!-- Phone Input -->
-        <label class="block text-sm font-medium text-gray-700 mb-2"
-          >Phone</label
-        >
-        <div class="flex">
-          <span
-            class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
-            >+91</span
-          >
-          <input
-            type="tel"
-            placeholder="Enter phone number"
-            class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 shadow-sm"
-          />
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <!-- Email Input -->
-        <label for="email" class="block text-sm font-medium text-gray-700"
-          >Email</label
-        >
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        />
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Client's GSTIN (optional)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >Address (optional)</label
-        >
-        <input
-          type="text"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div class="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >City (optional)</label
-          >
-          <input
-            type="text"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >Postal Code / Zip Code</label
-          >
-          <input
-            type="text"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700"
-          >State (optional)</label
-        >
-        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option>Select State</option>
-        </select>
-      </div>
-      <div class="flex justify-between text-blue-600 text-sm">
-        <button>+ Add Email</button>
-        <button>+ Add PAN</button>
-      </div>
-      <button class="text-blue-600 text-sm mt-4">+ Add Custom Fields</button>
-    </div>
-  </div>
-  <!-- customer detail -->
-  <div class="flex items-center mb-6">
-    <input
-      type="checkbox"
-      class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-    />
-    <label class="ml-2 text-sm text-gray-700">Add Shipping Details</label>
-  </div>
-
-  <!-- editoption to edit the gst invoice page -->
-  <div class="flex justify-between items-center mb-6">
-    <div class="flex items-center">
-      <button class="text-blue-600 text-sm">+ Edit GST</button>
-      <select class="ml-4 block w-full border-gray-300 rounded-md shadow-sm">
-        <option>Indian Rupee(INR, ₹)</option>
-      </select>
-    </div>
-    <button class="text-blue-600 text-sm">+ Edit Columns/Formulas</button>
-  </div>
-  <!-- edit page -->
-
-  <!-- product detail section table -->
-  <div class="max-w-full overflow-x-auto mb-6">
-    <table class="w-full bg-white border border-gray-300">
-      <thead class="bg-purple-600 text-white">
-        <tr>
-          <th class="py-2 px-4 border-b">Item</th>
-          <!-- <th class="py-2 px-4 border-b">HSN/SAC</th> -->
-          <th class="py-2 px-4 border-b">GST</th>
-          <th class="py-2 px-4 border-b">Quantity</th>
-          <th class="py-2 px-4 border-b">Rate</th>
-          <th class="py-2 px-4 border-b">Amount</th>
-          <th class="py-2 px-4 border-b">CGST</th>
-          <th class="py-2 px-4 border-b">SGST</th>
-          <th class="py-2 px-4 border-b">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="Item Name"
-            />
-          </td>
-          <!-- <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="#"
-            />
-          </td> -->
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="18"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="1"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="₹ 1"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="₹ 1.00"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="₹ 0.09"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="₹ 0.09"
-            />
-          </td>
-          <td class="py-2 px-4 border-b">
-            <input
-              type="text"
-              class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value="₹ 1.18"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div
-    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0"
-  >
-    <button
-      class="text-blue-600 text-sm hover:text-blue-800 transition duration-300 ease-in-out"
-    >
-      + Add New Line
-    </button>
-    <div
-      class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4"
-    >
-      <button
-        class="text-blue-600 text-sm hover:text-blue-800 transition duration-300 ease-in-out"
-      >
-        + Add Discounts/Additional Charges
-      </button>
-      <div class="flex items-center space-x-4">
-        <label class="inline-flex items-center">
-          <input
-            type="checkbox"
-            class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-          <span class="ml-2 text-sm text-gray-700">Round Up</span>
-        </label>
-        <label class="inline-flex items-center">
-          <input
-            type="checkbox"
-            class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-          <span class="ml-2 text-sm text-gray-700">Round Down</span>
-        </label>
-        <label class="inline-flex items-center">
-          <input
-            type="checkbox"
-            class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-          <span class="ml-2 text-sm text-gray-700"
-            >Summarise Total Quantity</span
-          >
-        </label>
-      </div>
-    </div>
-  </div>
-  <!-- table section over
-  total section
-  <div class="flex justify-between items-center mb-6">
-    <div>
-      <p class="text-sm text-gray-700">Amount</p>
-      <p class="text-sm text-gray-700">SGST</p>
-      <p class="text-sm text-gray-700">CGST</p>
-    </div>
-    <div class="text-right">
-      <p class="text-sm text-gray-700">₹ 1.00</p>
-      <p class="text-sm text-gray-700">₹ 0.09</p>
-      <p class="text-sm text-gray-700">₹ 0.09</p>
-    </div>
-  </div>
-
-  //extra prices if transport or nay thing
-  <div class="flex justify-between items-center mb-6">
-    <button class="text-blue-600 text-sm">+ Add More Fields</button>
-    <button class="text-blue-600 text-sm">+ Show Total In Words</button>
-  </div>
-
-  //summary of total amount area or total area
-  <div class="flex justify-between items-center mb-6">
-    <h2 class="text-lg font-semibold">Total (INR)</h2>
-    <h2 class="text-lg font-semibold">₹ 1.18</h2>
-  </div> -->
-  <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
-    <!-- Total Section -->
-    <div class="flex justify-between items-center mb-4">
-      <div>
-        <p class="text-sm text-center font-bold text-gray-600">Amount</p>
-        <p class="text-sm text-center font-bold text-gray-600">SGST</p>
-        <p class="text-sm text-center font-bold text-gray-600">CGST</p>
-      </div>
-      <div class="text-right">
-        <p class="text-sm text-gray-800 font-semibold">₹ 1.00</p>
-        <p class="text-sm text-gray-800 font-semibold">₹ 0.09</p>
-        <p class="text-sm text-gray-800 font-semibold">₹ 0.09</p>
-      </div>
-    </div>
-
-    <!-- Extra Prices Section -->
-    <div class="flex justify-between items-center mb-4">
-      <button class="text-blue-600 text-sm hover:underline focus:outline-none">
-        + Add More Fields
-      </button>
-      <button class="text-blue-600 text-sm hover:underline focus:outline-none">
-        + Show Total In Words
-      </button>
-    </div>
-
-    <!-- Summary of Total Amount Area -->
-    <div
-      class="flex justify-between items-center border-t border-gray-300 pt-4"
-    >
-      <h2 class="text-lg font-semibold text-gray-800">Total (INR)</h2>
-      <h2 class="text-lg font-semibold text-gray-800">₹ 1.18</h2>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="mt-6 flex justify-end space-x-4">
-      <button
-        class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-200"
-      >
-        Confirm
-      </button>
-      <button
-        class="bg-gray-300 text-gray-800 text-sm font-semibold py-2 px-4 rounded hover:bg-gray-400 transition duration-200"
-      >
-        Cancel
-      </button>
-    </div>
-  </div>
-  <!-- save data -->
-  <div class="text-center">
-    <button class="bg-pink-500 text-white py-2 px-4 rounded-md">
-      Save & Continue
-    </button>
-  </div>
-</div>**/
-
-<!-- <div class="max-w-5xl mx-auto p-6 bg-white shadow-md mt-10 rounded-lg">
-  <div class="flex justify-between items-center">
-    <div class="flex items-center">
-      <span
-        class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center"
-        >1</span
-      >
-      <span class="ml-2 text-sm text-gray-700">Invoice Details</span>
-    </div>
-    <div class="flex items-center">
-      <span
-        class="bg-gray-300 text-gray-700 rounded-full h-8 w-8 flex items-center justify-center"
-        >2</span
-      >
-      <span class="ml-2 text-sm text-gray-700"
-        >Add Banking Details (optional)</span
-      >
-    </div>
-    <div class="flex items-center">
-      <span
-        class="bg-gray-300 text-gray-700 rounded-full h-8 w-8 flex items-center justify-center"
-        >3</span
-      >
-      <span class="ml-2 text-sm text-gray-700">Design & Share (optional)</span>
-    </div>
-  </div>
-</div> -->
-
-<!-- extra field to add data  -->
-<!-- <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Terms & Conditions
-    </button>
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Notes
-    </button>
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Additional Info
-    </button>
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Contact Details
-    </button>
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Signature
-    </button>
-    <button
-      class="border border-gray-300 rounded-md py-2 text-sm text-gray-700"
-    >
-      + Add Attachments
-    </button>
-  </div> -->
+</body> -->
