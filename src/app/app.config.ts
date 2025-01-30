@@ -10,7 +10,7 @@ import { AppMessageService } from './core/services/message.service';
 import Aura from "@primeng/themes/aura";
 import { definePreset } from "@primeng/themes";
 import { MessageService } from 'primeng/api';
-import { authInterceptor, loggingInterceptor } from '../app/core/interceptors/auth.interceptor';
+import { authInterceptor, loggingInterceptor } from './core/Interceptors/auth.interceptor';
 const MyPreset = definePreset(Aura, {
     primitive: {
         borderRadius: {

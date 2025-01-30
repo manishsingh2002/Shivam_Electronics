@@ -81,7 +81,7 @@ export class AdminUserComponent implements OnInit{
   }
   loadDemoData() {
       this.apiService.getAllUserData().subscribe((res:any) => {
-        console.log(res);
+        // console.log(res);
           this.users = res.data;
           this.cd.markForCheck();
       });

@@ -128,7 +128,7 @@ filterSearch(event: Event): void {
 
     loadDemoData() {
       this.apiService.getAllProductData().subscribe((res:any)=>{
-        console.log(res.data);
+        // console.log(res.data);
         this.products = res.data;
         this.cd.markForCheck();
        })
@@ -169,10 +169,10 @@ filterSearch(event: Event): void {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                     const ids = this.selectedProducts ? this.selectedProducts.map(product => product.id) : []; // Extract IDs
-                  console.log(ids); 
+                //   console.log(ids); 
                     this.apiService.deleteProduct(ids).subscribe(
                         res => {
-                            console.log('Deletion Success:', res);
+                            // console.log('Deletion Success:', res);
                             this.products = this.products.filter(product => !ids.includes(product.id));
                         },
                         err => console.error('Deletion Error:', err)

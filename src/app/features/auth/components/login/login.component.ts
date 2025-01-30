@@ -70,7 +70,7 @@ export class LoginComponent {
         this.errorMessage = null;
         this.auth.login(this.logindetails).subscribe({
             next: (response: any) => {
-                console.log('Login Response:', response);
+                // console.log('Login Response:', response);
                 if (response && response.data && response.token) { 
                     // Correct check
                     this.messageService.handleResponse(response.status, 'Request Successful', 'maish');
