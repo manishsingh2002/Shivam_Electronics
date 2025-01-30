@@ -1,0 +1,38 @@
+.ag-column-drop-title {
+    font-family: 'Brush Script MT';
+    font-size: 1.5em;
+}
+.ag-theme-quartz .ag-header-group-cell {
+    font-weight: normal;
+    font-size: 22px;
+}
+.ag-theme-quartz .ag-header-cell {
+    font-size: 18px;
+}
+/* Custom CSS for stylish row borders */
+.ag-theme-quartz .ag-row {
+    border-bottom: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(to right, #1E1E2F, #2E2E3F), linear-gradient(to right, #9696C8, #B0B0FF);
+}
+
+/* Gradient border for rows */
+.ag-theme-quartz .ag-row {
+    border-bottom: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(to right, #1E1E2F, #2E2E3F), linear-gradient(to right, #9696C8, #B0B0FF);
+}
+
+/* Custom header styling with icons */
+.ag-theme-quartz .ag-header-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Hover effect for rows */
+.ag-theme-quartz .ag-row:hover {
+    background-color: #4E4E5F !important;
+}

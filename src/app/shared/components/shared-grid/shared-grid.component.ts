@@ -29,7 +29,43 @@ export class SharedGridComponent implements OnInit, OnChanges {
     resizable: true,
     editable: true,
   };
-  theme = themeQuartz.withPart(colorSchemeDark); // Apply dark theme to Quartz
+  theme = themeQuartz.withPart(colorSchemeDark).withParams({
+    fontFamily: 'serif',
+    headerFontFamily: 'Brush Script MT',
+    cellFontFamily: 'monospace',
+    wrapperBorder: false,
+    headerRowBorder: false,
+    // rowBorder: { style: 'dotted', width: 3, color: '#9696C8' },
+    columnBorder: { style: 'dashed', color: '#9696C8' },
+})
+// theme = themeQuartz.withPart(colorSchemeDark).withParams({
+//   fontFamily: 'serif',
+//   headerFontFamily: 'Brush Script MT',
+//   cellFontFamily: 'monospace',
+//   wrapperBorder: false,
+//   headerRowBorder: false,
+//   rowBorder: false, // Disable default row borders (we'll use custom CSS)
+//   columnBorder: { style: 'dashed', color: '#9696C8' },
+//   backgroundColor: '#1E1E2F',
+//   headerBackgroundColor: '#3E3E4F',
+//   rowHoverColor: '#4E4E5F',
+// });
+
+ CustomHeaderComponent = (params:any) => {
+  return (
+      `<div style="display: flex; align-items: center; gap: 8px;">
+          <span>${params.displayName}</span>
+          <i class="fas fa-user" style="color: #9696C8;"></i> <!-- Font Awesome icon -->
+      </div>`
+  );
+};
+gridOptions = {
+  columnDefs: this.columnDefs,
+  components: {
+      customHeaderComponent: this.CustomHeaderComponent,
+  },
+};
+
 
   ngOnInit(): void {
     console.log(this.theme, "Theme Object");

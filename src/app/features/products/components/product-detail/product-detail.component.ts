@@ -20,7 +20,7 @@ export class ProductDetailComponent {
     getColumn() {
         this.column =
             [
-                { field: 'title', sortable: true, filter: true, resizable: true, editable: true},
+                { field: 'title', sortable: true, filter: true, resizable: true,headerComponent: 'customHeaderComponent', editable: true},
                 { field: 'description', sortable: true, filter: true, resizable: true, editable: true},
                 { field: 'rate', sortable: true, filter: true, resizable: true, editable: true},
                 { field: 'price', sortable: true, filter: true, resizable: true, editable: true},
@@ -39,6 +39,15 @@ export class ProductDetailComponent {
             ];
     }
 
+     CustomHeaderComponent = (params:any) => {
+        return (
+            `<div style="display: flex; align-items: center; gap: 8px;">
+                <span>${params.displayName}</span>
+                <i class="fas fa-user" style="color: #9696C8;"></i> <!-- Font Awesome icon -->
+            </div>`
+        );
+    };
+    
     getData() {
         this.apiService.getAllProductData().subscribe((res: any) => {
             console.log(res.data);
