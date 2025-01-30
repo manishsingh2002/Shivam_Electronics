@@ -1,6 +1,6 @@
 
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ColDef, GridApi } from 'ag-grid-community';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { CellValueChangedEvent, ColDef, GridApi } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry, themeQuartz, colorSchemeDark } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ export class SharedGridComponent implements OnInit, OnChanges {
   @Input() usertheme: any;
   @Input() data: any;
   @Input() column: any;
+  @Output() dataChanged = new EventEmitter<any>(); // Create an Output event
 
   private gridApi!: GridApi;
   rowData: any;
@@ -38,18 +39,7 @@ export class SharedGridComponent implements OnInit, OnChanges {
     // rowBorder: { style: 'dotted', width: 3, color: '#9696C8' },
     columnBorder: { style: 'dashed', color: '#9696C8' },
 })
-// theme = themeQuartz.withPart(colorSchemeDark).withParams({
-//   fontFamily: 'serif',
-//   headerFontFamily: 'Brush Script MT',
-//   cellFontFamily: 'monospace',
-//   wrapperBorder: false,
-//   headerRowBorder: false,
-//   rowBorder: false, // Disable default row borders (we'll use custom CSS)
-//   columnBorder: { style: 'dashed', color: '#9696C8' },
-//   backgroundColor: '#1E1E2F',
-//   headerBackgroundColor: '#3E3E4F',
-//   rowHoverColor: '#4E4E5F',
-// });
+
 
  CustomHeaderComponent = (params:any) => {
   return (
@@ -66,9 +56,7 @@ gridOptions = {
   },
 };
 
-
   ngOnInit(): void {
-    console.log(this.theme, "Theme Object");
     if (!this.column || this.column.length === 0) {
       this.columnDefs = this.generateDefaultColumns(this.rowData);
     }
@@ -95,13 +83,21 @@ gridOptions = {
 
   onGridReady(params: any) {
     this.gridApi = params.api;
-    console.log(params);
+    // console.log(params);
   }
 
-  onCellValueChanged(event: any) {
+  // onCellValueChanged(event: any) {
+  //   const updatedRow = event.data;
+  //   console.log('Updated row:', updatedRow);
+
+  // }
+  
+  onCellValueChanged(event: CellValueChangedEvent) {
     const updatedRow = event.data;
-    console.log('Updated row:', updatedRow);
+    // console.log('Updated row:', updatedRow);
+    this.dataChanged.emit(event); 
   }
+
 
   exportToCSV() {
     if (this.gridApi) {
@@ -109,6 +105,21 @@ gridOptions = {
     }
   }
 }
+
+// theme = themeQuartz.withPart(colorSchemeDark).withParams({
+//   fontFamily: 'serif',
+//   headerFontFamily: 'Brush Script MT',
+//   cellFontFamily: 'monospace',
+//   wrapperBorder: false,
+//   headerRowBorder: false,
+//   rowBorder: false, // Disable default row borders (we'll use custom CSS)
+//   columnBorder: { style: 'dashed', color: '#9696C8' },
+//   backgroundColor: '#1E1E2F',
+//   headerBackgroundColor: '#3E3E4F',
+//   rowHoverColor: '#4E4E5F',
+// });
+
+// --------------
 // import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 // import { ColDef, GridApi } from 'ag-grid-community';
 // import { AllCommunityModule, ModuleRegistry, themeAlpine, themeBalham } from 'ag-grid-community';

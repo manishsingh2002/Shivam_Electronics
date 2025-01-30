@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { SharedGridComponent } from '../../../../shared/components/shared-grid/shared-grid.component';
 import { ApiService } from '../../../../core/services/api.service';
+import { CellValueChangedEvent } from 'ag-grid-community';
 @Component({
     selector: 'app-product-detail',
     imports: [SharedGridComponent],
@@ -10,13 +11,34 @@ import { ApiService } from '../../../../core/services/api.service';
 export class ProductDetailComponent {
     data: any;
     column: any
+    // @Output() dataChanged = new EventEmitter<any>(); // Create an Output event
 
+
+  
     constructor(private cdr: ChangeDetectorRef, private apiService: ApiService) { }
 
     ngOnInit(): void {
         this.getColumn()
         this.getData()
-    }      
+    }     
+   
+    handleDataChange(event: any) {
+        this.data = event; // Update the data in the parent component
+                this.apiService.updateProduct(event.data.id,event.data).subscribe((res: any) => {
+                this.getData()
+          } )
+
+        // this.apiService.updateAllProductData(updatedData).subscribe({
+        //     next: (res:any) => {
+        //         console.log("updated all data", res)
+        //     },
+        //     error: (err:any) => {
+        //         console.log("error in updating all data", err)
+        //     }
+        // })
+      }
+
+
     getColumn() {
         this.column =
             [
@@ -38,16 +60,7 @@ export class ProductDetailComponent {
 
             ];
     }
-
-     CustomHeaderComponent = (params:any) => {
-        return (
-            `<div style="display: flex; align-items: center; gap: 8px;">
-                <span>${params.displayName}</span>
-                <i class="fas fa-user" style="color: #9696C8;"></i> <!-- Font Awesome icon -->
-            </div>`
-        );
-    };
-    
+ 
     getData() {
         this.apiService.getAllProductData().subscribe((res: any) => {
             console.log(res.data);
@@ -55,4 +68,16 @@ export class ProductDetailComponent {
             this.cdr.markForCheck()
         })
     }
+    CustomHeaderComponent = (params:any) => {
+        return (
+            `<div style="display: flex; align-items: center; gap: 8px;">
+                <span>${params.displayName}</span>
+                <i class="fas fa-user" style="color: #9696C8;"></i> <!-- Font Awesome icon -->
+            </div>`
+        );
+    };
+// 
+
+
+
 }

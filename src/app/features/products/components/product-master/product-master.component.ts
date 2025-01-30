@@ -132,14 +132,14 @@ export class ProductMasterComponent {
         try {
           const parsedData = JSON.parse(storedData); // Parse the JSON string
           this.productdropdwn = parsedData.products || []; // Access the products array (or empty array if not present)
-          console.log(this.productdropdwn);
+          // console.log(this.productdropdwn);
         } catch (error) {
           console.error('Error parsing JSON from localStorage:', error);
           // Handle the error appropriately, e.g., set a default value or display an error message
           this.productdropdwn = [];
         }
       } else {
-        console.log('No data found in localStorage for key "autopopulate"');
+        // console.log('No data found in localStorage for key "autopopulate"');
       }
     }
   }
@@ -150,7 +150,7 @@ export class ProductMasterComponent {
 
   Update() {
     this.apiService.updateProduct(this.selectedProductId, this.product).subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
     })
   }
 
@@ -160,7 +160,7 @@ export class ProductMasterComponent {
         (res: any) => {
           this.productdata = res;
           this.product =res.data
-         console.log("populated product", this.product)
+        //  console.log("populated product", this.product)
         },
         (error) => {
           console.error('Error fetching product data:', error);
@@ -187,9 +187,9 @@ export class ProductMasterComponent {
   }
 
   onSubmit() {
-    console.log(this.product);
+    // console.log(this.product);
     this.apiService.createNewProduct(this.product).subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
     })
   }
 }

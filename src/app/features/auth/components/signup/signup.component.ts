@@ -25,7 +25,7 @@ export class SignupComponent {
     this.errorMessage = null; // Clear any previous error messages
   this.auth.signUp(this.signupdetails).subscribe({
     next: (response: any) => {
-      console.log('Login Response:', response);
+      // console.log('Login Response:', response);
       if (response && response.token) {
         // Check if token exists in the response
         this.router.navigate(['/dashboard']);

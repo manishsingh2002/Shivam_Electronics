@@ -21,7 +21,7 @@ export class AppComponent {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.ApiServide.getAutopopulateData().subscribe((res)=>{
-      console.log(res)
+      // console.log(res)
       localStorage.setItem('autopopulate', JSON.stringify(res.data));
     })}
 }
