@@ -9,7 +9,7 @@
     "test": "ng test",
     "electron": "electron electron-main.js",
     "desktop": "ng build --base-href ./ && electron electron-main.js",
-     "dist": "electron-builder",
+    "dist": "electron-builder",
     "serve:ssr:shivam_Electronics": "node dist/shivam-electronics/server/server.mjs"
   },
   "private": true,
@@ -65,7 +65,7 @@
       "icon": "path/to/icon.ico"
     },
     "files": [
-     "dist/shivam-electronics/**/*"
+      "dist/shivam-electronics/**/*"
     ]
   }
 }
