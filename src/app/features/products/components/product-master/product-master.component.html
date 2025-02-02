@@ -1,11 +1,10 @@
-<body class="bg-gray-100 w-6/6 mx-auto p-6 shadow-md rounded-lg font-roboto">
-  <div class="card flex justify-center mb-6">
-      <p-select [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title" optionValue="_id" class="w-1/2 md:w-56"></p-select>
-      <button pButton (click)="autopopulate()">Search</button>
+<body   class="bg-gray-900  text-white w-6/6 mx-auto p-6 shadow-md rounded-lg font-roboto">
+  <div   class="card flex justify-center mb-6">
+    <p-select styleClass="gradient-border" [options]="productdropdwn" [(ngModel)]="selectedProductId" optionLabel="title" optionValue="_id" class="w-1/2 md:w-56"></p-select>      <button pButton (click)="autopopulate()">Search</button>
   </div>
   <div class="container mx-auto p-4">
-      <h1 class="text-2xl text-black font-bold mb-4">Product Input Form</h1>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
+      <h1 class="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-5xl font-extrabold text-transparent mb-4">Product Input Form</h1>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                   <p-floatLabel>
@@ -46,8 +45,8 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700 font-semibold mb-4">Pricing and Tax Information</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white font-semibold mb-4">Pricing and Tax Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                   <p-floatLabel variant="on">
@@ -75,8 +74,8 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700 font-semibold mb-4">Stock and Product Information</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white font-semibold mb-4">Stock and Product Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                   <p-floatLabel variant="on">
@@ -104,11 +103,11 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700  font-semibold mb-4">Dimensions and Meta Information</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white  font-semibold mb-4">Dimensions and Meta Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="md:col-span-1">
-                  <label for="dimensions" class="block text-gray-700 font-bold mb-1">Dimensions</label>
+                  <label for="dimensions" class="block text-white font-bold mb-1">Dimensions</label>
                   <div class="flex space-x-2">
                       <p-floatLabel>
                           <input pInputText type="number" id="width" [(ngModel)]="product.dimensions.width" name="dimensions.width" class="w-1/3 p-2 border border-gray-300 rounded" required/>
@@ -129,7 +128,7 @@
                   </div>
               </div>
               <div class="col-span-1 md:col-span-1">
-                  <label for="meta" class="block text-gray-700 font-bold mb-1">Meta</label>
+                  <label for="meta" class="block text-white font-bold mb-1">Meta</label>
                   <div class="flex space-x-2">
                       <p-floatLabel>
                           <input pInputText type="text" id="barcode" [(ngModel)]="product.meta.barcode" name="meta.barcode" class="w-1/2 p-2 border border-gray-300 rounded" required/>
@@ -143,7 +142,7 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                   <p-floatLabel variant="on">
@@ -159,8 +158,8 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700 font-semibold mb-4">Detailed Descriptions</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white font-semibold mb-4">Detailed Descriptions</h2>
           <div id="detailedDescriptions">
               <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
                   <div class="flex flex-col md:flex-row md:space-x-4">
@@ -175,8 +174,8 @@
           </div>
           <button (click)="addDetailedDescription()" type="button" id="addDetail" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors duration-200">Add Detail</button>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700 font-semibold mb-4">Warranty, Shipping, and Return Information</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white font-semibold mb-4">Warranty, Shipping, and Return Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="col-span-1 md:col-span-2">
                   <p-floatLabel>
@@ -197,8 +196,8 @@
               </div>
           </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
-          <h2 class="text-lg text-gray-700 font-semibold mb-4">Images</h2>
+      <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6">
+          <h2 class="text-lg text-white font-semibold mb-4">Images</h2>
           <div id="images" *ngIf="product.images">
               <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
                   <p-floatLabel>
@@ -237,7 +236,7 @@
     </div>
     <div class="container mx-auto p-4">
         <h1 class="text-2xl text-black font-bold mb-4">Product Input Form</h1>
-        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+        <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <p-floatLabel>
@@ -278,8 +277,8 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
-            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Pricing and Tax Information</h2>
+        <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-white font-semibold mb-4 dark:text-gray-300">Pricing and Tax Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <p-floatLabel>
@@ -307,8 +306,8 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
-            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Stock and Product Information</h2>
+        <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-white font-semibold mb-4 dark:text-gray-300">Stock and Product Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <p-floatLabel>
@@ -336,11 +335,11 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
-            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Dimensions and Meta Information</h2>
+        <div class="bg-gray-900 border-4 bg-sky-950  p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+            <h2 class="text-lg text-white font-semibold mb-4 dark:text-gray-300">Dimensions and Meta Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-1">
-                    <label for="dimensions" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Dimensions</label>
+                    <label for="dimensions" class="block text-white font-bold mb-1 dark:text-gray-300">Dimensions</label>
                     <div class="flex space-x-2">
                         <p-floatLabel>
                             <input pInputText type="number" id="width" [(ngModel)]="product.dimensions.width" name="dimensions.width" class="w-1/3 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
@@ -361,7 +360,7 @@
                     </div>
                 </div>
                 <div class="col-span-1 md:col-span-1">
-                    <label for="meta" class="block text-gray-700 font-bold mb-1 dark:text-gray-300">Meta</label>
+                    <label for="meta" class="block text-white font-bold mb-1 dark:text-gray-300">Meta</label>
                     <div class="flex space-x-2">
                         <p-floatLabel>
                             <input pInputText type="text" id="barcode" [(ngModel)]="product.meta.barcode" name="meta.barcode" class="w-1/2 p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600" required/>
@@ -392,7 +391,7 @@
             </div>
         </div>
         <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
-            <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Detailed Descriptions</h2>
+            <h2 class="text-lg text-white font-semibold mb-4 dark:text-gray-300">Detailed Descriptions</h2>
             <div id="detailedDescriptions">
                 <div class="space-y-4 mb-4" *ngFor="let item of product.detailedDescriptions; let i = index">
                     <div class="flex flex-col md:flex-row md:space-x-4">
@@ -664,7 +663,7 @@
                             </div>
                         </div>
                       </body>
-                            <!-- <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
+                             <div class="bg-white p-4 rounded-lg shadow-lg mb-6 dark:bg-gray-800 dark:text-white">
                                 <h2 class="text-lg text-gray-700 font-semibold mb-4 dark:text-gray-300">Images</h2>
                                 <div id="images" *ngIf="product.images">
                                     <div *ngFor="let image of product.images; let i = index" class="flex mb-2 space-x-2">
@@ -683,4 +682,3 @@
                                      </div>
                                      </div> -->
                                    
-   -->

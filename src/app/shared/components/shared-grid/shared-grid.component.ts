@@ -30,9 +30,10 @@ export class SharedGridComponent implements OnInit, OnChanges {
     resizable: true,
     editable: true,
   };
+
   theme = themeQuartz.withPart(colorSchemeDark).withParams({
-    fontFamily: 'serif',
-    headerFontFamily: 'Brush Script MT',
+    fontFamily: 'Kanit',
+    headerFontFamily: 'Kanit',
     cellFontFamily: 'monospace',
     wrapperBorder: false,
     headerRowBorder: false,
@@ -49,6 +50,7 @@ export class SharedGridComponent implements OnInit, OnChanges {
       </div>`
   );
 };
+
 gridOptions = {
   columnDefs: this.columnDefs,
   components: {
@@ -81,30 +83,28 @@ gridOptions = {
     }
   }
 
-  onGridReady(params: any) {
-    this.gridApi = params.api;
-    // console.log(params);
-  }
-
-  // onCellValueChanged(event: any) {
-  //   const updatedRow = event.data;
-  //   console.log('Updated row:', updatedRow);
-
-  // }
-  
   onCellValueChanged(event: CellValueChangedEvent) {
-    const updatedRow = event.data;
-    // console.log('Updated row:', updatedRow);
-    this.dataChanged.emit(event); 
+    this.dataChanged.emit({ type: 'cellValueChanged', event });
   }
 
+  onRowSelected(event: any) {
+    this.dataChanged.emit({ type: 'rowSelected', event });
+  }
+  onCellClicked(event:any){
+    this.dataChanged.emit({ type: 'cellClicked', event });
+
+  }
+
+  onGridReady(event: any) {
+    this.dataChanged.emit({ type: 'gridReady', event });
+  }
 
   exportToCSV() {
-    if (this.gridApi) {
-      this.gridApi.exportDataAsCsv();
-    }
+    // CSV export logic
+    this.dataChanged.emit({ type: 'exportCSV' });
   }
 }
+
 
 // theme = themeQuartz.withPart(colorSchemeDark).withParams({
 //   fontFamily: 'serif',

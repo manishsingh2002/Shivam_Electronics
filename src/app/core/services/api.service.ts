@@ -32,6 +32,20 @@ export class ApiService {
   //     .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   // }
 
+  getCustomers(): Observable<any> {
+    return this.http
+    .get(`${this.baseUrl}/v1/customers`) 
+    .pipe(catchError((error) => this.errorhandler.handleError('getCustomers', error)));
+  }
+
+  // getCustomerById(id: string): Observable<Customer> {
+  //   return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+  // }
+
+  // updateCustomer(id: string, customer: Customer): Observable<Customer> {
+  //   return this.http.put<Customer>(`${this.apiUrl}/${id}`, customer);
+  // }
+
   deleteUser(): Observable<any> {
     return this.http
       .delete(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
@@ -49,11 +63,6 @@ export class ApiService {
       .patch(`${this.baseUrl}/v1/users/updatePassword`, data) // Interceptor will add headers
       .pipe(catchError((error) => this.errorhandler.handleError('updatePassword', error)));
   }
-
-
-
-
-
 
   // -----------------------------------------------------------------------------------------------------------------------------------------------------------
   // === Product CRUD Methods ===

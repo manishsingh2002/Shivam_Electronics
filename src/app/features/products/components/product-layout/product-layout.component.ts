@@ -17,11 +17,9 @@ import { AdminUserComponent } from '../../../../adminDashboard/admin-user/admin-
 
 export class ProductLayoutComponent {
     activeComponent: any = ProductMasterComponent; 
-
     componentNavItems: any[] = [
       { label: 'Product Master', component: ProductMasterComponent },
       { label: 'Product List', component: ProductListComponent },
-      { label: 'User List', component: AdminUserComponent },
       { label: 'Product detail', component: ProductDetailComponent }
     ];
 

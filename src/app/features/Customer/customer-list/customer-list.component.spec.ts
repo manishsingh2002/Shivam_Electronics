@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Component } from '@angular/core';
+import { SplitterModule } from 'primeng/splitter';
 import { CustomerListComponent } from './customer-list.component';
 
 describe('CustomerListComponent', () => {

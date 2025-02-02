@@ -1,71 +1,204 @@
+<!-- payment-form.component.html -->
+<div class="container w-full mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">Make Payment</h1>
+      
+      <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- User Code -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            User Code *
+          </label>
+          <input type="text" formControlName="userCode"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter user code">
+          <div *ngIf="f['userCode'].touched && f['userCode'].errors" class="text-red-500 text-sm mt-1">
+            <div *ngIf="f['userCode'].errors['required']">User code is required</div>
+          </div>
+        </div>
+  
+        <!-- Amount & Currency -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Amount *
+            </label>
+            <input type="number" formControlName="amount" step="0.01"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="0.00">
+            <div *ngIf="f['amount'].touched && f['amount'].errors" class="text-red-500 text-sm mt-1">
+              <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+              <div *ngIf="f['amount'].errors['min']">Amount cannot be negative</div>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Currency *
+            </label>
+            <select formControlName="currency"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- Payment Method -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Payment Method *
+          </label>
+          <select formControlName="paymentMethod"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option *ngFor="let method of paymentMethods" [value]="method.value">{{ method.label }}</option>
+          </select>
+        </div>
+  
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Description
+          </label>
+          <textarea formControlName="description"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="2"
+            placeholder="Payment description (max 200 characters)"></textarea>
+          <div *ngIf="f['description'].touched && f['description'].errors" class="text-red-500 text-sm mt-1">
+            <div *ngIf="f['description'].errors['maxlength']">Maximum 200 characters allowed</div>
+          </div>
+        </div>
+  
+        <!-- Metadata -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Metadata (JSON)
+          </label>
+          <textarea formControlName="metadata"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="3"
+            placeholder='Optional metadata in JSON format (e.g., {"invoice_id": "123"})'></textarea>
+          <div *ngIf="f['metadata'].touched && f['metadata'].errors" class="text-red-500 text-sm mt-1">
+            <div *ngIf="f['metadata'].errors['invalidJson']">Invalid JSON format</div>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200"
+          [disabled]="paymentForm.invalid">
+          Process Payment
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- <body class="bg-gray-50">
+    Main Container
+    <div class="max-w-2xl mx-auto min-h-screen bg-white shadow-lg">
+        Header
+        <header class="bg-blue-600 text-white p-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold">Payment Hub</h1>
+                <div class="flex gap-4">
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </header>
 
-<body class="bg-gray-100 font-roboto">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-4">Payment Management System</h1>
-        
-        <!-- Payment Form -->
-        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Add New Payment</h2>
-            <form id="paymentForm">
-                <div class="mb-4">
-                    <label for="customer" class="block text-gray-700">Customer ID</label>
-                    <input type="text" id="customer" name="customer" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                </div>
-                <div class="mb-4">
-                    <label for="paymentDate" class="block text-gray-700">Payment Date</label>
-                    <input type="date" id="paymentDate" name="paymentDate" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                </div>
-                <div class="mb-4">
-                    <label for="amount" class="block text-gray-700">Amount</label>
-                    <input type="number" id="amount" name="amount" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                </div>
-                <div class="mb-4">
-                    <label for="paymentMethod" class="block text-gray-700">Payment Method</label>
-                    <select id="paymentMethod" name="paymentMethod" class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                        <option value="card">Card</option>
-                        <option value="cash">Cash</option>
-                        <option value="upi">UPI</option>
-                        <option value="netBanking">Net Banking</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="transactionId" class="block text-gray-700">Transaction ID</label>
-                    <input type="text" id="transactionId" name="transactionId" class="w-full p-2 border border-gray-300 rounded mt-1">
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Payment</button>
-            </form>
+        Balance Overview
+        <div class="p-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+            <div class="mb-4">
+                <p class="text-sm opacity-90">Total Balance</p>
+                <h2 class="text-3xl font-bold">$12,450.00</h2>
+            </div>
         </div>
 
-        <!-- Payments Table -->
-        <!-- <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4">Payments</h2>
-            <table class="min-w-full bg-white">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 border-b">Customer ID</th>
-                        <th class="py-2 px-4 border-b">Payment Date</th>
-                        <th class="py-2 px-4 border-b">Amount</th>
-                        <th class="py-2 px-4 border-b">Payment Method</th>
-                        <th class="py-2 px-4 border-b">Transaction ID</th>
-                        <th class="py-2 px-4 border-b">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="paymentsTableBody">
-                    Example row
-                    <tr>
-                        <td class="py-2 px-4 border-b">12345</td>
-                        <td class="py-2 px-4 border-b">2023-10-01</td>
-                        <td class="py-2 px-4 border-b">$100.00</td>
-                        <td class="py-2 px-4 border-b">Card</td>
-                        <td class="py-2 px-4 border-b">TXN123456</td>
-                        <td class="py-2 px-4 border-b">
-                            <button class="text-blue-500 hover:underline">Edit</button>
-                            <button class="text-red-500 hover:underline ml-2">Delete</button>
-                        </td>
-                    </tr>
-                    Repeat for each payment
-                </tbody>
-            </table>
-        </div> -->
+        Payment Actions
+        <div class="grid grid-cols-3 gap-4 p-4 border-b">
+            <button class="py-2 px-4 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
+                <i class="fas fa-plus mr-2"></i>New Payment
+            </button>
+            <button class="py-2 px-4 bg-gray-100 text-gray-600 rounded-full text-sm">
+                <i class="fas fa-history mr-2"></i>History
+            </button>
+            <button class="py-2 px-4 bg-gray-100 text-gray-600 rounded-full text-sm">
+                <i class="fas fa-cog mr-2"></i>Settings
+            </button>
+        </div>
+
+        Payment Filters
+        <div class="p-4 flex gap-2 overflow-x-auto">
+            <button class="px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">All</button>
+            <button class="px-4 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">Completed</button>
+            <button class="px-4 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">Pending</button>
+            <button class="px-4 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">Failed</button>
+        </div>
+
+        Payment List
+        <div class="p-4 space-y-4">
+            Payment Card 1
+            <div class="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shopping-bag text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Premium Subscription</h3>
+                            <p class="text-sm text-gray-500">TX-123456789 • 15 May 2024</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium text-red-600">-$99.99</p>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            Payment Card 2
+            <div class="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-wifi text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Internet Bill</h3>
+                            <p class="text-sm text-gray-500">TX-987654321 • 14 May 2024</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium text-red-600">-$79.00</p>
+                        <span class="text-xs px-2 py-1 bg-yellow-100 text-yellow-600 rounded-full">Pending</span>
+                    </div>
+                </div>
+            </div>
+
+            Payment Card 3
+            <div class="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-times text-red-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Credit Card Payment</h3>
+                            <p class="text-sm text-gray-500">TX-456789123 • 13 May 2024</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium text-red-600">-$150.00</p>
+                        <span class="text-xs px-2 py-1 bg-red-100 text-red-600 rounded-full">Failed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Floating Action Button
+        <div class="fixed bottom-6 right-6">
+            <button class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                <i class="fas fa-plus text-xl"></i>
+            </button>
+        </div>
     </div>
-</body>
+</body> -->
