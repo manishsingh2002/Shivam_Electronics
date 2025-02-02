@@ -15,8 +15,8 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   // private baseUrl='https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'
-  // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
-  private baseUrl = 'http://localhost:4000/api'
+  private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
+  // private baseUrl = 'http://localhost:4000/api'
   constructor(private http: HttpClient, private authService: AuthService ,private errorhandler:ErrorhandlingService) {}
 
   // === User Authentication Methods ===
@@ -30,6 +30,20 @@ export class ApiService {
   //   return this.http
   //     .get(`${this.baseUrl}/v1/users/me`) // Interceptor will add headers
   //     .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
+  // }
+
+  getCustomers(): Observable<any> {
+    return this.http
+    .get(`${this.baseUrl}/v1/customers`) 
+    .pipe(catchError((error) => this.errorhandler.handleError('getCustomers', error)));
+  }
+
+  // getCustomerById(id: string): Observable<Customer> {
+  //   return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+  // }
+
+  // updateCustomer(id: string, customer: Customer): Observable<Customer> {
+  //   return this.http.put<Customer>(`${this.apiUrl}/${id}`, customer);
   // }
 
   deleteUser(): Observable<any> {
@@ -49,11 +63,6 @@ export class ApiService {
       .patch(`${this.baseUrl}/v1/users/updatePassword`, data) // Interceptor will add headers
       .pipe(catchError((error) => this.errorhandler.handleError('updatePassword', error)));
   }
-
-
-
-
-
 
   // -----------------------------------------------------------------------------------------------------------------------------------------------------------
   // === Product CRUD Methods ===

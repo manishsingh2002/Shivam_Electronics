@@ -21,8 +21,8 @@ export class AuthService {
   private tokenKey = 'authToken';
   // private refreshTokenKey = 'refreshToken';
   private userKey = 'user';
-  // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
-  private baseUrl = 'http://localhost:4000/api'
+  private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
+  // private baseUrl = 'http://localhost:4000/api'
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getStoredToken()?.token || null);
   public user: Observable<string | null> = this.userSubject.asObservable();
   private userDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.getStoredToken()?.user || null);

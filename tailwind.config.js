@@ -11,6 +11,27 @@
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+  ],
+  theme: {
+    extend: {
+      animation: {
+        'gradient-border': 'borderMove 3s linear infinite',
+      },
+      keyframes: {
+        borderMove: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
     "./node_modules/flowbite/**/*.js", // add this line
   ],
 

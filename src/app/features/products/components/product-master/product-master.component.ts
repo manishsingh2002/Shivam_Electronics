@@ -11,7 +11,8 @@ import { TextareaModule } from 'primeng/textarea';
 import { ApiService } from '../../../../core/services/api.service';
 import { Select } from 'primeng/select';
 import { isPlatformBrowser } from '@angular/common';
-
+import { GradientBorderDirective } from '../../../../core/directives/gradient-border.directive';
+import { BorderGradientAnimatedDirective } from '../../../../core/directives/border-gradient-animated.directive';
 interface DetailedDescription {
   id: string;
   detail: string;
@@ -72,8 +73,8 @@ interface Product {
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: 'In Stock' | 'Low Stock' | 'Out of Stock';
-  startLocation: StartLocation;
-  locations: Location[];
+  // startLocation: StartLocation;
+  // locations: Location[];
   returnPolicy: string;
   minimumOrderQuantity?: string;
   meta: Meta;
@@ -114,8 +115,6 @@ darkModes() {
     warrantyInformation: '',
     shippingInformation: '',
     availabilityStatus: 'In Stock',
-    startLocation: { type: 'Point', coordinates: '' }, // Initialized as string
-    locations: [{ type: 'Point', coordinates: '' }], // Initialized as string
     returnPolicy: '',
     minimumOrderQuantity: '',
     meta: { createdAt: new Date(), updatedAt: new Date(), barcode: '' },
@@ -123,6 +122,8 @@ darkModes() {
     thumbnail: '',
     salesPerson: [],
   };
+  // startLocation: { type: 'Point', coordinates: '' }, // Initialized as string
+  // locations: [{ type: 'Point', coordinates: '' }], // Initialized as string
   @Input() redirectedData:any
   public productdata: any
   public productdropdwn: any
@@ -178,9 +179,9 @@ darkModes() {
     this.product.detailedDescriptions.push({ id: '', detail: '' });
   }
 
-  addLocation() {
-    this.product.locations.push({ type: 'Point', coordinates: '' });
-  }
+  // addLocation() {
+  //   this.product.locations.push({ type: 'Point', coordinates: '' });
+  // }
 
   addImage() {
     this.product.images.push({ id: '', detail: '', link: '' });

@@ -9,11 +9,12 @@ import { TextareaModule } from 'primeng/textarea';
 import { ApiService } from '../../../core/services/api.service';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { SelectModule } from 'primeng/select';
+import { GradientBorderDirective } from '../../../core/directives/gradient-border.directive';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer-master.component.html',
   styleUrls: ['./customer-master.component.scss'],
-  imports:[FloatLabelModule,SelectModule,IftaLabelModule,TextareaModule,ButtonModule,InputTextModule,CommonModule,FormsModule,RouterModule]
+  imports:[FloatLabelModule,GradientBorderDirective,SelectModule,IftaLabelModule,TextareaModule,ButtonModule,InputTextModule,CommonModule,FormsModule,RouterModule]
 })
 export class CustomerMasterComponent {
   public customer = {
@@ -84,6 +85,8 @@ export class CustomerMasterComponent {
       }
     }
   }
+
+  
 
   addPhoneNumber() {
     this.customer.phoneNumbers.push({
