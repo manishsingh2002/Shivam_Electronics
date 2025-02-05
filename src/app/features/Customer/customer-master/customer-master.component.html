@@ -1,4 +1,353 @@
+ <!-- customer-detail.component.html -->
+<div class="p-grid p-fluid">
+  <div class="p-col-12 p-md-4">
+    <p-card header="Profile" [style]="{ height: '100%' }">
+      <div class="p-field">
+        <label for="status">Status</label>
+        <p-select id="status" [options]="statuses" [(ngModel)]="customer.status"></p-select>
+      </div>
+      <div class="p-field">
+        <label for="profileImg">Profile Image</label>
+        <p-image [src]="customer.profileImg" alt="Profile" width="150" [preview]="true"></p-image>
+        <p-fileUpload 
+        name="image" 
+        url="http://localhost:4000/api/customers/{{customerId}}/profile-image" 
+        accept="image/*" 
+        maxFileSize="5000000" 
+        (onSelect)="handleFileSelect($event)" 
+        (onUpload)="handleFileUpload($event)"
+        chooseLabel="Upload New Image" 
+        cancelLabel="Cancel"
+        [auto]="true"  
+        [showUploadButton]="false"  
+        [showCancelButton]="true">
+      </p-fileUpload>
+      
+      <p *ngIf="uploadStatus">
+        <strong>{{uploadStatus}}</strong>
+      </p>
+      
+          </div>
 
+        <input pInputText  id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
+        <label for="guaranteer">Guaranteer Name</label>
+    </p-card>
+  </div>
+
+  <!-- Contact Information -->
+  <div class="p-col-12 p-md-8">
+    <p-card header="Contact Information">
+      <div class="p-grid">
+        <div class="p-field p-col-6">
+          <label for="fullname">Full Name</label>
+          <input id="fullname" pInputText [(ngModel)]="customer.fullname" required />
+        </div>
+        <div class="p-field p-col-6">
+          <label for="email">Email</label>
+          <input id="email" pInputText [(ngModel)]="customer.email" required />
+        </div>
+      </div>
+
+      <!-- Phone Numbers Table -->
+      <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Primary</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-phone let-i="index"> 
+          <tr>
+            <td>{{ phone.number }}</td>
+            <td>{{ phone.type }}</td>
+            <!-- <td><p-radioButton [value]="phone" [(ngModel)]="customer.phoneNumbers[i].primary"></p-radioButton></td> -->
+            <td>
+              <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deletePhone(i)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <!-- <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Primary</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-phone>
+          <tr>
+            <td>{{ phone.number }}</td>
+            <td>{{ phone.type }}</td>
+            <td><p-radioButton [value]="phone" [(ngModel)]="customer.phoneNumbers[0].primary"></p-radioButton></td>
+            <td>
+              <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deletePhone(i)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table> -->
+      <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"></button>
+    </p-card>
+  </div>
+
+  <!-- Add Address Form -->
+  <div class="p-col-12">
+    <p-card header="Addresses">
+      <div *ngFor="let address of customer.addresses; let i = index" class="p-grid">
+        <div class="p-col-12 p-md-6">
+          <div class="p-fluid">
+            <div class="p-field">
+              <label for="street-{{i}}">Street</label>
+              <input id="street-{{i}}" pInputText [(ngModel)]="address.street" placeholder="Enter Street" required />
+            </div>
+            <div class="p-field">
+              <label for="city-{{i}}">City</label>
+              <input id="city-{{i}}" pInputText [(ngModel)]="address.city" placeholder="Enter City" required />
+            </div>
+            <div class="p-field">
+              <label for="state-{{i}}">State</label>
+              <input id="state-{{i}}" pInputText [(ngModel)]="address.state" placeholder="Enter State" required />
+            </div>
+            <div class="p-field">
+              <label for="zipCode-{{i}}">Zip Code</label>
+              <input id="zipCode-{{i}}" pInputText [(ngModel)]="address.zipCode" placeholder="Enter Zip Code" required />
+            </div>
+            <div class="p-field">
+              <label for="country-{{i}}">Country</label>
+              <input id="country-{{i}}" pInputText [(ngModel)]="address.country" placeholder="Enter Country" required />
+            </div>
+            <div class="p-field">
+              <label for="addressType-{{i}}">Address Type</label>
+              <p-select id="addressType-{{i}}" [options]="addressTypes" [(ngModel)]="address.type" optionLabel="label" optionValue="value" placeholder="Select Type"></p-select>
+            </div>
+            <div class="p-field-checkbox">
+              <p-checkbox id="isDefault-{{i}}" [(ngModel)]="address.isDefault" binary="true"></p-checkbox>
+              <label for="isDefault-{{i}}">Default Address</label>
+            </div>
+            <button pButton icon="pi pi-trash" class="p-button-danger p-button-rounded p-mt-2" (click)="removeAddress(i)"></button>
+          </div>
+        </div>
+      </div>
+      <button pButton label="Add Address" icon="pi pi-plus" (click)="addAddress()"></button>
+    </p-card>
+  </div>
+
+  <!-- Financial Overview -->
+  <div class="p-col-12 p-md-6">
+    <p-card header="Financial Overview">
+      <div class="p-grid">
+        <div class="p-col-6">
+          <h3>Total Purchased</h3>
+          <p class="text-4xl">{{ customer.totalPurchasedAmount | currency }}</p>
+        </div>
+        <div class="p-col-6">
+          <h3>Remaining Balance</h3>
+          <p class="text-4xl text-red-500">{{ customer.remainingAmount | currency }}</p>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <button pButton label="Save Customer" icon="pi pi-save" (click)="saveCustomer()"></button>
+</div>
+
+<p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible">
+  <div class="p-field">
+    <label for="phoneNumber">Phone Number</label>
+    <input id="phoneNumber" type="number" pInputText [(ngModel)]="newPhoneNumber.number" required />
+  </div>
+  <div class="p-field">
+    <label for="phoneType">Phone Type</label>
+    <p-select id="phoneType" [options]="phoneTypes" [(ngModel)]="newPhoneNumber.type" optionLabel="label" optionValue="value" required></p-select>
+  </div>
+  <p-button label="Add" (click)="addPhoneNumber()"></p-button>
+</p-dialog>
+<!-- <p-button (click)="saveCustomer()">save</p-button> -->
+
+ <!-- customer-detail.component.html
+<div class="p-grid p-fluid">
+  <div class="p-col-12 p-md-4">
+    <p-card header="Profile" [style]="{ height: '100%' }">
+      <div class="p-field">
+        <label>Status</label>
+        <p-select [options]="statuses" [(ngModel)]="customer.status"></p-select>
+      </div>
+      <div class="p-field">
+        <label>Profile Image</label>
+        <p-image [src]="customer.profileImg" alt="Profile" width="150" [preview]="true"></p-image>
+        <p-fileUpload mode="basic" chooseLabel="Upload New"></p-fileUpload>
+      </div>
+    </p-card>
+  </div>
+
+  Contact Information
+  <div class="p-col-12 p-md-8">
+    <p-card header="Contact Information">
+      <div class="p-grid">
+        <div class="p-field p-col-6">
+          <label>Full Name</label>
+          <input pInputText  [(ngModel)]="customer.fullname" />
+        </div>
+        <div class="p-field p-col-6">
+          <label>Email</label>
+          <input pInputText  [(ngModel)]="customer.email" />
+        </div>
+      </div>
+
+      Phone Numbers Table
+      <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Primary</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-phone>
+          <tr>
+            <td>{{ phone.number }}</td>
+            <td>{{ phone.type }}</td>
+            <td><p-radioButton [value]="phone" [(ngModel)]="customer.phoneNumbers[0].primary"></p-radioButton></td>
+            <td>
+              <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"></button>
+    </p-card>
+  </div>
+
+  Addresses Section
+  <div class="p-col-12">
+    <p-card header="Addresses">
+      <div class="p-grid" *ngFor="let address of customer.addresses; let i = index">
+        <div class="p-col-12 p-md-6">
+          <div class="p-fluid">
+            <div class="p-field">
+              <label for="street-{{i}}">Street</label>
+              <input pInputText id="street-{{i}}" [(ngModel)]="address.street" placeholder="Enter Street" />
+            </div>
+  
+            <div class="p-field">
+              <label for="city-{{i}}">City</label>
+              <input pInputText id="city-{{i}}" [(ngModel)]="address.city" placeholder="Enter City" />
+            </div>
+  
+            <div class="p-field">
+              <label for="state-{{i}}">State</label>
+              <input pInputText id="state-{{i}}" [(ngModel)]="address.state" placeholder="Enter State" />
+            </div>
+  
+            <div class="p-field">
+              <label for="zipCode-{{i}}">Zip Code</label>
+              <input pInputText id="zipCode-{{i}}" [(ngModel)]="address.zipCode" placeholder="Enter Zip Code" />
+            </div>
+  
+            <div class="p-field">
+              <label for="country-{{i}}">Country</label>
+              <input pInputText id="country-{{i}}" [(ngModel)]="address.country" placeholder="Enter Country" />
+            </div>
+  
+            <div class="p-field">
+              <label for="addressType-{{i}}">Address Type</label>
+              <p-select id="addressType-{{i}}" [options]="addressTypes" [(ngModel)]="address.type" optionLabel="label" optionValue="value" placeholder="Select Type"></p-select>
+            </div>
+  
+            <div class="p-field-checkbox">
+              <p-checkbox id="isDefault-{{i}}" [(ngModel)]="address.isDefault" binary="true"></p-checkbox>
+              <label for="isDefault-{{i}}">Default Address</label>
+            </div>
+  
+            <button pButton icon="pi pi-trash" class="p-button-danger p-button-rounded p-mt-2" (click)="removeAddress(i)"></button>
+          </div>
+        </div>
+      </div>
+      <button pButton label="Add Address" icon="pi pi-plus" (click)="addAddress()"></button>
+    </p-card>
+  </div>
+
+  <div class="p-col-12">
+    <p-card header="Shopping Cart">
+      <p-table [value]="customer.cart.items">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Product</th>
+            <th>Invoices</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{ item.productId }}</td> 
+            <td> 
+              <p-tag *ngFor="let invoice of item.invoices" value="{{ invoice }}"></p-tag> 
+            </td>
+            <td> 
+              <button pButton icon="pi pi-eye" class="p-button-rounded p-button-text"></button> 
+            </td>
+          </tr>
+        </ng-template>
+          <ng-template pTemplate="body" let-item> 
+          <tr>
+            <td>{{ item.productId  }}</td>
+            <td>
+              <p-tag *ngFor="let invoice of customer.cart.items" value="{{ invoice }}"></p-tag>
+            </td>
+            <td>
+              <button pButton icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+            </td>
+          </tr>
+        </ng-template> 
+      </p-table>
+    </p-card>
+  </div>
+
+  Financial Information
+  <div class="p-col-12 p-md-6">
+    <p-card header="Financial Overview">
+      <div class="p-grid">
+        <div class="p-col-6">
+          <h3>Total Purchased</h3>
+          <p class="text-4xl">{{ customer.totalPurchasedAmount  }}</p>
+        </div>
+        <div class="p-col-6">
+          <h3>Remaining Balance</h3>
+          <p class="text-4xl text-red-500">{{ customer.remainingAmount }}</p>
+        </div>
+      </div>
+      
+      <p-chart type="line" [data]="customer.paymentHistory"></p-chart>
+    </p-card>
+  </div>
+
+  Metadata Section
+  <div class="p-col-12 p-md-6">
+    <p-card header="Metadata">
+       <p-keyFilter [data]="customer.metadata" [columns]="metadataColumns"></p-keyFilter> 
+    </p-card>
+  </div>
+</div>
+
+<p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible">
+  <div class="p-field">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="text" pInputText id="phoneNumber" [(ngModel)]="newPhoneNumber.number">
+  </div>
+  <div class="p-field">
+    <label for="phoneType">Phone Type</label>
+    <p-select [options]="phoneTypes" [(ngModel)]="newPhoneNumber.type" optionLabel="label" optionValue="value"></p-select>
+  </div>
+  <p-button label="Add" (click)="addPhoneNumber()"></p-button>
+</p-dialog> 
+ 
 <body appGradientBorder   class="bg-gray-900 text-white">
 <div appGradientBorder  class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
   <div class="text-center mb-6">
@@ -132,22 +481,22 @@
       <button class="bg-pink-500 text-white py-2 px-4 rounded-md">Save & Continue</button>
   </div>
 </div>
-</body>
-<!-- <div class="card bg-white">
+</body> 
+ <div class="card bg-white">
     <h2>Customer Details</h2>
     <div class="row">
       <p-iftalabel class="p-field">
-        <input pInputText id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
+        <input pInputText  id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
         <label for="fullname">Full Name</label>
       </p-iftalabel>
   
       <p-iftalabel class="p-field">
-        <input pInputText id="email" [(ngModel)]="customer.email" autocomplete="off" />
+        <input pInputText  id="email" [(ngModel)]="customer.email" autocomplete="off" />
         <label for="email">Email</label>
       </p-iftalabel>
         
       <p-iftalabel class="p-field">
-        <input pInputText id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
+        <input pInputText  id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
         <label for="guaranteer">Guaranteer Name</label>
       </p-iftalabel>
   
@@ -159,7 +508,7 @@
       <div class="p-field">
         <label>Phone Numbers</label>
         <div *ngFor="let phone of customer.phoneNumbers; let i = index" class="p-d-flex">
-          <input pInputText [(ngModel)]="phone.number" placeholder="Phone Number" />
+          <input pInputText  [(ngModel)]="phone.number" placeholder="Phone Number" />
           <p-select [options]="phoneTypes" [(ngModel)]="phone.type" placeholder="Type"></p-select>
           <p-checkbox [(ngModel)]="phone.primary" binary="true" label="Primary"></p-checkbox>
           <button pButton icon="pi pi-plus" (click)="addPhoneNumber()"></button>
@@ -169,11 +518,11 @@
       <div class="p-field">
         <label>Addresses</label>
         <div *ngFor="let address of customer.addresses; let j = index" class="p-d-flex">
-          <input pInputText [(ngModel)]="address.street" placeholder="Street" />
-          <input pInputText [(ngModel)]="address.city" placeholder="City" />
-          <input pInputText [(ngModel)]="address.state" placeholder="State" />
-          <input pInputText [(ngModel)]="address.zipCode" placeholder="Zip Code" />
-          <input pInputText [(ngModel)]="address.country" placeholder="Country" />
+          <input pInputText  [(ngModel)]="address.street" placeholder="Street" />
+          <input pInputText  [(ngModel)]="address.city" placeholder="City" />
+          <input pInputText  [(ngModel)]="address.state" placeholder="State" />
+          <input pInputText  [(ngModel)]="address.zipCode" placeholder="Zip Code" />
+          <input pInputText  [(ngModel)]="address.country" placeholder="Country" />
           <p-select [options]="addressTypes" [(ngModel)]="address.type" placeholder="Type"></p-select>
           <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="Default"></p-checkbox>
           <button pButton icon="pi pi-plus" (click)="addAddress()"></button>
@@ -182,12 +531,12 @@
   
       <div class="p-field">
         <label for="totalPurchasedAmount">Total Purchased Amount</label>
-        <input pInputText id="totalPurchasedAmount" type="number" [(ngModel)]="customer.totalPurchasedAmount" placeholder="Enter total purchased amount" />
+        <input pInputText  id="totalPurchasedAmount" type="number" [(ngModel)]="customer.totalPurchasedAmount" placeholder="Enter total purchased amount" />
       </div>
   
       <div class="p-field">
         <label for="remainingAmount">Remaining Amount</label>
-        <input pInputText id="remainingAmount" type="number" [(ngModel)]="customer.remainingAmount" placeholder="Enter remaining amount" />
+        <input pInputText  id="remainingAmount" type="number" [(ngModel)]="customer.remainingAmount" placeholder="Enter remaining amount" />
       </div>
     </div>
   
@@ -198,17 +547,17 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
   
       <p-iftalabel class="p-field">
-        <input pInputText id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
+        <input pInputText  id="fullname" [(ngModel)]="customer.fullname" autocomplete="off" />
         <label for="fullname">Full Name</label>
       </p-iftalabel>
   
       <p-iftalabel class="p-field">
-        <input pInputText id="email" [(ngModel)]="customer.email" autocomplete="off" />
+        <input pInputText  id="email" [(ngModel)]="customer.email" autocomplete="off" />
         <label for="email">Email</label>
       </p-iftalabel>
   
       <p-iftalabel class="p-field">
-        <input pInputText id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
+        <input pInputText  id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
         <label for="guaranteer">Guaranteer Name</label>
       </p-iftalabel>
   
@@ -220,7 +569,7 @@
       <div class="p-field col-span-2">
         <label class="block font-medium mb-2">Phone Numbers</label>
         <div *ngFor="let phone of customer.phoneNumbers; let i = index" class="flex gap-2 items-center mb-2">
-          <input pInputText [(ngModel)]="phone.number" placeholder="Phone Number" class="flex-1" />
+          <input pInputText  [(ngModel)]="phone.number" placeholder="Phone Number" class="flex-1" />
           <p-select [options]="phoneTypes" [(ngModel)]="phone.type" placeholder="Type" class="flex-1"></p-select>
           <p-checkbox [(ngModel)]="phone.primary" binary="true" label="Primary"></p-checkbox>
           <button pButton icon="pi pi-plus" (click)="addPhoneNumber()" class="p-button-text"></button>
@@ -230,11 +579,11 @@
       <div class="p-field col-span-2">
         <label class="block font-medium mb-2">Addresses</label>
         <div *ngFor="let address of customer.addresses; let j = index" class="grid grid-cols-6 gap-2 mb-2">
-          <input pInputText [(ngModel)]="address.street" placeholder="Street" class="col-span-3" />
-          <input pInputText [(ngModel)]="address.city" placeholder="City" class="col-span-2" />
-          <input pInputText [(ngModel)]="address.state" placeholder="State" class="col-span-1" />
-          <input pInputText [(ngModel)]="address.zipCode" placeholder="Zip Code" class="col-span-1" />
-          <input pInputText [(ngModel)]="address.country" placeholder="Country" class="col-span-2" />
+          <input pInputText  [(ngModel)]="address.street" placeholder="Street" class="col-span-3" />
+          <input pInputText  [(ngModel)]="address.city" placeholder="City" class="col-span-2" />
+          <input pInputText  [(ngModel)]="address.state" placeholder="State" class="col-span-1" />
+          <input pInputText  [(ngModel)]="address.zipCode" placeholder="Zip Code" class="col-span-1" />
+          <input pInputText  [(ngModel)]="address.country" placeholder="Country" class="col-span-2" />
           <p-select [options]="addressTypes" [(ngModel)]="address.type" placeholder="Type" class="col-span-2"></p-select>
           <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="Default" class="col-span-1"></p-checkbox>
           <button pButton icon="pi pi-plus" (click)="addAddress()" class="p-button-text col-span-1"></button>
@@ -246,5 +595,5 @@
     <div class="mt-4 text-right">
       <button pButton label="Save" (click)="saveCustomer()" class="p-button-success"></button>
     </div>
-  </div> -->
-   -->
+  </div> 
+    -->

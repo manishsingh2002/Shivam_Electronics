@@ -15,8 +15,8 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   // private baseUrl='https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'
-  private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
-  // private baseUrl = 'http://localhost:4000/api'
+  // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
+  private baseUrl = 'http://localhost:4000/api'
   constructor(private http: HttpClient, private authService: AuthService ,private errorhandler:ErrorhandlingService) {}
 
   // === User Authentication Methods ===
@@ -32,18 +32,18 @@ export class ApiService {
   //     .pipe(catchError((error) => this.errorhandler.handleError('getUserData', error)));
   // }
 
-  getCustomers(): Observable<any> {
-    return this.http
-    .get(`${this.baseUrl}/v1/customers`) 
-    .pipe(catchError((error) => this.errorhandler.handleError('getCustomers', error)));
-  }
-
-  // getCustomerById(id: string): Observable<Customer> {
-  //   return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+  // getCustomers(): Observable<any> {
+  //   return this.http
+  //   .get(`${this.baseUrl}/v1/customers`) 
+  //   .pipe(catchError((error) => this.errorhandler.handleError('getCustomers', error)));
   // }
 
-  // updateCustomer(id: string, customer: Customer): Observable<Customer> {
-  //   return this.http.put<Customer>(`${this.apiUrl}/${id}`, customer);
+  // getCustomerById(id: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}/v1/customers/${id}`);
+  // }
+
+  // updateCustomer(id: string, customer: any): Observable<any> {
+  //   return this.http.put<any>(`${this.baseUrl}/v1/customers/${id}`, customer);
   // }
 
   deleteUser(): Observable<any> {
@@ -115,6 +115,27 @@ export class ApiService {
       .get<any[]>(`${this.baseUrl}/v1/customers`)
       .pipe(catchError((error) => this.errorhandler.handleError('getAllcustomerData', error)));
   }
+  
+// updateCustomerImage(data:any,customerid:any){
+//   return this.http
+//   .post(`${this.baseUrl}/v1/customers/${customerid}`, data)
+//   .pipe(catchError((error) => this.errorhandler.handleError('createNewcustomer', error)));
+// }
+// uploadProfileImage(formData: FormData, customerId: string) {
+//   const apiUrl = `/api/customers/${customerId}/profile-image`;  // Replace with your actual API URL
+//   return this.http.post(apiUrl, formData);
+// }
+
+uploadProfileImage(formData: FormData, customerId: string): Observable<any> {
+  const apiUrl = `http://localhost:4000/api/customers/${customerId}/profile-image`; // Backend endpoint
+  return this.http.post(apiUrl, formData).pipe(
+    catchError((error:any) => {
+      console.error('Upload Error:', error);
+      return error // Fallback in case of an error
+    })
+  );
+}
+
 
   getCustomerDataWithId(id: string): Observable<any> {
     return this.http
@@ -124,7 +145,7 @@ export class ApiService {
 
   createNewCustomer(data: any): Observable<any> {
     return this.http
-      .post(`${this.baseUrl}/v1/customers`, data)
+      .post(`${this.baseUrl}/v1/customers/`, data)
       .pipe(catchError((error) => this.errorhandler.handleError('createNewcustomer', error)));
   }
   

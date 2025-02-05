@@ -1,28 +1,99 @@
-/* customer.component.css */
-.row {
-  display: flex;
-  flex-wrap: wrap;
+/* Global Styles */
+.p-grid {
   gap: 1rem;
 }
-.p-field {
-  flex: 1 1 calc(33.333% - 1rem);
-  min-width: 200px;
+
+p-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
 }
-.masonry {
-  column-count: 1;
-  column-gap: 1rem;
+
+p-card header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 0.75rem;
 }
-@media (min-width: 768px) {
-  .masonry {
-      column-count: 2;
-  }
+
+/* Profile Section */
+.p-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
-@media (min-width: 1024px) {
-  .masonry {
-      column-count: 3;
-  }
+
+p-image {
+  display: block;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.masonry-item {
-  break-inside: avoid;
+
+p-fileUpload {
+  margin-top: 0.5rem;
+}
+
+/* Contact Information */
+.p-inputtext {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Phone Numbers Table */
+p-table th, p-table td {
+  text-align: center;
+  padding: 0.75rem;
+}
+
+p-button {
+  margin: 0.25rem;
+}
+
+/* Addresses Section */
+p-card[subheader] {
+  background-color: #e6f7ff;
+}
+
+/* Shopping Cart */
+p-tag {
+  margin: 0.25rem;
+  background-color: #ffecb3;
+  color: #795548;
+  font-weight: bold;
+}
+
+/* Financial Overview */
+.text-4xl {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.text-red-500 {
+  color: #e53935;
+}
+
+/* Dialog Styles */
+p-dialog {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+p-dialog .p-field {
   margin-bottom: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .p-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  p-card {
+    margin-bottom: 1rem;
+  }
 }
