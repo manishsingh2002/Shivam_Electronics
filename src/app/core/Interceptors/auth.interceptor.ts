@@ -13,7 +13,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 // Auth Interceptor
-export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+export function AuthInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const authService = inject(AuthService);
   const authKey = authService.getItem('authToken') as string | null;
   const user = authService.getItem('userKey') as string | null;

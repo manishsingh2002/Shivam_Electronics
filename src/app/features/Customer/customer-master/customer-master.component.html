@@ -1,6 +1,12 @@
  <!-- customer-detail.component.html -->
+
+
+ <input type="file" (change)="onFileSelected($event)">
+ <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image">
+
+ <!--  -->
 <div class="p-grid p-fluid">
-  <div class="p-col-12 p-md-4">
+  <!-- <div class="p-col-12 p-md-4">
     <p-card header="Profile" [style]="{ height: '100%' }">
       <div class="p-field">
         <label for="status">Status</label>
@@ -32,7 +38,7 @@
         <input pInputText  id="guaranteer" [(ngModel)]="customer.guaranteerId" autocomplete="off" />
         <label for="guaranteer">Guaranteer Name</label>
     </p-card>
-  </div>
+  </div> -->
 
   <!-- Contact Information -->
   <div class="p-col-12 p-md-8">

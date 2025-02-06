@@ -23,6 +23,8 @@ import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { SupabaseService } from '../../../core/services/supabase.service';
+
 @Component({
   selector: 'app-customer',
   templateUrl: './customer-master.component.html',
@@ -43,9 +45,13 @@ import { HttpClient } from '@angular/common/http';
     FileUploadModule,
     ImageModule,
   ],
-  providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
+  providers: [ApiService,SupabaseService, IftaLabelModule, ConfirmationService, MessageService],
 })
 export class CustomerMasterComponent implements OnInit {
+  selectedFile: File | null = null;
+  imageUrl: string | null = null;
+  bucketName = 'manish'; // Replace with your bucket name
+
 
   customer = {
     fullname: '',
@@ -110,6 +116,7 @@ export class CustomerMasterComponent implements OnInit {
   uploadStatus: string = ''; // For showing the status of the upload
 
   constructor(
+    private supabase: SupabaseService,
     private ApiService: ApiService,
     private http:HttpClient,
     private messageService: MessageService
@@ -119,6 +126,61 @@ export class CustomerMasterComponent implements OnInit {
     // Fetch customer data (replace with your actual logic)
     // this.getCustomerID();
   }
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0] as File;
+    this.upload()
+  }
+
+  async upload() {
+    if (this.selectedFile) {
+        const timestamp = Date.now();
+        const filePath = `${timestamp}-${this.selectedFile.name}`;
+        const uploadResult = await this.supabase.uploadImage(this.selectedFile, this.bucketName, filePath);
+
+        if ('data' in uploadResult && uploadResult.data) {  // Check if 'data' exists
+            this.imageUrl = await this.supabase.getImageUrl(this.bucketName, filePath);
+            console.log("Image URL:", this.imageUrl); // Log for debugging
+        } else if ('error' in uploadResult && uploadResult.error) {
+            console.error("Upload failed:", uploadResult.error);
+            // Display error message to the user (important!)
+            alert(`Upload failed: ${uploadResult.error.message || 'Unknown error'}`); // Example
+        } else {
+          console.error("Unexpected upload result:", uploadResult); // Handle unexpected cases
+        }
+    }
+}
+  // async upload() {
+  //   if (this.selectedFile) {
+  //       const timestamp = Date.now(); // or use UUID library
+  //       const filePath = `${timestamp}-${this.selectedFile.name}`; // Create a unique filename
+  //       const uploadResult = await this.supabase.uploadImage(this.selectedFile, this.bucketName, filePath);
+
+  //       if (uploadResult?.data) {
+  //           this.imageUrl = await this.supabase.getImageUrl(this.bucketName, filePath);
+  //       } else if (uploadResult?.error) {
+  //           // Handle error
+  //           console.error("Upload failed:", uploadResult?.error);
+  //       }
+  //   }
+  // }
+
+  // async onFileSelected(event: Event) {
+  //   console.log(event)
+  //   const input = event.target as HTMLInputElement;
+  //   const file = input.files?.[0];
+  //   if (!file) return;
+
+  //   try {
+  //     const data = await this.supabase.uploadImage(
+  //       file,
+  //       'bucket-name',
+  //       `uploads/${file.name}`
+  //     );
+  //     console.log('Upload successful:', data);
+  //   } catch (error) {
+  //     console.error('Upload failed:', error);
+  //   }
+  // }
 
   getCustomerID() {
     // Assuming you have a customer ID available (e.g., from route params)
@@ -137,27 +199,28 @@ export class CustomerMasterComponent implements OnInit {
   }
 
 
-  handleFileSelect(event?: any) {
-    console.log(event);
-    const file = event.files[0]; 
-    if (file) {
-      this.uploadStatus = 'Preparing to upload...';
-      const formData = new FormData();
-      formData.append('image', file); // Append the selected file to FormData
-      this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-        (response: any) => {
-          this.uploadStatus = 'Image uploaded successfully!';
-          console.log('Upload Response:', response);
-        },
-        (error: any) => {
-          this.uploadStatus = 'Error uploading image.';
-          console.error('Upload Error:', error);
-        }
-      );
-    } else {
-      console.log('No file selected');
-    }
-  }
+  
+  // handleFileSelect(event?: any) {
+  //   console.log(event);
+  //   const file = event.files[0]; 
+  //   if (file) {
+  //     this.uploadStatus = 'Preparing to upload...';
+  //     const formData = new FormData();
+  //     formData.append('image', file); // Append the selected file to FormData
+  //     // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
+  //     //   (response: any) => {
+  //     //     this.uploadStatus = 'Image uploaded successfully!';
+  //     //     console.log('Upload Response:', response);
+  //     //   },
+  //     //   (error: any) => {
+  //     //     this.uploadStatus = 'Error uploading image.';
+  //     //     console.error('Upload Error:', error);
+  //     //   }
+  //     // );
+  //   } else {
+  //     console.log('No file selected');
+  //   }
+  // }
   
   // handleFileSelect(event?: any) {
   //   const file = event.files[0];  // Extract the first selected file
@@ -209,7 +272,7 @@ export class CustomerMasterComponent implements OnInit {
           const customerId = response.data.data._id; 
           console.log('Customer ID:', customerId);
           this.customerId = customerId;  
-          this.handleFileSelect();
+          // this.handleFileSelect();
         },
         (error) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create customer.' });

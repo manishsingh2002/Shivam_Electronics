@@ -10,7 +10,7 @@ import { AppMessageService } from './core/services/message.service';
 import Aura from "@primeng/themes/aura";
 import { definePreset } from "@primeng/themes";
 import { MessageService } from 'primeng/api';
-import { authInterceptor, loggingInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthInterceptor, loggingInterceptor } from './core/Interceptors/auth.interceptor';
 // import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 const MyPreset = definePreset(Aura, {
@@ -672,7 +672,7 @@ const MyPreset = definePreset(Aura, {
 });
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor])),
+    provideHttpClient(withInterceptors([AuthInterceptor, loggingInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     AppMessageService,
     MessageService,
