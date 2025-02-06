@@ -24,119 +24,120 @@ import { Table } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { SharedGridComponent } from '../../../shared/components/shared-grid/shared-grid.component';
 export interface CartItem {
-  customerId: string;
-  invoiceIds: string[];
-  _id?: string;
+    customerId: string;
+    invoiceIds: string[];
+    _id?: string;
 }
 
 interface Column {
-  field: string;
-  header: string;
-  customExportHeader?: string;
+    field: string;
+    header: string;
+    customExportHeader?: string;
 }
 
 interface ExportColumn {
-  title: string;
-  dataKey: string;
+    title: string;
+    dataKey: string;
 }
 
 export interface PhoneNumber {
-  number: string;
-  type: 'home' | 'mobile' | 'work';
-  primary: boolean;
-  _id?: string;
+    number: string;
+    type: 'home' | 'mobile' | 'work';
+    primary: boolean;
+    _id?: string;
 }
 
 export interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-  type: 'billing' | 'shipping' | 'home' | 'work';
-  isDefault: boolean;
-  _id?: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+    type: 'billing' | 'shipping' | 'home' | 'work';
+    isDefault: boolean;
+    _id?: string;
 }
 
 export interface Customer {
-  _id: string;
-//   createdAt: Date;
-  updatedAt: Date;
-  status: 'active' | 'inactive' | 'pending' | 'suspended' | 'blocked';
-  email: string;
-  fullname: string;
-  phoneNumbers: PhoneNumber[];
-  addresses: Address[];
-  cart: {
-    items: CartItem[];
-  };
-  guarantorId?: string;
-  totalPurchasedAmount: number;
-  remainingAmount: number;
-  paymentHistory: Payment[];
-  metadata: Map<string, any>;
+    _id: string;
+    //   createdAt: Date;
+    updatedAt: Date;
+    status: 'active' | 'inactive' | 'pending' | 'suspended' | 'blocked';
+    email: string;
+    fullname: string;
+    phoneNumbers: PhoneNumber[];
+    addresses: Address[];
+    cart: {
+        items: CartItem[];
+    };
+    guarantorId?: string;
+    totalPurchasedAmount: number;
+    remainingAmount: number;
+    paymentHistory: Payment[];
+    metadata: Map<string, any>;
 }
 
 export interface Payment {
-  _id: string;
-  amount: number;
-  currency: string;
-  status: string;
-  createdAt: Date;
+    _id: string;
+    amount: number;
+    currency: string;
+    status: string;
+    createdAt: Date;
 }
 
 export interface Invoice {
-  _id: string;
-  amount: number;
-  createdAt: Date;
+    _id: string;
+    amount: number;
+    createdAt: Date;
 }
 @Component({
-  selector: 'app-customer-list',
-  imports: [TableModule, Dialog,ButtonModule,  SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload,  Tag,InputTextModule, FormsModule,  IconFieldModule, InputIconModule],
-  providers: [MessageService, ConfirmationService, ApiService],
-  templateUrl: './customer-list.component.html',
-  styleUrl: './customer-list.component.scss'
+    selector: 'app-customer-list',
+    imports: [TableModule, Dialog, ButtonModule, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, Tag, InputTextModule, FormsModule, IconFieldModule, InputIconModule],
+    providers: [MessageService, ConfirmationService, ApiService],
+    templateUrl: './customer-list.component.html',
+    styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent {
-checkedCustomer(customer : any) {
-console.log(customer);}
+    checkedCustomer(customer: any) {
+        console.log(customer);
+    }
 
- @ViewChild('dt') dt!: Table;
+    @ViewChild('dt') dt!: Table;
     customerDialog: boolean = false;
-   customers: any[]=[];
-    customer: any=[];
-    selectedcustomers: any[] =[];
+    customers: any[] = [];
+    customer: any = [];
+    selectedcustomers: any[] = [];
     submitted: boolean = false;
-    statuses: any[]=[];
-    cols: Column[]=[];
-    exportColumns: ExportColumn[]=[];
+    statuses: any[] = [];
+    cols: Column[] = [];
+    exportColumns: ExportColumn[] = [];
     redirectedcustomer: any;
 
     constructor(
-        private apiService:ApiService,  
+        private apiService: ApiService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
-    ) {}
+    ) { }
 
-  ngOnInit() { 
-    this.loadDemoData()   
-}
+    ngOnInit() {
+        this.loadDemoData()
+    }
 
-filterSearch(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  this.dt.filterGlobal(input.value, 'contains');
-}
+    filterSearch(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        this.dt.filterGlobal(input.value, 'contains');
+    }
 
     exportCSV() {
         this.dt.exportCSV();
     }
 
     loadDemoData() {
-      this.apiService.getCustomers().subscribe((res:any)=>{
-        this.customers = res.data;
-        this.cd.markForCheck();
-       })
+        this.apiService.getAllCustomerData().subscribe((res: any) => {
+            this.customers = res.data;
+            this.cd.markForCheck();
+        })
         this.cols = [
             { field: 'code', header: 'Code', customExportHeader: 'customer Code' },
             { field: 'fullname', header: 'fullname' },
@@ -156,7 +157,7 @@ filterSearch(event: Event): void {
 
     editcustomer(customer: any) {
         this.customer = { ...customer };
-        this.redirectedcustomer = { ...customer }; 
+        this.redirectedcustomer = { ...customer };
         this.customerDialog = true;
     }
 
@@ -166,15 +167,15 @@ filterSearch(event: Event): void {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                    const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
+                const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
                 //   console.log(ids); 
-                    this.apiService.deleteCustomers(ids).subscribe(
-                        res => {
-                            // console.log('Deletion Success:', res);
-                            this.customers = this.customers.filter(customer => !ids.includes(customer.id));
-                        },
-                        err => console.error('Deletion Error:', err)
-                    );           
+                this.apiService.deleteCustomers(ids).subscribe(
+                    res => {
+                        // console.log('Deletion Success:', res);
+                        this.customers = this.customers.filter(customer => !ids.includes(customer.id));
+                    },
+                    err => console.error('Deletion Error:', err)
+                );
                 this.selectedcustomers = [];
                 this.messageService.add({
                     severity: 'success',
@@ -230,17 +231,17 @@ filterSearch(event: Event): void {
         return id;
     }
     getSeverity(status: string) {
-            switch (status) {
-                case 'active':
-                    return 'success';
-                case 'noactive':
-                    return 'warn';
-            
-                default:
-                  return 'success';
-            }
-          }
-     savecustomer() {
+        switch (status) {
+            case 'active':
+                return 'success';
+            case 'noactive':
+                return 'warn';
+
+            default:
+                return 'success';
+        }
+    }
+    savecustomer() {
         this.submitted = true;
 
         if (this.customer.fullname?.trim()) {
