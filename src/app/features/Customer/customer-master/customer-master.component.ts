@@ -200,27 +200,27 @@ export class CustomerMasterComponent implements OnInit {
 
 
   
-  // handleFileSelect(event?: any) {
-  //   console.log(event);
-  //   const file = event.files[0]; 
-  //   if (file) {
-  //     this.uploadStatus = 'Preparing to upload...';
-  //     const formData = new FormData();
-  //     formData.append('image', file); // Append the selected file to FormData
-  //     // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-  //     //   (response: any) => {
-  //     //     this.uploadStatus = 'Image uploaded successfully!';
-  //     //     console.log('Upload Response:', response);
-  //     //   },
-  //     //   (error: any) => {
-  //     //     this.uploadStatus = 'Error uploading image.';
-  //     //     console.error('Upload Error:', error);
-  //     //   }
-  //     // );
-  //   } else {
-  //     console.log('No file selected');
-  //   }
-  // }
+  handleFileSelect(event?: any) {
+    console.log(event);
+    const file = event.files[0]; 
+    if (file) {
+      this.uploadStatus = 'Preparing to upload...';
+      const formData = new FormData();
+      formData.append('image', file); // Append the selected file to FormData
+      // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
+      //   (response: any) => {
+      //     this.uploadStatus = 'Image uploaded successfully!';
+      //     console.log('Upload Response:', response);
+      //   },
+      //   (error: any) => {
+      //     this.uploadStatus = 'Error uploading image.';
+      //     console.error('Upload Error:', error);
+      //   }
+      // );
+    } else {
+      console.log('No file selected');
+    }
+  }
   
   // handleFileSelect(event?: any) {
   //   const file = event.files[0];  // Extract the first selected file
