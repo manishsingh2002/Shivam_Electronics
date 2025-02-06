@@ -15,8 +15,8 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   // private baseUrl='https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'
-  private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
-  // private baseUrl = 'http://localhost:4000/api'
+  // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
+  private baseUrl = 'http://localhost:4000/api'
   constructor(private http: HttpClient, private authService: AuthService ,private errorhandler:ErrorhandlingService) {}
 
   // === User Authentication Methods ===
@@ -153,6 +153,13 @@ uploadProfileImage(formData: FormData, customerId: string): Observable<any> {
     return this.http
       .patch(`${this.baseUrl}/v1/customers/${customerId}`, data)
       .pipe(catchError((error) => this.errorhandler.handleError('updatecustomer', error)));
+  }
+
+  deleteCustomerID(customerIds: string[]): Observable<any> {
+    const endpoint = `${this.baseUrl}/v1/customers/${customerIds}`;
+    return this.http
+      .delete(endpoint)
+      .pipe(catchError((error) => this.errorhandler.handleError('deleteProduct', error)));
   }
 
   deleteCustomers(customerIds: string[]): Observable<any> {

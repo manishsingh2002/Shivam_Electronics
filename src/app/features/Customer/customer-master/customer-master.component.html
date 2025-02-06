@@ -1,4 +1,4 @@
-<body class="bg-gray-100 p-4">
+<body class="bg-gray-700 p-4">
   <div class="container mx-auto">
       <div class="mb-4">
           <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" (change)="onFileSelected($event)">
@@ -6,15 +6,15 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="col-span-1">
-              <div class="bg-white p-4 rounded-lg shadow-md h-full">
+          <div class="col-span-1 ">
+              <div class="bg-black p-4 rounded-lg shadow-md h-full">
                   <h2 class="text-xl font-semibold mb-4">Profile</h2>
                   <div class="mb-4">
-                      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                      <label for="status" class="block text-sm font-medium text-white">Status</label>
                       <p-select id="status" [options]="statuses" [(ngModel)]="customer.status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></p-select>
                   </div>
                   <div class="mb-4">
-                      <label for="profileImg" class="block text-sm font-medium text-gray-700">Profile Image</label>
+                      <label for="profileImg" class="block text-sm font-medium text-white">Profile Image</label>
                       <img [src]="customer.profileImg" alt="Profile Image" class="w-32 h-32 object-cover rounded-full mb-2">
                       <p-fileUpload 
                           name="image" 
@@ -33,82 +33,96 @@
                       <p *ngIf="uploadStatus" class="mt-2 text-sm text-green-600"><strong>{{uploadStatus}}</strong></p>
                   </div>
                   <div class="mb-4">
-                      <label for="guaranteer" class="block text-sm font-medium text-gray-700">Guaranteer Name</label>
+                      <label for="guaranteer" class="block text-sm font-medium text-white">Guaranteer Name</label>
                       <input id="guaranteer" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="customer.guaranteerId" autocomplete="off">
                   </div>
               </div>
           </div>
 
           <div class="col-span-2">
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                  <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
+              <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                  <!-- <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                          <label for="fullname" class="block text-sm font-medium text-gray-700">Full Name</label>
+                          <label for="fullname" class="block text-sm font-medium text-white">Full Name</label>
                           <input id="fullname" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="customer.fullname" required>
                       </div>
                       <div>
-                          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                          <label for="email" class="block text-sm font-medium text-white">Email</label>
                           <input id="email" type="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="customer.email" required>
                       </div>
-                  </div>
-                  <div class="mt-4">
-                      <h3 class="text-lg font-semibold mb-2">Phone Numbers</h3>
-                      <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-                          <thead>
+                  </div> -->
+                  <div class="mt-4 bg-black">
+                    <p-card header="Contact Information">
+                      <div styleClass="p-table-compact flex">
+                          <div class="p-field p-col-6">
+                              <label for="fullname">Full Name</label>
+                              <input id="fullname" pInputText [(ngModel)]="customer.fullname" required styleClass="p-input-compact"/>
+                          </div>
+                          <div class="p-field p-col-6">
+                              <label for="email">Email</label>
+                              <input id="email" pInputText [(ngModel)]="customer.email" required styleClass="p-input-compact"/>
+                          </div>
+                      </div>
+          
+                      <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3" styleClass="p-table-compact">
+                          <ng-template pTemplate="header">
                               <tr>
-                                  <th class="px-4 py-2 border-b">Number</th>
-                                  <th class="px-4 py-2 border-b">Type</th>
-                                  <th class="px-4 py-2 border-b">Actions</th>
+                                  <th>Number</th>
+                                  <th>Type</th>
+                                  <th>Primary</th>
+                                  <th>Actions</th>
                               </tr>
-                          </thead>
-                          <tbody>
-                              <tr *ngFor="let phone of customer.phoneNumbers; let i = index">
-                                  <td class="px-4 py-2 border-b">{{ phone.number }}</td>
-                                  <td class="px-4 py-2 border-b">{{ phone.type }}</td>
-                                  <td class="px-4 py-2 border-b">
-                                      <button class="text-blue-500 hover:text-blue-700"><i class="fas fa-pencil-alt"></i></button>
-                                      <button class="text-red-500 hover:text-red-700 ml-2" (click)="deletePhone(i)"><i class="fas fa-trash"></i></button>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-phone let-i="index">
+                              <tr>
+                                  <td>{{ phone.number }}</td>
+                                  <td>{{ phone.type }}</td>
+                                  <td><p-tableCheckbox [(ngModel)]="phone.primary" /></td>
+                                  <td>
+                                      <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-compact"></button>
+                                      <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-compact" (click)="deletePhone(i)"></button>
                                   </td>
                               </tr>
-                          </tbody>
-                      </table>
-                      <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" (click)="showPhoneDialog()">Add Phone Number</button>
+                          </ng-template>
+                      </p-table>
+                      <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()" styleClass="p-button-compact"></button>
+                  </p-card>
                   </div>
               </div>
           </div>
 
           <div class="col-span-3">
-              <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="bg-black p-4 rounded-lg shadow-md">
                   <h2 class="text-xl font-semibold mb-4">Addresses</h2>
                   <div *ngFor="let address of customer.addresses; let i = index" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                          <label for="street-{{i}}" class="block text-sm font-medium text-gray-700">Street</label>
+                          <label for="street-{{i}}" class="block text-sm font-medium text-white">Street</label>
                           <input id="street-{{i}}" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="address.street" required>
                       </div>
                       <div>
-                          <label for="city-{{i}}" class="block text-sm font-medium text-gray-700">City</label>
+                          <label for="city-{{i}}" class="block text-sm font-medium text-white">City</label>
                           <input id="city-{{i}}" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="address.city" required>
                       </div>
                       <div>
-                          <label for="state-{{i}}" class="block text-sm font-medium text-gray-700">State</label>
+                          <label for="state-{{i}}" class="block text-sm font-medium text-white">State</label>
                           <input id="state-{{i}}" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="address.state" required>
                       </div>
                       <div>
-                          <label for="zipCode-{{i}}" class="block text-sm font-medium text-gray-700">Zip Code</label>
+                          <label for="zipCode-{{i}}" class="block text-sm font-medium text-white">Zip Code</label>
                           <input id="zipCode-{{i}}" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="address.zipCode" required>
                       </div>
                       <div>
-                          <label for="country-{{i}}" class="block text-sm font-medium text-gray-700">Country</label>
+                          <label for="country-{{i}}" class="block text-sm font-medium text-white">Country</label>
                           <input id="country-{{i}}" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="address.country" required>
                       </div>
                       <div>
-                          <label for="addressType-{{i}}" class="block text-sm font-medium text-gray-700">Address Type</label>
+                          <label for="addressType-{{i}}" class="block text-sm font-medium text-white">Address Type</label>
                           <p-select id="addressType-{{i}}" [options]="addressTypes" [(ngModel)]="address.type" optionLabel="label" optionValue="value" placeholder="Select Type" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></p-select>
                       </div>
                       <div class="flex items-center">
-                          <p-checkbox id="isDefault-{{i}}" [(ngModel)]="address.isDefault" binary="true" class="h-4 w-4 text-blue-600 border-gray-300 rounded"></p-checkbox>
-                          <label for="isDefault-{{i}}" class="ml-2 block text-sm text-gray-900">Default Address</label>
+                          <p-checkbox id="isDefault-{{i}}" [(ngModel)]="address.isDefault" binary="true" class="h-4 w-4 text-blue-600 border-white rounded"></p-checkbox>
+                          <label for="isDefault-{{i}}" class="ml-2 block text-sm text-white">Default Address</label>
                       </div>
                       <div class="flex items-center">
                           <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" (click)="removeAddress(i)"><i class="fas fa-trash"></i></button>
@@ -119,7 +133,7 @@
           </div>
 
           <div class="col-span-1 md:col-span-2">
-              <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="bg-black p-4 rounded-lg shadow-md">
                   <h2 class="text-xl font-semibold mb-4">Financial Overview</h2>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -140,27 +154,96 @@
       </div>
   </div>
 
-  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50" *ngIf="phoneDialogVisible">
-      <div class="bg-white p-4 rounded-lg shadow-md w-96">
-          <h2 class="text-xl font-semibold mb-4">Add Phone Number</h2>
-          <div>
-              <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
-              <input id="phoneNumber" type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" [(ngModel)]="newPhoneNumber.number" required>
-          </div>
-          <div class="mt-4">
-              <label for="phoneType" class="block text-sm font-medium text-gray-700">Phone Type</label>
-              <p-select id="phoneType" [options]="phoneTypes" [(ngModel)]="newPhoneNumber.type" optionLabel="label" optionValue="value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></p-select>
-          </div>
-          <div class="mt-4 flex justify-end">
-              <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" (click)="addPhoneNumber()">Add</button>
-          </div>
-      </div>
-  </div>
+  <p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible" styleClass="p-dialog-compact ">
+    <div class="p-field">
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" type="number" pInputText [(ngModel)]="newPhoneNumber.number" required styleClass="p-input-compact"/>
+    </div>
+    <div class="p-field">
+        <label for="phoneType">Phone Type</label>
+        <p-select id="phoneType" [options]="phoneTypes" [(ngModel)]="newPhoneNumber.type" optionLabel="label" optionValue="value" required styleClass="p-dropdown-compact"></p-select>
+    </div>
+    <p-button label="Add" (click)="addPhoneNumber()" styleClass="p-button-compact"></p-button>
+</p-dialog>
 </body>
 
 
 
+<!-- 
 
+<body class="bg-gray-900 text-white p-4">
+  <div class="container mx-auto max-w-6xl space-y-6">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <div class="bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center">
+        <img *ngIf="customer.profileImg" [src]="customer.profileImg" class="w-24 h-24 object-cover rounded-full mb-3 border-2 border-gray-500">
+        <p-fileUpload name="image" url="http://localhost:4000/api/customers/{{customerId}}/profile-image" accept="image/*" maxFileSize="5000000" (onUpload)="handleFileUpload($event)" chooseLabel="Upload Image" class="text-center"></p-fileUpload>
+      </div>
+
+      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Financial Overview</h3>
+        <div class="grid grid-cols-1 gap-4">
+          <p class="text-lg">Total Purchased: <span class="font-semibold text-green-400">{{ customer.totalPurchasedAmount | currency }}</span></p>
+          <p class="text-lg text-red-400">Remaining Balance: <span class="font-semibold">{{ customer.remainingAmount | currency }}</span></p>
+        </div>
+      </div>
+
+      Status Section
+      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+        <label class="block text-sm font-medium text-gray-300 mb-2">Status</label>
+        <p-select [options]="statuses" [(ngModel)]="customer.status" class="w-full bg-gray-700 text-white rounded-md p-2"></p-select>
+      </div>
+
+    </div>
+
+    Second Row: Contact Info & Address
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      Contact Info Section
+      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-300">Full Name</label>
+            <input type="text" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:ring-2 focus:ring-purple-500" [(ngModel)]="customer.fullname">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300">Email</label>
+            <input type="email" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:ring-2 focus:ring-purple-500" [(ngModel)]="customer.email">
+          </div>
+        </div>
+        <h3 class="text-lg font-semibold mt-4">Phone Numbers</h3>
+        <div *ngFor="let phone of customer.phoneNumbers; let i = index" class="flex items-center justify-between bg-gray-700 p-2 rounded-md my-1">
+          <span>{{ phone.number }} ({{ phone.type }})</span>
+          <button class="text-red-400 hover:text-red-600" (click)="deletePhone(i)"><i class="fas fa-trash"></i></button>
+        </div>
+        <button class="mt-2 text-blue-400 hover:text-blue-600" (click)="showPhoneDialog()">+ Add Phone</button>
+      </div>
+
+      Address Section
+      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Addresses</h3>
+        <div *ngFor="let address of customer.addresses; let i = index" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-700 p-3 rounded-md my-2">
+          <input type="text" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600" placeholder="Street" [(ngModel)]="address.street">
+          <input type="text" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600" placeholder="City" [(ngModel)]="address.city">
+          <input type="text" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600" placeholder="State" [(ngModel)]="address.state">
+          <input type="text" class="w-full p-2 bg-gray-700 text-white rounded-md border border-gray-600" placeholder="Zip Code" [(ngModel)]="address.zipCode">
+          <p-select [options]="addressTypes" [(ngModel)]="address.type" class="w-full bg-gray-700 text-white rounded-md p-2"></p-select>
+          <button class="text-red-400 hover:text-red-600" (click)="removeAddress(i)"><i class="fas fa-trash"></i></button>
+        </div>
+        <button class="mt-2 text-blue-400 hover:text-blue-600" (click)="addAddress()">+ Add Address</button>
+      </div>
+
+    </div>
+
+    Save Button
+    <div class="text-center">
+      <button class="mt-6 w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-md" (click)="saveCustomer()">Save Customer</button>
+    </div>
+
+  </div>
+</body>
 
 
 
@@ -338,31 +421,24 @@
     <button pButton label="Save Customer" icon="pi pi-save" (click)="saveCustomer()" styleClass="p-button-compact"></button>
 </div>
 
-<p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible" styleClass="p-dialog-compact">
-    <div class="p-field">
-        <label for="phoneNumber">Phone Number</label>
-        <input id="phoneNumber" type="number" pInputText [(ngModel)]="newPhoneNumber.number" required styleClass="p-input-compact"/>
-    </div>
-    <div class="p-field">
-        <label for="phoneType">Phone Type</label>
-        <p-select id="phoneType" [options]="phoneTypes" [(ngModel)]="newPhoneNumber.type" optionLabel="label" optionValue="value" required styleClass="p-dropdown-compact"></p-select>
-    </div>
-    <p-button label="Add" (click)="addPhoneNumber()" styleClass="p-button-compact"></p-button>
-</p-dialog>
 
 
 
 
 
-<!-- ............................................................................... -->
+
+
+ ............................................................................... 
  
- <!-- customer-detail.component.html -->
+ 
+ customer-detail.component.html 
 
 
  <input type="file" (change)="onFileSelected($event)">
  <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image">
 
- <!--  -->
+ 
+   
 <div class="p-grid p-fluid">
   <div class="p-col-12 p-md-4">
     <p-card header="Profile" [style]="{ height: '100%' }">
@@ -398,7 +474,8 @@
     </p-card>
   </div>
 
-  <!-- Contact Information -->
+  
+   Contact Information 
   <div class="p-col-12 p-md-8">
     <p-card header="Contact Information">
       <div class="p-grid">
@@ -412,7 +489,8 @@
         </div>
       </div>
 
-      <!-- Phone Numbers Table -->
+      
+       Phone Numbers Table 
       <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
         <ng-template pTemplate="header">
           <tr>
@@ -426,7 +504,8 @@
           <tr>
             <td>{{ phone.number }}</td>
             <td>{{ phone.type }}</td>
-            <!-- <td><p-radioButton [value]="phone" [(ngModel)]="customer.phoneNumbers[i].primary"></p-radioButton></td> -->
+            
+             <td><p-radioButton [value]="phone" [(ngModel)]="customer.phoneNumbers[i].primary"></p-radioButton></td> 
             <td>
               <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
               <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deletePhone(i)"></button>
@@ -434,7 +513,8 @@
           </tr>
         </ng-template>
       </p-table>
-      <!-- <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
+      
+       <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3">
         <ng-template pTemplate="header">
           <tr>
             <th>Number</th>
@@ -454,12 +534,13 @@
             </td>
           </tr>
         </ng-template>
-      </p-table> -->
+      </p-table> 
       <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"></button>
     </p-card>
   </div>
 
-  <!-- Add Address Form -->
+  
+   Add Address Form 
   <div class="p-col-12">
     <p-card header="Addresses">
       <div *ngFor="let address of customer.addresses; let i = index" class="p-grid">
@@ -501,7 +582,8 @@
     </p-card>
   </div>
 
-  <!-- Financial Overview -->
+  
+   Financial Overview 
   <div class="p-col-12 p-md-6">
     <p-card header="Financial Overview">
       <div class="p-grid">
@@ -531,9 +613,11 @@
   </div>
   <p-button label="Add" (click)="addPhoneNumber()"></p-button>
 </p-dialog>
-<!-- <p-button (click)="saveCustomer()">save</p-button> -->
 
- <!-- customer-detail.component.html
+ <p-button (click)="saveCustomer()">save</p-button> 
+
+ 
+ customer-detail.component.html
 <div class="p-grid p-fluid">
   <div class="p-col-12 p-md-4">
     <p-card header="Profile" [style]="{ height: '100%' }">
@@ -846,7 +930,7 @@
   </div>
 </div>
 </body> 
- <div class="card bg-white">
+ <div class="card bg-gray-700">
     <h2>Customer Details</h2>
     <div class="row">
       <p-iftalabel class="p-field">
@@ -906,7 +990,7 @@
   
     <button pButton label="Save" (click)="saveCustomer()"></button>
   </div>
-<div class="card bg-white p-4 shadow-lg">
+<div class="card bg-gray-700 p-4 shadow-lg">
     <h2 class="text-lg font-bold mb-4">Customer Details</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
   
@@ -960,4 +1044,5 @@
       <button pButton label="Save" (click)="saveCustomer()" class="p-button-success"></button>
     </div>
   </div> 
-    -->
+     
+-->

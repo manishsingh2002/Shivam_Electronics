@@ -7,7 +7,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 })
 export class SupabaseService {
   private supabase: SupabaseClient;
-  private supabaseUrl = 'https://dhnzcdfiuwqgagqlefas.supabase.co' ; // Get from environment
+  private supabaseUrl = 'https://dhnzcdfiuwqgagqlefas.supabase.co'; // Get from environment
   private supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRobnpjZGZpdXdxZ2FncWxlZmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3NjM1MjcsImV4cCI6MjA1NDMzOTUyN30.rkbM7V-2kGvf4xJ04_7zEH-c-xODDBMVSERY6qzPOko'; // Get from environment
 
 
@@ -44,20 +44,20 @@ export class SupabaseService {
 
 
   async getImageUrl(bucket: string, path: string): Promise<string | null> {
-      try {
-        const { data } = await this.supabase.storage.from(bucket).getPublicUrl(path);
-        return data.publicUrl;
-      } catch (error) {
-        console.error("Error getting image URL:", error);
-        return null;
-      }
+    try {
+      const { data } = await this.supabase.storage.from(bucket).getPublicUrl(path);
+      return data.publicUrl;
+    } catch (error) {
+      console.error("Error getting image URL:", error);
+      return null;
+    }
   }
 
 }
 
-  // SUPABASE_URL='https://dhnzcdfiuwqgagqlefas.supabase.co/storage/v1/s3'
-  // SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRobnpjZGZpdXdxZ2FncWxlZmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3NjM1MjcsImV4cCI6MjA1NDMzOTUyN30.rkbM7V-2kGvf4xJ04_7zEH-c-xODDBMVSERY6qzPOko'
-  // SUPABASE_BUCKET='shivamelectronicsImages'
+// SUPABASE_URL='https://dhnzcdfiuwqgagqlefas.supabase.co/storage/v1/s3'
+// SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRobnpjZGZpdXdxZ2FncWxlZmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3NjM1MjcsImV4cCI6MjA1NDMzOTUyN30.rkbM7V-2kGvf4xJ04_7zEH-c-xODDBMVSERY6qzPOko'
+// SUPABASE_BUCKET='shivamelectronicsImages'
 
 //   constructor() {
 //     this.supabase = createClient(this.SUPABASE_URL, this.SUPABASE_KEY );

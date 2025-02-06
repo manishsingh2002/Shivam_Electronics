@@ -161,54 +161,13 @@ export class CustomerListComponent {
         this.customerDialog = true;
     }
 
-    deleteSelectedcustomers() {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selectedcustomers?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
-                //   console.log(ids); 
-                this.apiService.deleteCustomers(ids).subscribe(
-                    res => {
-                        // console.log('Deletion Success:', res);
-                        this.customers = this.customers.filter(customer => !ids.includes(customer.id));
-                    },
-                    err => console.error('Deletion Error:', err)
-                );
-                this.selectedcustomers = [];
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'customers Deleted',
-                    life: 3000
-                });
-            }
-        });
-    }
+
 
     hideDialog() {
         this.customerDialog = false;
         this.submitted = false;
     }
 
-    deletecustomer(customer: any) {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + customer.fullname + '?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.customers = this.customers.filter((val) => val.id !== customer.id);
-                this.customer = {};
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'customer Deleted',
-                    life: 3000
-                });
-            }
-        });
-    }
 
     findIndexById(id: string): number {
         let index = -1;
@@ -234,16 +193,61 @@ export class CustomerListComponent {
         switch (status) {
             case 'active':
                 return 'success';
-            case 'noactive':
-                return 'warn';
-
+            case 'inactive':
+                return 'danger';
+            case 'pending':
+                return 'contrast';
             default:
                 return 'success';
         }
     }
+
+    deleteSelectedcustomers() {
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete the selectedcustomers?',
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
+                //   console.log(ids); 
+                this.apiService.deleteCustomers(ids).subscribe((res: any) => {
+                    this.customers = this.customers.filter(customer => !ids.includes(customer.id))
+                    this.loadDemoData()
+                },
+                    err => console.error('Deletion Error:', err)
+                );
+                this.selectedcustomers = [];
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Successful',
+                    detail: 'customers Deleted',
+                    life: 3000
+                });
+            }
+        });
+    }
+    deletecustomer(customer: any) {
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete ' + customer.fullname + '?',
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.apiService.deleteCustomerID(customer._id).subscribe((res: any) => {
+                    this.loadDemoData()
+                    this.messageService.add({
+                        severity: res.status,
+                        summary: res.messages,
+                        detail: 'customer Deleted',
+                        life: 3000
+                    });
+                })
+
+            }
+        });
+    }
+
     savecustomer() {
         this.submitted = true;
-
         if (this.customer.fullname?.trim()) {
             if (this.customer.id) {
                 this.customers[this.findIndexById(this.customer.id)] = this.customer;

@@ -57,8 +57,8 @@ export class CustomerMasterComponent implements OnInit {
     fullname: '',
     profileImg: '',
     email: '',
-    status: 'pending',
-    phoneNumbers: [{ number: '', type: 'mobile', primary: false }],
+    status: '',
+    phoneNumbers: [{ number: '', type: '', primary: "" }],
     addresses: [
       {
         street: '',
