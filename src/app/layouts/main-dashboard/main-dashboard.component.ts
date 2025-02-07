@@ -11,10 +11,10 @@ import { ProductDetailComponent } from '../../features/products/components/produ
 import { AppNavigationComponent } from "../../shared/components/common-layout/common-layout.component";
 import { HomePage1Component } from '../dashboard/home-page1/home-page1.component';
 @Component({
-    selector: 'app-main-dashboard',
-    imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule, AppNavigationComponent],
-    templateUrl: './main-dashboard.component.html',
-    styleUrl: './main-dashboard.component.scss'
+  selector: 'app-main-dashboard',
+  imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule, AppNavigationComponent],
+  templateUrl: './main-dashboard.component.html',
+  styleUrl: './main-dashboard.component.scss'
 })
 export class MainDashboardComponent {
   showHeaderAndSidebar: boolean = true;
@@ -28,16 +28,16 @@ export class MainDashboardComponent {
     });
   }
 
-   activeComponent: any = HomePageComponent; 
-   componentNavItems: any[] = [
+  activeComponent: any = HomePageComponent;
+  componentNavItems: any[] = [
     { label: 'home', component: HomePageComponent },
     { label: 'invoice', component: GstInvoiceComponent }, // Corrected key
     { label: 'Product List', component: ProductListComponent },
     { label: 'home1', component: HomePage1Component },
 
-  
+
   ];
-      navigateToComponent(component: any) {
-        this.activeComponent = component;
-      }
+  navigateToComponent(component: any) {
+    this.activeComponent = component;
+  }
 }

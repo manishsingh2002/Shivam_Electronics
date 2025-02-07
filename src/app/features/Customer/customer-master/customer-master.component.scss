@@ -1,4 +1,8 @@
 /* Global Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .p-grid {
   gap: 1rem;
 }
@@ -97,3 +101,5 @@ p-dialog .p-field {
     margin-bottom: 1rem;
   }
 }
+
+

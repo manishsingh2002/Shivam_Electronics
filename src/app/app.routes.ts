@@ -11,19 +11,13 @@ import { ResetPasswordComponent } from './features/auth/components/reset-passwor
 import { UpdatePasswordComponent } from './features/auth/components/update-password/update-password.component';
 import { MainDashboardComponent } from './layouts/main-dashboard/main-dashboard.component';
 import { HomePageComponent } from './layouts/dashboard/home-page/home-page.component';
-import { AdminReportsComponent } from './adminDashboard/admin-reports/admin-reports.component';
-import { AdminStatsComponent } from './adminDashboard/admin-stats/admin-stats.component';
-import { GstInvoiceComponent } from './adminDashboard/gst-invoice/gst-invoice.component';
-import { ProductListComponent } from './features/products/components/product-list/product-list.component';
-import { ProductDetailComponent } from './features/products/components/product-detail/product-detail.component';
-import { ProductMasterComponent } from './features/products/components/product-master/product-master.component';
 import { ProductLayoutComponent } from './features/products/components/product-layout/product-layout.component';
 // Route Guards
 import { AuthGuard } from './core/guards/auth.guard';
 import { CustomerlayoutComponent } from './features/Customer/customerlayout/customerlayout.component';
-import { CustomerListComponent } from './features/Customer/customer-list/customer-list.component';
-import { CustomerMasterComponent } from './features/Customer/customer-master/customer-master.component';
 import { AdminLayoutComponent } from './adminDashboard/admin-layout/admin-layout.component';
+import { MessageComponent } from './shared/components/message/message.component';
+import { NotFoundComponent } from './shared/components/notfound';
 export const routes: Routes = [
   {
     path: '',
@@ -36,7 +30,7 @@ export const routes: Routes = [
     ],
   },
   {
-     path:'auth',component:AuthLayoutComponent
+    path: 'auth', component: AuthLayoutComponent
   },
   {
     path: '',
@@ -60,16 +54,14 @@ export const routes: Routes = [
       },
     ],
   },
-
-  // Wildcard Route for 404
-  { path: '**', redirectTo: 'login' },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 /*// app-routing.module.ts
 import { NgModule } from '@angular/core';

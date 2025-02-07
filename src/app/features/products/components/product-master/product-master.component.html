@@ -181,17 +181,57 @@
                   <p-floatLabel>
                       <textarea placeholder="Warranty Information" pInputTextarea id="warrantyInformation" [(ngModel)]="product.warrantyInformation" name="warrantyInformation" class="w-full p-2 border border-gray-300 rounded" required rows="5"></textarea>
                   </p-floatLabel>
+                  <div>
+                    <label for="OrderNotes" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                        Warranty Information  
+                     </label>
+                  
+                    <textarea
+                      id="OrderNotes"
+                      class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-xs sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                      rows="4"  [(ngModel)]="product.warrantyInformation"
+                      placeholder="Enter any additional order notes..."
+                    ></textarea>
+                  </div>
               </div>
               <div class="col-span-1 md:col-span-2">
-                  <p-floatLabel>
+                  <!-- <p-floatLabel>
                       <textarea pInputTextarea placeholder="Shipping Information" id="shippingInformation" [(ngModel)]="product.shippingInformation" name="shippingInformation" class="w-full p-2 border border-gray-300 rounded" required rows="5"></textarea>
                       <label for="shippingInformation">Shipping Information</label>
-                  </p-floatLabel>
+                  </p-floatLabel> -->
+
+                  <div>
+                    <label for="OrderNotes" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                        Shipping Information
+                    </label>
+                  
+                    <textarea
+                      id="OrderNotes"  [(ngModel)]="product.shippingInformation"
+                      class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-xs sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                      rows="4"  [(ngModel)]="product.returnPolicy"
+                      placeholder="Enter any additional order notes..."
+                    ></textarea>
+                  </div>
+                  
+                  
               </div>
               <div class="col-span-1 md:col-span-2">
                   <p-floatLabel>
+                    <div>
+                        <label for="OrderNotes" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Return Policy
+                        </label>
+                      
+                        <textarea
+                          id="OrderNotes"
+                          class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-xs sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                          rows="4"  [(ngModel)]="product.returnPolicy"
+                          placeholder="Enter any additional order notes..."
+                        ></textarea>
+                      </div>
+<!--                       
                       <textarea placeholder="Return Policy" pInputTextarea id="returnPolicy" [(ngModel)]="product.returnPolicy" name="returnPolicy" class="w-full p-2 border border-gray-300 rounded" required rows="3"></textarea>
-                      <label for="returnPolicy">Return Policy</label>
+                      <label for="returnPolicy">Return Policy</label> -->
                   </p-floatLabel>
               </div>
           </div>
