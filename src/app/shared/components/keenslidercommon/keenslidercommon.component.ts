@@ -34,7 +34,7 @@ function ThumbnailPlugin(main: KeenSliderInstance): KeenSliderPlugin {
     slider.on("created", () => {
       addActive(slider.track.details.rel);
       addClickEvents();
-      main.on("animationStarted", (main) => {
+      main.on("animationStarted", (main:any) => {
         removeActive();
         const next = main.animator.targetIdx || 0;
         addActive(main.track.absToRel(next));
