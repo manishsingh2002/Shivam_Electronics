@@ -28,12 +28,12 @@ export class MainDashboardComponent {
     });
   }
 
-  activeComponent: any = HomePageComponent;
+  activeComponent: any = HomePage1Component;
   componentNavItems: any[] = [
+    { label: 'home1', component: HomePage1Component },
     { label: 'home', component: HomePageComponent },
     { label: 'invoice', component: GstInvoiceComponent }, // Corrected key
     { label: 'Product List', component: ProductListComponent },
-    { label: 'home1', component: HomePage1Component },
 
 
   ];

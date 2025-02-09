@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { KeenslidercommonComponent } from '../../../shared/components/keenslidercommon/keenslidercommon.component';
 
 @Component({
     selector: 'app-home-page1',
-    imports: [KeenslidercommonComponent],
+    imports: [],
     templateUrl: './home-page1.component.html',
     styleUrl: './home-page1.component.scss'
 })

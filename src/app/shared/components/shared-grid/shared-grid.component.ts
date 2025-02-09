@@ -39,24 +39,24 @@ export class SharedGridComponent implements OnInit, OnChanges {
     headerRowBorder: false,
     // rowBorder: { style: 'dotted', width: 3, color: '#9696C8' },
     columnBorder: { style: 'dashed', color: '#9696C8' },
-})
+  })
 
 
- CustomHeaderComponent = (params:any) => {
-  return (
+  CustomHeaderComponent = (params: any) => {
+    return (
       `<div style="display: flex; align-items: center; gap: 8px;">
           <span>${params.displayName}</span>
           <i class="fas fa-user" style="color: #9696C8;"></i> <!-- Font Awesome icon -->
       </div>`
-  );
-};
+    );
+  };
 
-gridOptions = {
-  columnDefs: this.columnDefs,
-  components: {
+  gridOptions = {
+    columnDefs: this.columnDefs,
+    components: {
       customHeaderComponent: this.CustomHeaderComponent,
-  },
-};
+    },
+  };
 
   ngOnInit(): void {
     if (!this.column || this.column.length === 0) {
@@ -90,7 +90,7 @@ gridOptions = {
   onRowSelected(event: any) {
     this.dataChanged.emit({ type: 'rowSelected', event });
   }
-  onCellClicked(event:any){
+  onCellClicked(event: any) {
     this.dataChanged.emit({ type: 'cellClicked', event });
 
   }

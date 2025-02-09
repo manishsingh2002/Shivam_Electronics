@@ -48,7 +48,6 @@ import { RouterModule, Router } from '@angular/router'; // Import Router correct
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { appRoutes } from '../../../../routes/app.routes';
 import { AppMessageService } from '../../../../core/services/message.service';
 @Component({
     selector: 'app-login',

@@ -49,6 +49,8 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
   </div>
   <div class="mt-4">
     <ng-container *ngComponentOutlet="activeComponent"></ng-container>
+    <router-outlet></router-outlet> 
+
   </div>
 </main>
   `
