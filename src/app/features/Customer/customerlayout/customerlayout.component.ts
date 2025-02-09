@@ -14,12 +14,12 @@ import { CustomerdetailsComponent } from '../customerdetails/customerdetails.com
   styleUrl: './customerlayout.component.scss'
 })
 export class CustomerlayoutComponent {
-    activeComponent: any = CustomerMasterComponent; 
-    componentNavItems: any[] = [
-      { label: 'Customer Master', component: CustomerMasterComponent },
-      { label: 'Customer List', component: CustomerListComponent },
-      {label:'customerDetails',component:CustomerdetailsComponent}
-    ];
+  activeComponent: any = CustomerMasterComponent;
+  componentNavItems: any[] = [
+    { label: 'Customer Master', component: CustomerMasterComponent },
+    { label: 'Customer List', component: CustomerListComponent },
+    { label: 'customerDetails', component: CustomerdetailsComponent }
+  ];
 
   navigateToComponent(component: any) {
     this.activeComponent = component;
