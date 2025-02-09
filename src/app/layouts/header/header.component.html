@@ -14,10 +14,10 @@
     <div class="flex flex-1 items-center justify-end md:justify-between">
       <nav aria-label="Global" class="hidden md:block">
         <ul class="flex items-center gap-6 text-sm">
-          <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">About</a></li>
-          <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Careers</a></li>
-          <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">History</a></li>
-          <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Services</a></li>
+          <li><a [routerLink]="['/dashboard']" class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Dashboard</a></li>
+          <li><a [routerLink]="['/admin-layout']"  class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">admin-layout</a></li>
+          <li><a [routerLink]="['/products']" class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Products</a></li>
+          <li><a [routerLink]="['/customer']" class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Customer</a></li>
           <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Projects</a></li>
           <li><a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">Blog</a></li>
         </ul>
@@ -290,7 +290,6 @@
                 Team settings
               </a>
 
-              <form method="POST" action="#">
                 <button
                   type="submit"
                   class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50 dark:text-red-500 dark:hover:bg-red-600/10"

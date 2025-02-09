@@ -48,7 +48,7 @@ import { RouterModule, Router } from '@angular/router'; // Import Router correct
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from '../../../../app.routes';
+import { appRoutes } from '../../../../routes/app.routes';
 import { AppMessageService } from '../../../../core/services/message.service';
 @Component({
     selector: 'app-login',
@@ -64,14 +64,14 @@ export class LoginComponent {
     };
     public errorMessage: string | null = null;
 
-    constructor(private auth: AuthService, private router: Router,private messageService:AppMessageService) {}
+    constructor(private auth: AuthService, private router: Router, private messageService: AppMessageService) { }
 
     onLogin() {
         this.errorMessage = null;
         this.auth.login(this.logindetails).subscribe({
             next: (response: any) => {
                 // console.log('Login Response:', response);
-                if (response && response.data && response.token) { 
+                if (response && response.data && response.token) {
                     // Correct check
                     this.messageService.handleResponse(response.status, 'Request Successful', 'maish');
                     console.log("Login successful, redirecting to dashboard");

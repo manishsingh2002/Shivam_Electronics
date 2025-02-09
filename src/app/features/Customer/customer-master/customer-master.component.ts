@@ -50,26 +50,15 @@ import { SupabaseService } from '../../../core/services/supabase.service';
 export class CustomerMasterComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: string | null = null;
-  bucketName = 'manish'; // Replace with your bucket name
+  bucketName = 'manish';
 
-
-  customer = {
+  customer:any = {
     fullname: '',
     profileImg: '',
     email: '',
     status: '',
-    phoneNumbers: [{ number: '', type: '', primary: "" }],
-    addresses: [
-      {
-        street: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        country: '',
-        type: 'home',
-        isDefault: false,
-      },
-    ],
+    phoneNumbers: [],
+    addresses: [],
     cart: { items: [] },
     guaranteerId: '6787cc8facb090dbb35b773a',
     totalPurchasedAmount: 0,
@@ -114,6 +103,7 @@ export class CustomerMasterComponent implements OnInit {
   // i: number;
   customerId: string = '12345'; // You should dynamically get this from your application (e.g., logged-in user's customer ID)
   uploadStatus: string = ''; // For showing the status of the upload
+  addressdialogvisible: boolean=false;
 
   constructor(
     private supabase: SupabaseService,
@@ -302,6 +292,9 @@ export class CustomerMasterComponent implements OnInit {
   showPhoneDialog() {
     this.phoneDialogVisible = true;
   }
+  showAddressdialog(){
+    this.addressdialogvisible=true
+  }
 
   addPhoneNumber() {
     if (this.newPhoneNumber.number && this.newPhoneNumber.type) {
@@ -318,6 +311,7 @@ export class CustomerMasterComponent implements OnInit {
   }
 
   addAddress() {
+    this.addressdialogvisible=true
     if (this.newAddress.street && this.newAddress.city) {
       this.customer.addresses.push({ ...this.newAddress });
       this.newAddress = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };

@@ -23,6 +23,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { SharedGridComponent } from '../../../shared/components/shared-grid/shared-grid.component';
+import { Router } from '@angular/router';
 export interface CartItem {
     customerId: string;
     invoiceIds: string[];
@@ -114,6 +115,7 @@ export class CustomerListComponent {
     redirectedcustomer: any;
 
     constructor(
+        private router: Router,
         private apiService: ApiService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
@@ -122,6 +124,10 @@ export class CustomerListComponent {
 
     ngOnInit() {
         this.loadDemoData()
+    }
+
+    vierCustomer(customerId: any) {
+        this.router.navigate(['/customer', customerId._id]);
     }
 
     filterSearch(event: Event): void {

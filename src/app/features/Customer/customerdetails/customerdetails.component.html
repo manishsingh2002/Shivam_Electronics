@@ -1,4 +1,102 @@
-<section class="text-gray-600 body-font">
+<div class="flex flex-wrap w-full md:w-2/3 p-2"> 
+  <div class="md:p-2 p-1 w-full">
+
+    <!-- Personal Information Card (Read-Only) -->
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <p-card header="Personal Information" class="bg-gray-900 text-white">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-300">Full Name</label>
+            <p class="bg-gray-800 text-white border border-gray-600 rounded-md p-2">{{ customer.fullname }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300">Email</label>
+            <p class="bg-gray-800 text-white border border-gray-600 rounded-md p-2">{{ customer.email }}</p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Phone Numbers Card (Read-Only) -->
+    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <p-card header="Phone Numbers" class="bg-gray-900 text-white">
+        <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3" class="mt-4 bg-gray-900 text-white">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Number</th>
+              <th>Type</th>
+              <th>Primary</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-phone>
+            <tr>
+              <td>{{ phone.number }}</td>
+              <td>{{ phone.type }}</td>
+              <td>{{ phone.primary ? 'Yes' : 'No' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+
+    <!-- Addresses Card (Read-Only) -->
+    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <p-card header="Addresses" class="bg-gray-900 text-white">
+        <p-table [value]="customer.addresses" [paginator]="true" [rows]="3" class="mt-4 bg-gray-900 text-white">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Street</th>
+              <th>City</th>
+              <th>State</th>
+              <th>ZIP Code</th>
+              <th>Country</th>
+              <th>Type</th>
+              <th>Default</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-address>
+            <tr>
+              <td>{{ address.street }}</td>
+              <td>{{ address.city }}</td>
+              <td>{{ address.state }}</td>
+              <td>{{ address.zipCode }}</td>
+              <td>{{ address.country }}</td>
+              <td>{{ address.type }}</td>
+              <td>{{ address.isDefault ? 'Yes' : 'No' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+
+    <!-- Cart Items Section -->
+    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <p-card header="Cart Items" class="bg-gray-900 text-white">
+        <p-table [value]="customer.cartItems" [paginator]="true" [rows]="5" class="mt-4 bg-gray-900 text-white">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price | currency }}</td>
+              <td>{{ (item.quantity * item.price) | currency }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+
+  </div>
+</div>
+
+<!-- <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto flex flex-wrap">
       <div class="flex w-full mb-20 flex-wrap">
         <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 lg:w-1/3 lg:mb-0 mb-4">Master Cleanse Reliac Heirloom</h1>
@@ -7,16 +105,71 @@
       <div class="flex flex-wrap md:-m-2 -m-1">
         <div class="flex flex-wrap w-1/2">
           <div class="md:p-2 p-1 w-1/2">
-            <!-- <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300"> -->
+            <div class="md:p-2 p-1 w-full max-w-[500px] h-[250px] mx-auto">
+              <div class="h-full w-full bg-white dark:bg-gray-900 rounded-lg shadow-md flex flex-col justify-center items-center p-4">
+            
+                 Cards Container 
+                <dl class="grid grid-cols-2 gap-2 mt-3 w-full">
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">$4.8m</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Sales</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">24</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Official Addons</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">86</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Addons</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">86k</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Downloads</dt>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            
+             <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300"> 
           </div>
           <div class="md:p-2 p-1 w-1/2">
-            <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/501x301">
+            <div class="md:p-2 p-1 w-full max-w-[500px] h-[250px] mx-auto">
+              <div class="h-full w-full bg-white dark:bg-gray-900 rounded-lg shadow-md flex flex-col justify-center items-center p-4">
+            
+                 Cards Container 
+                <dl class="grid grid-cols-2 gap-2 mt-3 w-full">
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">$4.8m</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Sales</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">24</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Official Addons</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">86</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Addons</dt>
+                  </div>
+            
+                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
+                    <dd class="text-lg font-bold text-blue-600">86k</dd>
+                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Downloads</dt>
+                  </div>
+                </dl>
+              </div>
+            </div>
+             <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/501x301"> 
           </div>
           <div class="md:p-2 p-1 w-full">
             
-            <!-- <a class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8" style="height: 200px;">
-                <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"> -->
-            <!-- <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360"> -->
+             <a class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8" style="height: 200px;">
+                <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"> 
+             <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360"> 
             <a   class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
                 <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" ></span>
               
@@ -74,7 +227,7 @@
     </div>
   </section>
 
-  <!-- / product details bought -->
+   / product details bought 
   <section class="text-gray-400 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
@@ -165,4 +318,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
