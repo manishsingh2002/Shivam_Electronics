@@ -39,8 +39,10 @@ export class PaymentComponent {
   constructor(private http: HttpClient) { }
 
 
-  onInit() {
-    const data = localStorage.getItem('autopopulate');
+  ngOnInit() {
+    const autopopulate = JSON.parse(localStorage.getItem('autopopulate') || '{}');
+    console.log(autopopulate); // Check if data exists
+
   }
 
   isValidJson(input: string): boolean {
