@@ -23,7 +23,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
-import { SupabaseService } from '../../../core/services/supabase.service';
+// import { SupabaseService } from '../../../core/services/supabase.service';
 
 @Component({
   selector: 'app-customer',
@@ -45,7 +45,7 @@ import { SupabaseService } from '../../../core/services/supabase.service';
     FileUploadModule,
     ImageModule,
   ],
-  providers: [ApiService,SupabaseService, IftaLabelModule, ConfirmationService, MessageService],
+  providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
 })
 export class CustomerMasterComponent implements OnInit {
   selectedFile: File | null = null;
@@ -106,7 +106,7 @@ export class CustomerMasterComponent implements OnInit {
   addressdialogvisible: boolean=false;
 
   constructor(
-    private supabase: SupabaseService,
+    // private supabase: SupabaseService,
     private ApiService: ApiService,
     private http:HttpClient,
     private messageService: MessageService
@@ -118,27 +118,27 @@ export class CustomerMasterComponent implements OnInit {
   }
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
-    this.upload()
+    // this.upload()
   }
 
-  async upload() {
-    if (this.selectedFile) {
-        const timestamp = Date.now();
-        const filePath = `${timestamp}-${this.selectedFile.name}`;
-        const uploadResult = await this.supabase.uploadImage(this.selectedFile, this.bucketName, filePath);
+//   async upload() {
+//     if (this.selectedFile) {
+//         const timestamp = Date.now();
+//         const filePath = `${timestamp}-${this.selectedFile.name}`;
+//         const uploadResult = await this.supabase.uploadImage(this.selectedFile, this.bucketName, filePath);
 
-        if ('data' in uploadResult && uploadResult.data) {  // Check if 'data' exists
-            this.imageUrl = await this.supabase.getImageUrl(this.bucketName, filePath);
-            console.log("Image URL:", this.imageUrl); // Log for debugging
-        } else if ('error' in uploadResult && uploadResult.error) {
-            console.error("Upload failed:", uploadResult.error);
-            // Display error message to the user (important!)
-            alert(`Upload failed: ${uploadResult.error.message || 'Unknown error'}`); // Example
-        } else {
-          console.error("Unexpected upload result:", uploadResult); // Handle unexpected cases
-        }
-    }
-}
+//         if ('data' in uploadResult && uploadResult.data) {  // Check if 'data' exists
+//             this.imageUrl = await this.supabase.getImageUrl(this.bucketName, filePath);
+//             console.log("Image URL:", this.imageUrl); // Log for debugging
+//         } else if ('error' in uploadResult && uploadResult.error) {
+//             console.error("Upload failed:", uploadResult.error);
+//             // Display error message to the user (important!)
+//             alert(`Upload failed: ${uploadResult.error.message || 'Unknown error'}`); // Example
+//         } else {
+//           console.error("Unexpected upload result:", uploadResult); // Handle unexpected cases
+//         }
+//     }
+// }
   // async upload() {
   //   if (this.selectedFile) {
   //       const timestamp = Date.now(); // or use UUID library
