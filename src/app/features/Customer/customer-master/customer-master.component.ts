@@ -1,15 +1,11 @@
-// import { FloatLabelModule } from 'primeng/floatlabel';
-// import { InputTextModule } from 'primeng/inputtext';
-// import { TextareaModule } from 'primeng/textarea';
-import { IftaLabelModule } from 'primeng/iftalabel';
-// import { SelectModule } from 'primeng/select';
 
+import { IftaLabelModule } from 'primeng/iftalabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../../core/services/api.service';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -17,7 +13,6 @@ import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
-// import { ChartModule } from 'primeng/chart';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
@@ -29,43 +24,21 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-customer',
   templateUrl: './customer-master.component.html',
   styleUrls: ['./customer-master.component.scss'],
-  imports: [
-    CardModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    TagModule,
-    DialogModule,
-    KeyFilterModule,
-    TableModule,
-    RadioButtonModule,
-    InputTextModule, ButtonModule,
-    SelectModule,
-    FileUploadModule,
-    ImageModule,
-  ],
+  imports: [ CardModule, RouterModule, FormsModule, ReactiveFormsModule, CommonModule, TagModule, DialogModule, KeyFilterModule, TableModule, RadioButtonModule, InputTextModule, ButtonModule, SelectModule, FileUploadModule, ImageModule,],
   providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
 })
+
 export class CustomerMasterComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: string | null = null;
   bucketName = 'manish';
-
-  customer:any = {
-    fullname: '',
-    profileImg: '',
-    email: '',
-    status: '',
-    phoneNumbers: [],
-    addresses: [],
-    cart: { items: [] },
-    guaranteerId: '6787cc8facb090dbb35b773a',
-    totalPurchasedAmount: 0,
-    remainingAmount: 0,
-    paymentHistory: [],
-    metadata: {},
-  };
+  phoneDialogVisible = false;
+  newPhoneNumber: any = {};
+  customerId: string = '12345'; // You should dynamically get this from your application (e.g., logged-in user's customer ID)
+  uploadStatus: string = ''; // For showing the status of the upload
+  addressdialogvisible: boolean=false;
+  customerIDDropdown:any[]=[]
+  selectedGuaranter:any=''
 
   statuses = [
     { label: 'Active', value: 'active' },
@@ -98,12 +71,21 @@ export class CustomerMasterComponent implements OnInit {
     isDefault: false
   };
 
-  phoneDialogVisible = false;
-  newPhoneNumber: any = {};
-  // i: number;
-  customerId: string = '12345'; // You should dynamically get this from your application (e.g., logged-in user's customer ID)
-  uploadStatus: string = ''; // For showing the status of the upload
-  addressdialogvisible: boolean=false;
+  customer:any = {
+    fullname: '',
+    profileImg: '',
+    email: '',
+    status: '',
+    phoneNumbers: [],
+    addresses: [],
+    cart: { items: [] },
+    guaranteerId: this.selectedGuaranter._id,
+    totalPurchasedAmount: 0,
+    remainingAmount: 0,
+    paymentHistory: [],
+    metadata: {},
+  };
+
 
   constructor(
     // private supabase: SupabaseService,
@@ -113,13 +95,113 @@ export class CustomerMasterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Fetch customer data (replace with your actual logic)
-    // this.getCustomerID();
+  this.autopopulatedata()
   }
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0] as File;
-    // this.upload()
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.autopopulatedata();
   }
+  autopopulatedata(){
+    const autopopulate: any = JSON.parse(localStorage.getItem('autopopulate') || '{}');
+    console.log(autopopulate);
+    
+    if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
+      this.customerIDDropdown = [...autopopulate.customersdrop]; // Spread operator ensures a new array reference
+    } else {
+      this.customerIDDropdown = [];
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'No valid customer data found',
+        life: 3000
+      });
+    }
+    
+    // Ensure future updates also enforce an array
+    setTimeout(() => {
+      if (!Array.isArray(this.customerIDDropdown)) {
+        console.error('Corrupted Dropdown Data. Resetting...');
+        this.customerIDDropdown = [];
+      }
+    }, 500);
+    
+  }
+
+  selectedGuaranterevent(event:any){
+console.log(    this.selectedGuaranter); 
+this.customerIDDropdown = event.value;
+ }
+ 
+  // onFileSelected(event: any) {
+  //   this.selectedFile = event.target.files[0] as File;
+  // }
+
+  getCustomerID() {
+    const customerId = 'your-customer-id';
+    this.ApiService.getCustomerDataWithId(customerId)
+      .subscribe({
+        next: (customer) => {
+          this.customer = customer;
+        },
+        error: (err) => {
+          console.error('Error fetching customer:', err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load customer data.' });
+        }
+      });
+  }
+
+  
+  handleFileSelect(event?: any) {
+    console.log(event);
+    const file = event.files[0]; 
+    if (file) {
+      this.uploadStatus = 'Preparing to upload...';
+      const formData = new FormData();
+      formData.append('image', file); // Append the selected file to FormData
+      // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
+      //   (response: any) => {
+      //     this.uploadStatus = 'Image uploaded successfully!';
+      //     console.log('Upload Response:', response);
+      //   },
+      //   (error: any) => {
+      //     this.uploadStatus = 'Error uploading image.';
+      //     console.error('Upload Error:', error);
+      //   }
+      // );
+    } else {
+      console.log('No file selected');
+    }
+  }
+  
+  handleFileUpload(event: any) {
+    console.log('File uploaded:', event);
+  }
+
+// handleFileSelect(event?: any) {
+  //   const file = event.files[0];  // Extract the first selected file
+
+  //   if (file) {
+  //     this.uploadStatus = 'Preparing to upload...';
+  //     const formData = new FormData();
+  //     formData.append('image', file); 
+      
+  //     this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
+  //       (response:any) => {
+  //         this.uploadStatus = 'Image uploaded successfully!';
+  //         console.log('Upload Response:', response);
+  //       },
+  //       (error:any) => {
+  //         this.uploadStatus = 'Error uploading image.';
+  //         console.error('Upload Error:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.log('No file selected');
+  //   }
+  // }
+
+  // Handle file upload
+  
 
 //   async upload() {
 //     if (this.selectedFile) {
@@ -172,75 +254,7 @@ export class CustomerMasterComponent implements OnInit {
   //   }
   // }
 
-  getCustomerID() {
-    // Assuming you have a customer ID available (e.g., from route params)
-    const customerId = 'your-customer-id';
-
-    this.ApiService.getCustomerDataWithId(customerId)
-      .subscribe({
-        next: (customer) => {
-          this.customer = customer;
-        },
-        error: (err) => {
-          console.error('Error fetching customer:', err);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load customer data.' });
-        }
-      });
-  }
-
-
   
-  handleFileSelect(event?: any) {
-    console.log(event);
-    const file = event.files[0]; 
-    if (file) {
-      this.uploadStatus = 'Preparing to upload...';
-      const formData = new FormData();
-      formData.append('image', file); // Append the selected file to FormData
-      // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-      //   (response: any) => {
-      //     this.uploadStatus = 'Image uploaded successfully!';
-      //     console.log('Upload Response:', response);
-      //   },
-      //   (error: any) => {
-      //     this.uploadStatus = 'Error uploading image.';
-      //     console.error('Upload Error:', error);
-      //   }
-      // );
-    } else {
-      console.log('No file selected');
-    }
-  }
-  
-  // handleFileSelect(event?: any) {
-  //   const file = event.files[0];  // Extract the first selected file
-
-  //   if (file) {
-  //     this.uploadStatus = 'Preparing to upload...';
-  //     const formData = new FormData();
-  //     formData.append('image', file); 
-      
-  //     this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-  //       (response:any) => {
-  //         this.uploadStatus = 'Image uploaded successfully!';
-  //         console.log('Upload Response:', response);
-  //       },
-  //       (error:any) => {
-  //         this.uploadStatus = 'Error uploading image.';
-  //         console.error('Upload Error:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.log('No file selected');
-  //   }
-  // }
-
-  // Handle file upload
-  handleFileUpload(event: any) {
-    console.log('File uploaded:', event);
-  }
-
-
   // saveCustomer() {
   //   if (this.validateCustomer()) {
   //     this.ApiService.createNewCustomer(this.customer).subscribe(

@@ -35,7 +35,6 @@ export class PaymentComponent {
 
   paymentMethods = ['credit_card', 'debit_card', 'upi', 'crypto', 'bank_transfer'];
   statuses = ['pending', 'completed', 'failed', 'refunded'];
-
   constructor(private http: HttpClient) { }
 
 

@@ -22,10 +22,24 @@
             <p-select id="status" [options]="statuses" [(ngModel)]="customer.status" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
           </div>
     
-          <div class="mt-4">
+          <div class="mt-4 flex flex-col space-y-2"> 
             <label for="guaranteer" class="block text-sm font-medium text-gray-300 mb-1">Guaranteer Name</label>
-            <input id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" [(ngModel)]="customer.guaranteerId" autocomplete="off">
+            <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown" optionLabel="fullname" [(ngModel)]="selectedGuaranter" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
+
+            <!-- <p-select (onClick)="selectedGuaranterevent($event)" optionLabel="fullname" [(ngModel)]="selectedGuaranter" class=" border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select> -->
+            <div id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" autocomplete="off">{{selectedGuaranter.fullname}}</div>
+            <div *ngFor="let item of selectedGuaranter.phoneNumbers">
+              <div id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" autocomplete="off">{{item.number}}</div>
+            </div>
           </div>
+
+          <!-- <div class="mt-4">
+            <label for="guaranteer" class="block text-sm font-medium text-gray-300 mb-1">Guaranteer Name</label>
+            <p-select [options]="this.customerIDDropdown" [(ngModel)]="selectedGuaranter" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" ></p-select>
+            <p id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" [(ngModel)]="selectedGuaranter.fullname" autocomplete="off">
+            <p id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" [(ngModel)]="selectedGuaranter.phoneNumbers[0].number" autocomplete="off">
+
+          </div> -->
         </div>
     </div>
 
