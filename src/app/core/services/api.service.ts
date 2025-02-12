@@ -71,6 +71,7 @@ export class ApiService {
       .get(`${this.baseUrl}/v1/products/autopopulate`)
       .pipe(catchError((error) => this.errorhandler.handleError('getAutopopulateData', error)));
   }
+  
 
   getAllProductData(): Observable<Product[]> {
     return this.http

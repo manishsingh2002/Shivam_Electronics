@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object // Inject platform ID
-  ) {}
+  ) { }
 
   canActivate(): boolean {
     if (isPlatformBrowser(this.platformId)) {
@@ -26,7 +26,6 @@ export class AuthGuard implements CanActivate {
       console.log('User not authenticated, redirecting to login');
       // this.authService.logout()
       this.router.navigate(['/login']);
-      debugger
       return false;
     }
   }

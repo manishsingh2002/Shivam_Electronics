@@ -1,321 +1,409 @@
-<div class="flex flex-wrap w-full md:w-2/3 p-2"> 
-  <div class="md:p-2 p-1 w-full">
 
-    <!-- Personal Information Card (Read-Only) -->
-    <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-      <p-card header="Personal Information" class="bg-gray-900 text-white">
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Full Name</label>
-            <p class="bg-gray-800 text-white border border-gray-600 rounded-md p-2">{{ customer.fullname }}</p>
+<p-select id="guaranteer"  [options]="customerIDDropdown" optionLabel="fullname" [(ngModel)]="selectedGuaranteer" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
+<!--  -->
+
+
+<section class="bg-gray-900 text-gray-400 body-font p-4">
+  <div class="container mx-auto flex flex-wrap px-5 py-12">
+    <div class="flex w-full flex-wrap justify-center mb-8">
+      <h1 class="text-center mb-4 text-2xl font-medium title-font text-white sm:text-3xl lg:mb-0">Customer Profile</h1>
+    </div>
+    <div class="flex w-full flex-wrap md:-m-2 -m-1">
+      <div class="mx-auto w-full md:w-1/3 p-2">
+        <div class="flex h-full flex-col rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-lg">
+          <div class="mx-auto mb-4 flex h-32 w-32 items-center justify-center overflow-hidden rounded-lg border-2 border-gray-600 bg-gray-900">
+            <img src="" alt="Profile Image" class="h-full w-full object-cover" />
           </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Email</label>
-            <p class="bg-gray-800 text-white border border-gray-600 rounded-md p-2">{{ customer.email }}</p>
+
+          <div class="mx-auto flex gap-2 rounded-md px-4 py-2 font-semibold text-white justify-center">
+            <i class="pi pi-user text-gray-500 text-6xl"></i>
+          </div>
+
+          <p class="mt-2 text-center text-sm text-green-500"></p>
+
+          <div class="mt-4">
+            <label for="status" class="mb-1 block text-sm font-medium text-gray-300">Status</label>
+            <div
+              id="status"
+              class="w-full rounded-md border border-gray-600 bg-gray-800 p-2 text-white"
+            >inactive</div>
+          </div>
+
+          <div class="mt-4 flex flex-col space-y-2">
+            <label for="guaranteer" class="mb-1 block text-sm font-medium text-gray-300">Guaranteer Name</label>
+            <div
+              id="guaranteer-name"
+              type="text"
+              class="w-full rounded-md border border-gray-600 bg-gray-800 p-2 text-white"
+              autocomplete="off"
+            >Manish Singh</div>
+            <div>
+
+              <div
+                id="guaranteer-phone"
+                type="text"
+                class="w-full rounded-md border border-gray-600 bg-gray-800 p-2 text-white"
+                autocomplete="off"
+              >
+                7160966299
+              </div>
+
+            </div>
           </div>
         </div>
-      </p-card>
+      </div>
+
+      <div class="flex w-full flex-wrap md:w-2/3 p-2">
+        <div class="w-full p-1 md:p-2">
+          <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-md">
+            <div class="bg-gray-900 text-white">
+              <div class="text-white">
+                <h2 class="text-xl font-bold mb-2">Personal Information</h2>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="fullname" class="mb-1 block text-sm font-medium text-gray-300">Full Name</label>
+                  <div
+                    id="fullname"
+                    type="text"
+                    class="w-full rounded-md border border-gray-600 bg-gray-800 p-2 text-white"
+
+                  >Manish Singh</div>
+                </div>
+                <div>
+                  <label for="email" class="mb-1 block text-sm font-medium text-gray-300">Email</label>
+                  <div
+                    id="email"
+                    type="email"
+
+                    class="w-full rounded-md border border-gray-600 bg-gray-800 p-2 text-white"
+
+                  >msms5476mail.com</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-md">
+            <div class="bg-gray-900 text-white">
+              <div class="text-white">
+                <h2 class="text-xl font-bold mb-2">Phone Numbers</h2>
+              </div>
+              <div class="mt-4 bg-gray-900 text-white">
+                <table class="w-full text-left">
+                  <thead class="border-b border-gray-600">
+                    <tr>
+                      <th class="py-2">Number</th>
+                      <th class="py-2">Type</th>
+                      <th class="py-2">Primary</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  class="border-b border-gray-700">
+                      <td class="py-2">7160966299</td>
+                      <td class="py-2">home</td>
+                      <td class="py-2"><input type="checkbox" disabled checked /></td>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-md">
+            <div class="bg-gray-900 text-white">
+              <div class="text-white">
+                <h2 class="text-xl font-bold mb-2">Addresses</h2>
+              </div>
+              <div class="mt-4 bg-gray-900 text-white">
+                <table class="w-full text-left">
+                  <thead class="border-b border-gray-600">
+                    <tr>
+                      <th class="py-2">Street</th>
+                      <th class="py-2">City</th>
+                      <th class="py-2">State</th>
+                      <th class="py-2">ZIP Code</th>
+                      <th class="py-2">Country</th>
+                      <th class="py-2">Type</th>
+                      <th class="py-2">Default</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-gray-700">
+                      <td class="py-2">69 balaji green city near noorie media</td>
+                      <td class="py-2">surat</td>
+                      <td class="py-2">GUJARAT</td>
+                      <td class="py-2">394327</td>
+                      <td class="py-2">India</td>
+                      <td class="py-2">home</td>
+                      <td class="py-2"><input type="checkbox" disabled checked /></td>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex w-full flex-wrap p-2">
+        <div class="w-full p-1 md:p-2">
+          <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-md">
+            <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-gray-900 rounded-lg">
+              <div class="mx-auto max-w-3xl text-center">
+                <h2 class="text-3xl font-bold text-yellow-500 sm:text-4xl">Financial Status</h2>
+              </div>
+
+              <dl class="mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col rounded-lg border border-gray-600 px-4 py-8 text-center bg-gray-900">
+                  <dt class="order-last text-lg font-medium text-gray-400">Remaining Amount</dt>
+                  <dd class="text-4xl font-extrabold text-blue-500 md:text-5xl">{{ customer.remainingAmount | currency }}</dd>
+                </div>
+
+                <div class="flex flex-col rounded-lg border border-gray-600 px-4 py-8 text-center bg-gray-900">
+                  <dt class="order-last text-lg font-medium text-gray-400">Purchased Amount</dt>
+                  <dd class="text-4xl font-extrabold text-blue-500 md:text-5xl">{{ customer.totalPurchasedAmount | currency }}</dd>
+                </div>
+
+                <div class="flex flex-col rounded-lg border border-gray-600 px-4 py-8 text-center bg-gray-900">
+                  <dt class="order-last text-lg font-medium text-gray-400">Total BUY</dt>
+                  <dd class="text-4xl font-extrabold text-blue-500 md:text-5xl">86</dd>
+                </div>
+
+                <div class="flex flex-col rounded-lg border border-gray-600 px-4 py-8 text-center bg-gray-900">
+                  <dt class="order-last text-lg font-medium text-gray-400">Downloads</dt>
+                  <dd class="text-4xl font-extrabold text-blue-500 md:text-5xl">86k</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
 
-    <!-- Phone Numbers Card (Read-Only) -->
-    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-      <p-card header="Phone Numbers" class="bg-gray-900 text-white">
-        <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3" class="mt-4 bg-gray-900 text-white">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Number</th>
-              <th>Type</th>
-              <th>Primary</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-phone>
-            <tr>
-              <td>{{ phone.number }}</td>
-              <td>{{ phone.type }}</td>
-              <td>{{ phone.primary ? 'Yes' : 'No' }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-card>
-    </div>
-
-    <!-- Addresses Card (Read-Only) -->
-    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-      <p-card header="Addresses" class="bg-gray-900 text-white">
-        <p-table [value]="customer.addresses" [paginator]="true" [rows]="3" class="mt-4 bg-gray-900 text-white">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Street</th>
-              <th>City</th>
-              <th>State</th>
-              <th>ZIP Code</th>
-              <th>Country</th>
-              <th>Type</th>
-              <th>Default</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-address>
-            <tr>
-              <td>{{ address.street }}</td>
-              <td>{{ address.city }}</td>
-              <td>{{ address.state }}</td>
-              <td>{{ address.zipCode }}</td>
-              <td>{{ address.country }}</td>
-              <td>{{ address.type }}</td>
-              <td>{{ address.isDefault ? 'Yes' : 'No' }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-card>
-    </div>
-
-    <!-- Cart Items Section -->
-    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-      <p-card header="Cart Items" class="bg-gray-900 text-white">
-        <p-table [value]="customer.cartItems" [paginator]="true" [rows]="5" class="mt-4 bg-gray-900 text-white">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Product Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{ item.name }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ item.price | currency }}</td>
-              <td>{{ (item.quantity * item.price) | currency }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-card>
-    </div>
 
   </div>
-</div>
+</section>
+<!--  -->
+<section class="text-gray-400 bg-gray-900 body-font p-4">
+  <div class="container px-5 py-12 mx-auto flex flex-wrap">
+    <div class="flex w-full mb-8 flex-wrap justify-center">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-white lg:mb-0 mb-4 text-center">
+        Customer Profile
+      </h1>
+    </div>
 
-<!-- <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto flex flex-wrap">
-      <div class="flex w-full mb-20 flex-wrap">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 lg:w-1/3 lg:mb-0 mb-4">Master Cleanse Reliac Heirloom</h1>
-        <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom.</p>
+    <div class="flex flex-wrap md:-m-2 -m-1 w-full">
+      <!-- Left Section: Profile Card -->
+      <div class="w-full md:w-1/3 p-2 mx-auto">
+        <div class="bg-gray-800 rounded-lg p-4 flex flex-col h-full border border-gray-700 shadow-lg">
+          <div class="w-32 h-32 border-2 border-gray-600 rounded-lg flex items-center justify-center overflow-hidden mb-4 bg-gray-900 mx-auto">
+            <img *ngIf="customer.profileImg" [src]="customer.profileImg" alt="Profile Image" class="w-full h-full object-cover">
+            <i *ngIf="!customer.profileImg" class="pi pi-user text-gray-500 text-6xl"></i>
+          </div>
+          <div class="text-center text-lg font-semibold text-white">
+            {{ customer.fullname }}
+          </div>
+          <div class="text-center text-sm text-gray-400">{{ customer.email }}</div>
+
+          <div class="mt-4 text-center">
+            <span class="px-3 py-1 rounded text-sm" 
+                  [ngClass]="{'bg-green-600': customer.status === 'active', 'bg-red-600': customer.status === 'inactive'}">
+              Status: {{ customer.status | titlecase }}
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="flex flex-wrap md:-m-2 -m-1">
-        <div class="flex flex-wrap w-1/2">
-          <div class="md:p-2 p-1 w-1/2">
-            <div class="md:p-2 p-1 w-full max-w-[500px] h-[250px] mx-auto">
-              <div class="h-full w-full bg-white dark:bg-gray-900 rounded-lg shadow-md flex flex-col justify-center items-center p-4">
-            
-                 Cards Container 
-                <dl class="grid grid-cols-2 gap-2 mt-3 w-full">
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">$4.8m</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Sales</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">24</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Official Addons</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">86</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Addons</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">86k</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Downloads</dt>
-                  </div>
-                </dl>
+
+      <!-- Right Section: Details -->
+      <div class="flex flex-wrap w-full md:w-2/3 p-2">
+        <div class="md:p-2 p-1 w-full">
+          <!-- Phone Numbers -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Phone Numbers</h2>
+            <ul class="text-white">
+              <li *ngFor="let phone of customer.phoneNumbers">
+                {{ phone.number }} <span class="text-gray-400">({{ phone.type }})</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Addresses -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Address</h2>
+            <ul class="text-white">
+              <li *ngFor="let address of customer.addresses">
+                {{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.zipCode }}, {{ address.country }} 
+                <span class="text-gray-400">({{ address.type }})</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Financial Status -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Financial Status</h2>
+            <div class="grid grid-cols-2 gap-4 text-white">
+              <div>
+                <p class="text-gray-400">Remaining Amount:</p>
+                <p class="text-blue-500 font-bold">{{ customer.remainingAmount | currency }}</p>
+              </div>
+              <div>
+                <p class="text-gray-400">Total Purchased:</p>
+                <p class="text-blue-500 font-bold">{{ customer.totalPurchasedAmount | currency }}</p>
               </div>
             </div>
-            
-             <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300"> 
           </div>
-          <div class="md:p-2 p-1 w-1/2">
-            <div class="md:p-2 p-1 w-full max-w-[500px] h-[250px] mx-auto">
-              <div class="h-full w-full bg-white dark:bg-gray-900 rounded-lg shadow-md flex flex-col justify-center items-center p-4">
-            
-                 Cards Container 
-                <dl class="grid grid-cols-2 gap-2 mt-3 w-full">
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">$4.8m</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Sales</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">24</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Official Addons</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">86</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Total Addons</dt>
-                  </div>
-            
-                  <div class="flex flex-col items-center justify-center w-full h-[70px] bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
-                    <dd class="text-lg font-bold text-blue-600">86k</dd>
-                    <dt class="text-xs font-medium text-gray-500 dark:text-gray-400">Downloads</dt>
-                  </div>
-                </dl>
-              </div>
-            </div>
-             <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/501x301"> 
+
+          <!-- Payment History -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Payment History</h2>
+            <ul *ngIf="customer.paymentHistory.length > 0" class="text-white">
+              <li *ngFor="let payment of customer.paymentHistory">
+                <p class="text-gray-400">Amount: <span class="text-blue-500">{{ payment.amount | currency }}</span></p>
+                <p class="text-gray-400">Date: {{ payment.date | date:'medium' }}</p>
+              </li>
+            </ul>
+            <p *ngIf="customer.paymentHistory.length === 0" class="text-gray-400">No payment history available.</p>
           </div>
-          <div class="md:p-2 p-1 w-full">
-            
-             <a class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8" style="height: 200px;">
-                <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"> 
-             <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360"> 
-            <a   class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
-                <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" ></span>
-              
-                <div class="sm:flex sm:justify-between sm:gap-4">
-                  <div>
-                    <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
-                      Building a SaaS product as a software developer
-                    </h3>
-              
-                    <p class="mt-1 text-xs font-medium text-gray-600">By John Doe</p>
-                  </div>
-              
-                  <div class="hidden sm:block sm:shrink-0">
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                      class="size-16 rounded-lg object-cover shadow-xs"
-                    />
-                  </div>
-                </div>
-              
-                <div class="mt-4">
-                  <p class="text-sm text-pretty text-gray-500">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit illum provident a, ipsa
-                    maiores deleniti consectetur nobis et eaque.
-                  </p>
-                </div>
-              
-                <dl class="mt-6 flex gap-4 sm:gap-6">
-                  <div class="flex flex-col-reverse">
-                    <dt class="text-sm font-medium text-gray-600">Published</dt>
-                    <dd class="text-xs text-gray-500">31st June, 2021</dd>
-                  </div>
-              
-                  <div class="flex flex-col-reverse">
-                    <dt class="text-sm font-medium text-gray-600">Reading time</dt>
-                    <dd class="text-xs text-gray-500">3 minute</dd>
-                  </div>
-                </dl>
-              </a>
-        </div>
-        </div>
-        <div class="flex flex-wrap w-1/2">
-          <div class="md:p-2 p-1 w-full">
-            <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/601x361">
+
+          <!-- Cart Information -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Cart Status</h2>
+            <p class="text-white">Items in Cart: {{ customer.cart.items.length }}</p>
           </div>
-          <div class="md:p-2 p-1 w-1/2">
-            <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/502x302">
+
+          <!-- Guaranteer Information -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Guaranteer</h2>
+            <p class="text-white">Guaranteer ID: {{ customer.guaranteerId || 'N/A' }}</p>
           </div>
-          <div class="md:p-2 p-1 w-1/2">
-            <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/503x303">
+
+          <!-- MetaData & Timestamps -->
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Timestamps</h2>
+            <p class="text-gray-400">Created At: {{ customer.createdAt | date:'medium' }}</p>
+            <p class="text-gray-400">Last Updated: {{ customer.updatedAt | date:'medium' }}</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-   / product details bought 
-  <section class="text-gray-400 bg-gray-900 body-font">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Our Team</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  -->
+<!-- <section class="text-gray-400 bg-gray-900 body-font p-4">
+  <div class="container px-5 py-12 mx-auto flex flex-wrap">
+    <div class="flex w-full mb-8 flex-wrap justify-center">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-white lg:mb-0 mb-4 text-center">
+        Customer Profile
+      </h1>
+    </div>
+
+    <div class="flex flex-wrap md:-m-2 -m-1 w-full">
+      <div class="w-full md:w-1/3 p-2 mx-auto">
+        <div class="bg-gray-800 rounded-lg p-4 flex flex-col h-full border border-gray-700 shadow-lg">
+          <div class="w-32 h-32 border-2 border-gray-600 rounded-lg flex items-center justify-center overflow-hidden mb-4 bg-gray-900 mx-auto">
+            <img *ngIf="customer.profileImg" [src]="customer.profileImg" alt="Profile Image" class="w-full h-full object-cover">
+            <i *ngIf="!customer.profileImg" class="pi pi-user text-gray-500 text-6xl"></i>
+          </div>
+
+          <div class="text-center text-lg font-semibold text-white">
+            {{ customer.fullname }}
+          </div>
+          <div class="text-center text-sm text-gray-400">{{ customer.email }}</div>
+
+          <div class="mt-4 text-center">
+            <span class="px-3 py-1 bg-gray-700 text-white text-sm rounded">
+              Status: {{ customer.status | titlecase }}
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="flex flex-wrap -m-2">
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/80x80">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Holden Caulfield</h2>
-              <p class="text-gray-600">UI Designer</p>
+
+      <div class="flex flex-wrap w-full md:w-2/3 p-2">
+        <div class="md:p-2 p-1 w-full">
+Personal Information
+          <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Personal Information</h2>
+            <div class="grid grid-cols-2 gap-4 text-white">
+              <div>
+                <p class="text-gray-400">Full Name:</p>
+                <p>{{ customer.fullname }}</p>
+              </div>
+              <div>
+                <p class="text-gray-400">Email:</p>
+                <p>{{ customer.email }}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/84x84">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Henry Letham</h2>
-              <p class="text-gray-600">CTO</p>
+
+Phone Numbers
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Phone Numbers</h2>
+            <ul class="text-white">
+              <li *ngFor="let phone of customer.phoneNumbers">
+                {{ phone.number }} <span class="text-gray-400">({{ phone.type }})</span>
+              </li>
+            </ul>
+          </div>
+
+Addresses
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Addresses</h2>
+            <ul class="text-white">
+              <li *ngFor="let address of customer.addresses">
+                {{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.zipCode }},
+                {{ address.country }} <span class="text-gray-400">({{ address.type }})</span>
+              </li>
+            </ul>
+          </div>
+
+Financial Status
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Financial Status</h2>
+            <div class="grid grid-cols-2 gap-4 text-white">
+              <div>
+                <p class="text-gray-400">Remaining Amount:</p>
+                <p class="text-blue-500 font-bold">{{ customer.remainingAmount | currency }}</p>
+              </div>
+              <div>
+                <p class="text-gray-400">Total Purchased:</p>
+                <p class="text-blue-500 font-bold">{{ customer.totalPurchasedAmount | currency }}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/88x88">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Oskar Blinde</h2>
-              <p class="text-gray-600">Founder</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/90x90">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">John Doe</h2>
-              <p class="text-gray-600">DevOps</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/94x94">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Martin Eden</h2>
-              <p class="text-gray-600">Software Engineer</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/98x98">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Boris Kitua</h2>
-              <p class="text-gray-600">UX Researcher</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/100x90">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Atticus Finch</h2>
-              <p class="text-gray-600">QA Engineer</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/104x94">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Alper Kamu</h2>
-              <p class="text-gray-600">System</p>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/108x98">
-            <div class="flex-grow">
-              <h2 class="text-white title-font font-medium">Rodrigo Monchi</h2>
-              <p class="text-gray-600">Product Manager</p>
-            </div>
+
+Guaranteer Information
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+            <h2 class="text-xl font-semibold text-yellow-500 mb-2">Guaranteer Information</h2>
+            <p class="text-white">{{ selectedGuaranteer?.fullname || 'No Guaranteer Assigned' }}</p>
+            <p *ngIf="selectedGuaranteer?.phoneNumbers" class="text-white">
+              Phone: {{ selectedGuaranteer.phoneNumbers[0]?.number }}
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </div>
+</section> -->

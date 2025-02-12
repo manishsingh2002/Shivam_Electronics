@@ -1,3 +1,4 @@
+
 <section class="text-gray-400 bg-gray-900 body-font p-4"> 
   <div class="container px-5 py-12 mx-auto flex flex-wrap">
    <div class="flex w-full mb-8 flex-wrap justify-center"> 
@@ -24,7 +25,7 @@
     
           <div class="mt-4 flex flex-col space-y-2"> 
             <label for="guaranteer" class="block text-sm font-medium text-gray-300 mb-1">Guaranteer Name</label>
-            <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown" optionLabel="fullname" [(ngModel)]="selectedGuaranter" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
+              <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown" optionLabel="fullname" [(ngModel)]="selectedGuaranter" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
 
             <!-- <p-select (onClick)="selectedGuaranterevent($event)" optionLabel="fullname" [(ngModel)]="selectedGuaranter" class=" border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select> -->
             <div id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" autocomplete="off">{{selectedGuaranter.fullname}}</div>

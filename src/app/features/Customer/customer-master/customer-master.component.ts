@@ -19,7 +19,7 @@ import { TagModule } from 'primeng/tag';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 // import { SupabaseService } from '../../../core/services/supabase.service';
-
+import lodash from 'lodash'
 @Component({
   selector: 'app-customer',
   templateUrl: './customer-master.component.html',
@@ -102,11 +102,12 @@ export class CustomerMasterComponent implements OnInit {
     this.autopopulatedata();
   }
   autopopulatedata(){
-    const autopopulate: any = JSON.parse(localStorage.getItem('autopopulate') || '{}');
+    const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
     console.log(autopopulate);
     
     if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
-      this.customerIDDropdown = [...autopopulate.customersdrop]; // Spread operator ensures a new array reference
+      this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
+      console.log(this.customerIDDropdown);
     } else {
       this.customerIDDropdown = [];
       this.messageService.add({
@@ -128,8 +129,7 @@ export class CustomerMasterComponent implements OnInit {
   }
 
   selectedGuaranterevent(event:any){
-console.log(    this.selectedGuaranter); 
-this.customerIDDropdown = event.value;
+      console.log(this.selectedGuaranter); 
  }
  
   // onFileSelected(event: any) {
