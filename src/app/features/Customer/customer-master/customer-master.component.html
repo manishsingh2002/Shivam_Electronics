@@ -48,9 +48,8 @@
 
     <div class="flex flex-wrap w-full md:w-2/3 p-2"> 
       <div class="md:p-2 p-1 w-full">
-    
         <!-- Name & Email Card -->
-        <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+        <div class="bg-gray-900 p-4 rounded-lg shadow-md border border-gray-700">
           <p-card header="Personal Information" class="bg-gray-900 text-white">
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -92,7 +91,6 @@
             <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()" class="mt-2 p-button-sm bg-blue-600 hover:bg-blue-700"></button>
           </p-card>
         </div>
-    
         <!-- Addresses Card -->
         <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
           <p-card header="Addresses" class="bg-gray-900 text-white">
@@ -132,7 +130,7 @@
       </div>
     </div>
     
-      <div class="flex flex-wrap w-full md:w-full p-2"> <div class="md:p-2 p-1 w-full">
+      <div *ngIf="false" class="flex flex-wrap w-full md:w-full p-2"> <div class="md:p-2 p-1 w-full">
           <div class="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
             <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 bg-gray-900 rounded-lg">
               <div class="mx-auto max-w-3xl text-center">
@@ -171,7 +169,7 @@
 
       <div class="flex flex-wrap w-full p-2"> 
         <div class="md:p-2 p-1 w-full">
-          <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold w-full">Save Customer</button>
+          <button (click)="saveCustomer()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold w-full">Save Customer</button>
         </div>
       </div>
     </div>

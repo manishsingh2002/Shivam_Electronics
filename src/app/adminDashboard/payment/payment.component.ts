@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SplitterModule } from 'primeng/splitter';
 import { SelectModule } from 'primeng/select';
+import { ApiService } from '../../core/services/api.service';
+import lodash from 'lodash';
 @Component({
   selector: 'app-payment',
   standalone: true,
@@ -32,16 +34,58 @@ export class PaymentComponent {
     customerName: "",
     phoneNumbers: ''
   };
-
   paymentMethods = ['credit_card', 'debit_card', 'upi', 'crypto', 'bank_transfer'];
   statuses = ['pending', 'completed', 'failed', 'refunded'];
-  constructor(private http: HttpClient) { }
+  customerIDDropdown: any;
+  messageService: any;
+  customer: any;
+  customerId:any
+  constructor(private http: HttpClient,private ApiService:ApiService) { }
+  // customer:any = {
+  //   fullname: '',
+  //   profileImg: '',
+  //   email: '',
+  //   status: '',
+  //   phoneNumbers: [],
+  //   addresses: [],
+  //   cart: { items: [] },
+  //   guaranteerId: this.selectedGuaranter._id,
+  //   totalPurchasedAmount: 0,
+  //   remainingAmount: 0,
+  //   paymentHistory: [],
+  //   metadata: {},
+  // };
+
+  ngOnInit(): void {
+    this.autopopulatedata()
+  }
+  autopopulatedata() {
+    const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
+    if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
+      this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
+    } else {
+      this.customerIDDropdown = [];
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'No valid customer data found',
+        life: 3000
+      });
+    }
+  }
 
 
-  ngOnInit() {
-    const autopopulate = JSON.parse(localStorage.getItem('autopopulate') || '{}');
-    console.log(autopopulate); // Check if data exists
-
+  fetchCustomerData() {
+    this.paymentData.customerId = this.customerId
+    this.ApiService.getCustomerDataWithId(this.customerId).subscribe(
+      (response) => {
+        this.customer = response.data;
+        console.log(this.customer)
+      },
+      (error) => {
+        console.error('Error fetching customer data:', error);
+      }
+    );
   }
 
   isValidJson(input: string): boolean {
@@ -66,27 +110,9 @@ export class PaymentComponent {
       updatedAt: new Date().toISOString()
     };
 
-    this.http.post('/api/payments', formData).subscribe({
-      next: (response: any) => {
-        alert(`Payment successful! Transaction ID: ${response.transactionId}`);
-        this.paymentData = {
-          amount: 0,
-          paymentMethod: 'credit_card',
-          status: 'pending',
-          transactionId: '',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          customerId: '',
-          metadata: '{}',
-          description: '',
-          customerName: " ",
-          phoneNumbers: ''
-        };
-      },
-      error: (err) => {
-        alert(`Payment failed: ${err.error?.message || err.message}`);
-      }
-    });
+    this.ApiService.createNewpayment(this.paymentData).subscribe((res)=>{
+      console.log(res)
+    })
   }
 }
 

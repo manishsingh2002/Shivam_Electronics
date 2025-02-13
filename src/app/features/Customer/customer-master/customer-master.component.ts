@@ -101,6 +101,7 @@ export class CustomerMasterComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     this.autopopulatedata();
   }
+
   autopopulatedata(){
     const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
     console.log(autopopulate);
@@ -129,7 +130,7 @@ export class CustomerMasterComponent implements OnInit {
   }
 
   selectedGuaranterevent(event:any){
-      console.log(this.selectedGuaranter); 
+      console.log(this.selectedGuaranter._id); 
  }
  
   // onFileSelected(event: any) {
@@ -179,7 +180,6 @@ export class CustomerMasterComponent implements OnInit {
 
 // handleFileSelect(event?: any) {
   //   const file = event.files[0];  // Extract the first selected file
-
   //   if (file) {
   //     this.uploadStatus = 'Preparing to upload...';
   //     const formData = new FormData();
@@ -270,10 +270,11 @@ export class CustomerMasterComponent implements OnInit {
   
   saveCustomer() {
     if (this.validateCustomer()) {
+      this.customer.guaranteerId=this.selectedGuaranter._id
       this.ApiService.createNewCustomer(this.customer).subscribe(
         (response: any) => {
           console.log(response);
-          const customerId = response.data.data._id; 
+          const customerId = response.data._id; 
           console.log('Customer ID:', customerId);
           this.customerId = customerId;  
           // this.handleFileSelect();

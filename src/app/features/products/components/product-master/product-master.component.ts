@@ -1,7 +1,7 @@
 
 import { Component, Inject, Input, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { FormControl, FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule   } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -10,9 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { TextareaModule } from 'primeng/textarea';
 import { ApiService } from '../../../../core/services/api.service';
 import { Select } from 'primeng/select';
-import { isPlatformBrowser } from '@angular/common';
-import { GradientBorderDirective } from '../../../../core/directives/gradient-border.directive';
-import { BorderGradientAnimatedDirective } from '../../../../core/directives/border-gradient-animated.directive';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import lodash from 'lodash'
 interface DetailedDescription {
   id: string;
   detail: string;
@@ -87,9 +86,10 @@ interface Product {
   selector: 'app-product-master',
   // imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
 
-  imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
+  imports: [FloatLabelModule, Select, FormsModule, CommonModule,  RouterModule, InputTextModule, TextareaModule, ButtonModule],
   templateUrl: './product-master.component.html',
-  styleUrl: './product-master.component.scss'
+  styleUrl: './product-master.component.scss',
+  providers:[ConfirmationService, MessageService]
 })
 export class ProductMasterComponent {
   darkMode:boolean=false
@@ -129,25 +129,31 @@ darkModes() {
   public productdropdwn: any
   public selectedProductId: any;
 
-  constructor(private apiService: ApiService, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private apiService: ApiService,private messageService:MessageService ,@Inject(PLATFORM_ID) private platformId: Object) { }
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const storedData = localStorage.getItem('autopopulate');
-      if (storedData) {
-        try {
-          const parsedData = JSON.parse(storedData); // Parse the JSON string
-          this.productdropdwn = parsedData.products || []; // Access the products array (or empty array if not present)
-          // console.log(this.productdropdwn);
-        } catch (error) {
-          console.error('Error parsing JSON from localStorage:', error);
-          // Handle the error appropriately, e.g., set a default value or display an error message
-          this.productdropdwn = [];
-        }
+    this.autopopulatedata()
+  }  
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+  }
+
+    autopopulatedata(){
+      const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
+      console.log(autopopulate);
+      
+      if (autopopulate && Array.isArray(autopopulate.productsdrop)) {
+        this.productdropdwn = lodash.cloneDeep(autopopulate.productsdrop)
+        console.log(this.productdropdwn);
       } else {
-        // console.log('No data found in localStorage for key "autopopulate"');
+        this.productdropdwn = [];
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Info',
+          detail: 'No valid customer data found',
+          life: 3000
+        });
       }
     }
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.redirectedData)  this.product= this.redirectedData
