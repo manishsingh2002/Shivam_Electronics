@@ -241,7 +241,6 @@ export class MainLayoutComponent { }
           Logout
         </span>
       </button>
-    </form>
   </div>
 </div>*/
 

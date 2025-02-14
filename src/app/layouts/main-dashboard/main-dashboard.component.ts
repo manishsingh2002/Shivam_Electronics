@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
-import { GstInvoiceComponent } from '../../adminDashboard/gst-invoice/gst-invoice.component';
+import { GstInvoiceComponent } from '../../features/Invoice/gst-invoice/gst-invoice.component';
 import { ProductListComponent } from '../../features/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '../../features/products/components/product-detail/product-detail.component';
 import { AppNavigationComponent } from "../../shared/components/common-layout/common-layout.component";

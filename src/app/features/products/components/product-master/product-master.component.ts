@@ -1,7 +1,7 @@
 
 import { Component, Inject, Input, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import {  FormsModule   } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -84,18 +84,16 @@ interface Product {
 
 @Component({
   selector: 'app-product-master',
-  // imports: [FloatLabelModule, Select, FormsModule, CommonModule, ReactiveFormsModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
-
-  imports: [FloatLabelModule, Select, FormsModule, CommonModule,  RouterModule, InputTextModule, TextareaModule, ButtonModule],
+  imports: [FloatLabelModule, Select, FormsModule, CommonModule, RouterModule, InputTextModule, TextareaModule, ButtonModule],
   templateUrl: './product-master.component.html',
   styleUrl: './product-master.component.scss',
-  providers:[ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class ProductMasterComponent {
-  darkMode:boolean=false
-darkModes() {
-  this.darkMode = !this.darkMode
-}
+  darkMode: boolean = false
+  darkModes() {
+    this.darkMode = !this.darkMode
+  }
 
   product: Product = {
     title: '',
@@ -124,39 +122,39 @@ darkModes() {
   };
   // startLocation: { type: 'Point', coordinates: '' }, // Initialized as string
   // locations: [{ type: 'Point', coordinates: '' }], // Initialized as string
-  @Input() redirectedData:any
+  @Input() redirectedData: any
   public productdata: any
   public productdropdwn: any
   public selectedProductId: any;
 
-  constructor(private apiService: ApiService,private messageService:MessageService ,@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private apiService: ApiService, private messageService: MessageService, @Inject(PLATFORM_ID) private platformId: Object) { }
   ngOnInit() {
     this.autopopulatedata()
-  }  
+  }
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
   }
 
-    autopopulatedata(){
-      const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
-      console.log(autopopulate);
-      
-      if (autopopulate && Array.isArray(autopopulate.productsdrop)) {
-        this.productdropdwn = lodash.cloneDeep(autopopulate.productsdrop)
-        console.log(this.productdropdwn);
-      } else {
-        this.productdropdwn = [];
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Info',
-          detail: 'No valid customer data found',
-          life: 3000
-        });
-      }
+  autopopulatedata() {
+    const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
+    console.log(autopopulate);
+
+    if (autopopulate && Array.isArray(autopopulate.productsdrop)) {
+      this.productdropdwn = lodash.cloneDeep(autopopulate.productsdrop)
+      console.log(this.productdropdwn);
+    } else {
+      this.productdropdwn = [];
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'No valid customer data found',
+        life: 3000
+      });
     }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.redirectedData)  this.product= this.redirectedData
+    if (this.redirectedData) this.product = this.redirectedData
   }
 
   Update() {
@@ -170,8 +168,8 @@ darkModes() {
       this.apiService.getProductDataWithId(this.selectedProductId).subscribe(
         (res: any) => {
           this.productdata = res;
-          this.product =res.data
-        //  console.log("populated product", this.product)
+          this.product = res.data
+          //  console.log("populated product", this.product)
         },
         (error) => {
           console.error('Error fetching product data:', error);

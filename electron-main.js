@@ -14,7 +14,6 @@
 // // //   // Ensure the correct path
 // // //   const indexPath = `file://${path.resolve(__dirname, 'dist', 'shivam-electronics', 'index.html')}`;
   
-// // //   console.log("Loading URL:", indexPath); // Debugging output
 
 // // //   mainWindow.loadURL(indexPath);
 // // // });
@@ -34,7 +33,6 @@
 
 // //   const indexPath = `file://${path.resolve(__dirname, 'dist', 'shivam-electronics', 'index.html')}`;
   
-// //   console.log("Loading URL:", indexPath); // Debugging output
 
 // //   mainWindow.loadURL(indexPath);
 // // });
@@ -58,7 +56,6 @@
 //   // Load the correct path
 //   // const indexPath = `file://${path.resolve(__dirname, 'dist', 'shivam-electronics', 'index.html')}`;
 
-//   // console.log("Loading URL:", indexPath); // Debugging output
 
 //   // mainWindow.loadURL(indexPath);
 //   const indexPath = path.join(__dirname, 'dist/shivam-electronics/browser/', 'browser', 'index.html');

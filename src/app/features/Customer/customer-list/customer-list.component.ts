@@ -100,7 +100,6 @@ export interface Invoice {
 })
 export class CustomerListComponent {
     checkedCustomer(customer: any) {
-        console.log(customer);
     }
 
     @ViewChild('dt') dt!: Table;
@@ -215,7 +214,6 @@ export class CustomerListComponent {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
-                //   console.log(ids); 
                 this.apiService.deleteCustomers(ids).subscribe((res: any) => {
                     this.customers = this.customers.filter(customer => !ids.includes(customer.id))
                     this.loadDemoData()

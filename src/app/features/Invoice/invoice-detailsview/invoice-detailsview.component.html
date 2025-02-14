@@ -1,0 +1,203 @@
+
+<div *ngIf="!loading && invoiceData" class="space-y-4">
+  <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs dark:border-gray-700">
+    <h2 class="p-3 text-xl font-semibold text-white dark:text-white">Invoice Information</h2>
+    <dl class="-my-3 divide-y divide-gray-100 text-sm dark:divide-gray-700">
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Invoice Number</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.invoiceNumber }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Invoice Date</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.invoiceDate | date }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Due Date</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.dueDate | date }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Status</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.status }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Place of Supply</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.placeOfSupply }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Payment Terms</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.paymentTerms }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Notes</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.notes }}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs dark:border-gray-700 w-full">
+      <h2 class="p-3 text-xl font-semibold text-white dark:text-white">Seller Details</h2>
+      <dl class="-my-3 divide-y divide-gray-100 text-sm dark:divide-gray-700">
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Name</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.name }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Shop Name</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.shopname }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">GSTIN</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.gstin }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">PAN</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.pan }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Contact Number</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.contactNumber }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Address</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.address }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Created At</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.createdAt | date:'medium' }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Updated At</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.sellerDetails?.updatedAt | date:'medium' }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs dark:border-gray-700 w-full">
+      <h2 class="p-3 text-xl font-semibold text-white dark:text-white">Buyer Details</h2>
+      <dl class="-my-3 divide-y divide-gray-100 text-sm dark:divide-gray-700">
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Full Name</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.fullname }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Email</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.email }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Guaranteer ID</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.guaranteerId }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Status</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.status }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Contact Number</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.phoneNumbers?.[0]?.number }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Address</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.addresses?.[0]?.street }}, {{ invoiceData.buyerDetails?.addresses?.[0]?.city }}, {{ invoiceData.buyerDetails?.addresses?.[0]?.state }}, {{ invoiceData.buyerDetails?.addresses?.[0]?.zipCode }}, {{ invoiceData.buyerDetails?.addresses?.[0]?.country }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Created At</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.createdAt | date:'medium' }}</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-white dark:text-white">Updated At</dt>
+          <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.buyerDetails?.updatedAt | date:'medium' }}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+
+  <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs dark:border-gray-700">
+    <h2 class="p-3 text-xl font-semibold text-white dark:text-white">Items</h2>
+    <dl class="-my-3 divide-y divide-gray-100 text-sm dark:divide-gray-700">
+      <div *ngFor="let item of invoiceData.items" class="mb-4 p-4 border-b last:border-b-0 dark:border-gray-700">
+        <h4 class="font-semibold text-white dark:text-white">{{ item.itemDetails?.title || 'Product Details Unavailable' }}</h4>
+        <div class="grid grid-cols-2 gap-4 mt-2">
+          <div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">Quantity</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.quantity }}</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">Rate</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.rate }}</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">Discount</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.discount }}</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">Taxable Value</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.taxableValue }}</dd>
+            </div>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">CGST Rate</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.cgstRate }}%</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">SGST Rate</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.sgstRate }}%</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">CGST Amount</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.cgstAmount }}</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">SGST Amount</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.sgstAmount }}</dd>
+            </div>
+            <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <dt class="font-medium text-white dark:text-white">Amount</dt>
+              <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ item.amount }}</dd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dl>
+  </div>
+
+
+  <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-xs dark:border-gray-700">
+    <h2 class="p-3 text-xl font-semibold text-white dark:text-white">Financials</h2>
+    <dl class="-my-3 divide-y divide-gray-100 text-sm dark:divide-gray-700">
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Sub Total</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.subTotal }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Total Discount</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.totalDiscount }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">IGST</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.igst }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">CESS</dt>
+        <dd class="text-white sm:col-span-2 dark:text-gray-200 value-view">{{ invoiceData.cess }}</dd>
+      </div>
+      <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium text-white dark:text-white">Total Amount</dt>
+        <dd class="text-2xl font-semibold text-green-600 dark:text-green-400 sm:col-span-2 value-view">{{ invoiceData.totalAmount }}</dd>
+      </div>
+    </dl>
+  </div>
+
+</div>
+
+<div *ngIf="loading" class="text-center py-4 dark:text-white">
+  Loading invoice details...
+</div>
+
+<div *ngIf="!loading && !invoiceData && invoiceId" class="text-center py-4 text-red-500 dark:text-red-400 dark:text-white">
+  Error loading invoice details. Please try again.
+</div>
+

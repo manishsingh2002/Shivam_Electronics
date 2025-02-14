@@ -9,13 +9,15 @@
       [defaultColDef]="defaultColDef"
       [pagination]="true"
       [rowSelection]="rowSelection"
+      [rowClassRules]="rowClassrules"
       (cellValueChanged)="onCellValueChanged($event)"
       (rowSelected)="onRowSelected($event)"
       (cellClicked)="onCellClicked($event)"
       (gridReady)="onGridReady($event)">
     </ag-grid-angular>
-    </div>
- </div>
+  </div>
+</div>
+<!-- [paginationPageSizeSelector]="pagesizeselector" -->
   
     <!-- <div class="flex justify-end mt-4">
       <button 

@@ -25,7 +25,6 @@
 //     this.errorMessage = null; // Clear any previous error messages
 //     this.auth.login(this.logindetails).subscribe({
 //       next: (response: any) => {
-//         console.log('Login Response:', response);
 //         if (response && response.token) {
 //           // Check if token exists in the response
 //           this.router.navigate(['/dashboard']);
@@ -69,11 +68,9 @@ export class LoginComponent {
         this.errorMessage = null;
         this.auth.login(this.logindetails).subscribe({
             next: (response: any) => {
-                // console.log('Login Response:', response);
                 if (response && response.data && response.token) {
                     // Correct check
                     this.messageService.handleResponse(response.status, 'Request Successful', 'maish');
-                    console.log("Login successful, redirecting to dashboard");
                     this.router.navigate(['/dashboard']);
                 } else {
                     this.errorMessage = 'Invalid credentials. Please try again.';

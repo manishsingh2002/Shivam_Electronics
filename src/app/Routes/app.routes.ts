@@ -2,7 +2,7 @@
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from '../adminDashboard/admin-layout/admin-layout.component';
 import { AdminUserComponent } from '../adminDashboard/admin-user/admin-user.component';
-import { GstInvoiceComponent } from '../adminDashboard/gst-invoice/gst-invoice.component';
+import { GstInvoiceComponent } from '../features/Invoice/gst-invoice/gst-invoice.component';
 import { PaymentComponent } from '../adminDashboard/payment/payment.component';
 import { NotFoundComponent } from '../shared/components/notfound';
 import { AuthLayoutComponent } from '../features/auth/auth-layout.component';
@@ -22,6 +22,8 @@ import { ProductLayoutComponent } from '../features/products/components/product-
 import { ProductListComponent } from '../features/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '../features/products/components/product-detail/product-detail.component';
 import { ProductMasterComponent } from '../features/products/components/product-master/product-master.component';
+import { InvoiceLayoutComponent } from '../features/Invoice/invoice-layout/invoice-layout.component';
+import { InvoiceViewComponent } from '../features/Invoice/invoice-view/invoice-view.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -47,7 +49,7 @@ export const appRoutes: Routes = [
     children: [
       { path: 'dashboard', component: MainDashboardComponent },
       {
-        path: 'admin',
+        path: 'admin-layout',
         component: AdminLayoutComponent,
         children: [
           { path: 'adminUser', component: AdminUserComponent },
@@ -67,7 +69,14 @@ export const appRoutes: Routes = [
           { path: 'details', component: CustomerdetailsComponent },
         ],
       },
-
+      {
+        path: 'invoiceLayout',
+        component: InvoiceLayoutComponent,
+        children: [
+          { path: 'list', component: InvoiceViewComponent },
+          { path: 'createInv', component: GstInvoiceComponent },
+        ]
+      },
       // Product Routes inside Main Layout
       {
         path: 'products',

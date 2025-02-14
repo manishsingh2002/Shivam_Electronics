@@ -7,7 +7,7 @@ import { Routes } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
 import { AdminUserComponent } from './../../adminDashboard/admin-user/admin-user.component';
-import { GstInvoiceComponent } from '../gst-invoice/gst-invoice.component';
+import { GstInvoiceComponent } from '../../features/Invoice/gst-invoice/gst-invoice.component';
 import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
@@ -17,14 +17,14 @@ import { PaymentComponent } from '../payment/payment.component';
   styleUrl: './admin-layout.component.scss'
 })
 export class AdminLayoutComponent {
-  
-    activeComponent: any = AdminUserComponent; 
 
-    componentNavItems: any[] = [
-      { label: 'Users', component: AdminUserComponent },
-      { label: 'Invoice', component: GstInvoiceComponent },
-      { label: 'Payment', component: PaymentComponent }
-    ];
+  activeComponent: any = AdminUserComponent;
+
+  componentNavItems: any[] = [
+    { label: 'Users', component: AdminUserComponent },
+    { label: 'Invoice', component: GstInvoiceComponent },
+    { label: 'Payment', component: PaymentComponent }
+  ];
 
   navigateToComponent(component: any) {
     this.activeComponent = component;

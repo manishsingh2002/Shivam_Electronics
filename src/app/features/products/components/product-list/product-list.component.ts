@@ -65,7 +65,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { CommonModule } from '@angular/common';
 import { FileUpload } from 'primeng/fileupload';
-import {  SelectModule } from 'primeng/select';
+import { SelectModule } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 // import { RadioButton } from 'primeng/radiobutton';
 import { Rating } from 'primeng/rating';
@@ -87,51 +87,50 @@ interface ExportColumn {
     dataKey: string;
 }
 @Component({
-      selector: 'app-product-list',
+    selector: 'app-product-list',
     templateUrl: './product-list.component.html',
     styleUrl: './product-list.component.scss',
-    imports: [TableModule, Dialog, RatingModule, ButtonModule, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload,  Tag, Rating, InputTextModule, FormsModule,  IconFieldModule, InputIconModule, ProductMasterComponent],
+    imports: [TableModule, Dialog, RatingModule, ButtonModule, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, Tag, Rating, InputTextModule, FormsModule, IconFieldModule, InputIconModule, ProductMasterComponent],
     providers: [MessageService, ConfirmationService, ApiService],
-    })
-    export class ProductListComponent implements OnInit{
+})
+export class ProductListComponent implements OnInit {
     @ViewChild('dt') dt!: Table;
     productDialog: boolean = false;
-    products: any[]=[];
-    product: any=[];
-    selectedProducts: any[] =[];
+    products: any[] = [];
+    product: any = [];
+    selectedProducts: any[] = [];
     submitted: boolean = false;
-    statuses: any[]=[];
-    cols: Column[]=[];
-    exportColumns: ExportColumn[]=[];
+    statuses: any[] = [];
+    cols: Column[] = [];
+    exportColumns: ExportColumn[] = [];
     redirectedProduct: any;
 
     constructor(
         // private productService: ProductService,
-        private apiService:ApiService,  
+        private apiService: ApiService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
-    ) {}
+    ) { }
 
-  ngOnInit() { 
-    this.loadDemoData()   
-}
+    ngOnInit() {
+        this.loadDemoData()
+    }
 
-filterSearch(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  this.dt.filterGlobal(input.value, 'contains');
-}
+    filterSearch(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        this.dt.filterGlobal(input.value, 'contains');
+    }
 
     exportCSV() {
         this.dt.exportCSV();
     }
 
     loadDemoData() {
-      this.apiService.getAllProductData().subscribe((res:any)=>{
-        // console.log(res.data);
-        this.products = res.data;
-        this.cd.markForCheck();
-       })
+        this.apiService.getAllProductData().subscribe((res: any) => {
+            this.products = res.data;
+            this.cd.markForCheck();
+        })
 
         this.statuses = [
             { label: 'INSTOCK', value: 'instock' },
@@ -158,7 +157,7 @@ filterSearch(event: Event): void {
 
     editProduct(product: any) {
         this.product = { ...product };
-        this.redirectedProduct = { ...product }; 
+        this.redirectedProduct = { ...product };
         this.productDialog = true;
     }
 
@@ -168,15 +167,13 @@ filterSearch(event: Event): void {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                    const ids = this.selectedProducts ? this.selectedProducts.map(product => product.id) : []; // Extract IDs
-                //   console.log(ids); 
-                    this.apiService.deleteProduct(ids).subscribe(
-                        res => {
-                            // console.log('Deletion Success:', res);
-                            this.products = this.products.filter(product => !ids.includes(product.id));
-                        },
-                        err => console.error('Deletion Error:', err)
-                    );           
+                const ids = this.selectedProducts ? this.selectedProducts.map(product => product.id) : []; // Extract IDs
+                this.apiService.deleteProduct(ids).subscribe(
+                    res => {
+                        this.products = this.products.filter(product => !ids.includes(product.id));
+                    },
+                    err => console.error('Deletion Error:', err)
+                );
                 this.selectedProducts = [];
                 this.messageService.add({
                     severity: 'success',
@@ -232,18 +229,18 @@ filterSearch(event: Event): void {
         return id;
     }
     getSeverity(status: string) {
-            switch (status) {
-                case 'INSTOCK':
-                    return 'success';
-                case 'LOWSTOCK':
-                    return 'warn';
-                case 'OUTOFSTOCK':
-                    return 'danger';
-                default:
-                  return 'success';
-            }
-          }
-     saveProduct() {
+        switch (status) {
+            case 'INSTOCK':
+                return 'success';
+            case 'LOWSTOCK':
+                return 'warn';
+            case 'OUTOFSTOCK':
+                return 'danger';
+            default:
+                return 'success';
+        }
+    }
+    saveProduct() {
         this.submitted = true;
 
         if (this.product.name?.trim()) {

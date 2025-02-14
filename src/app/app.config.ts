@@ -2,7 +2,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http'; // Import this
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { appRoutes } from '../app/Routes/app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
@@ -680,7 +680,7 @@ export const appConfig: ApplicationConfig = {
         provideZoneChangeDetection({ eventCoalescing: true }),
         AppMessageService,
         MessageService,
-        provideRouter(routes),
+        provideRouter(appRoutes),
         provideClientHydration(),
         provideAnimationsAsync(),
         providePrimeNG({

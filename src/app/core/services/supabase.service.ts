@@ -33,7 +33,6 @@ export class SupabaseService {
         console.error("Error uploading image:", error);
         return { error };
       } else {
-        console.log("Image uploaded successfully:", data);
         return { data };
       }
     } catch (err) {
