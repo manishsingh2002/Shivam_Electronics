@@ -63,10 +63,10 @@ export const appRoutes: Routes = [
         path: 'customer',
         component: CustomerlayoutComponent,
         children: [
-          { path: '', redirectTo: 'master', pathMatch: 'full' },
-          { path: 'list', component: CustomerListComponent },
-          { path: 'master', component: CustomerMasterComponent },
-          { path: 'details', component: CustomerdetailsComponent },
+          // { path: '', redirectTo: 'master', pathMatch: 'full' },
+          // { path: 'list', component: CustomerListComponent },
+          // { path: 'master', component: CustomerMasterComponent },
+          // { path: 'details', component: CustomerdetailsComponent },
         ],
       },
       {
