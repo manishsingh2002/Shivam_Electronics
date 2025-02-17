@@ -1,104 +1,118 @@
-body.dark-mode {
-  --bg-body: #111827; /* Dark Gray-900 */
-  --text-color: #F9FAFB; /* Gray-50 */
-  --bg-card: #1F2937; /* Gray-800 */
-  --border-color: #0EA5E9; /* Sky-500 */
-  --input-bg: #374151; /* Gray-700 */
-  --input-text: #F9FAFB; /* Gray-50 */
-  --input-border: #4B5563; /* Gray-600 */
-  --label-color: #D1D5DB; /* Gray-300 */
-}
-
-body {
-  --bg-body: #F9FAFB; /* Gray-50 */
-  --text-color: #1F2937; /* Gray-800 */
-  --bg-card: #FFFFFF; /* White */
-  --border-color: #0EA5E9; /* Sky-500 */
-  --input-bg: #FFFFFF; /* White */
-  --input-text: #1F2937; /* Gray-800 */
-  --input-border: #D1D5DB; /* Gray-300 */
-  --label-color: #4B5563; /* Gray-600 */
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+// body.dark-mode {
+//   --bg-body: #111827; /* Dark Gray-900 */
+//   --text-color: #F9FAFB; /* Gray-50 */
+//   --bg-card: #1F2937; /* Gray-800 */
+//   --border-color: #0EA5E9; /* Sky-500 */
+//   --input-bg: #374151; /* Gray-700 */
+//   --input-text: #F9FAFB; /* Gray-50 */
+//   --input-border: #4B5563; /* Gray-600 */
+//   --label-color: #D1D5DB; /* Gray-300 */
+// }
 
 
-body {
-  background-color: var(--bg-body);
-  color: var(--text-color);
-}
-
-.card {
-  background-color: var(--bg-card);
-}
-
-.bg-sky-950 {
-  background-color: #020617; /* Overriding bg-sky-950 to a darker shade for better dark mode */
-  border-color: var(--border-color);
-}
-.dark-mode .dark\:bg-sky-900 { /* Corrected selector for dark mode bg-sky-900 border */
-  border-color: var(--border-color);
-}
+// body {
+//   --bg-body: #F9FAFB; /* Gray-50 */
+//   --text-color: #1F2937; /* Gray-800 */
+//   --bg-card: #FFFFFF; /* White */
+//   --border-color: #0EA5E9; /* Sky-500 */
+//   --input-bg: #FFFFFF; /* White */
+//   --input-text: #1F2937; /* Gray-800 */
+//   --input-border: #D1D5DB; /* Gray-300 */
+//   --label-color: #4B5563; /* Gray-600 */
+//   transition: background-color 0.3s ease, color 0.3s ease;
+// }
 
 
-.p-float-label input,
-.p-float-label textarea {
-  background-color: var(--input-bg);
-  color: var(--input-text);
-  border-color: var(--input-border);
+// body {
+//   background-color: var(--bg-body);
+//   color: var(--text-color);
+// }
+
+// .card {
+//   background-color: var(--bg-card);
+// }
+
+// .bg-sky-950 {
+//   background-color: #020617; /* Overriding bg-sky-950 to a darker shade for better dark mode */
+//   border-color: var(--border-color);
+// }
+// .dark-mode .dark\:bg-sky-900 { /* Corrected selector for dark mode bg-sky-900 border */
+//   border-color: var(--border-color);
+// }
+
+
+// .p-float-label input,
+// .p-float-label textarea {
+//   background-color: var(--input-bg);
+//   color: var(--input-text);
+//   border-color: var(--input-border);
+// }
+
+// .p-float-label label {
+//   color: var(--label-color);
+// }
+// .text-gray-900,
+// .dark-mode .text-gray-900{ /* Added dark mode specifier */
+//   color: var(--text-color);
+// }
+// .dark\:text-white,
+// .dark-mode .dark\:text-white{ /* Added dark mode specifier */
+//    color: var(--text-color);
+// }
+// .border-gray-300,
+// .dark-mode .border-gray-300{ /* Added dark mode specifier */
+//   border-color: var(--input-border);
+// }
+// .dark\:border-gray-700,
+// .dark-mode .dark\:border-gray-700{ /* Added dark mode specifier */
+//    border-color: var(--input-border);
+// }
+// .text-gray-700,
+// .dark-mode .text-gray-700{ /* Added dark mode specifier */
+//   color: var(--label-color);
+// }
+// .dark\:text-gray-300,
+// .dark-mode .dark\:text-gray-300{ /* Added dark mode specifier */
+//    color: var(--label-color);
+// }
+// .bg-gray-200,
+// .dark-mode .bg-gray-200{ /* Added dark mode specifier */
+//   background-color: #E5E7EB; /* Gray-200 for light mode toggle button */
+// }
+// .dark\:bg-gray-800,
+// .dark-mode .dark\:bg-gray-800{ /* Added dark mode specifier */
+//    background-color: #374151; /* Gray-800 for dark mode toggle button */
+// }
+// .text-gray-800,
+// .dark-mode .text-gray-800{ /* Added dark mode specifier */
+//   color: #1F2937; /* Gray-800 for light mode toggle button text */
+// }
+// .dark\:text-gray-200,
+// .dark-mode .dark\:text-gray-200{ /* Added dark mode specifier */
+//    color: #E5E7EB; /* Gray-200 for dark mode toggle button text */
+// }
+// .bg-white,
+// .dark-mode .bg-white{ /* Added dark mode specifier */
+//    background-color: var(--bg-card);
+// }
+// .dark\:bg-gray-800,
+// .dark-mode .dark\:bg-gray-800{ /* Added dark mode specifier */
+//    background-color: var(--bg-card);
+// }
+// .text-black,
+// .dark-mode .text-black{ /* Added dark mode specifier */
+//   color: var(--text-color); /* Assuming text-black was meant to be general text color */
+// }
+.gradient-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(to right, #4f46e5, #e91e63);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px white inset;
+  border-radius: 0.5rem; /* Equivalent to rounded-md */
 }
 
-.p-float-label label {
-  color: var(--label-color);
-}
-.text-gray-900,
-.dark-mode .text-gray-900{ /* Added dark mode specifier */
-  color: var(--text-color);
-}
-.dark\:text-white,
-.dark-mode .dark\:text-white{ /* Added dark mode specifier */
-   color: var(--text-color);
-}
-.border-gray-300,
-.dark-mode .border-gray-300{ /* Added dark mode specifier */
-  border-color: var(--input-border);
-}
-.dark\:border-gray-700,
-.dark-mode .dark\:border-gray-700{ /* Added dark mode specifier */
-   border-color: var(--input-border);
-}
-.text-gray-700,
-.dark-mode .text-gray-700{ /* Added dark mode specifier */
-  color: var(--label-color);
-}
-.dark\:text-gray-300,
-.dark-mode .dark\:text-gray-300{ /* Added dark mode specifier */
-   color: var(--label-color);
-}
-.bg-gray-200,
-.dark-mode .bg-gray-200{ /* Added dark mode specifier */
-  background-color: #E5E7EB; /* Gray-200 for light mode toggle button */
-}
-.dark\:bg-gray-800,
-.dark-mode .dark\:bg-gray-800{ /* Added dark mode specifier */
-   background-color: #374151; /* Gray-800 for dark mode toggle button */
-}
-.text-gray-800,
-.dark-mode .text-gray-800{ /* Added dark mode specifier */
-  color: #1F2937; /* Gray-800 for light mode toggle button text */
-}
-.dark\:text-gray-200,
-.dark-mode .dark\:text-gray-200{ /* Added dark mode specifier */
-   color: #E5E7EB; /* Gray-200 for dark mode toggle button text */
-}
-.bg-white,
-.dark-mode .bg-white{ /* Added dark mode specifier */
-   background-color: var(--bg-card);
-}
-.dark\:bg-gray-800,
-.dark-mode .dark\:bg-gray-800{ /* Added dark mode specifier */
-   background-color: var(--bg-card);
-}
-.text-black,
-.dark-mode .text-black{ /* Added dark mode specifier */
-  color: var(--text-color); /* Assuming text-black was meant to be general text color */
+.dark .gradient-border {
+  background-image: linear-gradient(#1f2937, #1f2937), linear-gradient(to right, #4f46e5, #e91e63);
+  box-shadow: 2px 1000px 1px #1f2937 inset;
 }

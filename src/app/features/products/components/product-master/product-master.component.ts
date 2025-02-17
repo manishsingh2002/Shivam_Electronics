@@ -91,6 +91,7 @@ interface Product {
 })
 export class ProductMasterComponent {
   darkMode: boolean = false
+  isDarkMode: boolean = false;
   darkModes() {
     this.darkMode = !this.darkMode
   }
@@ -131,9 +132,9 @@ export class ProductMasterComponent {
   ngOnInit() {
     this.autopopulatedata()
   }
-  toggleDarkMode() {
-    this.darkMode = !this.darkMode;
-  }
+  // toggleDarkMode() {
+  //   this.darkMode = !this.darkMode;
+  // }
 
   autopopulatedata() {
     const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
@@ -151,6 +152,12 @@ export class ProductMasterComponent {
         life: 3000
       });
     }
+  }
+
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('dark', this.isDarkMode);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
