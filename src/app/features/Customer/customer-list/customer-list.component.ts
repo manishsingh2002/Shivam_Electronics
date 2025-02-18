@@ -102,6 +102,8 @@ export class CustomerListComponent {
     checkedCustomer(customer: any) {
     }
 
+    loading: boolean = true;
+
     @ViewChild('dt') dt!: Table;
     customerDialog: boolean = false;
     customers: any[] = [];
@@ -142,6 +144,7 @@ export class CustomerListComponent {
         this.apiService.getAllCustomerData().subscribe((res: any) => {
             this.customers = res.data;
             this.cd.markForCheck();
+            this.loading = false
         })
         this.cols = [
             { field: 'code', header: 'Code', customExportHeader: 'customer Code' },

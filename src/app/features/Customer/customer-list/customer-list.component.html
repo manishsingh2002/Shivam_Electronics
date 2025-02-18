@@ -12,8 +12,9 @@
           <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
       </ng-template>
   </p-toolbar>
-  <p-table #dt [value]="customers" [rows]="10" [columns]="cols" [paginator]="true"
-      [globalFilterFields]="['email', 'country.name', 'representative.name', 'status']"
+  <p-table #dt [scrollable]="true"  [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading"
+  [paginator]="true" scrollHeight="450px"  [value]="customers" [rows]="10" [columns]="cols" [paginator]="true"
+      [globalFilterFields]="['email', 'country.name', 'representative.name', 'status']"  [filterDelay]="0"
       [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedcustomers" [rowHover]="true" dataKey="id"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
       <ng-template #caption>
