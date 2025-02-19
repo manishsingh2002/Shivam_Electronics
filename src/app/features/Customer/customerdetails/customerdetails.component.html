@@ -1,34 +1,55 @@
 <div class="flex items-center mb-4">
-  <p-select [options]="customerIDDropdown" optionLabel="fullname" [(ngModel)]="customerId" optionValue="_id"
-    class="w-200px border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+  <p-select
+    [options]="customerIDDropdown"
+    optionLabel="fullname"
+    [(ngModel)]="customerId"
+    optionValue="_id"
+    class="w-200px border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+  >
   </p-select>
-  <button (click)="fetchCustomerData()"
-    class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200">Fetch</button>
+  <button
+    (click)="fetchCustomerData()"
+    class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+  >
+    Fetch
+  </button>
 </div>
 <div class="mb-4">
-  <pre>{{customerId |json}}</pre>
+  <pre>{{ customerId | json }}</pre>
 </div>
 
-
-<div class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen font-sans antialiased">
-  <button (click)="toggleDarkMode()"
-    class="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md fixed top-4 right-4 z-50 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors font-semibold">
+<div
+  class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen font-sans antialiased"
+>
+  <button
+    (click)="toggleDarkMode()"
+    class="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md fixed top-4 right-4 z-50 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors font-semibold"
+  >
     <i class="pi pi-moon" *ngIf="!darkMode"></i>
     <i class="pi pi-sun" *ngIf="darkMode"></i>
     <span class="ml-2 hidden sm:inline">Toggle Dark Mode</span>
   </button>
 
   <header
-    class="bg-gradient-to-r from-sky-600 to-indigo-600 dark:from-gray-800 dark:to-gray-900 py-24 md:py-32 text-center relative overflow-hidden">
+    class="bg-gradient-to-r from-sky-600 to-indigo-600 dark:from-gray-800 dark:to-gray-900 py-24 md:py-32 text-center relative overflow-hidden"
+  >
     <div class="container mx-auto relative z-10">
       <div class="relative inline-block mb-8">
-        <img [src]="customer.profileImg || 'https://placekitten.com/150/150'" alt="Profile Image"
-          class="rounded-full h-32 w-32 border-4 border-white dark:border-gray-700 shadow-xl">
+        <img
+          [src]="customer.profileImg || 'https://placekitten.com/150/150'"
+          alt="Profile Image"
+          class="rounded-full h-32 w-32 border-4 border-white dark:border-gray-700 shadow-xl"
+        />
         <span
-          class="absolute bottom-0 right-0 transform translate-y-1/4 translate-x-1/4 bg-green-500 border-2 border-white dark:border-gray-700 rounded-full w-4 h-4 shadow-md ring-2 ring-green-300 dark:ring-green-600"></span>
+          class="absolute bottom-0 right-0 transform translate-y-1/4 translate-x-1/4 bg-green-500 border-2 border-white dark:border-gray-700 rounded-full w-4 h-4 shadow-md ring-2 ring-green-300 dark:ring-green-600"
+        ></span>
       </div>
-      <h1 class="text-5xl md:text-6xl font-bold text-white shadow-text-lg mb-4">{{ customer.fullname }}</h1>
-      <p class="text-xl text-gray-100 dark:text-gray-300 mt-2 shadow-text-sm">{{ customer.email }}</p>
+      <h1 class="text-5xl md:text-6xl font-bold text-white shadow-text-lg mb-4">
+        {{ customer.fullname }}
+      </h1>
+      <p class="text-xl text-gray-100 dark:text-gray-300 mt-2 shadow-text-sm">
+        {{ customer.email }}
+      </p>
       <div class="mt-12 flex justify-center space-x-6">
         <button class="ecommerce-button primary-god-tier">
           <i class="pi pi-user-edit mr-2"></i> Edit Profile
@@ -39,29 +60,57 @@
       </div>
     </div>
     <div
-      class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-sky-700 to-indigo-700 opacity-20 dark:opacity-30">
-    </div>
+      class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-sky-700 to-indigo-700 opacity-20 dark:opacity-30"
+    ></div>
   </header>
 
   <main class="container mx-auto mt-16 px-6 md:px-12 lg:px-24">
-    <p-tabView (onChange)="onTabChange($event.index)" [activeIndex]="activeTabIndex" styleClass="ecommerce-tabview">
-
-      <p-tabPanel header="Personal Info" headerStyleClass="ecommerce-tab-header-god-tier"
-        contentStyleClass="ecommerce-tab-content-god-tier">
+    <p-tabView
+      (onChange)="onTabChange($event.index)"
+      [activeIndex]="activeTabIndex"
+      styleClass="ecommerce-tabview"
+    >
+      <p-tabPanel
+        header="Personal Info"
+        headerStyleClass="ecommerce-tab-header-god-tier"
+        contentStyleClass="ecommerce-tab-content-god-tier"
+      >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div class="w-full">
             <div class="ecommerce-card-god-tier group">
               <span class="ecommerce-card-border"></span>
               <div class="ecommerce-card-body">
-                <h3 class="ecommerce-card-title-god-tier"><i class="pi pi-user mr-2"></i> Account Details</h3>
-                <p class="ecommerce-card-text"><i class="pi pi-id-card mr-1"></i> Customer ID: <span
-                    class="font-semibold text-indigo-500 dark:text-indigo-300">{{ customer._id }}</span></p>
-                <p class="ecommerce-card-text"><i class="pi pi-user-plus mr-1"></i> Guarantor ID: <span
-                    class="font-semibold text-indigo-500 dark:text-indigo-300">{{ customer.guaranteerId }}</span></p>
-                <p class="ecommerce-card-text"><i class="pi pi-calendar mr-1"></i> Account Created: <span
-                    class="font-semibold text-indigo-500 dark:text-indigo-300">{{ customer.createdAt | date:'MMM d, y' }}</span></p>
-                <p class="ecommerce-card-text"><i class="pi pi-clock mr-1"></i> Last Updated: <span
-                    class="font-semibold text-indigo-500 dark:text-indigo-300">{{ customer.updatedAt | date:'MMM d, y, h:mm a' }}</span></p>
+                <h3 class="ecommerce-card-title-god-tier">
+                  <i class="pi pi-user mr-2"></i> Account Details
+                </h3>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-id-card mr-1"></i> Customer ID:
+                  <span
+                    class="font-semibold text-indigo-500 dark:text-indigo-300"
+                    >{{ customer._id }}</span
+                  >
+                </p>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-user-plus mr-1"></i> Guarantor ID:
+                  <span
+                    class="font-semibold text-indigo-500 dark:text-indigo-300"
+                    >{{ customer.guaranteerId }}</span
+                  >
+                </p>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-calendar mr-1"></i> Account Created:
+                  <span
+                    class="font-semibold text-indigo-500 dark:text-indigo-300"
+                    >{{ customer.createdAt | date : "MMM d, y" }}</span
+                  >
+                </p>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-clock mr-1"></i> Last Updated:
+                  <span
+                    class="font-semibold text-indigo-500 dark:text-indigo-300"
+                    >{{ customer.updatedAt | date : "MMM d, y, h:mm a" }}</span
+                  >
+                </p>
               </div>
             </div>
           </div>
@@ -69,36 +118,71 @@
             <div class="ecommerce-card-god-tier group">
               <span class="ecommerce-card-border"></span>
               <div class="ecommerce-card-body">
-                <h3 class="ecommerce-card-title-god-tier"><i class="pi pi-chart-line mr-2"></i> Purchase Summary</h3>
-                <p class="ecommerce-card-text"><i class="pi pi-shopping-bag mr-1"></i> Total Purchases: <span
-                    class="font-semibold text-green-500 dark:text-green-300">${{ customer.totalPurchasedAmount }}</span></p>
-                <p class="ecommerce-card-text"><i class="pi pi-wallet mr-1"></i> Remaining Balance: <span
-                    class="font-semibold text-green-500 dark:text-green-300">${{ customer.remainingAmount }}</span></p>
-                <p class="ecommerce-card-text"><i class="pi pi-check-circle mr-1"></i> Status: <span
-                    class="font-semibold text-green-500 dark:text-green-300">{{ customer.status }}</span></p>
+                <h3 class="ecommerce-card-title-god-tier">
+                  <i class="pi pi-chart-line mr-2"></i> Purchase Summary
+                </h3>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-shopping-bag mr-1"></i> Total Purchases:
+                  <span class="font-semibold text-green-500 dark:text-green-300"
+                    >${{ customer.totalPurchasedAmount }}</span
+                  >
+                </p>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-wallet mr-1"></i> Remaining Balance:
+                  <span class="font-semibold text-green-500 dark:text-green-300"
+                    >${{ customer.remainingAmount }}</span
+                  >
+                </p>
+                <p class="ecommerce-card-text">
+                  <i class="pi pi-check-circle mr-1"></i> Status:
+                  <span
+                    class="font-semibold text-green-500 dark:text-green-300"
+                    >{{ customer.status }}</span
+                  >
+                </p>
               </div>
             </div>
           </div>
         </div>
       </p-tabPanel>
 
-      <p-tabPanel header="Contact" headerStyleClass="ecommerce-tab-header-god-tier"
-        contentStyleClass="ecommerce-tab-content-god-tier">
+      <p-tabPanel
+        header="Contact"
+        headerStyleClass="ecommerce-tab-header-god-tier"
+        contentStyleClass="ecommerce-tab-content-god-tier"
+      >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div class="w-full">
             <div class="ecommerce-card-god-tier group">
               <span class="ecommerce-card-border"></span>
               <div class="ecommerce-card-body">
-                <h3 class="ecommerce-card-title-god-tier"><i class="pi pi-phone mr-2"></i> Phone Numbers</h3>
-                <div *ngFor="let phone of customer.phoneNumbers"
-                  class="mb-6 p-5 rounded-md bg-gray-100 dark:bg-gray-700 shadow-md border-2 border-gray-200 dark:border-gray-600 transition-shadow hover:shadow-lg">
-                  <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"><i
-                      class="pi pi-tag mr-1"></i>
-                    Type: <span class="font-normal">{{ phone.type }}</span></h4>
-                  <p class="ecommerce-card-text"><i class="pi pi-phone mr-1"></i> Number: <span
-                      class="font-semibold text-blue-500 dark:text-blue-300">{{ phone.number }}</span></p>
-                  <p class="ecommerce-card-text"><i class="pi pi-star-fill mr-1"></i> Primary: <span
-                      class="font-semibold text-blue-500 dark:text-blue-300">{{ phone.primary ? 'Yes' : 'No' }}</span></p>
+                <h3 class="ecommerce-card-title-god-tier">
+                  <i class="pi pi-phone mr-2"></i> Phone Numbers
+                </h3>
+                <div
+                  *ngFor="let phone of customer.phoneNumbers"
+                  class="mb-6 p-5 rounded-md bg-gray-100 dark:bg-gray-700 shadow-md border-2 border-gray-200 dark:border-gray-600 transition-shadow hover:shadow-lg"
+                >
+                  <h4
+                    class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"
+                  >
+                    <i class="pi pi-tag mr-1"></i> Type:
+                    <span class="font-normal">{{ phone.type }}</span>
+                  </h4>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-phone mr-1"></i> Number:
+                    <span
+                      class="font-semibold text-blue-500 dark:text-blue-300"
+                      >{{ phone.number }}</span
+                    >
+                  </p>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-star-fill mr-1"></i> Primary:
+                    <span
+                      class="font-semibold text-blue-500 dark:text-blue-300"
+                      >{{ phone.primary ? "Yes" : "No" }}</span
+                    >
+                  </p>
                 </div>
               </div>
             </div>
@@ -107,22 +191,54 @@
             <div class="ecommerce-card-god-tier group">
               <span class="ecommerce-card-border"></span>
               <div class="ecommerce-card-body">
-                <h3 class="ecommerce-card-title-god-tier"><i class="pi pi-map-marker mr-2"></i> Addresses</h3>
-                <div *ngFor="let address of customer.addresses"
-                  class="mb-6 p-5 rounded-md bg-gray-100 dark:bg-gray-700 shadow-md border-2 border-gray-200 dark:border-gray-600 transition-shadow hover:shadow-lg">
-                  <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"><i
-                      class="pi pi-home mr-1"></i>
-                    Type: <span class="font-normal">{{ address.type }}</span></h4>
-                  <p class="ecommerce-card-text"><i class="pi pi-map mr-1"></i> Street: <span
-                      class="font-semibold text-purple-500 dark:text-purple-300">{{ address.street }}</span></p>
-                  <p class="ecommerce-card-text"><i class="pi pi-city mr-1"></i> City: <span
-                      class="font-semibold text-purple-500 dark:text-purple-300">{{ address.city }}</span></p>
-                  <p class="ecommerce-card-text"><i class="pi pi-flag-fill mr-1"></i> State: <span
-                      class="font-semibold text-purple-500 dark:text-purple-300">{{ address.state }}</span></p>
-                  <p class="ecommerce-card-text"><i class="pi pi-inbox mr-1"></i> Zip Code: <span
-                      class="font-semibold text-purple-500 dark:text-purple-300">{{ address.zipCode }}</span></p>
-                  <p class="ecommerce-card-text"><i class="pi pi-globe mr-1"></i> Country: <span
-                      class="font-semibold text-purple-500 dark:text-purple-300">{{ address.country }}</span></p>
+                <h3 class="ecommerce-card-title-god-tier">
+                  <i class="pi pi-map-marker mr-2"></i> Addresses
+                </h3>
+                <div
+                  *ngFor="let address of customer.addresses"
+                  class="mb-6 p-5 rounded-md bg-gray-100 dark:bg-gray-700 shadow-md border-2 border-gray-200 dark:border-gray-600 transition-shadow hover:shadow-lg"
+                >
+                  <h4
+                    class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"
+                  >
+                    <i class="pi pi-home mr-1"></i> Type:
+                    <span class="font-normal">{{ address.type }}</span>
+                  </h4>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-map mr-1"></i> Street:
+                    <span
+                      class="font-semibold text-purple-500 dark:text-purple-300"
+                      >{{ address.street }}</span
+                    >
+                  </p>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-city mr-1"></i> City:
+                    <span
+                      class="font-semibold text-purple-500 dark:text-purple-300"
+                      >{{ address.city }}</span
+                    >
+                  </p>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-flag-fill mr-1"></i> State:
+                    <span
+                      class="font-semibold text-purple-500 dark:text-purple-300"
+                      >{{ address.state }}</span
+                    >
+                  </p>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-inbox mr-1"></i> Zip Code:
+                    <span
+                      class="font-semibold text-purple-500 dark:text-purple-300"
+                      >{{ address.zipCode }}</span
+                    >
+                  </p>
+                  <p class="ecommerce-card-text">
+                    <i class="pi pi-globe mr-1"></i> Country:
+                    <span
+                      class="font-semibold text-purple-500 dark:text-purple-300"
+                      >{{ address.country }}</span
+                    >
+                  </p>
                 </div>
               </div>
             </div>
@@ -130,32 +246,54 @@
         </div>
       </p-tabPanel>
 
-      <p-tabPanel header="Orders" headerStyleClass="ecommerce-tab-header-god-tier"
-        contentStyleClass="ecommerce-tab-content-god-tier">
+      <p-tabPanel
+        header="Orders"
+        headerStyleClass="ecommerce-tab-header-god-tier"
+        contentStyleClass="ecommerce-tab-content-god-tier"
+      >
         <div class="ecommerce-card-god-tier">
-          <h2 class="ecommerce-card-title-god-tier"><i class="pi pi-shopping-bag mr-2"></i> Recent Orders</h2>
+          <h2 class="ecommerce-card-title-god-tier">
+            <i class="pi pi-shopping-bag mr-2"></i> Recent Orders
+          </h2>
           <div *ngIf="customer.cart?.items?.length > 0; else noCartItems">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-              <div *ngFor="let cartItem of customer.cart.items" class="ecommerce-product-card">
-                <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  alt="Product Image" class="ecommerce-product-image">
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+            >
+              <div
+                *ngFor="let cartItem of customer.cart.items"
+                class="ecommerce-product-card"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  alt="Product Image"
+                  class="ecommerce-product-image"
+                />
                 <div class="ecommerce-product-details">
                   <dl>
                     <div>
                       <dt class="sr-only">Product ID</dt>
-                      <dd class="ecommerce-product-text"><i class="pi pi-box mr-1"></i> Product ID: <span
-                          class="font-semibold text-orange-500 dark:text-orange-300">{{ cartItem.productId }}</span></dd>
+                      <dd class="ecommerce-product-text">
+                        <i class="pi pi-box mr-1"></i> Product ID:
+                        <span
+                          class="font-semibold text-orange-500 dark:text-orange-300"
+                          >{{ cartItem.productId }}</span
+                        >
+                      </dd>
                     </div>
                     <div>
                       <dt class="sr-only">Quantity</dt>
-                      <dd class="ecommerce-product-text"><i class="pi pi- Compton-1 mr-1"></i> Quantity: <span
-                          class="font-semibold text-orange-500 dark:text-orange-300">{{ cartItem.quantity }}</span></dd>
+                      <dd class="ecommerce-product-text">
+                        <i class="pi pi- Compton-1 mr-1"></i> Quantity:
+                        <span
+                          class="font-semibold text-orange-500 dark:text-orange-300"
+                          >{{ cartItem.quantity }}</span
+                        >
+                      </dd>
                     </div>
                   </dl>
                 </div>
               </div>
             </div>
-
           </div>
           <ng-template #noCartItems>
             <p class="ecommerce-card-text">No recent orders.</p>
@@ -163,10 +301,15 @@
         </div>
       </p-tabPanel>
 
-      <p-tabPanel header="Payments" headerStyleClass="ecommerce-tab-header-god-tier"
-        contentStyleClass="ecommerce-tab-content-god-tier">
+      <p-tabPanel
+        header="Payments"
+        headerStyleClass="ecommerce-tab-header-god-tier"
+        contentStyleClass="ecommerce-tab-content-god-tier"
+      >
         <div class="ecommerce-card-god-tier">
-          <h2 class="ecommerce-card-title-god-tier"><i class="pi pi-credit-card mr-2"></i> Payment History</h2>
+          <h2 class="ecommerce-card-title-god-tier">
+            <i class="pi pi-credit-card mr-2"></i> Payment History
+          </h2>
           <div *ngIf="customer.paymentHistory?.length > 0; else noPayments">
             <div class="overflow-x-auto">
               <table class="min-w-full leading-normal ecommerce-table-god-tier">
@@ -179,13 +322,23 @@
                   </tr>
                 </thead>
                 <tbody class="ecommerce-table-body-god-tier">
-                  <tr *ngFor="let payment of customer.paymentHistory" class="ecommerce-table-row-god-tier">
-                    <td class="ecommerce-table-td-god-tier"><i class="pi pi-key mr-1"></i> {{ payment._id }}</td>
-                    <td class="ecommerce-table-td-god-tier"><i class="pi pi-dollar mr-1"></i> ${{ payment.amount }}
+                  <tr
+                    *ngFor="let payment of customer.paymentHistory"
+                    class="ecommerce-table-row-god-tier"
+                  >
+                    <td class="ecommerce-table-td-god-tier">
+                      <i class="pi pi-key mr-1"></i> {{ payment._id }}
                     </td>
-                    <td class="ecommerce-table-td-god-tier"><i class="pi pi-calendar-times mr-1"></i> {{ payment.date |
-                      date }}</td>
-                    <td class="ecommerce-table-td-god-tier"><i class="pi pi-circle-fill mr-1"></i> {{ payment.status }}
+                    <td class="ecommerce-table-td-god-tier">
+                      <i class="pi pi-dollar mr-1"></i> ${{ payment.amount }}
+                    </td>
+                    <td class="ecommerce-table-td-god-tier">
+                      <i class="pi pi-calendar-times mr-1"></i>
+                      {{ payment.date | date }}
+                    </td>
+                    <td class="ecommerce-table-td-god-tier">
+                      <i class="pi pi-circle-fill mr-1"></i>
+                      {{ payment.status }}
                     </td>
                   </tr>
                 </tbody>
@@ -198,37 +351,67 @@
         </div>
       </p-tabPanel>
 
-      <p-tabPanel header="Summary" headerStyleClass="ecommerce-tab-header-god-tier"
-        contentStyleClass="ecommerce-tab-content-god-tier">
+      <p-tabPanel
+        header="Summary"
+        headerStyleClass="ecommerce-tab-header-god-tier"
+        contentStyleClass="ecommerce-tab-content-god-tier"
+      >
         <div class="ecommerce-card-god-tier">
-          <h2 class="ecommerce-card-title-god-tier"><i class="pi pi-align-left mr-2"></i> Account Summary</h2>
-          <p class="ecommerce-card-text"><i class="pi pi-user-badge mr-1"></i> Status: <span
-              class="font-semibold text-teal-500 dark:text-teal-300">{{ customer.status }}</span></p>
-          <p class="ecommerce-card-text"><i class="pi pi-clock mr-1"></i> Member Since: <span
-              class="font-semibold text-teal-500 dark:text-teal-300">{{ customer.createdAt | date:'MMM d, y' }}</span></p>
-          <p class="ecommerce-card-text"><i class="pi pi-chart-bar mr-1"></i> Total Purchases: <span
-              class="font-semibold text-teal-500 dark:text-teal-300">${{ customer.totalPurchasedAmount }}</span></p>
-          <p class="ecommerce-card-text"><i class="pi pi-percentage mr-1"></i> Remaining Balance: <span
-              class="font-semibold text-teal-500 dark:text-teal-300">${{ customer.remainingAmount }}</span></p>
+          <h2 class="ecommerce-card-title-god-tier">
+            <i class="pi pi-align-left mr-2"></i> Account Summary
+          </h2>
+          <p class="ecommerce-card-text">
+            <i class="pi pi-user-badge mr-1"></i> Status:
+            <span class="font-semibold text-teal-500 dark:text-teal-300">{{
+              customer.status
+            }}</span>
+          </p>
+          <p class="ecommerce-card-text">
+            <i class="pi pi-clock mr-1"></i> Member Since:
+            <span class="font-semibold text-teal-500 dark:text-teal-300">{{
+              customer.createdAt | date : "MMM d, y"
+            }}</span>
+          </p>
+          <p class="ecommerce-card-text">
+            <i class="pi pi-chart-bar mr-1"></i> Total Purchases:
+            <span class="font-semibold text-teal-500 dark:text-teal-300"
+              >${{ customer.totalPurchasedAmount }}</span
+            >
+          </p>
+          <p class="ecommerce-card-text">
+            <i class="pi pi-percentage mr-1"></i> Remaining Balance:
+            <span class="font-semibold text-teal-500 dark:text-teal-300"
+              >${{ customer.remainingAmount }}</span
+            >
+          </p>
         </div>
 
         <div class="ecommerce-card-god-tier mt-10">
-          <h2 class="ecommerce-card-title-god-tier"><i class="pi pi-bolt mr-2"></i> Quick Actions</h2>
+          <h2 class="ecommerce-card-title-god-tier">
+            <i class="pi pi-bolt mr-2"></i> Quick Actions
+          </h2>
           <div class="ecommerce-actions-god-tier">
-            <button class="ecommerce-action-button-god-tier"><i class="pi pi-heart-fill mr-2"></i> View Wishlist</button>
-            <button class="ecommerce-action-button-god-tier"><i class="pi pi-truck mr-2"></i> Track Orders</button>
-            <button class="ecommerce-action-button-god-tier"><i class="pi pi-map-marker mr-2"></i> Manage Addresses</button>
-            <button class="ecommerce-action-button-god-tier"><i class="pi pi-credit-card mr-2"></i> Payment Methods</button>
+            <button class="ecommerce-action-button-god-tier">
+              <i class="pi pi-heart-fill mr-2"></i> View Wishlist
+            </button>
+            <button class="ecommerce-action-button-god-tier">
+              <i class="pi pi-truck mr-2"></i> Track Orders
+            </button>
+            <button class="ecommerce-action-button-god-tier">
+              <i class="pi pi-map-marker mr-2"></i> Manage Addresses
+            </button>
+            <button class="ecommerce-action-button-god-tier">
+              <i class="pi pi-credit-card mr-2"></i> Payment Methods
+            </button>
           </div>
         </div>
       </p-tabPanel>
-
     </p-tabView>
   </main>
 
-  <footer class="text-center py-12 text-gray-500 dark:text-gray-400 border-t dark:border-gray-700 mt-16">
+  <footer
+    class="text-center py-12 text-gray-500 dark:text-gray-400 border-t dark:border-gray-700 mt-16"
+  >
     <p>&copy; 2025 Ecommerce Platform. Crafted with Tailwind CSS & PrimeNG.</p>
   </footer>
 </div>
-
-

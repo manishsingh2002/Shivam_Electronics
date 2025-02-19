@@ -90,11 +90,8 @@ interface Product {
   providers: [ConfirmationService, MessageService]
 })
 export class ProductMasterComponent {
-  darkMode: boolean = false
-  isDarkMode: boolean = false;
-  darkModes() {
-    this.darkMode = !this.darkMode
-  }
+  isDarkMode: boolean = true;
+
 
   product: Product = {
     title: '',
@@ -133,7 +130,6 @@ export class ProductMasterComponent {
     this.autopopulatedata()
   }
   // toggleDarkMode() {
-  //   this.darkMode = !this.darkMode;
   // }
 
   autopopulatedata() {

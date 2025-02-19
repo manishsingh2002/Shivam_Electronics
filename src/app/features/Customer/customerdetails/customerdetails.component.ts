@@ -12,7 +12,7 @@ import { PrimeIcons } from 'primeng/api';
 import lodash from 'lodash'
 @Component({
   selector: 'app-customerdetails',
-  imports: [CardModule, SelectModule, TableModule,TabViewModule,  CommonModule, FormsModule],
+  imports: [CardModule, SelectModule, TableModule, TabViewModule, CommonModule, FormsModule],
   templateUrl: './customerdetails.component.html',
   styleUrl: './customerdetails.component.scss',
   providers: [PrimeIcons] // Add PrimeIcons to providers if needed for component-level injection
@@ -53,14 +53,14 @@ export class CustomerdetailsComponent {
     }
   }
 
-  
+
   onTabChange(index: number) {
     this.activeTabIndex = index;
-  } 
+  }
 
-  public customer: any  
+  public customer: any
 
- data:any= {
+  data: any = {
     _id: "678cc6e2ac1c4d9126b458ef",
     status: "inactive",
     profileImg: "",
@@ -80,7 +80,7 @@ export class CustomerdetailsComponent {
     createdAt: "2025-01-19T09:33:22.830Z",
     updatedAt: "2025-02-06T17:24:24.643Z"
   };
-  
+
 
   fetchCustomerData() {
     this.apiService.getCustomerDataWithId(this.customerId).subscribe(
