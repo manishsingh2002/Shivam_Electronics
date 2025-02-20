@@ -4,6 +4,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.gradient-text {
+  background: -webkit-linear-gradient(to right, #4c6ef5, #db63f8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 main {
     display: flex;
     flex-direction: column;

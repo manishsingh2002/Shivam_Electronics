@@ -1,0 +1,61 @@
+<!-- <div class="min-h-screen bg-gray-100 p-8">
+  <h1 class="text-4xl font-extrabold text-center mb-8 gradient-text">
+    Hyper-Advanced ERP Dashboard
+  </h1>
+
+  <div mwlDraggable [dragWithin]="parentElement" [dragSnapToGrid]="true" class="cursor-move">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" #parentElement>
+    <ng-container *ngFor="let comp of components">
+        <div mwlDraggable [dragBoundary]="parentElement" [dragSnapToGrid]="true" class="cursor-move">
+
+        <app-user-stats *ngIf="comp.id === 'user-stats'" [@fadeIn] [users]="comp.data"></app-user-stats>
+        <app-customer-list *ngIf="comp.id === 'customer-list'" [@slideIn] [customers]="comp.data"></app-customer-list>
+        <app-product-overview *ngIf="comp.id === 'product-overview'" [@slideIn] [products]="comp.data"></app-product-overview>
+        <app-sales-chart *ngIf="comp.id === 'sales-chart'" [@fadeIn] [sales]="comp.data"></app-sales-chart>
+        <app-order-stats *ngIf="comp.id === 'order-stats'" [@fadeIn]"></app-order-stats>
+        <app-inventory *ngIf="comp.id === 'inventory'" [@fadeIn]"></app-inventory>
+        <app-revenue *ngIf="comp.id === 'revenue'" [@fadeIn]"></app-revenue>
+        <app-tasks *ngIf="comp.id === 'tasks'" [@fadeIn]"></app-tasks>
+        <app-analytics *ngIf="comp.id === 'analytics'" [@fadeIn]"></app-analytics>
+        <app-notifications *ngIf="comp.id === 'notifications'" [@fadeIn]"></app-notifications>
+      </div>
+    </ng-container>
+  </div>
+</div> -->
+<div class="min-h-screen bg-gray-100 p-8">
+  <h1 class="text-4xl font-extrabold text-center mb-8 gradient-text">
+    Hyper-Advanced ERP Dashboard
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <ng-container *ngFor="let comp of components">
+      <div
+        [dndDraggable]="comp"
+        [dndEffectAllowed]="comp.effectAllowed"
+        (dndStart)="onDragStart($event, comp.id)"
+        (dndEnd)="onDragEnd($event, comp.id)"
+        class="cursor-move"
+      >
+        <section
+          dndDropzone
+          (dndDrop)="onDrop($event, comp.id)"
+          class="relative"
+        >
+          <app-user-stats *ngIf="comp.id === 'user-stats'" [@fadeIn] [users]="comp.data"></app-user-stats>
+          <app-customer-list *ngIf="comp.id === 'customer-list'" [@slideIn] [customers]="comp.data"></app-customer-list>
+          <app-product-overview *ngIf="comp.id === 'product-overview'" [@slideIn] [products]="comp.data"></app-product-overview>
+          <app-sales-chart *ngIf="comp.id === 'sales-chart'" [@fadeIn] [sales]="comp.data"></app-sales-chart>
+          <app-order-stats *ngIf="comp.id === 'order-stats'" [@fadeIn]  ></app-order-stats>
+          <app-inventory *ngIf="comp.id === 'inventory'" [@fadeIn]></app-inventory>
+          <app-revenue *ngIf="comp.id === 'revenue'" [@fadeIn]></app-revenue>
+          <app-tasks *ngIf="comp.id === 'tasks'" [@fadeIn]></app-tasks>
+          <app-analytics *ngIf="comp.id === 'analytics'" [@fadeIn]></app-analytics>
+          <app-notifications *ngIf="comp.id === 'notifications'" [@fadeIn]></app-notifications>
+
+          <!-- Placeholder for drop feedback -->
+          <div dndPlaceholderRef class="absolute inset-0 bg-orange-200 opacity-50 rounded-xl pointer-events-none"></div>
+        </section>
+      </div>
+    </ng-container>
+  </div>
+</div>

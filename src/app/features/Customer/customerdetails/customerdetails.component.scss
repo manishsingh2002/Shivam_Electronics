@@ -1,73 +1,23 @@
-/* customer-card.component.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.futuristic-product-card {
+  @apply bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300;
+}
 
-/* Your other global styles can go here */
-.ecommerce-button.primary {
-    @apply bg-sky-500 dark:bg-sky-700 text-white font-semibold py-2 px-4 rounded-full hover:bg-sky-600 dark:hover:bg-sky-600 transition-colors shadow-md;
-  }
-  
-  .ecommerce-button.secondary {
-    @apply bg-transparent border border-sky-500 dark:border-sky-700 text-sky-500 dark:text-sky-700 font-semibold py-2 px-4 rounded-full hover:border-sky-600 dark:hover:border-sky-600 hover:text-sky-600 dark:hover:text-sky-600 transition-colors;
-  }
-  
-  .ecommerce-card {
-    @apply bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6;
-  }
-  
-  .ecommerce-card-title {
-    @apply text-lg font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2;
-  }
-  
-  .ecommerce-card-text {
-    @apply text-gray-700 dark:text-gray-300 mb-2 flex items-center; /* Added flex and items-center for icon alignment */
-  }
-  
-  .ecommerce-tab-header {
-    @apply font-semibold text-gray-700 dark:text-gray-200;
-  }
-  
-  .ecommerce-tab-content {
-    @apply p-6;
-  }
-  
-  .ecommerce-table {
-    @apply min-w-full leading-normal;
-  }
-  
-  .ecommerce-table-header {
-    @apply bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300;
-  }
-  
-  .ecommerce-table-th {
-    @apply px-5 py-3 border-b-2 border-gray-200 dark:border-gray-600 text-left text-xs font-semibold uppercase tracking-wider;
-  }
-  
-  .ecommerce-table-body {
-    @apply text-sm text-gray-900 dark:text-gray-100;
-  }
-  
-  .ecommerce-table-row {
-    @apply hover:bg-gray-100 dark:hover:bg-gray-700;
-  }
-  
-  .ecommerce-table-td {
-    @apply px-5 py-5 border-b border-gray-200 dark:border-gray-700;
-  }
-  
-  .ecommerce-actions {
-    @apply space-y-3;
-  }
-  
-  .ecommerce-action-button {
-    @apply w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md transition-colors block text-left shadow-sm; /* Block and text-left for button list */
-  }
-  
-  .shadow-text-md {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Example text shadow */
-  }
-  
-  .shadow-text-sm {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Example smaller text shadow */
-  }
+.ecommerce-product-image {
+  @apply w-full h-48 object-cover;
+}
+
+.futuristic-product-details {
+  @apply mt-4;
+}
+
+.futuristic-table {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.futuristic-table-th {
+  @apply px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold;
+}
+
+.futuristic-table-td {
+  @apply px-4 py-2 border-b border-gray-200 dark:border-gray-700;
+}

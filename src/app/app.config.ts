@@ -11,6 +11,7 @@ import Aura from "@primeng/themes/aura";
 import { definePreset } from "@primeng/themes";
 import { MessageService } from 'primeng/api';
 import { AuthInterceptor, loggingInterceptor } from './core/Interceptors/auth.interceptor';
+// import { DndModule } from 'ngx-drag-drop';
 // import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import Nora from "@primeng/themes/nora";
 // import { definePreset } from "@primeng/themes";

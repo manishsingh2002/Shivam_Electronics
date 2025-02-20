@@ -10,6 +10,7 @@ import { ProductListComponent } from '../../features/products/components/product
 import { ProductDetailComponent } from '../../features/products/components/product-detail/product-detail.component';
 import { AppNavigationComponent } from "../../shared/components/common-layout/common-layout.component";
 import { HomePage1Component } from '../dashboard/home-page1/home-page1.component';
+import { AdminDashboardComponent } from '../../admin-dashboard/admin-dashboard.component';
 @Component({
   selector: 'app-main-dashboard',
   imports: [CommonModule, SelectButtonModule, FormsModule, RouterModule, AppNavigationComponent],
@@ -31,6 +32,8 @@ export class MainDashboardComponent {
   activeComponent: any = HomePage1Component;
   componentNavItems: any[] = [
     { label: 'home1', component: HomePage1Component },
+    { label: 'admin', component: AdminDashboardComponent },
+
     { label: 'home', component: HomePageComponent },
     { label: 'invoice', component: GstInvoiceComponent }, // Corrected key
     { label: 'Product List', component: ProductListComponent },
