@@ -127,6 +127,7 @@ export class ProductMasterComponent {
 
   constructor(private apiService: ApiService, private messageService: MessageService, @Inject(PLATFORM_ID) private platformId: Object) { }
   ngOnInit() {
+    document.body.classList.toggle('dark', this.isDarkMode);
     this.autopopulatedata()
   }
   // toggleDarkMode() {
@@ -152,7 +153,7 @@ export class ProductMasterComponent {
 
 
   toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
+    // this.isDarkMode = !this.isDarkMode;
     document.body.classList.toggle('dark', this.isDarkMode);
   }
 

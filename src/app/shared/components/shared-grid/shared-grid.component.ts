@@ -3,7 +3,26 @@
 
 import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { CellValueChangedEvent, ColDef, GridApi, GridReadyEvent, RowSelectedEvent, CellClickedEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, themeQuartz, colorSchemeDark } from 'ag-grid-community';
+// import { AllCommunityModule, ModuleRegistry, themeQuartz, colorSchemeDark } from 'ag-grid-community';
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+  colorSchemeDark,
+  colorSchemeDarkBlue,
+  colorSchemeDarkWarm,
+  colorSchemeLight,
+  colorSchemeLightCold,
+  colorSchemeLightWarm,
+  colorSchemeVariable,
+  iconSetAlpine,
+  iconSetMaterial,
+  iconSetQuartzBold,
+  iconSetQuartzLight,
+  iconSetQuartzRegular,
+  themeAlpine,
+  themeBalham,
+  themeQuartz,
+} from "ag-grid-community";
 import { AgGridAngular } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -44,12 +63,12 @@ export class SharedGridComponent implements OnInit, OnChanges {
   };
 
   theme = themeQuartz.withPart(colorSchemeDark).withParams({
-    // fontFamily: 'Kanit',
-    // headerFontFamily: 'Kanit',
-    // cellFontFamily: 'monospace',
-    // wrapperBorder: false,
-    // headerRowBorder: false,
-    // columnBorder: { style: 'dashed', color: '#9696C8' },
+    fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
+    headerFontFamily: 'Kanit, sans-serif',
+    cellFontFamily: 'DM Sans, sans-serif',
+    wrapperBorder: false,
+    headerRowBorder: false,
+    columnBorder: { style: 'dashed', color: '#9696C8' },
   });
 
   rowSelection: any;
@@ -121,6 +140,48 @@ export class SharedGridComponent implements OnInit, OnChanges {
     this.gridApi = params.api;
     this.gridReady.emit(params); // Also emit gridReady when Grid API is ready
   }
+
+  baseThemes = [
+    { id: "themeQuartz", value: themeQuartz },
+    { id: "themeBalham", value: themeBalham },
+    { id: "themeAlpine", value: themeAlpine },
+  ];
+  baseTheme = themeQuartz;
+
+  colorSchemes = [
+    { id: "(unchanged)", value: null },
+    { id: "colorSchemeLight", value: colorSchemeLight },
+    { id: "colorSchemeLightCold", value: colorSchemeLightCold },
+    { id: "colorSchemeLightWarm", value: colorSchemeLightWarm },
+    { id: "colorSchemeDark", value: colorSchemeDark },
+    { id: "colorSchemeDarkWarm", value: colorSchemeDarkWarm },
+    { id: "colorSchemeDarkBlue", value: colorSchemeDarkBlue },
+    { id: "colorSchemeVariable", value: colorSchemeVariable },
+  ];
+  colorScheme = null;
+
+  iconSets = [
+    { id: "(unchanged)", value: null },
+    { id: "iconSetQuartzLight", value: iconSetQuartzLight },
+    { id: "iconSetQuartzRegular", value: iconSetQuartzRegular },
+    { id: "iconSetQuartzBold", value: iconSetQuartzBold },
+    { id: "iconSetAlpine", value: iconSetAlpine },
+    { id: "iconSetMaterial", value: iconSetMaterial },
+  ];
+  iconSet = null;
+
+  // get theme() {
+  //   let theme = this.baseTheme;
+  //   if (this.iconSet) {
+  //     theme = theme.withPart(this.iconSet);
+  //   }
+  //   if (this.colorScheme) {
+  //     theme = theme.withPart(this.colorScheme);
+  //   }
+  //   return theme;
+  // }
+
+
 }
 
 //
