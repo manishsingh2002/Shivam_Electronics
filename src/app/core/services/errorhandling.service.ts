@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 export class ErrorhandlingService {
 
   constructor() { }
-   handleError(method: string, error: HttpErrorResponse): Observable<never> {
+  handleError(method: string, error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unexpected error occurred';
     let backendErrorCode: string | undefined;
     if (error.error instanceof ErrorEvent) {

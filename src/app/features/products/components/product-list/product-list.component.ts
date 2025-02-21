@@ -115,23 +115,6 @@ export class ProductListComponent implements OnInit {
 
     ngOnInit() {
         this.loadDemoData()
-    }
-
-    filterSearch(event: Event): void {
-        const input = event.target as HTMLInputElement;
-        this.dt.filterGlobal(input.value, 'contains');
-    }
-
-    exportCSV() {
-        this.dt.exportCSV();
-    }
-
-    loadDemoData() {
-        this.apiService.getAllProductData().subscribe((res: any) => {
-            this.products = res.data;
-            this.cd.markForCheck();
-        })
-
         this.statuses = [
             { label: 'INSTOCK', value: 'instock' },
             { label: 'LOWSTOCK', value: 'lowstock' },
@@ -145,6 +128,55 @@ export class ProductListComponent implements OnInit {
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' }
         ];
+    }
+
+    filterSearch(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        this.dt.filterGlobal(input.value, 'contains');
+    }
+
+    exportCSV() {
+        this.dt.exportCSV();
+    }
+
+    loadDemoData() {
+        const filterOptions = {
+            page: 1,        // Pagination: Page number
+            limit: 50,       // Pagination: Number of results per page
+            sort: 'price,-name',  // Sorting: Sort by price ascending, then name descending
+            // fields: 'name,price,category,ratingsAverage', // Field Limiting: Select specific fields
+            // category: 'Electronics,Clothing', // Filtering: Products in 'Electronics' OR 'Clothing' categories (using $in operator on backend)
+            // ratingsAverage: { gte: '4.5' }, // Filtering: Products with ratingsAverage greater than or equal to 4.5 (using $gte operator on backend)
+            // rate: { lt: '100' } // Filtering: Products with price less than 100 (using $lt operator on backend)
+        };
+
+        this.apiService.getAllProductData(filterOptions).subscribe((res: any) => {
+            if (res && res.data) { // Check if res and res.data are defined
+                this.products = res.data;
+                this.cd.markForCheck();
+                console.log(res);
+            } else {
+                console.error('Error loading product data: Invalid response format', res);
+                // Handle error appropriately, maybe show a message to the user
+            }
+        }, (error) => {
+            console.error('Error loading product data:', error);
+            // Handle error appropriately, maybe show a message to the user
+        });
+    }
+
+    loadAllData() {
+        this.apiService.getAllProductData().subscribe((res: any) => {
+            if (res && res.data) {
+                this.products = res.data;
+                this.cd.markForCheck();
+            } else {
+                console.error('Error loading all product data: Invalid response format', res);
+            }
+        }, (error) => {
+            console.error('Error loading all product data:', error);
+        });
+
 
         this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
     }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -18,6 +18,11 @@ export class ApiService {
   // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
   private baseUrl = 'http://localhost:4000/api'
   constructor(private http: HttpClient, private authService: AuthService, private errorhandler: ErrorhandlingService) { }
+
+  private handleError(operation = 'operation', error: HttpErrorResponse) {
+    console.error(`${operation} failed: ${error.message}`);
+    return throwError(() => error);
+  }
 
   // === User Authentication Methods ===
   getUserData(): Observable<any> {
@@ -72,12 +77,27 @@ export class ApiService {
       .pipe(catchError((error) => this.errorhandler.handleError('getAutopopulateData', error)));
   }
 
+  // -----------------------------------------------------------------------------------------------------------------------------------------------------------
+  getAllProductData(filterParams?: any): Observable<Product[]> {
+    let params = new HttpParams();
 
-  getAllProductData(): Observable<Product[]> {
-    return this.http
-      .get<Product[]>(`${this.baseUrl}/v1/products`)
-      .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error)));
+    if (filterParams) {
+      Object.keys(filterParams).forEach(key => {
+        if (filterParams[key] !== undefined) { // Ensure value is not undefined
+          params = params.set(key, filterParams[key]);
+        }
+      });
+    }
+
+    return this.http.get<Product[]>(`${this.baseUrl}/v1/products`, { params: params })
+      .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error as HttpErrorResponse)));
   }
+
+  // getAllProductData(): Observable<Product[]> {
+  //   return this.http
+  //     .get<Product[]>(`${this.baseUrl}/v1/products`)
+  //     .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error)));
+  // }
 
   getProductDataWithId(id: string): Observable<Product> {
     return this.http
