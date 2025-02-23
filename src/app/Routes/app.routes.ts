@@ -94,3 +94,95 @@ export const appRoutes: Routes = [
   // Fallback route for 404
   { path: '**', component: NotFoundComponent }
 ];
+
+
+/*{
+  "name": "shivam-electronics",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start:dev": "cross-env PORT=4200 ng serve --configuration=development --port $PORT",
+    "start:qa": "cross-env PORT=4300 ng serve --configuration=qa --port $PORT",
+    "start:prod": "cross-env PORT=4400 ng serve --configuration=production --port $PORT",
+    "build:dev": "ng build --configuration=development",
+    "build:qa": "ng build --configuration=qa",
+    "build:prod": "ng build --configuration=production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "electron:dev": "ng build --configuration=development --base-href ./ && electron electron-main.js",
+    "electron:qa": "ng build --configuration=qa --base-href ./ && electron electron-main.js",
+    "electron:prod": "ng build --configuration=production --base-href ./ && electron electron-main.js",
+    "dist": "electron-builder",
+    "serve:ssr": "node dist/shivam-electronics/server/server.mjs"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.0.6",
+    "@angular/common": "^19.0.6",
+    "@angular/compiler": "^19.0.6",
+    "@angular/core": "^19.0.6",
+    "@angular/forms": "^19.0.6",
+    "@angular/platform-browser": "^19.0.6",
+    "@angular/platform-browser-dynamic": "^19.0.6",
+    "@angular/platform-server": "^19.0.6",
+    "@angular/router": "^19.0.6",
+    "@angular/ssr": "^19.0.7",
+    "@primeng/themes": "^18.0.2",
+    "@supabase/supabase-js": "^2.48.1",
+    "ag-grid-angular": "^33.0.4",
+    "ag-grid-community": "^33.0.4",
+    "angular-draggable-droppable": "^8.0.0",
+    "express": "^4.18.2",
+    "flowbite": "^2.5.2",
+    "keen-slider": "^6.8.6",
+    "lodash": "^4.17.21",
+    "ngx-drag-drop": "^19.0.0",
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^19.0.5",
+    "rxjs": "~7.8.0",
+    "supabase": "^2.9.6",
+    "tailwindcss-primeui": "^0.4.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.7",
+    "@angular/cli": "^19.0.7",
+    "@angular/compiler-cli": "^19.0.6",
+    "@electron/remote": "^2.1.2",
+    "@tailwindcss/postcss": "^4.0.6",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/lodash": "^4.17.15",
+    "@types/node": "^18.18.0",
+    "cross-env": "^7.0.3",
+    "electron": "^34.0.2",
+    "electron-builder": "^25.1.8",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.5.2"
+  },
+  "build": {
+    "appId": "com.shivam_electronics.app",
+    "productName": "Shivam Electronics",
+    "directories": {
+      "output": "dist/electron"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/icon.ico"
+    },
+    "files": [
+      "dist/shivam-electronic
+"electron-main.js"
+    ]
+  }
+}
+*/

@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start:dev": "ng serve --configuration=development",
+    "start:qa": "ng serve --configuration=qa",
+    "start:prod": "ng serve --configuration=production",
+    "build:dev": "ng build --configuration=development",
+    "build:qa": "ng build --configuration=qa",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron": "electron electron-main.js",
-    "desktop": "ng build --base-href ./ && electron electron-main.js",
+    "electron:dev": "ng build --configuration=development --base-href ./ && electron electron-main.js",
+    "electron:qa": "ng build --configuration=qa --base-href ./ && electron electron-main.js",
+    "electron:prod": "ng build --configuration=production --base-href ./ && electron electron-main.js",
     "dist": "electron-builder",
-    "serve:ssr:shivam_Electronics": "node dist/shivam-electronics/server/server.mjs"
+    "serve:ssr": "node dist/shivam-electronics/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -69,14 +74,15 @@
     "appId": "com.shivam_electronics.app",
     "productName": "Shivam Electronics",
     "directories": {
-      "output": "dist"
+      "output": "dist/electron"
     },
     "win": {
       "target": "nsis",
-      "icon": "path/to/icon.ico"
+      "icon": "src/assets/icon.ico"
     },
     "files": [
-      "dist/shivam-electronics/**/*"
+      "dist/shivam-electronics/**/*",
+      "electron-main.js"
     ]
   }
 }

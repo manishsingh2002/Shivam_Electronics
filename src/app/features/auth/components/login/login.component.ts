@@ -5,6 +5,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import ReactiveFormsModule, FormBuilder, FormGroup, Validators
 import { AppMessageService } from '../../../../core/services/message.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-login',
@@ -34,6 +35,22 @@ export class LoginComponent implements OnInit { // Implement OnInit
         // Initialization logic can go here if needed
     }
 
+    // onLogin(): void {
+    //     const loginDetails = this.loginForm.value;
+    //     this.auth
+    //         .login(loginDetails)
+    //         .pipe(take(1))
+    //         .subscribe({
+    //             next: () => {
+    //                 const returnUrl = this.auth.getItem('returnUrl');
+    //                 this.auth.removeItem('returnUrl');
+    //                 this.router.navigate([returnUrl || '/dashboard']);
+    //             },
+    //             error: (error) => {
+    //                 this.messageService.handleError(error);
+    //             }
+    //         });
+    // }
 
     onLogin() {
         if (this.loginForm.valid) {
@@ -60,6 +77,7 @@ export class LoginComponent implements OnInit { // Implement OnInit
             console.log("Form is invalid");
         }
     }
+
 }
 
 // import { Component } from '@angular/core';
