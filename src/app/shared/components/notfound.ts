@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-notfound',
-  imports: [],
+  imports: [RouterModule,],
   template: `
 <div class="grid h-screen place-content-center bg-white px-4 dark:bg-gray-900">
   <div class="text-center">
@@ -43,6 +44,7 @@ import { Component } from '@angular/core';
 
     <p class="mt-4 text-gray-500 dark:text-gray-400">We can't find that page.</p>
   </div>
+
 </div>`,
   styles: `
   @tailwind base;

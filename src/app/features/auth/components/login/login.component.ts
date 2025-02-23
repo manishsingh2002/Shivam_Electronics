@@ -5,12 +5,12 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import ReactiveFormsModule, FormBuilder, FormGroup, Validators
 import { AppMessageService } from '../../../../core/services/message.service';
-import { take } from 'rxjs';
-
+// import { take } from 'rxjs';
+import { FocusTrapModule } from 'primeng/focustrap';
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule], // Add ReactiveFormsModule to imports
+    imports: [CommonModule, FocusTrapModule, RouterModule, FormsModule, ReactiveFormsModule], // Add ReactiveFormsModule to imports
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
@@ -31,26 +31,8 @@ export class LoginComponent implements OnInit { // Implement OnInit
     }
 
     ngOnInit(): void {
-        // Implement ngOnInit lifecycle hook
-        // Initialization logic can go here if needed
-    }
 
-    // onLogin(): void {
-    //     const loginDetails = this.loginForm.value;
-    //     this.auth
-    //         .login(loginDetails)
-    //         .pipe(take(1))
-    //         .subscribe({
-    //             next: () => {
-    //                 const returnUrl = this.auth.getItem('returnUrl');
-    //                 this.auth.removeItem('returnUrl');
-    //                 this.router.navigate([returnUrl || '/dashboard']);
-    //             },
-    //             error: (error) => {
-    //                 this.messageService.handleError(error);
-    //             }
-    //         });
-    // }
+    }
 
     onLogin() {
         if (this.loginForm.valid) {
@@ -79,6 +61,26 @@ export class LoginComponent implements OnInit { // Implement OnInit
     }
 
 }
+
+
+
+// onLogin(): void {
+//     const loginDetails = this.loginForm.value;
+//     this.auth
+//         .login(loginDetails)
+//         .pipe(take(1))
+//         .subscribe({
+//             next: () => {
+//                 const returnUrl = this.auth.getItem('returnUrl');
+//                 this.auth.removeItem('returnUrl');
+//                 this.router.navigate([returnUrl || '/dashboard']);
+//             },
+//             error: (error) => {
+//                 this.messageService.handleError(error);
+//             }
+//         });
+// }
+
 
 // import { Component } from '@angular/core';
 // import { RouterModule, Router } from '@angular/router'; // Import Router correctly

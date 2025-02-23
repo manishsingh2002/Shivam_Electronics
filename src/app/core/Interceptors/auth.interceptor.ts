@@ -23,7 +23,6 @@ export function AuthInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
     return next(req);
   }
 
-  // Append Authorization and User headers for other requests
   let headers = req.headers;
   if (authKey) {
     headers = headers.append('Authorization', `Bearer ${authKey}`);

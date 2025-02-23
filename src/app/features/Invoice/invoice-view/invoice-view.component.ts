@@ -125,8 +125,6 @@ export class InvoiceViewComponent {
     this.cdr.detectChanges();
   }
 
-
-
   getData() {
     this.apiService.getAllinvoiceData().subscribe((res: any) => {
       this.data = res.data;

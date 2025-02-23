@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
+import { AppMessageService } from '../../../../core/services/message.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,11 +15,11 @@ export class SignupComponent {
   signupForm: FormGroup; // Declare signupForm
 
   constructor(
+    private messageService: AppMessageService,
     private auth: AuthService,
     private router: Router,
     private fb: FormBuilder // Inject FormBuilder
   ) {
-    // Use FormBuilder to create the form group
     this.signupForm = this.fb.group({
       name: ['', Validators.required], // Full Name control
       email: ['', [Validators.required, Validators.email]], // Email control with email validator
@@ -32,20 +33,20 @@ export class SignupComponent {
 
   signUp() {
     if (this.signupForm.valid) {
-      this.errorMessage = null; // Clear any previous error messages
-
-      // Access form values using this.signupForm.value
+      this.errorMessage = null;
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (response: any) => {
           if (response && response.token) {
-            // Check if token exists in the response
+            this.messageService.showSuccessMessage('success', response.status)
             this.router.navigate(['/dashboard']);
           } else {
             this.errorMessage = 'Invalid credentials. Please try again.';
+            this.messageService.handleError(response.status, this.errorMessage)
           }
         },
         error: (error) => {
           console.error('Signup Error:', error);
+          this.messageService.handleError(error, "check the credencials")
           this.errorMessage = 'An error occurred during signup.'; // Display a generic error message
           if (error?.error?.message) {
             this.errorMessage = error.error.message;
@@ -53,8 +54,6 @@ export class SignupComponent {
         },
       });
     } else {
-      // Form is invalid, handle accordingly (e.g., display validation errors)
-      console.log('Form is invalid');
       // You can optionally mark controls as touched to show validation errors immediately
       Object.values(this.signupForm.controls).forEach(control => {
         if (control.invalid) {
@@ -65,6 +64,7 @@ export class SignupComponent {
     }
   }
 }
+
 // import { Component } from '@angular/core';
 // import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 // import { RouterModule } from '@angular/router';

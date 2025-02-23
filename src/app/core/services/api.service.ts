@@ -168,7 +168,7 @@ export class ApiService {
     return this.http.delete(endpoint, { body: body }).pipe(catchError((error) => this.errorhandler.handleError('deleteProduct', error)));
   }
 
-  // -===================================seller================================
+  // -=================================== seller ================================
 
   getSellerDataWithId(id: any): Observable<any[]> {
     return this.http.get<any>(`${this.baseUrl}/v1/sellers/${id}`).pipe(catchError((error) => this.errorhandler.handleError('getSellerDataWithId', error)));

@@ -265,7 +265,7 @@ import { TagModule } from 'primeng/tag';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { FileUpload } from 'primeng/fileupload';
-// import { SupabaseService } from '../../../core/services/supabase.service';
+import { FocusTrapModule } from 'primeng/focustrap';// import { SupabaseService } from '../../../core/services/supabase.service';
 import lodash from 'lodash'
 
 interface Customer {
@@ -313,7 +313,7 @@ interface CustomerDropdownOption {
   selector: 'app-customer-master',
   templateUrl: './customer-master.component.html',
   styleUrls: ['./customer-master.component.scss'],
-  imports: [CardModule, RouterModule, FormsModule, CommonModule, TagModule, DialogModule, KeyFilterModule, TableModule, RadioButtonModule, InputTextModule, ButtonModule, SelectModule, FileUploadModule, ImageModule,],
+  imports: [CardModule, RouterModule, FocusTrapModule, FormsModule, CommonModule, TagModule, DialogModule, KeyFilterModule, TableModule, RadioButtonModule, InputTextModule, ButtonModule, SelectModule, FileUploadModule, ImageModule,],
   providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
 })
 

@@ -140,6 +140,7 @@ export class CustomerListComponent {
         this.dt.exportCSV();
     }
 
+
     loadDemoData() {
         this.apiService.getAllCustomerData().subscribe((res: any) => {
             this.customers = res.data;
