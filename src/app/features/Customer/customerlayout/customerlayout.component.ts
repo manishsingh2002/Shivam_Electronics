@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CustomerMasterComponent } from '../customer-master/customer-master.component';
 import { CustomerListComponent } from '../customer-list/customer-list.component';
 import { CustomerdetailsComponent } from '../customerdetails/customerdetails.component';
+import { SellersComponent } from '../../Seller/sellers/sellers.component';
 @Component({
   selector: 'app-customerlayout',
   imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
@@ -18,7 +19,9 @@ export class CustomerlayoutComponent {
   componentNavItems: any[] = [
     { label: 'Customer Master', component: CustomerMasterComponent },
     { label: 'Customer List', component: CustomerListComponent },
-    { label: 'customerDetails', component: CustomerdetailsComponent }
+    { label: 'customerDetails', component: CustomerdetailsComponent },
+    { label: 'Seller Mater', component: SellersComponent },
+
   ];
 
   navigateToComponent(component: any) {
