@@ -36,12 +36,6 @@ export class CustomerdetailsComponent {
 
   ngOnInit(): void {
     this.autopopulatedata();
-    this.route.params.subscribe((params) => {
-      if (params['id']) {
-        this.customerId = params['id'];
-        this.fetchCustomerData();
-      }
-    });
   }
 
   autopopulatedata() {
@@ -92,10 +86,10 @@ export class CustomerdetailsComponent {
 }
 
 // Define the interface with a different name
-interface ApiServiceInterface {
-  getCustomerDataWithId(id: string): any;
-  getProductsByIds(ids: string[]): any;
-}
+// interface ApiServiceInterface {
+//   // getCustomerDataWithId(id: string): any;
+//   getProductsByIds(ids: string[]): any;
+// }
 // import { Component, HostBinding, Input } from '@angular/core';
 // import { CardModule } from 'primeng/card';
 // import { TableModule } from 'primeng/table';
