@@ -1,4 +1,4 @@
-<div class="bg-gray-900 text-white">
+<!-- <div class="bg-gray-900 text-white">
   <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
@@ -6,61 +6,31 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label
-            for="invoiceNumber"
-            class="block text-sm font-medium text-gray-300"
-            >Invoice No*</label
-          >
-          <input
-            type="text"
-            id="invoiceNumber"
-            [(ngModel)]="gstData.invoiceNumber"
-            placeholder="Enter Invoice No"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="invoiceNumber" class="block text-sm font-medium text-gray-300">Invoice No*</label>
+          <input type="text" id="invoiceNumber" [(ngModel)]="gstData.invoiceNumber" placeholder="Enter Invoice No"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
         <div>
-          <label
-            for="invoiceDate"
-            class="block text-sm font-medium text-gray-300"
-            >Invoice Date*</label
-          >
-          <input
-            type="date"
-            id="invoiceDate"
-            [(ngModel)]="gstData.invoiceDate"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="invoiceDate" class="block text-sm font-medium text-gray-300">Invoice Date*</label>
+          <input type="date" id="invoiceDate" [(ngModel)]="gstData.invoiceDate"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
         <div>
-          <label for="dueDate" class="block text-sm font-medium text-gray-300"
-            >Due Date</label
-          >
-          <input
-            type="date"
-            id="dueDate"
-            [(ngModel)]="gstData.dueDate"
-            placeholder="Enter Due Date"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="dueDate" class="block text-sm font-medium text-gray-300">Due Date</label>
+          <input type="date" id="dueDate" [(ngModel)]="gstData.dueDate" placeholder="Enter Due Date"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
       </div>
-      <div
-        class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center"
-      >
+      <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
         <i class="fas fa-image text-gray-400 text-5xl"></i>
         <div class="bg-gray-700 p-4 rounded-md">
           <h2 class="text-lg font-semibold mb-2 text-gray-300">
             Place of Supply (Buyer Address)
           </h2>
-          <textarea
-            id="placeOfSupply"
-            [(ngModel)]="gstData.placeOfSupply"
-            rows="3"
+          <textarea id="placeOfSupply" [(ngModel)]="gstData.placeOfSupply" rows="3"
             placeholder="Buyer Address will be shown here"
             class="mt-1 block w-full rounded-md border-gray-600 shadow-sm bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            readonly
-          ></textarea>
+            readonly></textarea>
         </div>
       </div>
     </div>
@@ -68,46 +38,32 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="bg-gray-700 p-4 rounded-md">
         <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
-        <p-select
-          appendTo="body"
-          [options]="sellersDrop"
-          optionLabel="name"
-          optionValue="_id"
-          [(ngModel)]="gstData.seller"
-          placeholder="Select Seller"
-          class="w-full"
-        ></p-select>
-        <!-- (onChange)="getsellerData()" -->
+        <p-select appendTo="body" [options]="sellersDrop" optionLabel="name" optionValue="_id"
+          [(ngModel)]="gstData.seller" placeholder="Select Seller" class="w-full"></p-select>
+         (onChange)="getsellerData()" 
       </div>
       <div class="bg-gray-700 p-4 rounded-md">
         <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
-        <p-select
-          appendTo="body"
-          [options]="customerIDDropdown"
-          optionLabel="fullname"
-          optionValue="_id"
-          [(ngModel)]="gstData.buyer"
-          placeholder="Select Buyer"
-          class="w-full"
-        ></p-select>
-        <!-- (onChange)="getCustomerData()" -->
+        <p-select appendTo="body" [options]="customerIDDropdown" optionLabel="fullname" optionValue="_id"
+          [(ngModel)]="gstData.buyer" placeholder="Select Buyer" class="w-full"></p-select>
+         (onChange)="getCustomerData()" 
       </div>
     </div>
     <div class="flex justify-between items-center mb-6">
       <div class="flex items-center space-x-4">
-        <!-- <select
+         <select
           [(ngModel)]="gstData.currency"
           class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-        > -->
-        <!-- <option *ngFor="let currency of currencies" [value]="currency.value">
+        > 
+         <option *ngFor="let currency of currencies" [value]="currency.value">
             {{ currency.label }}
           </option>
-        </select> -->
+        </select> 
       </div>
     </div>
     <div class="max-w-full overflow-x-auto mb-6">
       <table class="table-auto w-full bg-gray-700 text-white">
-        <!-- <thead class="bg-gray-800">
+         <thead class="bg-gray-800">
           <tr>
             <th class="py-2 px-4 border-b border-gray-600">Item</th>
             <th class="py-2 px-4 border-b border-gray-600">GST (%)</th>
@@ -211,7 +167,7 @@
               </button>
             </td>
           </tr>
-        </tbody> -->
+        </tbody> 
         <thead class="bg-gray-800">
           <tr>
             <th class="py-2 px-4 border-b border-gray-600">Item</th>
@@ -228,7 +184,11 @@
         <tbody>
           <tr *ngFor="let item of gstData.items; let i = index">
             <td class="py-2 px-4 border-b border-gray-600">
-              <p-select
+              <p-select appendTo="body" type="text" [(ngModel)]="gstData.items[i].product"
+                (onChange)="onProductChange($event, i)" [options]="productdrop"
+                (ngModelChange)="onItemValueChange(gstData.items[i])" optionValue="_id" optionLabel="title"
+                class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-select>
+               <p-select
                 appendTo="body"
                 type="text"
                 [(ngModel)]="gstData.items[i].product"
@@ -238,92 +198,52 @@
                 optionValue="_id"
                 optionLabel="title"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-              ></p-select>
-              <!-- <p-select
-                appendTo="body"
-                type="text"
-                [(ngModel)]="gstData.items[i].product"
-                (onChange)="onProductChange($event, i)"
-                [options]="productdrop"
-                (ngModelChange)="onItemValueChange(gstData.items[i])"
-                optionValue="_id"
-                optionLabel="title"
-                class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-              ></p-select> -->
+              ></p-select> 
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].gstRate"
+              <input type="number" [(ngModel)]="gstData.items[i].gstRate"
                 (ngModelChange)="onItemValueChange(gstData.items[i])"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="0.01"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].quantity"
+              <input type="number" [(ngModel)]="gstData.items[i].quantity"
                 (ngModelChange)="onItemValueChange(gstData.items[i])"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="1"
-              />
+                step="1" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].rate"
+              <input type="number" [(ngModel)]="gstData.items[i].rate"
                 (ngModelChange)="onItemValueChange(gstData.items[i])"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="0.01"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].discount"
+              <input type="number" [(ngModel)]="gstData.items[i].discount"
                 (ngModelChange)="onItemValueChange(gstData.items[i])"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="0.01"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].taxableValue"
+              <input type="number" [(ngModel)]="gstData.items[i].taxableValue"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                [readonly]="true" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].gstAmount"
+              <input type="number" [(ngModel)]="gstData.items[i].gstAmount"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                [readonly]="true" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].amount"
+              <input type="number" [(ngModel)]="gstData.items[i].amount"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                [readonly]="true" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600 text-center">
-              <button
-                type="button"
-                class="text-red-500 hover:text-red-700"
-                (click)="removeItem(i)"
-              >
+              <button type="button" class="text-red-500 hover:text-red-700" (click)="removeItem(i)">
                 <i class="fas fa-trash">remove</i>
               </button>
-              <button
-                type="button"
-                class="text-blue-500 hover:text-blue-700 ml-2"
-                (click)="addItem()"
-              >
+              <button type="button" class="text-blue-500 hover:text-blue-700 ml-2" (click)="addItem()">
                 <i class="fas fa-plus">add</i>
               </button>
             </td>
@@ -337,28 +257,20 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="bg-gray-700 p-4 rounded-md flex items-center">
-        <input
-          type="checkbox"
-          id="roundUp"
+        <input type="checkbox" id="roundUp"
           class="mr-2 rounded border-gray-600 text-purple-500 focus:ring-purple-500 bg-gray-800"
-          (change)="calculateInvoiceTotals()"
-        />
+          (change)="calculateInvoiceTotals()" />
         <label for="roundUp" class="ml-2 text-sm text-gray-300">Round Up</label>
       </div>
       <div class="bg-gray-700 p-4 rounded-md flex items-center">
-        <input
-          type="checkbox"
-          id="roundDown"
+        <input type="checkbox" id="roundDown"
           class="mr-2 rounded border-gray-600 text-purple-500 focus:ring-purple-500 bg-gray-800"
-          (change)="calculateInvoiceTotals()"
-        />
-        <label for="roundDown" class="ml-2 text-sm text-gray-300"
-          >Round Down</label
-        >
+          (change)="calculateInvoiceTotals()" />
+        <label for="roundDown" class="ml-2 text-sm text-gray-300">Round Down</label>
       </div>
     </div>
     <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
-      <!-- <table class="table-auto w-full">
+       <table class="table-auto w-full">
         <thead>
           <tr>
             <th class="py-2 px-4 text-left">Description</th>
@@ -403,7 +315,7 @@
             </td>
           </tr>
         </tbody>
-      </table> -->
+      </table> 
       <table class="table-auto w-full">
         <thead>
           <tr>
@@ -439,22 +351,16 @@
         </tbody>
       </table>
       <div class="flex justify-between items-center mt-4">
-        <button
-          type="button"
-          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm"
-        >
+        <button type="button"
+          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm">
           + Add More Fields
         </button>
-        <button
-          type="button"
-          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm"
-        >
+        <button type="button"
+          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm">
           + Show Total In Words
         </button>
       </div>
-      <div
-        class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4"
-      >
+      <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
         <h2 class="text-lg font-semibold">Total (INR)</h2>
         <h2 class="text-lg font-semibold">
           ₹ {{ gstData.totalAmount | number : "1.2-2" }}
@@ -463,16 +369,14 @@
     </div>
   </div>
   <div class="text-center">
-    <button
-      type="button"
+    <button type="button"
       class="bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out"
-      (click)="saveInvoice()"
-    >
+      (click)="saveInvoice()">
       Save & Continue
     </button>
   </div>
-</div>
-<!-- <div class="bg-gray-900 text-white">
+</div> -->
+<div class="bg-gray-900 text-white" [formGroup]="invoiceForm">
   <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
@@ -480,390 +384,49 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label
-            for="invoiceNumber"
-            class="block text-sm font-medium text-gray-300"
-            >Invoice No*</label
-          >
-          <input
-            type="text"
-            id="invoiceNumber"
-            [(ngModel)]="gstData.invoiceNumber"
-            placeholder="Enter Invoice No"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="invoiceNumber" class="block text-sm font-medium text-gray-300">Invoice No*</label>
+          <input type="text" id="invoiceNumber" formControlName="invoiceNumber" placeholder="Enter Invoice No"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
         <div>
-          <label
-            for="invoiceDate"
-            class="block text-sm font-medium text-gray-300"
-            >Invoice Date*</label
-          >
-          <input
-            type="date"
-            id="invoiceDate"
-            [(ngModel)]="gstData.invoiceDate"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="invoiceDate" class="block text-sm font-medium text-gray-300">Invoice Date*</label>
+          <input type="date" id="invoiceDate" formControlName="invoiceDate"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
         <div>
-          <label for="dueDate" class="block text-sm font-medium text-gray-300"
-            >Due Date</label
-          >
-          <input
-            type="date"
-            id="dueDate"
-            [(ngModel)]="gstData.dueDate"
-            placeholder="Enter Due Date"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
+          <label for="dueDate" class="block text-sm font-medium text-gray-300">Due Date</label>
+          <input type="date" id="dueDate" formControlName="dueDate" placeholder="Enter Due Date"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white focus:ring-purple-500 focus:border-purple-500" />
         </div>
       </div>
-      <div
-        class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center"
-      >
+      <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
         <i class="fas fa-image text-gray-400 text-5xl"></i>
-        <p class="mt-2 text-gray-500">Add Business Logo</p>
-        <p class="text-xs text-gray-400 mt-2">
-          Resolution up to 1080x1080px. PNG or JPEG format.
-        </p>
+        <div class="bg-gray-700 p-4 rounded-md">
+          <h2 class="text-lg font-semibold mb-2 text-gray-300">
+            Place of Supply (Buyer Address)
+          </h2>
+          <textarea id="placeOfSupply" formControlName="placeOfSupply" rows="3"
+            placeholder="Buyer Address will be shown here"
+            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
+            readonly></textarea>
+        </div>
       </div>
     </div>
     <div class="flex justify-between mb-6"></div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="bg-gray-700 p-4 rounded-md">
         <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
-        <p-select
-          appendTo="body"
-          [options]="sellersDrop"
-          optionLabel="name"
-          optionValue="_id"
-          (onChange)="getsellerData()"
-          [(ngModel)]="sellersselec"
-          class="w-full"
-        ></p-select>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label
-              for="billedByCountry"
-              class="block text-sm font-medium text-gray-300"
-              >Country</label
-            >
-            <select
-              id="billedByCountry"
-              [(ngModel)]="gstData.billedBy.country"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            >
-              <option *ngFor="let country of countries" [value]="country.value">
-                {{ country.label }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <label
-              for="billedByState"
-              class="block text-sm font-medium text-gray-300"
-              >State</label
-            >
-            <input
-              type="text"
-              id="billedByState"
-              [(ngModel)]="gstData.billedBy.state"
-              placeholder="Enter State"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByBusinessName"
-            class="block text-sm font-medium text-gray-300"
-            >Your Business Name (Required)</label
-          >
-          <input
-            type="text"
-            id="billedByBusinessName"
-            [(ngModel)]="gstData.billedBy.businessName"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByPhone"
-            class="block text-sm font-medium text-gray-300 mb-2"
-            >Phone</label
-          >
-          <div class="flex">
-            <span
-              class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm"
-              >+91</span
-            >
-            <input
-              type="tel"
-              id="billedByPhone"
-              [(ngModel)]="gstData.billedBy.phone"
-              placeholder="Enter phone number"
-              class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByEmail"
-            class="block text-sm font-medium text-gray-300"
-            >Email</label
-          >
-          <input
-            type="email"
-            id="billedByEmail"
-            [(ngModel)]="gstData.billedBy.email"
-            placeholder="Enter your email"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByGstin"
-            class="block text-sm font-medium text-gray-300"
-            >Your GSTIN (optional)</label
-          >
-          <input
-            type="text"
-            id="billedByGstin"
-            [(ngModel)]="gstData.billedBy.gstin"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByAddress"
-            class="block text-sm font-medium text-gray-300"
-            >Address (optional)</label
-          >
-          <input
-            type="text"
-            id="billedByAddress"
-            [(ngModel)]="gstData.billedBy.address"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label
-              for="billedByCity"
-              class="block text-sm font-medium text-gray-300"
-              >City (optional)</label
-            >
-            <input
-              type="text"
-              id="billedByCity"
-              [(ngModel)]="gstData.billedBy.city"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-          <div>
-            <label
-              for="billedByPostalCode"
-              class="block text-sm font-medium text-gray-300"
-              >Postal Code / Zip Code</label
-            >
-            <input
-              type="text"
-              id="billedByPostalCode"
-              [(ngModel)]="gstData.billedBy.postalCode"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedByBillState"
-            class="block text-sm font-medium text-gray-300"
-            >State (optional)</label
-          >
-          <select
-            id="billedByBillState"
-            [(ngModel)]="gstData.billedBy.billState"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          >
-            <option *ngFor="let state of states" [value]="state.value">
-              {{ state.label }}
-            </option>
-          </select>
-        </div>
+        <p-select appendTo="body" [options]="sellersDrop" optionLabel="name" optionValue="_id" formControlName="seller"
+          placeholder="Select Seller" class="w-full"></p-select>
       </div>
       <div class="bg-gray-700 p-4 rounded-md">
         <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
-        <p-select
-          appendTo="body"
-          [options]="customerIDDropdown"
-          optionLabel="fullname"
-          optionValue="_id"
-          (onChange)="getCustomerData()"
-          [(ngModel)]="buyerselect"
-          class="w-full"
-        ></p-select>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label
-              for="billedToCountry"
-              class="block text-sm font-medium text-gray-300"
-              >Country</label
-            >
-            <select
-              id="billedToCountry"
-              [(ngModel)]="gstData.billedTo.country"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            >
-              <option *ngFor="let country of countries" [value]="country.value">
-                {{ country.label }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <label
-              for="billedToState"
-              class="block text-sm font-medium text-gray-300"
-              >State</label
-            >
-            <input
-              type="text"
-              id="billedToState"
-              [(ngModel)]="gstData.billedTo.state"
-              placeholder="Enter State"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToBusinessName"
-            class="block text-sm font-medium text-gray-300"
-            >Client's business name (Required)</label
-          >
-          <input
-            type="text"
-            id="billedToBusinessName"
-            [(ngModel)]="gstData.billedTo.businessName"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToPhone"
-            class="block text-sm font-medium text-gray-300 mb-2"
-            >Phone</label
-          >
-          <div class="flex">
-            <span
-              class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm"
-              >+91</span
-            >
-            <input
-              type="tel"
-              id="billedToPhone"
-              [(ngModel)]="gstData.billedTo.phone"
-              placeholder="Enter phone number"
-              class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToEmail"
-            class="block text-sm font-medium text-gray-300"
-            >Email</label
-          >
-          <input
-            type="email"
-            id="billedToEmail"
-            [(ngModel)]="gstData.billedTo.email"
-            placeholder="Enter your email"
-            class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToGstin"
-            class="block text-sm font-medium text-gray-300"
-            >Client's GSTIN (optional)</label
-          >
-          <input
-            type="text"
-            id="billedToGstin"
-            [(ngModel)]="gstData.billedTo.gstin"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToAddress"
-            class="block text-sm font-medium text-gray-300"
-            >Address (optional)</label
-          >
-          <input
-            type="text"
-            id="billedToAddress"
-            [(ngModel)]="gstData.billedTo.address"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          />
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label
-              for="billedToCity"
-              class="block text-sm font-medium text-gray-300"
-              >City (optional)</label
-            >
-            <input
-              type="text"
-              id="billedToCity"
-              [(ngModel)]="gstData.billedTo.city"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-          <div>
-            <label
-              for="billedToPostalCode"
-              class="block text-sm font-medium text-gray-300"
-              >Postal Code / Zip Code</label
-            >
-            <input
-              type="text"
-              id="billedToPostalCode"
-              [(ngModel)]="gstData.billedTo.postalCode"
-              class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-            />
-          </div>
-        </div>
-        <div class="mb-4">
-          <label
-            for="billedToBillState"
-            class="block text-sm font-medium text-gray-300"
-            >State (optional)</label
-          >
-          <select
-            id="billedToBillState"
-            [(ngModel)]="gstData.billedTo.billState"
-            class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-          >
-            <option *ngFor="let state of states" [value]="state.value">
-              {{ state.label }}
-            </option>
-          </select>
-        </div>
+        <p-select appendTo="body" [options]="customerIDDropdown" optionLabel="fullname" optionValue="_id"
+          formControlName="buyer" placeholder="Select Buyer" class="w-full"></p-select>
       </div>
     </div>
     <div class="flex justify-between items-center mb-6">
       <div class="flex items-center space-x-4">
-        <select
-          [(ngModel)]="gstData.currency"
-          class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white focus:ring-purple-500 focus:border-purple-500"
-        >
-          <option *ngFor="let currency of currencies" [value]="currency.value">
-            {{ currency.label }}
-          </option>
-        </select>
       </div>
     </div>
     <div class="max-w-full overflow-x-auto mb-6">
@@ -873,138 +436,84 @@
             <th class="py-2 px-4 border-b border-gray-600">Item</th>
             <th class="py-2 px-4 border-b border-gray-600">GST (%)</th>
             <th class="py-2 px-4 border-b border-gray-600">Quantity</th>
-            <th class="py-2 px-4 border-b border-gray-600">Rate</th>
+            <th class="py-2 px-4 border-b border-gray-600">Rate (Ex-GST)</th>
+            <th class="py-2 px-4 border-b border-gray-600">Discount (%)</th>
             <th class="py-2 px-4 border-b border-gray-600">Taxable Value</th>
-            <th class="py-2 px-4 border-b border-gray-600">CGST Amount</th>
-            <th class="py-2 px-4 border-b border-gray-600">SGST Amount</th>
+            <th class="py-2 px-4 border-b border-gray-600">GST Amount</th>
             <th class="py-2 px-4 border-b border-gray-600">Total Amount</th>
             <th class="py-2 px-4 border-b border-gray-600">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let item of gstData.items; let i = index">
+        <tbody formArrayName="items">
+          <tr *ngFor="let itemFormGroup of itemsFormArray.controls; let i = index" [formGroupName]="i">
             <td class="py-2 px-4 border-b border-gray-600">
-               <p-select
-                        appendTo="body"
-                        type="text"
-                        [(ngModel)]="gstData.items[i].product"
-                        (onChange)="getproductdata()"
-                        [options]="productdrop"
-                        (ngModelChange)="onItemValueChange(gstData.items[i])"
-                        optionValue="_id"
-                        optionLabel="title"
-                        class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white">
-                      </p-select> 
-                    </td>
-            <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].gstRate"
-                (ngModelChange)="onItemValueChange(gstData.items[i])"
-                class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="0.01"
-              />
+              <p-select appendTo="body" type="text" formControlName="product" (onChange)="onProductChange($event, i)"
+                [options]="productdrop" (ngModelChange)="onItemValueChange(i)" optionValue="_id" optionLabel="title"
+                class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-select>
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].quantity"
-                (ngModelChange)="onItemValueChange(gstData.items[i])"
+              <input type="number" formControlName="gstRate" (ngModelChange)="onItemValueChange(i)"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="1"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].rate"
-                (ngModelChange)="onItemValueChange(gstData.items[i])"
+              <input type="number" formControlName="quantity" (ngModelChange)="onItemValueChange(i)"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                step="0.01"
-              />
+                step="1" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].taxableValue"
+              <input type="number" formControlName="rate" (ngModelChange)="onItemValueChange(i)"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].cgstAmount"
+              <input type="number" formControlName="discount" (ngModelChange)="onItemValueChange(i)"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                step="0.01" />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].sgstAmount"
+              <input type="number" formControlName="taxableValue"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                readonly />
             </td>
             <td class="py-2 px-4 border-b border-gray-600">
-              <input
-                type="number"
-                [(ngModel)]="gstData.items[i].amount"
+              <input type="number" formControlName="gstAmount"
                 class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
-                [readonly]="true"
-              />
+                readonly />
+            </td>
+            <td class="py-2 px-4 border-b border-gray-600">
+              <input type="number" formControlName="amount"
+                class="w-full border-gray-600 rounded-md shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"
+                readonly />
             </td>
             <td class="py-2 px-4 border-b border-gray-600 text-center">
-              <button
-                type="button"
-                class="text-red-500 hover:text-red-700"
-                (click)="removeItem(i)"
-              >
+              <button type="button" class="text-red-500 hover:text-red-700" (click)="removeItem(i)">
                 <i class="fas fa-trash">remove</i>
               </button>
-              <button
-                type="button"
-                class="text-blue-500 hover:text-blue-700 ml-2"
-                (click)="addItem()"
-              >
+              <button type="button" class="text-blue-500 hover:text-blue-700 ml-2" (click)="addItem()">
                 <i class="fas fa-plus">add</i>
               </button>
             </td>
           </tr>
- </tbody>
+        </tbody>
       </table>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <div class="bg-gray-700 p-4 rounded-md">
-        <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm" (click)="addItem()">+ Add New Line</button>
-      </div>
-      <div class="bg-gray-700 p-4 rounded-md">
-        <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm">+ Add Discounts/Additional Charges</button>
-      </div>
+      <div class="bg-gray-700 p-4 rounded-md"></div>
+      <div class="bg-gray-700 p-4 rounded-md"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="bg-gray-700 p-4 rounded-md flex items-center">
-        <input
-          type="checkbox"
-          id="roundUp"
-          [(ngModel)]="gstData.roundUp"
+        <input type="checkbox" id="roundUp" formControlName="roundUp"
           class="mr-2 rounded border-gray-600 text-purple-500 focus:ring-purple-500 bg-gray-800"
-          (change)="calculateInvoiceTotals()"
-        />
+          (change)="calculateInvoiceTotals()" />
         <label for="roundUp" class="ml-2 text-sm text-gray-300">Round Up</label>
       </div>
       <div class="bg-gray-700 p-4 rounded-md flex items-center">
-        <input
-          type="checkbox"
-          id="roundDown"
-          [(ngModel)]="gstData.roundDown"
+        <input type="checkbox" id="roundDown" formControlName="roundDown"
           class="mr-2 rounded border-gray-600 text-purple-500 focus:ring-purple-500 bg-gray-800"
-          (change)="calculateInvoiceTotals()"
-        />
-        <label for="roundDown" class="ml-2 text-sm text-gray-300"
-          >Round Down</label
-        >
+          (change)="calculateInvoiceTotals()" />
+        <label for="roundDown" class="ml-2 text-sm text-gray-300">Round Down</label>
       </div>
     </div>
     <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
@@ -1019,808 +528,52 @@
           <tr>
             <td class="py-2 px-4 border-b border-gray-600">Sub Total</td>
             <td class="py-2 px-4 border-b border-gray-600 text-right">
-              ₹ {{ gstData.subTotal | number : "1.2-2" }}
+              ₹ {{ invoiceForm.get('subTotal')?.value | number : "1.2-2" }}
             </td>
           </tr>
           <tr>
-            <td class="py-2 px-4 border-b border-gray-600">SGST</td>
+            <td class="py-2 px-4 border-b border-gray-600">GST</td>
             <td class="py-2 px-4 border-b border-gray-600 text-right">
-              ₹ {{ calculateTotalSgst() | number : "1.2-2" }}
-            </td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-gray-600">CGST</td>
-            <td class="py-2 px-4 border-b border-gray-600 text-right">
-              ₹ {{ calculateTotalCgst() | number : "1.2-2" }}
-            </td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-gray-600">IGST</td>
-            <td class="py-2 px-4 border-b border-gray-600 text-right">
-              ₹ {{ gstData.igst | number : "1.2-2" }}
+              ₹ {{ invoiceForm.get('gst')?.value | number : "1.2-2" }}
             </td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-gray-600">CESS</td>
             <td class="py-2 px-4 border-b border-gray-600 text-right">
-              ₹ {{ gstData.cess | number : "1.2-2" }}
+              ₹ {{ invoiceForm.get('cess')?.value | number : "1.2-2" }}
             </td>
           </tr>
           <tr>
             <td class="py-2 px-4">Discount</td>
             <td class="py-2 px-4 text-right">
-              ₹ {{ gstData.totalDiscount | number : "1.2-2" }}
+              ₹ {{ invoiceForm.get('totalDiscount')?.value | number : "1.2-2" }}
             </td>
           </tr>
         </tbody>
       </table>
       <div class="flex justify-between items-center mt-4">
-        <button
-          type="button"
-          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm"
-        >
+        <button type="button"
+          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm">
           + Add More Fields
         </button>
-        <button
-          type="button"
-          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm"
-        >
+        <button type="button"
+          class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded transition duration-300 ease-in-out text-sm">
           + Show Total In Words
         </button>
       </div>
-      <div
-        class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4"
-      >
+      <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
         <h2 class="text-lg font-semibold">Total (INR)</h2>
         <h2 class="text-lg font-semibold">
-          ₹ {{ gstData.totalAmount | number : "1.2-2" }}
+          ₹ {{ invoiceForm.get('totalAmount')?.value | number : "1.2-2" }}
         </h2>
       </div>
     </div>
   </div>
   <div class="text-center">
-    <button
-      type="button"
+    <button type="button"
       class="bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out"
-      (click)="saveInvoice()"
-    >
+      (click)="saveInvoice()">
       Save & Continue
     </button>
   </div>
-</div> -->
-
-<!-- invoice-form.component.html
-<form class="max-w-6xl mx-auto p-6 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl" [formGroup]="invoiceForm">
-  Header Section
-  <div class="mb-8 text-center">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">GST Invoice</h1>
-    <div class="flex gap-4 justify-center">
-      <p-button label="Save Draft" styleClass="p-button-outlined" />
-      <p-button label="Submit Invoice" styleClass="p-button-gradient" />
-    </div>
-  </div>
-
-  Seller/Buyer Section
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <div class="p-4 bg-gray-50 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-700 mb-4">Seller Information</h3>
-      <p-dropdown [options]="sellers" optionLabel="name" formControlName="seller" 
-        placeholder="Select Seller" class="w-full"></p-dropdown>
-    </div>
-
-    <div class="p-4 bg-gray-50 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-700 mb-4">Buyer Information</h3>
-      <p-dropdown [options]="customers" optionLabel="name" formControlName="buyer" 
-        placeholder="Select Customer" class="w-full"></p-dropdown>
-    </div>
-  </div>
-
-  Invoice Details
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-    <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700">Invoice Number</label>
-      <input type="text" formControlName="invoiceNumber" pInputText class="w-full">
-    </div>
-    
-    <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700">Invoice Date</label>
-      <p-calendar formControlName="invoiceDate" [showTime]="false" dateFormat="dd/mm/yy" 
-        class="w-full"></p-calendar>
-    </div>
-
-    <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700">Place of Supply</label>
-      <input type="text" formControlName="placeOfSupply" pInputText class="w-full">
-    </div>
-  </div>
-
-  Items Table
-  <div class="mb-8">
-    <div class="flex justify-between items-center mb-4">
-      <h3 class="text-lg font-semibold">Items</h3>
-      <p-button icon="pi pi-plus" label="Add Item" (onClick)="addItem()"></p-button>
-    </div>
-
-    <div class="overflow-x-auto rounded-lg border">
-      <table class="w-full">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-4 py-3 text-left">Product</th>
-            <th class="px-4 py-3 text-left">Quantity</th>
-            <th class="px-4 py-3 text-left">Rate</th>
-            <th class="px-4 py-3 text-left">Discount (%)</th>
-            <th class="px-4 py-3 text-left">GST Rate</th>
-            <th class="px-4 py-3 text-left">Amount</th>
-            <th class="px-4 py-3 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody formArrayName="items">
-          <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
-            class="border-t hover:bg-gray-50 transition-colors">
-            <td class="px-4 py-3">
-              <p-dropdown [options]="products" formControlName="product" optionLabel="name" 
-                (onChange)="updateProductDetails(i)" class="w-full"></p-dropdown>
-            </td>
-            <td class="px-4 py-3">
-              <p-inputNumber formControlName="quantity" mode="decimal" [min]="1" 
-                (onInput)="calculateItemTotal(i)" class="w-full"></p-inputNumber>
-            </td>
-            <td class="px-4 py-3">
-              <p-inputNumber formControlName="rate" mode="currency" currency="INR" 
-                [min]="0" class="w-full"></p-inputNumber>
-            </td>
-            <td class="px-4 py-3">
-              <p-inputNumber formControlName="discount" mode="decimal" [min]="0" [max]="100" 
-                (onInput)="calculateItemTotal(i)" class="w-full"></p-inputNumber>
-            </td>
-            <td class="px-4 py-3">
-              <p-inputNumber formControlName="gstRate" suffix="%" [min]="0" 
-                class="w-full" [disabled]="true"></p-inputNumber>
-            </td>
-            <td class="px-4 py-3 font-medium">
-              {{ calculateItemAmount(i) | currency:'INR' }}
-            </td>
-            <td class="px-4 py-3">
-              <button type="button" (click)="removeItem(i)" 
-                class="text-red-600 hover:text-red-800 transition-colors">
-                <i class="pi pi-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  Totals Section
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700">Notes</label>
-      <textarea formControlName="notes" pInputTextarea rows="3" class="w-full"></textarea>
-    </div>
-
-    <div class="p-4 bg-gray-50 rounded-lg space-y-3">
-      <div class="flex justify-between">
-        <span class="font-medium">Subtotal:</span>
-        <span>{{ invoiceForm.value.subTotal | currency:'INR' }}</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">Total Discount:</span>
-        <span>{{ invoiceForm.value.totalDiscount | currency:'INR' }}</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-medium">Total GST:</span>
-        <span>{{ invoiceForm.value.gst | currency:'INR' }}</span>
-      </div>
-      <div class="flex justify-between font-bold text-lg border-t pt-2">
-        <span>Total Amount:</span>
-        <span>{{ invoiceForm.value.totalAmount | currency:'INR' }}</span>
-      </div>
-    </div>
-  </div>
-</form> -->
-
-<!-- <body class="bg-gray-900 text-white">
-    <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
-      <div class="text-center mb-6">
-        <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Invoice No*</label>
-            <p-button [(ngModel)]="gstData.invoiceNumber" type="text" placeholder="Enter Invoice No" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-button>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Invoice Date*</label>
-            <p-calendar [(ngModel)]="gstData.invoiceDate" dateFormat="yy-mm-dd" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-calendar>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Due Date</label>
-            <p-calendar [(ngModel)]="gstData.dueDate" dateFormat="yy-mm-dd" placeholder="Enter Due Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-calendar>
-          </div>
-        </div>
-        <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
-          <i class="fas fa-image text-gray-400 text-5xl"></i>
-          <p class="mt-2 text-gray-500">Add Business Logo</p>
-          <p class="text-xs text-gray-400 mt-2">Resolution up to 1080x1080px. PNG or JPEG format.</p>
-        </div>
-      </div>
-      <div class="flex justify-between mb-6">
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-gray-700 p-4 rounded-md">
-          <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-300">Country</label>
-              <p-dropdown [options]="countries" placeholder="Select Country" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedBy.country"></p-dropdown>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300">State</label>
-              <p-button [(ngModel)]="gstData.billedBy.state" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" ></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Your Business Name (Required)</label>
-            <p-button [(ngModel)]="gstData.billedBy.businessName" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" ></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-            <div class="flex">
-              <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
-              <p-button [(ngModel)]="gstData.billedBy.phone" type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-            <p-button [(ngModel)]="gstData.billedBy.email" type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Your GSTIN (optional)</label>
-            <p-button [(ngModel)]="gstData.billedBy.gstin" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
-            <p-button [(ngModel)]="gstData.billedBy.address" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-300">City (optional)</label>
-              <p-button [(ngModel)]="gstData.billedBy.city" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
-              <p-button [(ngModel)]="gstData.billedBy.postalCode" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">State (optional)</label>
-            <p-dropdown [options]="states" placeholder="Select State" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedBy.billState"></p-dropdown>
-          </div>
-        </div>
-        <div class="bg-gray-700 p-4 rounded-md">
-          <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-300">Country</label>
-              <p-dropdown [options]="countries" placeholder="Select Country" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedTo.country"></p-dropdown>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300">State</label>
-              <p-button [(ngModel)]="gstData.billedTo.state" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" ></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Client's business name (Required)</label>
-            <p-button [(ngModel)]="gstData.billedTo.businessName" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" ></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-            <div class="flex">
-              <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
-              <p-button [(ngModel)]="gstData.billedTo.phone" type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-            <p-button [(ngModel)]="gstData.billedTo.email" type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Client's GSTIN (optional)</label>
-            <p-button [(ngModel)]="gstData.billedTo.gstin" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
-            <p-button [(ngModel)]="gstData.billedTo.address" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-          </div>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-300">City (optional)</label>
-              <p-button [(ngModel)]="gstData.billedTo.city" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
-              <p-button [(ngModel)]="gstData.billedTo.postalCode" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-300">State (optional)</label>
-            <p-dropdown [options]="states" placeholder="Select State" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedTo.billState"></p-dropdown>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center space-x-4">
-          <p-dropdown [options]="currencies" placeholder="Indian Rupee(INR, ₹)" class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.currency" ></p-dropdown>
-        </div>
-      </div>
-      <div class="max-w-full overflow-x-auto mb-6">
-        <table class="table-auto w-full bg-gray-700 text-white">
-          <thead class="bg-gray-800">
-            <tr>
-              <th class="py-2 px-4 border-b border-gray-600">Item</th>
-              <th class="py-2 px-4 border-b border-gray-600">GST (%)</th>
-              <th class="py-2 px-4 border-b border-gray-600">Quantity</th>
-              <th class="py-2 px-4 border-b border-gray-600">Rate</th>
-              <th class="py-2 px-4 border-b border-gray-600">Taxable Value</th>
-              <th class="py-2 px-4 border-b border-gray-600">CGST Amount</th>
-              <th class="py-2 px-4 border-b border-gray-600">SGST Amount</th>
-              <th class="py-2 px-4 border-b border-gray-600">Total Amount</th>
-              <th class="py-2 px-4 border-b border-gray-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of gstData.items; let i = index;">
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-button [(ngModel)]="item.product" (ngModelChange)="onItemValueChange(item)" type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" ></p-button>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.gstRate" (ngModelChange)="onItemValueChange(item)" mode="decimal" [minFractionDigits]="2" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.quantity" (ngModelChange)="onItemValueChange(item)" mode="decimal" [minFractionDigits]="0" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.rate" (ngModelChange)="onItemValueChange(item)" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.taxableValue" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" [readonly]="true"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.cgstAmount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" [readonly]="true"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.sgstAmount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" [readonly]="true"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600">
-                <p-inputNumber [(ngModel)]="item.amount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" [readonly]="true"></p-inputNumber>
-              </td>
-              <td class="py-2 px-4 border-b border-gray-600 text-center">
-                <button type="button" class="text-red-500 hover:text-red-700" (click)="removeItem(i)"><i class="fas fa-trash"></i></button>
-                <button type="button" class="text-blue-500 hover:text-blue-700 ml-2" (click)="addItem()"><i class="fas fa-plus"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-gray-700 p-4 rounded-md">
-          <button type="button" pButton pRipple label="+ Add New Line" class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out" (click)="addItem()"></button>
-        </div>
-        <div class="bg-gray-700 p-4 rounded-md">
-          <button type="button" pButton pRipple label="+ Add Discounts/Additional Charges" class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out"></button>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-gray-700 p-4 rounded-md">
-          <p-checkbox [(ngModel)]="gstData.roundUp" binary="true" styleClass="mr-2" (onChange)="calculateInvoiceTotals()"></p-checkbox>
-          <span class="ml-2 text-sm text-gray-300">Round Up</span>
-        </div>
-        <div class="bg-gray-700 p-4 rounded-md">
-          <p-checkbox [(ngModel)]="gstData.roundDown" binary="true" styleClass="mr-2" (onChange)="calculateInvoiceTotals()"></p-checkbox>
-          <span class="ml-2 text-sm text-gray-300">Round Down</span>
-        </div>
-      </div>
-      <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
-        <table class="table-auto w-full">
-          <thead>
-            <tr>
-              <th class="py-2 px-4 text-left">Description</th>
-              <th class="py-2 px-4 text-right">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="py-2 px-4 border-b border-gray-600">Sub Total</td>
-              <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.subTotal | number:'1.2-2' }}</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border-b border-gray-600">SGST</td>
-              <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ calculateTotalSgst() | number:'1.2-2' }}</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border-b border-gray-600">CGST</td>
-              <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ calculateTotalCgst() | number:'1.2-2' }}</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border-b border-gray-600">IGST</td>
-              <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.igst | number:'1.2-2'}}</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border-b border-gray-600">CESS</td>
-              <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.cess | number:'1.2-2' }}</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">Discount</td>
-              <td class="py-2 px-4 text-right">₹ {{ gstData.totalDiscount | number:'1.2-2' }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="flex justify-between items-center mt-4">
-          <button type="button" pButton pRipple label="+ Add More Fields" class="text-blue-400 text-sm hover:underline focus:outline-none"></button>
-          <button type="button" pButton pRipple label="+ Show Total In Words" class="text-blue-400 text-sm hover:underline focus:outline-none"></button>
-        </div>
-        <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
-          <h2 class="text-lg font-semibold">Total (INR)</h2>
-          <h2 class="text-lg font-semibold">₹ {{ gstData.totalAmount | number:'1.2-2' }}</h2>
-        </div>
-      </div>
-    </div>
-    <div class="text-center">
-      <p-button label="Save & Continue" (click)="saveInvoice()" styleClass="bg-pink-500 text-white py-2 px-4 rounded-md"></p-button>
-    </div>
-  </body> -->
-<!-- 
-<body class="bg-gray-900 text-white" ng-app="invoiceApp" ng-controller="InvoiceController">
-    <div class="w-full mx-auto p-6 bg-gray-800 shadow-md mt-10 rounded-lg">
-        <div class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-purple-400">GST Invoice</h1>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-300">Invoice No*</label>
-                    <p-button [(ngModel)]="gstData.invoiceNumber" type="text" placeholder="Enter Invoice No" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-button>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-300">Invoice Date*</label>
-                    <p-calendar [(ngModel)]="gstData.invoiceDate" dateFormat="yy-mm-dd" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-calendar>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-300">Due Date</label>
-                    <p-calendar [(ngModel)]="gstData.dueDate" dateFormat="yy-mm-dd" placeholder="Enter Due Date" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-700 text-white"></p-calendar>
-                </div>
-                </div>
-            <div class="border-2 border-dashed border-gray-600 rounded-md p-8 flex flex-col items-center justify-center">
-                <i class="fas fa-image text-gray-400 text-5xl"></i>
-                <p class="mt-2 text-gray-500">Add Business Logo</p>
-                <p class="text-xs text-gray-400 mt-2">Resolution up to 1080x1080px. PNG or JPEG format.</p>
-            </div>
-        </div>
-        <div class="flex justify-between mb-6">
-            </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-gray-700 p-4 rounded-md">
-                <h2 class="text-lg font-semibold mb-4">Billed By (Your Details)</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">Country</label>
-                        <p-select appendTo="body" [options]="countries" placeholder="Select Country" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedBy.country"></p-select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">State</label>
-                        <p-button [(ngModel)]="gstData.billedBy.state" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" ></p-button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Your Business Name (Required)</label>
-                    <p-button [(ngModel)]="gstData.billedBy.businessName" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" ></p-button>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
-                        <p-button [(ngModel)]="gstData.billedBy.phone" type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                    <p-button [(ngModel)]="gstData.billedBy.email" type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Your GSTIN (optional)</label>
-                    <p-button [(ngModel)]="gstData.billedBy.gstin" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
-                    <p-button [(ngModel)]="gstData.billedBy.address" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">City (optional)</label>
-                        <p-button [(ngModel)]="gstData.billedBy.city" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
-                        <p-button [(ngModel)]="gstData.billedBy.postalCode" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">State (optional)</label>
-                    <p-select appendTo="body" [options]="states" placeholder="Select State" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedBy.billState"></p-select>
-                </div>
-                </div>
-            <div class="bg-gray-700 p-4 rounded-md">
-                <h2 class="text-lg font-semibold mb-4">Billed To (Client Details)</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">Country</label>
-                        <p-select appendTo="body" [options]="countries" placeholder="Select Country" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedTo.country"></p-select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">State</label>
-                        <p-button [(ngModel)]="gstData.billedTo.state" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" placeholder="Enter State" ></p-button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Client's business name (Required)</label>
-                    <p-button [(ngModel)]="gstData.billedTo.businessName" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" ></p-button>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">+91</span>
-                        <p-button [(ngModel)]="gstData.billedTo.phone" type="tel" placeholder="Enter phone number" class="flex-1 block w-full rounded-none rounded-r-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                    <p-inputtext [(ngModel)]="gstData.billedTo.email" type="email" id="email" placeholder="Enter your email" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm h-10 bg-gray-800 text-white"></p-inputtext>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Client's GSTIN (optional)</label>
-                    <p-inputtext [(ngModel)]="gstData.billedTo.gstin" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-inputtext>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">Address (optional)</label>
-                    <p-inputtext [(ngModel)]="gstData.billedTo.address" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-inputtext>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">City (optional)</label>
-                        <p-inputtext [(ngModel)]="gstData.billedTo.city" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-inputtext>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300">Postal Code / Zip Code</label>
-                        <p-inputtext [(ngModel)]="gstData.billedTo.postalCode" type="text" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white"></p-inputtext>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300">State (optional)</label>
-                    <p-select appendTo="body" [options]="states" placeholder="Select State" class="mt-1 block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.billedTo.billState"></p-select>
-                </div>
-                </div>
-        </div>
-        <div class="flex justify-between items-center mb-6">
-            <div class="flex items-center space-x-4">
-                <p-select appendTo="body" [options]="currencies" placeholder="Indian Rupee(INR, ₹)" class="block w-full border-gray-600 rounded-md shadow-sm h-10 bg-gray-800 text-white" [(ngModel)]="gstData.currency"></p-select>
-            </div>
-        </div>
-        <div class="max-w-full overflow-x-auto mb-6">
-            <table class="table-auto w-full bg-gray-700 text-white">
-                <thead class="bg-gray-800">
-                    <tr>
-                        <th class="py-2 px-4 border-b border-gray-600">Item</th>
-                        <th class="py-2 px-4 border-b border-gray-600">GST (%)</th>
-                        <th class="py-2 px-4 border-b border-gray-600">Quantity</th>
-                        <th class="py-2 px-4 border-b border-gray-600">Rate</th>
-                        <th class="py-2 px-4 border-b border-gray-600">Taxable Value</th>
-                        <th class="py-2 px-4 border-b border-gray-600">CGST Amount</th>
-                        <th class="py-2 px-4 border-b border-gray-600">SGST Amount</th>
-                        <th class="py-2 px-4 border-b border-gray-600">Total Amount</th>
-                        <th class="py-2 px-4 border-b border-gray-600">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of gstData.items; let i = index;">
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputtext [(ngModel)]="item.product" type="text" class="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white" ></p-inputtext>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.gstRate" mode="decimal"  inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.quantity" mode="decimal"  inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.rate" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.taxableValue" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.cgstAmount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.sgstAmount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600">
-                            <p-inputNumber [(ngModel)]="item.amount" mode="currency" currency="INR" currencyDisplay="symbol" inputStyleClass="w-full border-gray-600 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-10 bg-gray-800 text-white"></p-inputNumber>
-                        </td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-center">
-                            <button class="text-red-500 hover:text-red-700" (click)="removeItem(i)"><i class="fas fa-trash"></i></button>
-                            <button class="text-blue-500 hover:text-blue-700 ml-2" (click)="addItem()"><i class="fas fa-plus"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-gray-700 p-4 rounded-md">
-                <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out" (click)="addItem()">+ Add New Line</button>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-md">
-                <button class="text-blue-400 text-sm hover:text-blue-600 transition duration-300 ease-in-out">+ Add Discounts/Additional Charges</button>
-            </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-gray-700 p-4 rounded-md">
-                <p-checkbox [(ngModel)]="gstData.roundUp" binary="true" styleClass="mr-2"></p-checkbox>
-                <span class="ml-2 text-sm text-gray-300">Round Up</span>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-md">
-                <p-checkbox [(ngModel)]="gstData.roundDown" binary="true" styleClass="mr-2"></p-checkbox>
-                <span class="ml-2 text-sm text-gray-300">Round Down</span>
-            </div>
-        </div>
-        <div class="bg-gray-800 text-white shadow-lg rounded-lg p-6 mb-6">
-            <table class="table-auto w-full">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 text-left">Description</th>
-                        <th class="py-2 px-4 text-right">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-2 px-4 border-b border-gray-600">Sub Total</td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.subTotal | number:'1.2-2' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border-b border-gray-600">SGST</td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ calculateTotalSgst() | number:'1.2-2' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border-b border-gray-600">CGST</td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ calculateTotalCgst() | number:'1.2-2' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border-b border-gray-600">IGST</td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.igst | number:'1.2-2'}}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border-b border-gray-600">CESS</td>
-                        <td class="py-2 px-4 border-b border-gray-600 text-right">₹ {{ gstData.cess | number:'1.2-2' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4">Discount</td>
-                        <td class="py-2 px-4 text-right">₹ {{ gstData.totalDiscount | number:'1.2-2' }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="flex justify-between items-center mt-4">
-                <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Add More Fields</button>
-                <button class="text-blue-400 text-sm hover:underline focus:outline-none">+ Show Total In Words</button>
-            </div>
-            <div class="flex justify-between items-center border-t border-gray-600 pt-4 mt-4">
-                <h2 class="text-lg font-semibold">Total (INR)</h2>
-                <h2 class="text-lg font-semibold">₹ {{ gstData.totalAmount | number:'1.2-2' }}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="text-center">
-        <p-button  (click)="createInvoice()" label="Save & Continue" styleClass="bg-pink-500 text-white py-2 px-4 rounded-md"></p-button>
-    </div>
-
-    <!-- <script>
-        angular.module('invoiceApp', ['primeNgModule']) // Ensure 'primeNgModule' is loaded/defined
-            .controller('InvoiceController', ['$scope', function($scope) {
-                gstData = {
-                    invoiceNumber: 'A00001',
-                    invoiceDate: new Date('2024-12-11'), // Use Date object for dates
-                    dueDate: null, // Date can be null if not set
-                    seller: {}, // Seller ObjectId will be populated later
-                    buyer: {},  // Buyer ObjectId will be populated later
-                    items: [
-                        {
-                            product: 'Item Name 1', // Product ObjectId will be populated later, using name for UI
-                            gstRate: 18.00,        // GST percentage, not just rate
-                            quantity: 1,
-                            rate: 1,
-                            taxableValue: 1.00,    // You can calculate this based on quantity * rate in Angular
-                            cgstRate: 0.09,         // Example CGST rate (9%) - but should be calculated from GST rate
-                            sgstRate: 0.09,         // Example SGST rate (9%) - but should be calculated from GST rate
-                            cgstAmount: 0.09,        // Calculated in Angular
-                            sgstAmount: 0.09,        // Calculated in Angular
-                            amount: 1.18           // Calculated in Angular
-                        }
-                    ],
-                    subTotal: 1.00,              // Calculated in Angular
-                    totalDiscount: 0,
-                    igst: 0,
-                    cess: 0,
-                    totalAmount: 1.18,            // Calculated in Angular
-                    paymentTerms: '',
-                    notes: '',
-                    placeOfSupply: '',
-                    status: 'unpaid',
-                    metadata: {},
-                    billedBy: {
-                        country: 'India',
-                        state: '',
-                        businessName: '',
-                        phone: '',
-                        email: '',
-                        gstin: '',
-                        address: '',
-                        city: '',
-                        postalCode: '',
-                        billState: null // For select selection
-                    },
-                    billedTo: {
-                        country: 'India',
-                        state: '',
-                        businessName: '',
-                        phone: '',
-                        email: '',
-                        gstin: '',
-                        address: '',
-                        city: '',
-                        postalCode: '',
-                        billState: null // For select selection
-                    },
-                    roundUp: false,
-                    roundDown: false,
-                    currency: 'INR'
-                };
-
-                $scope.countries = [
-                    {label: 'India', value: 'India'},
-                    // ... more countries
-                ];
-
-                $scope.states = [
-                    {label: 'Select State', value: null},
-                    {label: 'Maharashtra', value: 'Maharashtra'},
-                    // ... more states
-                ];
-
-                $scope.currencies = [
-                    {label: 'Indian Rupee(INR, ₹)', value: 'INR'},
-                    // ... more currencies
-                ];
-
-                $scope.addItem = function() {
-                    $scope.gstData.items.push({
-                        product: '',
-                        gstRate: 0.00,
-                        quantity: 1,
-                        rate: 0,
-                        taxableValue: 0.00,
-                        cgstRate: 0.00,
-                        sgstRate: 0.00,
-                        cgstAmount: 0.00,
-                        sgstAmount: 0.00,
-                        amount: 0.00
-                    });
-                };
-
-               
-
-
-                // You'll need functions to calculate taxableValue, CGST, SGST, amount, subTotal, totalAmount in your Angular controller
-                // These calculations should be based on your GST rules and the schema.
-            }]);
-        </body>
-    </script> -->
+</div>

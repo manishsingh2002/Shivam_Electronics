@@ -17,6 +17,7 @@ export interface Product {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
+
   // private baseUrl='https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api'
   // private baseUrl = 'https://4000-idx-backend-1737022093659.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev/api';
   // private baseUrl = 'http://localhost:4002/api'
@@ -174,8 +175,14 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/v1/sellers/${id}`).pipe(catchError((error) => this.errorhandler.handleError('getSellerDataWithId', error)));
   }
 
+  createNewSeller(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/v1/sellers/`, data).pipe(catchError((error) => this.errorhandler.handleError('createNewSeller', error)));
+  }
   getAllSellersdata(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/v1/sellers`).pipe(catchError((error) => this.errorhandler.handleError('getAllSellersdata', error)));
+  }
+  updateSellersdata(SellersId: string, data: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/v1/sellers/${SellersId}`, data).pipe(catchError((error) => this.errorhandler.handleError('updateSellersdata', error)));
   }
 
   //////////////////---------------------- Payment ----------------------\\\\\\\\\\\\\

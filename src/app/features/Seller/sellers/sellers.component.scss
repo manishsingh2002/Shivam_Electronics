@@ -1,83 +1,10 @@
-// seller-master.component.scss
+// seller-create.component.scss
 @import 'primeicons/primeicons.css';
-// @import 'primeflex/primeflex.css';
-
-:host ::ng-deep {
-  .p-button.p-button-outlined {
-    border: 1px solid #ffffff;
-    color: #ffffff;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      border-color: #ffffff;
-    }
-  }
-
-  /* Gradient Border for Cards */
-  .p-card {
-    border: 2px solid transparent;
-    /* Initially transparent border to make space for gradient */
-    padding: 1px;
-    /* Add a small padding inside to prevent content from being directly under the border */
-    background-clip: padding-box;
-    /* Important to clip background under the border for visual effect */
-    position: relative;
-    /* Needed for pseudo-element to create inner background if needed */
-    overflow: hidden;
-    /* To contain the gradient within the card boundaries */
-  }
-
-  .p-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    /* Place gradient behind the card content */
-    margin: -2px;
-    /* Expand the gradient to cover the area of the 'border' */
-    border-radius: inherit;
-    /* Inherit border-radius from the card */
-    background: repeating-linear-gradient(45deg,
-        #3ab7bf,
-        /* Start color - light blue */
-        #3ab7bf 10px,
-        #2980b9 10px,
-        /* Middle color - slightly darker blue */
-        #2980b9 20px,
-        #1e8449 20px,
-        /* Green for wave feeling */
-        #1e8449 30px);
-    background-size: 200% 200%;
-    /* Make gradient larger than the element */
-    animation: wave-border 4s linear infinite;
-    /* Apply animation for moving waves */
-  }
-}
-
-@keyframes wave-border {
-  0% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 100% 0;
-  }
-
-  100% {
-    background-position: 0 0;
-  }
-}
-
 
 section {
   &.dark-mode {
     background-color: #111827;
-    /* Dark background color */
     color: #f9fafb;
-    /* Light text color */
 
     h1,
     label,
@@ -88,13 +15,10 @@ section {
       color: #f9fafb !important;
     }
 
-    .profile-card,
     .form-card,
     .financial-stats {
       background-color: #1f2937 !important;
-      /* Dark card background */
       border-color: #4b5563 !important;
-      /* Dark border color */
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
@@ -102,7 +26,6 @@ section {
     .form-dropdown,
     .guaranteer-info {
       background-color: #374151 !important;
-      /* Dark input background */
       color: #f9fafb !important;
       border-color: #4b5563 !important;
     }
@@ -110,7 +33,6 @@ section {
     .form-input::placeholder,
     .form-dropdown::placeholder {
       color: #d1d5db !important;
-      /* Light placeholder text */
     }
 
     .upload-button,
@@ -118,12 +40,10 @@ section {
     .add-button,
     .dialog-button-add {
       background-color: #2563eb !important;
-      /* Primary button color */
       color: #f9fafb !important;
 
       &:hover {
         background-color: #3b82f6 !important;
-        /* Lighter primary hover color */
       }
     }
 
@@ -134,7 +54,6 @@ section {
         color: #d1d5db !important;
       }
     }
-
 
     .form-table {
       background-color: #1f2937 !important;
@@ -265,9 +184,9 @@ section {
   text-align: center;
 }
 
-.form-group {
-  margin-top: 1rem;
-}
+// .form-group {
+//   margin-top: 1rem;
+// }
 
 .form-label {
   display: block;
@@ -424,6 +343,7 @@ section {
 }
 
 .dialog-compact {
+
   :host ::ng-deep .p-dialog-header {
     background-color: #f9f9f9;
     color: #374151;
@@ -445,4 +365,25 @@ section {
 .dialog-checkbox-label {
   font-size: 0.875rem;
   color: #4b5563;
+}
+
+.form-group {
+  margin-top: 0.5rem;
+}
+
+.form-card-content .p-card-content {
+  padding: 0.5rem !important;
+}
+
+/* Optional: Style for profile image container */
+.profile-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-icon {
+  font-size: 2.5rem;
 }

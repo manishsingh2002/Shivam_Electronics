@@ -8,6 +8,8 @@ import { CustomerMasterComponent } from '../customer-master/customer-master.comp
 import { CustomerListComponent } from '../customer-list/customer-list.component';
 import { CustomerdetailsComponent } from '../customerdetails/customerdetails.component';
 import { SellersComponent } from '../../Seller/sellers/sellers.component';
+import { SellersDetailsComponent } from '../../Seller/sellers-details/sellers-details.component';
+import { SellersListsComponent } from '../../Seller/sellers-lists/sellers-lists.component';
 @Component({
   selector: 'app-customerlayout',
   imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
@@ -21,6 +23,9 @@ export class CustomerlayoutComponent {
     { label: 'Customer List', component: CustomerListComponent },
     { label: 'customerDetails', component: CustomerdetailsComponent },
     { label: 'Seller Mater', component: SellersComponent },
+    { label: 'Seller details', component: SellersDetailsComponent },
+    { label: 'Seller List', component: SellersListsComponent },
+
 
   ];
 

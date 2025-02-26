@@ -1,97 +1,46 @@
-import { Component, OnInit, ViewChild, Inject, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
-import { CardModule } from 'primeng/card';
-import { SelectModule } from 'primeng/select';
-import { FileUploadModule, FileUpload } from 'primeng/fileupload';
-import { ImageModule } from 'primeng/image';
-import { InputTextModule } from 'primeng/inputtext';
-import { TableModule } from 'primeng/table';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { KeyFilterModule } from 'primeng/keyfilter';
-import { DialogModule } from 'primeng/dialog';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
-import { FocusTrapModule } from 'primeng/focustrap';
-import { ConfirmationService, MessageService } from 'primeng/api';
-
 import { ApiService } from '../../../core/services/api.service';
-import lodash from 'lodash';
-interface Seller {
-  name: string;
-  prifile: string;
-  shopname: string;
-  address: string;
-  status: string,
-  gstin: string;
-  pan: string;
-  contactNumber: string;
-  salesHistory: any[];
-}
-
-interface Phone {
-  number: string;
-  type: string;
-  primary: boolean;
-}
-
-interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-  type: string;
-  isDefault: boolean;
-}
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { FocusTrapModule } from 'primeng/focustrap';
+import { RouterModule } from '@angular/router';
 
 interface DropdownOption {
   label: string;
   value: any;
 }
 
-
 @Component({
   selector: 'app-seller-master',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
     CardModule,
-    SelectModule,
-    FileUploadModule,
-    ImageModule,
-    InputTextModule,
-    TableModule,
-    RadioButtonModule,
-    KeyFilterModule,
-    DialogModule,
-    ButtonModule,
-    CheckboxModule,
-    TooltipModule,
+    RouterModule,
     FocusTrapModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    TooltipModule,
+    ToastModule,
+    SelectModule,
+    InputTextModule,
+    ButtonModule,
   ],
-  providers: [ApiService, ConfirmationService, MessageService],
+  providers: [ApiService, MessageService],
+
   templateUrl: './sellers.component.html',
   styleUrl: './sellers.component.scss'
 })
 export class SellersComponent implements OnInit {
-  selectedFile: File | null = null;
-  imageUrl: string | null = null;
-  bucketName = 'manish';
-  phoneDialogVisible = false;
-  addressDialogVisible = false;
-  newPhoneNumber: Phone = { number: '', type: 'mobile', primary: false };
-  newAddress: Address = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };
-  sellerId: string = '12345'; // You should dynamically get this from your application
-  uploadStatus: string = ''; // For showing the status of the upload
+  sellerForm: FormGroup;
   isDarkMode: boolean = false;
-
   statuses: DropdownOption[] = [
     { label: 'Active', value: 'active' },
     { label: 'Inactive', value: 'inactive' },
@@ -100,52 +49,9 @@ export class SellersComponent implements OnInit {
     { label: 'Blocked', value: 'blocked' },
   ];
 
-  // phoneTypes: DropdownOption[] = [
-  //   { label: 'Home', value: 'home' },
-  //   { label: 'Mobile', value: 'mobile' },
-  //   { label: 'Work', value: 'work' },
-  // ];
-
-  // addressTypes: DropdownOption[] = [
-  //   { label: 'Billing', value: 'billing' },
-  //   { label: 'Shipping', value: 'shipping' },
-  //   { label: 'Home', value: 'home' },
-  //   { label: 'Work', value: 'work' }
-  // ]
-
-  phoneTypes: DropdownOption[] = [
-    { label: 'Home', value: 'home' },
-    { label: 'Mobile', value: 'mobile' },
-    { label: 'Work', value: 'work' },
-  ];
-
-  addressTypes: DropdownOption[] = [
-    { label: 'Billing', value: 'billing' },
-    { label: 'Shipping', value: 'shipping' },
-    { label: 'Home', value: 'home' },
-    { label: 'Work', value: 'work' }
-  ];
-
-
-  seller: Seller = {
-    name: '',
-    prifile: '',
-    shopname: '',
-    address: '',
-    gstin: '',
-    status: '',
-    pan: '',
-    contactNumber: '',
-    salesHistory: [],
-  };
-
-  @ViewChild('fileUploader') fileUploader!: FileUpload;
-
-
   constructor(
-    // private supabase: SupabaseService,
-    private ApiService: ApiService,
-    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
     private messageService: MessageService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -153,18 +59,32 @@ export class SellersComponent implements OnInit {
     if (this.isDarkMode) {
       document.body.classList.add('dark-mode');
     }
+
+    this.sellerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      shopName: ['', Validators.required],
+      status: ['pending', Validators.required],
+      address: this.formBuilder.group({
+        street: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]] // Indian pincode pattern
+      }),
+      gstin: ['', [Validators.required, Validators.pattern(/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)]], // GSTIN pattern
+      pan: ['', [Validators.required, Validators.pattern(/^([A-Z]{5})([0-9]{4})([A-Z]{1})$/)]], // PAN pattern
+      contactNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]], // Indian contact number pattern
+      bankDetails: this.formBuilder.group({
+        accountHolderName: ['', Validators.required],
+        accountNumber: ['', [Validators.required, Validators.pattern(/^\d{9,18}$/)]], // Bank account number pattern
+        ifscCode: ['', [Validators.required, Validators.pattern(/^[A-Z]{4}0[A-Z0-9]{6}$/)]], // IFSC code pattern
+        bankName: ['', Validators.required],
+        branch: ['', Validators.required]
+      })
+    });
   }
 
-  ngOnInit() {
-    // this.autopopulatedata() // if you have any autopopulate data for seller
+  ngOnInit(): void {
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //this.autopopulatedata(); // if you have any autopopulate data for seller
-  }
-
-  // autopopulatedata() { // if you have any autopopulate data for seller
-  // }
 
 
   toggleDarkMode() {
@@ -175,132 +95,21 @@ export class SellersComponent implements OnInit {
     }
   }
 
-
-  getSellerID() {
-    // const sellerId = 'your-seller-id'; // replace with actual seller ID retrieval logic
-    // this.ApiService.getSellerDataWithId(sellerId) // Assuming you have this API service method
-    //   .subscribe({
-    //     next: (seller) => {
-    //       this.seller = seller;
-    //     },
-    //     error: (err) => {
-    //       console.error('Error fetching seller:', err);
-    //       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load seller data.' });
-    //     }
-    //   });
-  }
-
-
-  handleFileSelect(event?: any) {
-    const file = event.files[0];
-    if (file) {
-      this.uploadStatus = 'Preparing to upload...';
-      const formData = new FormData();
-      formData.append('image', file); // Append the selected file to FormData
-      // this.ApiService.uploadSellerProfileImage(formData, this.sellerId).subscribe( // Assuming you have this API service method
-      //  (response: any) => {
-      //    this.uploadStatus = 'Image uploaded successfully!';
-      //  },
-      //  (error: any) => {
-      //    this.uploadStatus = 'Error uploading image.';
-      //    console.error('Upload Error:', error);
-      //  }
-      // );
-    } else {
-    }
-  }
-
-  handleFileUpload(event: any) {
-  }
-
-
-
   saveSeller() {
-    // if (this.validateSeller()) {
-    //   this.ApiService.createNewSeller(this.seller).subscribe( // Assuming you have this API service method
-    //     (response: any) => {
-    //       const sellerId = response.data._id;
-    //       this.sellerId = sellerId;
-    //       // this.handleFileSelect(); // if you want to upload profile image after save seller info
-    //     },
-    //     (error) => {
-    //       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create seller.' });
-    //     }
-    //   );
-    // } else {
-    //   this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please correct the errors in the form.' });
-    // }
-  }
-
-
-  validateSeller(): boolean {
-    // Basic validation checks
-    if (!this.seller.name) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Seller Name is required.' });
-      return false;
-    }
-
-    if (!this.seller.shopname) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Shop Name is required.' });
-      return false;
-    }
-    if (!this.seller.address) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Address is required.' });
-      return false;
-    }
-    if (!this.seller.gstin) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'GSTIN is required.' });
-      return false;
-    }
-    if (!this.seller.pan) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'PAN is required.' });
-      return false;
-    }
-    if (!this.seller.contactNumber) {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Contact Number is required.' });
-      return false;
-    }
-    // Add more validations as needed, for example, GSTIN and PAN format validations can be added here if not handled by backend
-
-    return true;
-  }
-
-  showPhoneDialog() {
-    this.phoneDialogVisible = true;
-  }
-  showAddressDialog() {
-    this.addressDialogVisible = true
-  }
-
-  addPhoneNumber() {
-    if (this.newPhoneNumber.number && this.newPhoneNumber.type) {
-      // Seller doesn't have phone numbers in schema, decide if you want to add them and how to store/use them
-      this.phoneDialogVisible = false;
-      this.newPhoneNumber = { number: '', type: 'mobile', primary: false };
+    if (this.sellerForm.valid) {
+      this.apiService.createNewSeller(this.sellerForm.value).subscribe({
+        next: (response: any) => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seller created successfully' });
+          this.sellerForm.reset(); // Reset the form after successful creation
+          this.sellerForm.patchValue({ status: 'pending' }); // Optionally reset status to default 'pending'
+        },
+        error: (error: any) => {
+          console.error('Error creating seller:', error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create seller' });
+        }
+      });
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter phone number and type.' });
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please fill all required fields correctly' });
     }
-  }
-
-  deletePhone(index: number) {
-    // Seller doesn't have phone numbers in schema, decide if you want to implement phone number management
-  }
-
-  addAddress() {
-    this.addressDialogVisible = true
-    if (this.newAddress.street && this.newAddress.city) {
-      // Seller has address as a single string in schema, decide how to handle structured addresses
-      this.seller.address = `${this.newAddress.street}, ${this.newAddress.city}, ${this.newAddress.state} ${this.newAddress.zipCode}, ${this.newAddress.country}`; // Example of combining address fields into single string
-      this.addressDialogVisible = false;
-      this.newAddress = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };
-    }
-  }
-
-  setDefaultAddress(index: number) {
-    // Seller has single address field, default address concept might not be directly applicable
-  }
-
-  removeAddress(index: number) {
-    // Seller has single address field, address removal might not be directly applicable in the same way as customer addresses
   }
 }
