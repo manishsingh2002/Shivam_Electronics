@@ -3,7 +3,7 @@
 <p-dialog [(visible)]="display" modal="true" header="Detailed View" appendTo="body"
   [style]="{ width: '80vw', height: '80vh' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [maximizable]="true">
-  <ng-container *ngComponentOutlet="dynamicComponent; inputs: { invoiceId: id }"></ng-container>
+  <ng-container *ngComponentOutlet="dynamicComponent; inputs: { Id: id }"></ng-container>
   <ng-container *ngIf="!dynamicComponent">
     <div>
       <p>Loading component...</p>

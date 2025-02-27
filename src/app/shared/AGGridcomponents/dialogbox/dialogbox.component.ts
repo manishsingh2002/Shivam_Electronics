@@ -26,9 +26,7 @@ export class DialogboxComponent implements ICellRendererAngularComp {
   display: boolean = false;
   invoiceDetailData: any;
   params: any;
-
   constructor(private cdr: ChangeDetectorRef, private apiService: ApiService) { }
-
   agInit(params: CustomCellRendererParams): void {
     this.params = params
   }

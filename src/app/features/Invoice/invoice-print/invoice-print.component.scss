@@ -1,0 +1,178 @@
+.invoice-container {
+  width: 210mm;
+  /* A4 width */
+  min-height: 297mm;
+  /* A4 height */
+  margin: 0 auto;
+  padding: 20mm;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10mm;
+  margin-bottom: 10mm;
+}
+
+.seller-info {
+  text-align: left;
+}
+
+.invoice-details {
+  text-align: right;
+}
+
+.company-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.company-address,
+.company-gstin {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.invoice-details h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.buyer-info {
+  margin-bottom: 10mm;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5mm;
+}
+
+.buyer-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 5px 10px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  /* Align label and value in a row */
+  align-items: baseline;
+  /* Align items to the baseline */
+  margin-bottom: 3px;
+}
+
+.info-item .label {
+  font-weight: bold;
+  margin-right: 5px;
+  white-space: nowrap;
+  /* Prevent label from wrapping */
+}
+
+.info-item .value {
+  word-wrap: break-word;
+  /* Allow value to wrap if needed */
+}
+
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10mm;
+}
+
+.items-table th,
+.items-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.items-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.items-table tfoot tr.total td {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+.items-table tfoot td {
+  text-align: right;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 10mm;
+  font-size: 14px;
+}
+
+.notes,
+.amount-in-words,
+.company-signature {
+  width: 30%;
+  /* Adjust as needed */
+}
+
+.notes h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.amount-in-words .value {
+  font-weight: bold;
+}
+
+.company-signature {
+  text-align: right;
+}
+
+.signature-line {
+  border-bottom: 1px solid #333;
+  margin-top: 10px;
+}
+
+/* Print specific styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .invoice-container,
+  .invoice-container * {
+    visibility: visible;
+  }
+
+  .invoice-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 20mm;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    min-height: auto;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+}

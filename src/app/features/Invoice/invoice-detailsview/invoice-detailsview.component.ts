@@ -13,7 +13,7 @@ import { ApiService } from '../../../core/services/api.service'; // Import ApiSe
 })
 export class InvoiceDetailCardComponent implements OnInit {
 
-  @Input() invoiceId: string | undefined; // Input to receive the invoice ID
+  @Input() Id: string | undefined; // Input to receive the invoice ID
   invoiceData: any; // To store fetched invoice data
   loading: boolean = true; // Add a loading flag
 
@@ -24,9 +24,9 @@ export class InvoiceDetailCardComponent implements OnInit {
   }
 
   getCustomerdata() {
-    if (this.invoiceId) {
+    if (this.Id) {
       this.loading = true;
-      this.apiService.getinvoiceDataWithId(this.invoiceId).subscribe({
+      this.apiService.getinvoiceDataWithId(this.Id).subscribe({
         next: (res: any) => {
           this.invoiceData = res.data;
           this.loading = false;

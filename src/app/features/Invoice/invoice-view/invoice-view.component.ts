@@ -6,6 +6,7 @@ import { CellValueChangedEvent } from 'ag-grid-community';
 import { DialogboxComponent } from '../../../shared/AGGridcomponents/dialogbox/dialogbox.component';
 import { HomePageComponent } from '../../../layouts/dashboard/home-page/home-page.component';
 import { InvoiceDetailCardComponent } from '../invoice-detailsview/invoice-detailsview.component';
+import { InvoicePrintComponent } from '../invoice-print/invoice-print.component';
 @Component({
   selector: 'app-invoice-view',
   imports: [SharedGridComponent],
@@ -67,6 +68,7 @@ export class InvoiceViewComponent {
           dynamicComponent: InvoiceDetailCardComponent, id: params.data.id,
         })
       },
+
       { field: 'buyerDetails.fullname', headerName: 'Buyer Name', sortable: true, filter: true, resizable: true },
       { field: 'buyerDetails.email', headerName: 'Buyer Email', sortable: true, filter: true, resizable: true },
       { field: 'buyerDetails.phoneNumbers[0].number', headerName: 'Buyer Contact 1', sortable: true, filter: true, resizable: true },
@@ -119,7 +121,13 @@ export class InvoiceViewComponent {
 
       { field: 'createdAt', headerName: 'Created At', sortable: true, filter: true, resizable: true, valueFormatter: (params: any) => new Date(params.value).toLocaleString() },
       { field: 'updatedAt', headerName: 'Updated At', sortable: true, filter: true, resizable: true, valueFormatter: (params: any) => new Date(params.value).toLocaleString() },
-      { field: 'view', headerName: 'View' }
+      {
+        field: 'view', cellRenderer: DialogboxComponent,
+        cellRendererParams: (params: any) => ({
+          dynamicComponent: InvoicePrintComponent,
+          id: params.data.id,
+        }), headerName: 'View'
+      }
     ];
 
     this.cdr.detectChanges();
