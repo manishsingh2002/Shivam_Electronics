@@ -641,7 +641,8 @@
                     <td class="text-center"><p-checkbox formControlName="primary" binary="true"></p-checkbox></td>
                     <td class="actions-column">
                       <button pButton icon="pi pi-pencil"
-                        class="action-button p-button-rounded p-button-text p-button-sm"></button>
+                        class="action-button p-button-rounded p-button-text p-button-sm"
+                        (click)="editPhone(i)"></button>
                       <button pButton icon="pi pi-trash"
                         class="action-button p-button-rounded p-button-text p-button-sm"
                         (click)="deletePhone(i)"></button>
@@ -760,14 +761,11 @@
         </p-select>
         <small *ngIf="newPhoneNumberForm.controls['type'].invalid && newPhoneNumberForm.controls['type'].touched"
           class="p-error block">Phone Type is required</small>
-
       </div>
-
       <div class="p-field flex items-center">
         <p-checkbox formControlName="primary" inputId="primaryPhone" binary="true" class="mr-2"></p-checkbox>
         <label for="primaryPhone" class="dialog-checkbox-label">Set as Primary Number</label>
       </div>
-
       <div class="flex justify-end gap-2 mt-4">
         <p-button label="Cancel" icon="pi pi-times" (click)="phoneDialogVisible = false"
           styleClass="p-button-text dialog-button-cancel" type="button"></p-button>

@@ -372,6 +372,7 @@ interface CustomerDropdownOption {
 })
 
 export class CustomerMasterComponent implements OnInit {
+  @ViewChild('fileUploader') fileUploader!: FileUpload;
   selectedFile: File | null = null;
   imageUrl: string | null = null;
   bucketName = 'manish';
@@ -412,7 +413,7 @@ export class CustomerMasterComponent implements OnInit {
     fullname: '',
     profileImg: '',
     email: '',
-    status: '',
+    status: 'active',
     phoneNumbers: [],
     addresses: [],
     cart: { items: [] },
@@ -423,7 +424,6 @@ export class CustomerMasterComponent implements OnInit {
     metadata: {},
   };
 
-  @ViewChild('fileUploader') fileUploader!: FileUpload;
 
 
   constructor(
@@ -451,7 +451,6 @@ export class CustomerMasterComponent implements OnInit {
       paymentHistory: this.fb.array([]),
       metadata: this.fb.group({})
     });
-
     this.newPhoneNumberForm = this.fb.group({
       number: ['', Validators.required],
       type: ['mobile', Validators.required],
@@ -491,8 +490,6 @@ export class CustomerMasterComponent implements OnInit {
       remainingAmount: this.customer.remainingAmount,
       metadata: this.customer.metadata,
     });
-
-    // Set phone numbers FormArray
     this.setPhoneNumbers(this.customer.phoneNumbers);
 
     // Set addresses FormArray
@@ -538,9 +535,9 @@ export class CustomerMasterComponent implements OnInit {
   }
 
 
+
   autopopulatedata() {
     const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
-
     if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
       this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
     } else {
@@ -615,8 +612,6 @@ export class CustomerMasterComponent implements OnInit {
   handleFileUpload(event: any) {
   }
 
-
-
   saveCustomer() {
     if (this.customerForm.valid) {
       const formValue = this.customerForm.value;
@@ -657,8 +652,8 @@ export class CustomerMasterComponent implements OnInit {
     if (this.newPhoneNumberForm.valid) {
       const phoneFormArray = this.customerForm.get('phoneNumbers') as FormArray;
       phoneFormArray.push(this.fb.group(this.newPhoneNumberForm.value));
-      this.phoneDialogVisible = false;
       this.newPhoneNumberForm.reset({ type: 'mobile', primary: false }); // Reset with defaults
+      this.phoneDialogVisible = true;
     } else {
       // Trigger validation to show errors in dialog
       Object.keys(this.newPhoneNumberForm.controls).forEach(field => {
@@ -668,7 +663,9 @@ export class CustomerMasterComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter valid phone details.' });
     }
   }
+  editPhone(i: any) {
 
+  }
 
   deletePhone(index: number) {
     this.phoneNumbersFormArray.removeAt(index);

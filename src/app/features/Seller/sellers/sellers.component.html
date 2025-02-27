@@ -193,8 +193,8 @@
         <p-card header="Create Seller" styleClass="form-card-content" class="w-full">
           <form [formGroup]="sellerForm" (ngSubmit)="saveSeller()">
             <!-- First Row: Seller Information and Profile Image -->
-            <div class="flex w-full">
-              <!-- Left: Form Fields -->
+            <!-- Left: Form Fields -->
+            <!-- <div class="flex w-full">
               <div class="flex-1 grid grid-cols-2 gap-4">
                 <div class="form-group">
                   <label for="name" class="form-label">Name</label>
@@ -222,17 +222,73 @@
                   <small *ngIf="sellerForm.controls['pan'].invalid && sellerForm.controls['pan'].dirty"
                     class="p-error block">PAN is required and should be valid format</small>
                 </div>
-                <div class="form-group col-span-2">
+                <div class="form-group  col-span-2">
                   <label for="gstin" class="form-label">GSTIN</label>
                   <input id="gstin" type="text" pInputText class="form-input w-full" formControlName="gstin" required />
                   <small *ngIf="sellerForm.controls['gstin'].invalid && sellerForm.controls['gstin'].dirty"
                     class="p-error block">GSTIN is required and should be valid format</small>
                 </div>
+                <div class="form-group col-span-2">
+                  <label for="contactNumber" class="form-label">contactNumber</label>
+                  <input id="contactNumber" type="text" pInputText class="form-input w-full"
+                    formControlName="contactNumber" required />
+                  <small
+                    *ngIf="sellerForm.controls['contactNumber'].invalid && sellerForm.controls['contactNumber'].dirty"
+                    class="p-error block">contactNumber is required and should be valid format</small>
+                </div>
               </div>
-              <!-- Right: Profile Image -->
+              Right: Profile Image
               <div class="w-40 ml-4">
                 <div class="profile-image-container">
                   <i class="pi pi-user profile-icon"></i>
+                </div>
+              </div>
+            </div> -->
+            <div class="flex w-full">
+              <!-- Left: Form Fields -->
+              <div class="flex-1 grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label for="name" class="form-label">Name</label>
+                  <input id="name" type="text" pInputText class="form-input w-full" formControlName="name" required />
+                  <small *ngIf="sellerForm.controls['name'].invalid && sellerForm.controls['name'].dirty"
+                    class="p-error block">Name
+                    is required</small>
+                </div>
+                <div class="form-group">
+                  <label for="shopName" class="form-label">Shop Name</label>
+                  <input id="shopName" type="text" pInputText class="form-input w-full" formControlName="shopName"
+                    required />
+                  <small *ngIf="sellerForm.controls['shopName'].invalid && sellerForm.controls['shopName'].dirty"
+                    class="p-error block">Shop Name is required</small>
+                </div>
+                <div class="form-group">
+                  <label for="status" class="form-label">Status</label>
+                  <p-select id="status" [options]="statuses" formControlName="status" placeholder="Select Status"
+                    class="w-full" required></p-select>
+                  <small *ngIf="sellerForm.controls['status'].invalid && sellerForm.controls['status'].dirty"
+                    class="p-error block">Status is required</small>
+                </div>
+                <div class="form-group">
+                  <label for="pan" class="form-label">PAN</label>
+                  <input id="pan" type="text" pInputText class="form-input w-full" formControlName="pan" required />
+                  <small *ngIf="sellerForm.controls['pan'].invalid && sellerForm.controls['pan'].dirty"
+                    class="p-error block">PAN is
+                    required and should be valid format</small>
+                </div>
+                <!-- GSTIN and Contact Number in a Single Row -->
+                <div class="form-group">
+                  <label for="gstin" class="form-label">GSTIN</label>
+                  <input id="gstin" type="text" pInputText class="form-input w-full" formControlName="gstin" required />
+                  <small *ngIf="sellerForm.controls['gstin'].invalid && sellerForm.controls['gstin'].dirty"
+                    class="p-error block">GSTIN is required and should be valid format</small>
+                </div>
+                <div class="form-group">
+                  <label for="contactNumber" class="form-label">Contact Number</label>
+                  <input id="contactNumber" type="text" pInputText class="form-input w-full"
+                    formControlName="contactNumber" required />
+                  <small
+                    *ngIf="sellerForm.controls['contactNumber'].invalid && sellerForm.controls['contactNumber'].dirty"
+                    class="p-error block">Contact Number is required and should be valid format</small>
                 </div>
               </div>
             </div>

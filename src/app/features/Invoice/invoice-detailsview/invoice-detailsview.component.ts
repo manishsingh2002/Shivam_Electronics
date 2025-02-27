@@ -20,6 +20,10 @@ export class InvoiceDetailCardComponent implements OnInit {
   constructor(private apiService: ApiService, private cdr: ChangeDetectorRef) { } // Inject ApiService and ChangeDetectorRef
 
   ngOnInit(): void {
+    this.getCustomerdata()
+  }
+
+  getCustomerdata() {
     if (this.invoiceId) {
       this.loading = true;
       this.apiService.getinvoiceDataWithId(this.invoiceId).subscribe({
@@ -40,9 +44,6 @@ export class InvoiceDetailCardComponent implements OnInit {
     }
   }
 }
-
-
-
 
 
 

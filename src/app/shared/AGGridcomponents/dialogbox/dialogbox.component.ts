@@ -25,13 +25,12 @@ export class DialogboxComponent implements ICellRendererAngularComp {
   value: any;
   display: boolean = false;
   invoiceDetailData: any;
+  params: any;
 
   constructor(private cdr: ChangeDetectorRef, private apiService: ApiService) { }
 
   agInit(params: CustomCellRendererParams): void {
-    this.value = params.value;
-    this.id = params.id || '';
-    this.dynamicComponent = params.dynamicComponent || null; // Assign dynamicComponent to the component
+    this.params = params
   }
 
   refresh(params: CustomCellRendererParams): boolean {
@@ -40,6 +39,9 @@ export class DialogboxComponent implements ICellRendererAngularComp {
 
   openDialog(): void {
     this.display = true;
+    this.value = this.params.value;
+    this.id = this.params.id || '';
+    this.dynamicComponent = this.params.dynamicComponent || null;
     // if (this.id) {
     //   this.apiService.getinvoiceDataWithId(this.id).subscribe((res: any) => {
     //     this.invoiceDetailData = res.data;
