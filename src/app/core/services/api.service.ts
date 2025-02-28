@@ -223,6 +223,9 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/invoices`, data).pipe(catchError((error) => this.errorhandler.handleError('createNewinvoice', error)));
   }
 
+  getProductSales(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/v1/invoices/productSales`, data).pipe(catchError((error) => this.errorhandler.handleError('getProductSales', error)));
+  }
   updateinvoice(invoiceId: string, data: any): Observable<any> {
     return this.http.patch(`${this.baseUrl}/v1/invoices/${invoiceId}`, data).pipe(catchError((error) => this.errorhandler.handleError('updateinvoice', error)));
   }
