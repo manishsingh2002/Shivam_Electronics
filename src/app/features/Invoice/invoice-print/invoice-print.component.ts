@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ApiService } from '../../../core/services/api.service';
+import * as QRCode from 'qrcode';
+
 @Component({
   selector: 'app-invoice-print',
   imports: [CommonModule],
@@ -44,23 +46,124 @@ export class InvoicePrintComponent implements OnInit {
   }
 
   getInvoiceWithId() {
-    this.apiService.getinvoiceDataWithId(this.Id).subscribe((res: any) => {
-      this.invoiceData = res.data
+    this.apiService.getinvoiceDataWithId(this.Id).subscribe({
+      next: (res: any) => {
+        this.invoiceData = res.data;
+      },
+      error: (err) => {
+        console.error('Error fetching invoice:', err);
+      }
     })
   }
 
   downloadPDF() {
-    const DATA = document.querySelector('.invoice-container') as HTMLElement;
-    html2canvas(DATA).then(canvas => {
-      const fileWidth = 210; // A4 size paper width in mm
-      const fileHeight = 297; // A4 size paper height in mm
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-      var width = pdf.internal.pageSize.getWidth();
-      var height = pdf.internal.pageSize.getHeight();
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
-      pdf.save('invoice.pdf');
-    });
+    setTimeout(() => {
+      const element = document.querySelector('.invoice-container') as HTMLElement;
+
+      if (!element) {
+        console.error('Invoice container not found');
+        return;
+      }
+
+      html2canvas(element, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4'
+        });
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Maintain aspect ratio
+
+        pdf.addImage(imgData, 'PNG', 0, 10, pdfWidth, pdfHeight);
+        pdf.save(`invoice-${this.invoiceData?.invoiceNumber || 'download'}.pdf`);
+      }).catch(error => {
+        console.error('Error generating PDF:', error);
+      });
+
+    }, 500); // Small delay to ensure rendering
+  }
+
+
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      const qrElement = document.getElementById("upi-qrcode") as HTMLCanvasElement;
+      if (qrElement) {
+        QRCode.toCanvas(qrElement, "YOUR_UPI_PAYMENT_LINK_OR_UPI_ID", {
+          width: 100,
+          color: {
+            dark: "#000000",
+            light: "#ffffff"
+          }
+        }, (error) => {
+          if (error) {
+            console.error("Error generating QR Code:", error);
+          }
+        });
+      } else {
+        console.error("QR Code container not found");
+      }
+    }, 500);
   }
 }
+
+
+// downloadPDF() {
+//   const element = document.querySelector('.invoice-container') as HTMLElement;
+//   html2canvas(element, { scale: 2 }).then(canvas => {
+//     const imgData = canvas.toDataURL('image/png');
+//     const pdf = new jsPDF({
+//       orientation: 'portrait',
+//       unit: 'mm',
+//       format: 'a4'
+//     });
+//     const pdfWidth = pdf.internal.pageSize.getWidth();
+//     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+//     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+//     pdf.save('invoice.pdf');
+//   });
+// }
+
+// downloadPDF() {
+//   const element = document.querySelector('.invoice-container') as HTMLElement;
+//   if (!element) {
+//     console.error('Invoice container not found');
+//     return;
+//   }
+
+//   html2canvas(element, { scale: 2 }).then(canvas => {
+//     const imgData = canvas.toDataURL('image/png');
+//     const pdf = new jsPDF({
+//       orientation: 'portrait',
+//       unit: 'mm',
+//       format: 'a4'
+//     });
+//     const pdfWidth = pdf.internal.pageSize.getWidth();
+//     const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Maintain aspect ratio
+//     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+//     pdf.save('invoice.pdf');
+//   }).catch(error => {
+//     console.error('Error generating PDF:', error);
+//   });
+// }
+
+// convertNumberToWords(num: number): string {
+//   // Your implementation for converting numbers to words
+//   return 'Your Conversion Logic Here';
+// }
+// downloadPDF() {
+//   const DATA = document.querySelector('.invoice-container') as HTMLElement;
+//   html2canvas(DATA).then(canvas => {
+//     const fileWidth = 210; // A4 size paper width in mm
+//     const fileHeight = 297; // A4 size paper height in mm
+//     const contentDataURL = canvas.toDataURL('image/png')
+//     let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+//     var width = pdf.internal.pageSize.getWidth();
+//     var height = pdf.internal.pageSize.getHeight();
+//     pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
+//     pdf.save('invoice.pdf');
+//   });
+// }
 

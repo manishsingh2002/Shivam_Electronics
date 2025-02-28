@@ -305,7 +305,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../../core/services/api.service';
-import { Component, Inject, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -430,7 +430,7 @@ export class CustomerMasterComponent implements OnInit {
     private ApiService: ApiService,
     private http: HttpClient,
     private messageService: MessageService,
-    private fb: FormBuilder,
+    private fb: FormBuilder, private cdRef: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isDarkMode = (isPlatformBrowser(this.platformId)) && localStorage.getItem('darkMode') === 'true';
@@ -470,6 +470,8 @@ export class CustomerMasterComponent implements OnInit {
 
   ngOnInit() {
     this.autopopulatedata();
+    this.cdRef.detectChanges();
+
     this.populateFormWithCustomerData(); // Populate form after data is available
   }
 
@@ -687,6 +689,10 @@ export class CustomerMasterComponent implements OnInit {
     }
   }
 
+
+  ngAfterViewInit(): void {
+    this.cdRef.detectChanges(); // Force change detection after view init
+  }
 
   removeAddress(index: number) {
     this.addressesFormArray.removeAt(index);

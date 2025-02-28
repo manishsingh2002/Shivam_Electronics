@@ -1,3 +1,300 @@
+<section class="body-font " [ngClass]="{'dark-mode': isDarkMode}" [formGroup]="customerForm">
+  <div pFocusTrap class="container px-5 py-1 mx-auto flex flex-wrap">
+    <div class="flex w-full mb-8 flex-wrap justify-between items-center">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 dark:text-white lg:mb-0 mb-4 text-center">
+        Customer Profile</h1>
+      <button pButton pRipple type="button" icon="pi pi-moon" class="p-button-rounded p-button-text"
+        (click)="toggleDarkMode()" [ngClass]="{'p-button-outlined': !isDarkMode}" tooltip="Toggle Dark Mode"
+        tooltipPosition="bottom"></button>
+    </div>
+    <div class="flex flex-wrap md:-m-2 -m-1 w-full">
+      <div class="w-full md:w-1/3 p-2 mx-auto">
+        <div class="rounded-lg p-4 flex flex-col h-full profile-card shadow-md">
+          <div class="profile-image-container">
+            <img *ngIf="customerForm.get('profileImg')?.value" [src]="customerForm.get('profileImg')?.value"
+              alt="Profile Image" class="profile-image">
+            <i *ngIf="!customerForm.get('profileImg')?.value" class="pi pi-user profile-icon"></i>
+          </div>
+
+          <button (click)="fileUploader.choose()" class="upload-button">
+            <i class="pi pi-upload"></i> Upload
+          </button>
+
+          <p *ngIf="uploadStatus" class="upload-status">{{ uploadStatus }}</p>
+
+          <div class="form-group">
+            <label for="status" class="form-label">Status</label>
+            <p-select id="status" [options]="statuses" formControlName="status" placeholder="Select Status"
+              class="w-full md:w-56"></p-select>
+          </div>
+
+          <div class="form-group">
+            <label for="guaranteer" class="form-label">Guaranteer Name</label>
+            <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown"
+              optionLabel="fullname" [(ngModel)]="selectedGuaranter" placeholder="Select Guaranteer"
+              class="w-full md:w-56"></p-select>
+            <div id="guaranteer-name" placeholder="guaranter name" class="guaranteer-info">
+              {{selectedGuaranter?.fullname}}</div>
+            <div *ngFor="let item of selectedGuaranter?.phoneNumbers">
+              <div id="guaranteer-phone" placeholder="guaranteer phone Number" class="guaranteer-info">{{item?.number}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap w-full md:w-2/3 p-2">
+        <div class="md:p-2 p-1 w-full">
+          <div class="form-card">
+            <p-card header="Personal Information" styleClass="form-card-content">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label for="fullname" class="form-label">Full Name</label>
+                  <input id="fullname" type="text" pInputText class="form-input" formControlName="fullname" />
+                  <small *ngIf="customerForm.controls['fullname'].invalid && customerForm.controls['fullname'].touched"
+                    class="p-error block">Fullname is required</small>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input id="email" type="email" pInputText class="form-input" formControlName="email" />
+                  <small *ngIf="customerForm.controls['email'].invalid && customerForm.controls['email'].touched"
+                    class="p-error block">Invalid email format</small>
+
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+          <div class="mt-4 form-card">
+            <p-card header="Phone Numbers" styleClass="form-card-content">
+              <p-table [value]="phoneNumbersFormArray.controls" [paginator]="true" [rows]="3" styleClass="form-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Number</th>
+                    <th>Type</th>
+                    <th>Primary</th>
+                    <th>Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-phone let-i="index">
+                  <tr [formGroupName]="i">
+                    <td>{{ phone.value.number }}</td>
+                    <td>{{ phone.value.type }}</td>
+                    <td class="text-center"><p-checkbox formControlName="primary" binary="true"></p-checkbox></td>
+                    <td class="actions-column">
+                      <button pButton icon="pi pi-pencil"
+                        class="action-button p-button-rounded p-button-text p-button-sm"
+                        (click)="editPhone(i)"></button>
+                      <button pButton icon="pi pi-trash"
+                        class="action-button p-button-rounded p-button-text p-button-sm"
+                        (click)="deletePhone(i)"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"
+                styleClass="add-button"></button>
+            </p-card>
+          </div>
+          <div class="mt-4 form-card">
+            <p-card header="Addresses" styleClass="form-card-content">
+              <p-table [value]="addressesFormArray.controls" [paginator]="true" [rows]="3" styleClass="form-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>ZIP Code</th>
+                    <th>Country</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-address let-i="index">
+                  <tr [formGroupName]="i">
+                    <td>{{ address.value.street }}</td>
+                    <td>{{ address.value.city }}</td>
+                    <td>{{ address.value.state }}</td>
+                    <td>{{ address.value.zipCode }}</td>
+                    <td>{{ address.value.country }}</td>
+                    <td>{{ address.value.type }}</td>
+                    <td class="text-center"><p-checkbox formControlName="isDefault" binary="true"></p-checkbox></td>
+                    <td class="actions-column">
+                      <button pButton icon="pi pi-pencil"
+                        class="action-button p-button-rounded p-button-text p-button-sm"></button>
+                      <button pButton icon="pi pi-trash"
+                        class="action-button p-button-rounded p-button-text p-button-sm"
+                        (click)="removeAddress(i)"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <button pButton label="Add Address" styleClass="add-button" (click)="showAddressDialog()"></button>
+            </p-card>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="false" class="flex flex-wrap w-full md:w-full p-2">
+        <div class="md:p-2 p-1 w-full">
+          <div class="form-card">
+            <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 rounded-lg">
+              <div class="mx-auto max-w-3xl text-center">
+                <h2 class="section-title">
+                  Financial Status
+                </h2>
+              </div>
+
+              <dl class="mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="financial-stats">
+                  <dt class="stats-label">Remaining Amount</dt>
+                  <dd class="stats-value">{{ customer.remainingAmount | currency }}</dd>
+                </div>
+
+                <div class="financial-stats">
+                  <dt class="stats-label">
+                    Purchased Amount
+                  </dt>
+                  <dd class="stats-value">{{ customer.totalPurchasedAmount | currency }}</dd>
+                </div>
+
+                <div class="financial-stats">
+                  <dt class="stats-label">Total BUY</dt>
+                  <dd class="stats-value">86</dd>
+                </div>
+
+                <div class="financial-stats">
+                  <dt class="stats-label">Downloads</dt>
+                  <dd class="stats-value">86k</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap w-full p-2">
+        <div class="md:p-2 p-1 w-full">
+          <button (click)="saveCustomer()" class="save-button">Save Customer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible" styleClass="dialog-compact" [modal]="true"
+  [closable]="true" [dismissableMask]="true" [breakpoints]="{'960px': '50vw', '640px': '90vw'}">
+  <form [formGroup]="newPhoneNumberForm" (ngSubmit)="addPhoneNumber()">
+    <div class="p-fluid">
+      <div class="p-field mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <input id="phoneNumber" type="tel" pInputText formControlName="number" required class="form-input"
+          placeholder="Enter phone number" />
+        <small *ngIf="newPhoneNumberForm.controls['number'].invalid && newPhoneNumberForm.controls['number'].touched"
+          class="p-error block">Phone Number is required</small>
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="phoneType" class="form-label">Phone Type</label>
+        <p-select id="phoneType" [options]="phoneTypes" formControlName="type" optionLabel="label" optionValue="value"
+          required class="w-full md:w-56">
+        </p-select>
+        <small *ngIf="newPhoneNumberForm.controls['type'].invalid && newPhoneNumberForm.controls['type'].touched"
+          class="p-error block">Phone Type is required</small>
+      </div>
+      <div class="p-field flex items-center">
+        <p-checkbox formControlName="primary" inputId="primaryPhone" binary="true" class="mr-2"></p-checkbox>
+        <label for="primaryPhone" class="dialog-checkbox-label">Set as Primary Number</label>
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <p-button label="Cancel" icon="pi pi-times" (click)="phoneDialogVisible = false"
+          styleClass="p-button-text dialog-button-cancel" type="button"></p-button>
+        <p-button label="Add Number" icon="pi pi-check" styleClass="dialog-button-add" type="submit"
+          [disabled]="newPhoneNumberForm.invalid"></p-button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<p-fileUpload hidden #fileUploader name="image" url="http://localhost:4000/api/customers/{{customerId}}/profile-image"
+  accept="image/*" maxFileSize="5000000" (onSelect)="handleFileSelect($event)" (onUpload)="handleFileUpload($event)"
+  [auto]="true" [showUploadButton]="false" [showCancelButton]="false">
+</p-fileUpload>
+
+<p-dialog header="Add Address" [(visible)]="addressDialogVisible" styleClass="dialog-compact" [modal]="true"
+  [closable]="true" [dismissableMask]="true" [breakpoints]="{'960px': '75vw', '640px': '90vw'}">
+  <form [formGroup]="newAddressForm" (ngSubmit)="addAddress()">
+    <div class="p-fluid">
+      <div class="p-field mb-3">
+        <label for="street" class="form-label">Street</label>
+        <input id="street" type="text" pInputText formControlName="street" required class="form-input" />
+        <small *ngIf="newAddressForm.controls['street'].invalid && newAddressForm.controls['street'].touched"
+          class="p-error block">Street is required</small>
+
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="p-field">
+          <label for="city" class="form-label">City</label>
+          <input id="city" type="text" pInputText formControlName="city" required class="form-input" />
+          <small *ngIf="newAddressForm.controls['city'].invalid && newAddressForm.controls['city'].touched"
+            class="p-error block">City is required</small>
+
+        </div>
+
+        <div class="p-field">
+          <label for="state" class="form-label">State</label>
+          <input id="state" type="text" pInputText formControlName="state" required class="form-input" />
+          <small *ngIf="newAddressForm.controls['state'].invalid && newAddressForm.controls['state'].touched"
+            class="p-error block">State is required</small>
+
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="p-field">
+          <label for="zipCode" class="form-label">ZIP Code</label>
+          <input id="zipCode" type="text" pInputText formControlName="zipCode" required class="form-input" />
+          <small *ngIf="newAddressForm.controls['zipCode'].invalid && newAddressForm.controls['zipCode'].touched"
+            class="p-error block">ZIP Code is required</small>
+
+        </div>
+
+        <div class="p-field">
+          <label for="country" class="form-label">Country</label>
+          <input id="country" type="text" pInputText formControlName="country" required class="form-input" />
+          <small *ngIf="newAddressForm.controls['country'].invalid && newAddressForm.controls['country'].touched"
+            class="p-error block">Country is required</small>
+        </div>
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="addressType" class="form-label">Address Type</label>
+        <p-select id="addressType" [options]="addressTypes" formControlName="type" optionLabel="label"
+          optionValue="value" required class="w-full md:w-56"></p-select>
+        <small *ngIf="newAddressForm.controls['type'].invalid && newAddressForm.controls['type'].touched"
+          class="p-error block">Address Type is required</small>
+
+      </div>
+
+      <div class="p-field flex items-center">
+        <p-checkbox formControlName="isDefault" inputId="defaultAddress" binary="true" class="mr-2"></p-checkbox>
+        <label for="defaultAddress" class="dialog-checkbox-label">Set as Default Address</label>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <p-button label="Cancel" icon="pi pi-times" (click)="addressDialogVisible = false"
+          styleClass="p-button-text dialog-button-cancel" type="button"></p-button>
+        <p-button label="Add Address" icon="pi pi-check" styleClass="dialog-button-add" type="submit"
+          [disabled]="newAddressForm.invalid"></p-button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+
 <!-- 
 
 
@@ -556,298 +853,3 @@
   </div>
 </p-dialog> -->
 <!-- </section> -->
-<section class="body-font " [ngClass]="{'dark-mode': isDarkMode}" [formGroup]="customerForm">
-  <div pFocusTrap class="container px-5 py-1 mx-auto flex flex-wrap">
-    <div class="flex w-full mb-8 flex-wrap justify-between items-center">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 dark:text-white lg:mb-0 mb-4 text-center">
-        Customer Profile</h1>
-      <button pButton pRipple type="button" icon="pi pi-moon" class="p-button-rounded p-button-text"
-        (click)="toggleDarkMode()" [ngClass]="{'p-button-outlined': !isDarkMode}" tooltip="Toggle Dark Mode"
-        tooltipPosition="bottom"></button>
-    </div>
-    <div class="flex flex-wrap md:-m-2 -m-1 w-full">
-      <div class="w-full md:w-1/3 p-2 mx-auto">
-        <div class="rounded-lg p-4 flex flex-col h-full profile-card shadow-md">
-          <div class="profile-image-container">
-            <img *ngIf="customerForm.get('profileImg')?.value" [src]="customerForm.get('profileImg')?.value"
-              alt="Profile Image" class="profile-image">
-            <i *ngIf="!customerForm.get('profileImg')?.value" class="pi pi-user profile-icon"></i>
-          </div>
-
-          <button (click)="fileUploader.choose()" class="upload-button">
-            <i class="pi pi-upload"></i> Upload
-          </button>
-
-          <p *ngIf="uploadStatus" class="upload-status">{{ uploadStatus }}</p>
-
-          <div class="form-group">
-            <label for="status" class="form-label">Status</label>
-            <p-select id="status" [options]="statuses" formControlName="status" placeholder="Select Status"
-              class="w-full md:w-56"></p-select>
-          </div>
-
-          <div class="form-group">
-            <label for="guaranteer" class="form-label">Guaranteer Name</label>
-            <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown"
-              optionLabel="fullname" [(ngModel)]="selectedGuaranter" placeholder="Select Guaranteer"
-              class="w-full md:w-56"></p-select>
-            <div id="guaranteer-name" placeholder="guaranter name" class="guaranteer-info">
-              {{selectedGuaranter?.fullname}}</div>
-            <div *ngFor="let item of selectedGuaranter?.phoneNumbers">
-              <div id="guaranteer-phone" placeholder="guaranteer phone Number" class="guaranteer-info">{{item?.number}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap w-full md:w-2/3 p-2">
-        <div class="md:p-2 p-1 w-full">
-          <div class="form-card">
-            <p-card header="Personal Information" styleClass="form-card-content">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="form-group">
-                  <label for="fullname" class="form-label">Full Name</label>
-                  <input id="fullname" type="text" pInputText class="form-input" formControlName="fullname" />
-                  <small *ngIf="customerForm.controls['fullname'].invalid && customerForm.controls['fullname'].touched"
-                    class="p-error block">Fullname is required</small>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
-                  <input id="email" type="email" pInputText class="form-input" formControlName="email" />
-                  <small *ngIf="customerForm.controls['email'].invalid && customerForm.controls['email'].touched"
-                    class="p-error block">Invalid email format</small>
-
-                </div>
-              </div>
-            </p-card>
-          </div>
-
-          <div class="mt-4 form-card">
-            <p-card header="Phone Numbers" styleClass="form-card-content">
-              <p-table [value]="phoneNumbersFormArray.controls" [paginator]="true" [rows]="3" styleClass="form-table">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Number</th>
-                    <th>Type</th>
-                    <th>Primary</th>
-                    <th>Actions</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-phone let-i="index">
-                  <tr [formGroupName]="i">
-                    <td>{{ phone.value.number }}</td>
-                    <td>{{ phone.value.type }}</td>
-                    <td class="text-center"><p-checkbox formControlName="primary" binary="true"></p-checkbox></td>
-                    <td class="actions-column">
-                      <button pButton icon="pi pi-pencil"
-                        class="action-button p-button-rounded p-button-text p-button-sm"
-                        (click)="editPhone(i)"></button>
-                      <button pButton icon="pi pi-trash"
-                        class="action-button p-button-rounded p-button-text p-button-sm"
-                        (click)="deletePhone(i)"></button>
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
-              <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"
-                styleClass="add-button"></button>
-            </p-card>
-          </div>
-          <div class="mt-4 form-card">
-            <p-card header="Addresses" styleClass="form-card-content">
-              <p-table [value]="addressesFormArray.controls" [paginator]="true" [rows]="3" styleClass="form-table">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Street</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>ZIP Code</th>
-                    <th>Country</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                    <th>Actions</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-address let-i="index">
-                  <tr [formGroupName]="i">
-                    <td>{{ address.value.street }}</td>
-                    <td>{{ address.value.city }}</td>
-                    <td>{{ address.value.state }}</td>
-                    <td>{{ address.value.zipCode }}</td>
-                    <td>{{ address.value.country }}</td>
-                    <td>{{ address.value.type }}</td>
-                    <td class="text-center"><p-checkbox formControlName="isDefault" binary="true"></p-checkbox></td>
-                    <td class="actions-column">
-                      <button pButton icon="pi pi-pencil"
-                        class="action-button p-button-rounded p-button-text p-button-sm"></button>
-                      <button pButton icon="pi pi-trash"
-                        class="action-button p-button-rounded p-button-text p-button-sm"
-                        (click)="removeAddress(i)"></button>
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
-              <button pButton label="Add Address" styleClass="add-button" (click)="showAddressDialog()"></button>
-            </p-card>
-          </div>
-
-        </div>
-      </div>
-
-      <div *ngIf="false" class="flex flex-wrap w-full md:w-full p-2">
-        <div class="md:p-2 p-1 w-full">
-          <div class="form-card">
-            <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 rounded-lg">
-              <div class="mx-auto max-w-3xl text-center">
-                <h2 class="section-title">
-                  Financial Status
-                </h2>
-              </div>
-
-              <dl class="mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="financial-stats">
-                  <dt class="stats-label">Remaining Amount</dt>
-                  <dd class="stats-value">{{ customer.remainingAmount | currency }}</dd>
-                </div>
-
-                <div class="financial-stats">
-                  <dt class="stats-label">
-                    Purchased Amount
-                  </dt>
-                  <dd class="stats-value">{{ customer.totalPurchasedAmount | currency }}</dd>
-                </div>
-
-                <div class="financial-stats">
-                  <dt class="stats-label">Total BUY</dt>
-                  <dd class="stats-value">86</dd>
-                </div>
-
-                <div class="financial-stats">
-                  <dt class="stats-label">Downloads</dt>
-                  <dd class="stats-value">86k</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap w-full p-2">
-        <div class="md:p-2 p-1 w-full">
-          <button (click)="saveCustomer()" class="save-button">Save Customer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<p-dialog header="Add Phone Number" [(visible)]="phoneDialogVisible" styleClass="dialog-compact" [modal]="true"
-  [closable]="true" [dismissableMask]="true" [breakpoints]="{'960px': '50vw', '640px': '90vw'}">
-  <form [formGroup]="newPhoneNumberForm" (ngSubmit)="addPhoneNumber()">
-    <div class="p-fluid">
-      <div class="p-field mb-3">
-        <label for="phoneNumber" class="form-label">Phone Number</label>
-        <input id="phoneNumber" type="tel" pInputText formControlName="number" required class="form-input"
-          placeholder="Enter phone number" />
-        <small *ngIf="newPhoneNumberForm.controls['number'].invalid && newPhoneNumberForm.controls['number'].touched"
-          class="p-error block">Phone Number is required</small>
-      </div>
-
-      <div class="p-field mb-3">
-        <label for="phoneType" class="form-label">Phone Type</label>
-        <p-select id="phoneType" [options]="phoneTypes" formControlName="type" optionLabel="label" optionValue="value"
-          required class="w-full md:w-56">
-        </p-select>
-        <small *ngIf="newPhoneNumberForm.controls['type'].invalid && newPhoneNumberForm.controls['type'].touched"
-          class="p-error block">Phone Type is required</small>
-      </div>
-      <div class="p-field flex items-center">
-        <p-checkbox formControlName="primary" inputId="primaryPhone" binary="true" class="mr-2"></p-checkbox>
-        <label for="primaryPhone" class="dialog-checkbox-label">Set as Primary Number</label>
-      </div>
-      <div class="flex justify-end gap-2 mt-4">
-        <p-button label="Cancel" icon="pi pi-times" (click)="phoneDialogVisible = false"
-          styleClass="p-button-text dialog-button-cancel" type="button"></p-button>
-        <p-button label="Add Number" icon="pi pi-check" styleClass="dialog-button-add" type="submit"
-          [disabled]="newPhoneNumberForm.invalid"></p-button>
-      </div>
-    </div>
-  </form>
-</p-dialog>
-
-<p-fileUpload hidden #fileUploader name="image" url="http://localhost:4000/api/customers/{{customerId}}/profile-image"
-  accept="image/*" maxFileSize="5000000" (onSelect)="handleFileSelect($event)" (onUpload)="handleFileUpload($event)"
-  [auto]="true" [showUploadButton]="false" [showCancelButton]="false">
-</p-fileUpload>
-
-<p-dialog header="Add Address" [(visible)]="addressDialogVisible" styleClass="dialog-compact" [modal]="true"
-  [closable]="true" [dismissableMask]="true" [breakpoints]="{'960px': '75vw', '640px': '90vw'}">
-  <form [formGroup]="newAddressForm" (ngSubmit)="addAddress()">
-    <div class="p-fluid">
-      <div class="p-field mb-3">
-        <label for="street" class="form-label">Street</label>
-        <input id="street" type="text" pInputText formControlName="street" required class="form-input" />
-        <small *ngIf="newAddressForm.controls['street'].invalid && newAddressForm.controls['street'].touched"
-          class="p-error block">Street is required</small>
-
-      </div>
-
-      <div class="grid grid-cols-2 gap-4">
-        <div class="p-field">
-          <label for="city" class="form-label">City</label>
-          <input id="city" type="text" pInputText formControlName="city" required class="form-input" />
-          <small *ngIf="newAddressForm.controls['city'].invalid && newAddressForm.controls['city'].touched"
-            class="p-error block">City is required</small>
-
-        </div>
-
-        <div class="p-field">
-          <label for="state" class="form-label">State</label>
-          <input id="state" type="text" pInputText formControlName="state" required class="form-input" />
-          <small *ngIf="newAddressForm.controls['state'].invalid && newAddressForm.controls['state'].touched"
-            class="p-error block">State is required</small>
-
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-4">
-        <div class="p-field">
-          <label for="zipCode" class="form-label">ZIP Code</label>
-          <input id="zipCode" type="text" pInputText formControlName="zipCode" required class="form-input" />
-          <small *ngIf="newAddressForm.controls['zipCode'].invalid && newAddressForm.controls['zipCode'].touched"
-            class="p-error block">ZIP Code is required</small>
-
-        </div>
-
-        <div class="p-field">
-          <label for="country" class="form-label">Country</label>
-          <input id="country" type="text" pInputText formControlName="country" required class="form-input" />
-          <small *ngIf="newAddressForm.controls['country'].invalid && newAddressForm.controls['country'].touched"
-            class="p-error block">Country is required</small>
-        </div>
-      </div>
-
-      <div class="p-field mb-3">
-        <label for="addressType" class="form-label">Address Type</label>
-        <p-select id="addressType" [options]="addressTypes" formControlName="type" optionLabel="label"
-          optionValue="value" required class="w-full md:w-56"></p-select>
-        <small *ngIf="newAddressForm.controls['type'].invalid && newAddressForm.controls['type'].touched"
-          class="p-error block">Address Type is required</small>
-
-      </div>
-
-      <div class="p-field flex items-center">
-        <p-checkbox formControlName="isDefault" inputId="defaultAddress" binary="true" class="mr-2"></p-checkbox>
-        <label for="defaultAddress" class="dialog-checkbox-label">Set as Default Address</label>
-      </div>
-
-      <div class="flex justify-end gap-2 mt-4">
-        <p-button label="Cancel" icon="pi pi-times" (click)="addressDialogVisible = false"
-          styleClass="p-button-text dialog-button-cancel" type="button"></p-button>
-        <p-button label="Add Address" icon="pi pi-check" styleClass="dialog-button-add" type="submit"
-          [disabled]="newAddressForm.invalid"></p-button>
-      </div>
-    </div>
-  </form>
-</p-dialog>

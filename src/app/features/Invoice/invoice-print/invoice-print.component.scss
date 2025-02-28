@@ -1,178 +1,438 @@
-.invoice-container {
-  width: 210mm;
-  /* A4 width */
-  min-height: 297mm;
-  /* A4 height */
-  margin: 0 auto;
-  padding: 20mm;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
+// .invoice-container {
+//   width: 210mm;
+//   /* A4 width */
+//   min-height: 297mm;
+//   /* A4 height */
+//   margin: 0 auto;
+//   padding: 20mm;
+//   font-family: 'Arial', sans-serif;
+//   color: #333;
+//   border: 1px solid #ccc;
+//   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+//   background-color: #fff;
+// }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10mm;
-  margin-bottom: 10mm;
-}
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   border-bottom: 2px solid #ccc;
+//   padding-bottom: 10mm;
+//   margin-bottom: 10mm;
+// }
 
-.seller-info {
-  text-align: left;
-}
+// .seller-info {
+//   text-align: left;
+// }
 
-.invoice-details {
-  text-align: right;
-}
+// .invoice-details {
+//   text-align: right;
+// }
 
-.company-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+// .company-name {
+//   font-size: 24px;
+//   font-weight: bold;
+//   margin-bottom: 5px;
+// }
 
-.company-address,
-.company-gstin {
-  font-size: 14px;
-  margin-bottom: 2px;
-}
+// .company-address,
+// .company-gstin {
+//   font-size: 14px;
+//   margin-bottom: 2px;
+// }
 
-.invoice-details h2 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+// .invoice-details h2 {
+//   font-size: 28px;
+//   font-weight: bold;
+//   margin-bottom: 10px;
+// }
 
-.buyer-info {
-  margin-bottom: 10mm;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5mm;
-}
+// .buyer-info {
+//   margin-bottom: 10mm;
+//   border-bottom: 1px solid #eee;
+//   padding-bottom: 5mm;
+// }
 
-.buyer-info h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
+// .buyer-info h3 {
+//   font-size: 18px;
+//   font-weight: bold;
+//   margin-bottom: 8px;
+// }
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 5px 10px;
-}
+// .info-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+//   gap: 5px 10px;
+// }
 
-.info-item {
-  display: flex;
-  flex-direction: row;
-  /* Align label and value in a row */
-  align-items: baseline;
-  /* Align items to the baseline */
-  margin-bottom: 3px;
-}
+// .info-item {
+//   display: flex;
+//   flex-direction: row;
+//   /* Align label and value in a row */
+//   align-items: baseline;
+//   /* Align items to the baseline */
+//   margin-bottom: 3px;
+// }
 
-.info-item .label {
-  font-weight: bold;
-  margin-right: 5px;
-  white-space: nowrap;
-  /* Prevent label from wrapping */
-}
+// .info-item .label {
+//   font-weight: bold;
+//   margin-right: 5px;
+//   white-space: nowrap;
+//   /* Prevent label from wrapping */
+// }
 
-.info-item .value {
-  word-wrap: break-word;
-  /* Allow value to wrap if needed */
-}
+// .info-item .value {
+//   word-wrap: break-word;
+//   /* Allow value to wrap if needed */
+// }
 
 
-.items-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 10mm;
-}
+// .items-table {
+//   width: 100%;
+//   border-collapse: collapse;
+//   margin-bottom: 10mm;
+// }
 
-.items-table th,
-.items-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-  font-size: 14px;
-}
+// .items-table th,
+// .items-table td {
+//   border: 1px solid #ddd;
+//   padding: 8px;
+//   text-align: left;
+//   font-size: 14px;
+// }
 
-.items-table th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-}
+// .items-table th {
+//   background-color: #f0f0f0;
+//   font-weight: bold;
+// }
 
-.items-table tfoot tr.total td {
-  font-weight: bold;
-  background-color: #eee;
-}
+// .items-table tfoot tr.total td {
+//   font-weight: bold;
+//   background-color: #eee;
+// }
 
-.items-table tfoot td {
-  text-align: right;
-}
+// .items-table tfoot td {
+//   text-align: right;
+// }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-top: 10mm;
-  font-size: 14px;
-}
+// .footer {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   padding-top: 10mm;
+//   font-size: 14px;
+// }
 
-.notes,
-.amount-in-words,
-.company-signature {
-  width: 30%;
-  /* Adjust as needed */
-}
+// .notes,
+// .amount-in-words,
+// .company-signature {
+//   width: 30%;
+//   /* Adjust as needed */
+// }
 
-.notes h3 {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+// .notes h3 {
+//   font-weight: bold;
+//   margin-bottom: 5px;
+// }
 
-.amount-in-words .value {
-  font-weight: bold;
-}
+// .amount-in-words .value {
+//   font-weight: bold;
+// }
 
-.company-signature {
-  text-align: right;
-}
+// .company-signature {
+//   text-align: right;
+// }
 
-.signature-line {
-  border-bottom: 1px solid #333;
-  margin-top: 10px;
-}
+// .signature-line {
+//   border-bottom: 1px solid #333;
+//   margin-top: 10px;
+// }
 
-/* Print specific styles */
-@media print {
-  body * {
-    visibility: hidden;
+// /* Print specific styles */
+// @media print {
+//   body * {
+//     visibility: hidden;
+//   }
+
+//   .invoice-container,
+//   .invoice-container * {
+//     visibility: visible;
+//   }
+
+//   .invoice-container {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     margin: 0;
+//     padding: 20mm;
+//     border: none;
+//     box-shadow: none;
+//     width: auto;
+//     min-height: auto;
+//   }
+
+//   @page {
+//     size: A4;
+//     margin: 20mm;
+//   }
+// // }
+// .invoice-container {
+//   width: 210mm;
+//   /* A4 width */
+//   margin: 0 auto;
+//   /* Centers the container */
+//   padding: 20mm;
+//   /* Adds padding inside the container */
+//   font-family: Arial, sans-serif;
+//   background-color: #fff;
+//   /* White background */
+//   border: 1px solid #ddd;
+//   /* Optional border for clarity */
+//   box-sizing: border-box;
+//   /* Includes padding in width */
+// }
+
+// .items-table table {
+//   width: 100%;
+//   /* Fits table within container */
+//   border-collapse: collapse;
+//   /* Removes gaps between cells */
+// }
+
+// .header,
+// .buyer-info,
+// .items-table,
+// .footer {
+//   padding: 0 10mm;
+//   /* Equal padding on left and right */
+//   margin: 0;
+//   /* No extra margins */
+// }
+
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   margin-bottom: 20px;
+// }
+
+// .seller-info h2 {
+//   font-size: 24px;
+//   margin: 0;
+// }
+
+// .invoice-details h2 {
+//   font-size: 24px;
+//   margin: 0;
+// }
+
+// .invoice-container {
+//   background-color: #fff;
+//   /* White background */
+//   color: #333;
+//   /* Dark gray text */
+// }
+
+// h2,
+// h3,
+// p,
+// td,
+// th {
+//   color: #333;
+//   /* Consistent text color */
+// }
+
+// .items-table th {
+//   background-color: #f5f5f5;
+//   /* Light gray for table headers */
+// }
+
+// .buyer-info {
+//   display: flex;
+//   flex-wrap: wrap;
+//   /* Allows items to wrap if too wide */
+//   gap: 10px;
+//   /* Space between items */
+// }
+
+// .buyer-info .info-item {
+//   flex: 1 1 45%;
+//   /* Each item takes ~45% width, wrapping if needed */
+// }
+
+// .buyer-info .info-item.address {
+//   flex: 1 1 100%;
+//   /* Address takes full width if long */
+// }
+
+// .buyer-info .value {
+//   word-wrap: break-word;
+//   /* Prevents text overflow */
+//   max-width: 100%;
+// }
+
+// .items-table td {
+//   background-color: #fff;
+//   /* White for table cells */
+// }
+
+// .buyer-info h3,
+// .footer h3 {
+//   font-size: 16px;
+//   margin-bottom: 10px;
+// }
+
+// .info-grid {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   gap: 10px;
+// }
+
+// .info-item .label {
+//   font-weight: bold;
+//   margin: 0;
+// }
+
+// .info-item .value {
+//   margin: 0;
+// }
+
+// .items-table table {
+//   width: 100%;
+//   border-collapse: collapse;
+//   margin-bottom: 20px;
+// }
+
+// .items-table th,
+// .items-table td {
+//   border: 1px solid #ddd;
+//   padding: 8px;
+//   text-align: left;
+// }
+
+// .items-table th {
+//   background-color: #f5f5f5;
+// }
+
+// .items-table .text-right {
+//   text-align: right;
+// }
+
+// .items-table .total td {
+//   font-weight: bold;
+// }
+
+// .footer {
+//   margin-top: 20px;
+// }
+
+// .notes,
+// .amount-in-words,
+// .company-signature {
+//   margin-bottom: 15px;
+// }
+
+// .signature-line {
+//   width: 150px;
+//   height: 1px;
+//   background-color: #000;
+//   margin: 20px 0 5px;
+// }
+
+// .download-button {
+//   text-align: center;
+//   margin-top: 20px;
+// }
+
+// button {
+//   padding: 10px 20px;
+//   background-color: #007bff;
+//   color: #fff;
+//   border: none;
+//   cursor: pointer;
+// }
+
+// button:hover {
+//   background-color: #0056b3;
+// }
+
+// @media print {
+//   .download-button {
+//     display: none;
+//   }
+// }
+
+// .items-table table {
+//   width: 100%;
+//   font-size: 10px;
+//   /* Smaller font to save space */
+// }
+
+// .items-table th,
+// .items-table td {
+//   padding: 5px;
+//   border: 1px solid #ddd;
+// }
+
+// /* Example column widths (adjust based on your columns) */
+// .items-table th:nth-child(1),
+// .items-table td:nth-child(1) {
+//   width: 5%;
+// }
+
+// /* Serial # */
+// .items-table th:nth-child(2),
+// .items-table td:nth-child(2) {
+//   width: 25%;
+// }
+
+// /* Item Description */
+// .items-table th:nth-child(3),
+// .items-table td:nth-child(3) {
+//   width: 10%;
+// }
+
+// /* Quantity */
+// .items-table th:nth-child(4),
+// .items-table td:nth-child(4) {
+//   width: 15%;
+// }
+
+// /* Rate */
+// .items-table th:nth-child(5),
+// .items-table td:nth-child(5) {
+//   width: 15%;
+// }
+
+// /* Tax */
+// .items-table th:nth-child(6),
+// .items-table td:nth-child(6) {
+//   width: 20%;
+// }
+
+// /* Amount */
+
+/* styles.scss or invoice-print.component.scss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .invoice-container {
+    @apply bg-white p-6 rounded-md shadow-md;
   }
 
-  .invoice-container,
-  .invoice-container * {
-    visibility: visible;
+  .download-button {
+    @apply text-center mt-4;
+  }
+}
+
+@media print {
+  .download-button {
+    @apply hidden;
   }
 
   .invoice-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0;
-    padding: 20mm;
-    border: none;
-    box-shadow: none;
-    width: auto;
-    min-height: auto;
-  }
-
-  @page {
-    size: A4;
-    margin: 20mm;
+    @apply shadow-none border-none p-0 m-0 w-full;
+    /* Reset container styles for printing */
   }
 }
