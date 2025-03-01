@@ -1,6 +1,6 @@
 // import { Component } from '@angular/core';
 // import { CommonModule } from '@angular/common';
-// import { DragAndDropModule } from 'angular-draggable-droppable';
+// import { DndModule, DndDropEvent } from 'ngx-drag-drop';
 // import { animate, style, transition, trigger } from '@angular/animations';
 // import { UserStatsComponent } from './user-stats/user-stats.component';
 // import { CustomerListComponent } from './customer-list/customer-list.component';
@@ -43,7 +43,7 @@
 //   standalone: true,
 //   imports: [
 //     CommonModule,
-//     DragAndDropModule,
+//     DndModule,
 //     UserStatsComponent,
 //     CustomerListComponent,
 //     ProductOverviewComponent,
@@ -56,7 +56,7 @@
 //     NotificationsComponent,
 //   ],
 //   templateUrl: './admin-dashboard.component.html',
-//   styleUrls: ['./admin-dashboard.component.css'],
+//   styleUrls: ['./admin-dashboard.component.scss'],
 //   animations: [
 //     trigger('fadeIn', [
 //       transition(':enter', [
@@ -74,17 +74,35 @@
 // })
 // export class AdminDashboardComponent {
 //   components = [
-//     { id: 'user-stats', data: dummyData.users },
-//     { id: 'customer-list', data: dummyData.customers },
-//     { id: 'product-overview', data: dummyData.products },
-//     { id: 'sales-chart', data: dummyData.sales },
-//     { id: 'order-stats', data: [] },
-//     { id: 'inventory', data: [] },
-//     { id: 'revenue', data: [] },
-//     { id: 'tasks', data: [] },
-//     { id: 'analytics', data: [] },
-//     { id: 'notifications', data: [] },
+//     { id: 'user-stats', data: dummyData.users, effectAllowed: 'move' as const },
+//     { id: 'customer-list', data: dummyData.customers, effectAllowed: 'move' as const },
+//     { id: 'product-overview', data: dummyData.products, effectAllowed: 'move' as const },
+//     { id: 'sales-chart', data: dummyData.sales, effectAllowed: 'move' as const },
+//     { id: 'order-stats', data: [], effectAllowed: 'move' as const },
+//     { id: 'inventory', data: [], effectAllowed: 'move' as const },
+//     { id: 'revenue', data: [], effectAllowed: 'move' as const },
+//     { id: 'tasks', data: [], effectAllowed: 'move' as const },
+//     { id: 'analytics', data: [], effectAllowed: 'move' as const },
+//     { id: 'notifications', data: [], effectAllowed: 'move' as const },
 //   ];
+
+//   onDrop(event: DndDropEvent, targetId: string) {
+//     console.log(`Dropped ${event.data.id} onto ${targetId}`);
+//     const draggedIndex = this.components.findIndex(c => c.id === event.data.id);
+//     const targetIndex = this.components.findIndex(c => c.id === targetId);
+//     if (draggedIndex !== -1 && targetIndex !== -1) {
+//       const [draggedItem] = this.components.splice(draggedIndex, 1);
+//       this.components.splice(targetIndex, 0, draggedItem);
+//     }
+//   }
+
+//   onDragStart(event: DragEvent, id: string) {
+//     console.log(`Drag started for ${id}`, event);
+//   }
+
+//   onDragEnd(event: DragEvent, id: string) {
+//     console.log(`Drag ended for ${id}`, event);
+//   }
 // }
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -126,6 +144,13 @@ const dummyData = {
   ],
 };
 
+interface DashboardComponent {
+  id: string;
+  type: string; // Add type property
+  data: any;
+  effectAllowed: 'move';
+}
+
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -161,18 +186,20 @@ const dummyData = {
   ],
 })
 export class AdminDashboardComponent {
-  components = [
-    { id: 'user-stats', data: dummyData.users, effectAllowed: 'move' as const },
-    { id: 'customer-list', data: dummyData.customers, effectAllowed: 'move' as const },
-    { id: 'product-overview', data: dummyData.products, effectAllowed: 'move' as const },
-    { id: 'sales-chart', data: dummyData.sales, effectAllowed: 'move' as const },
-    { id: 'order-stats', data: [], effectAllowed: 'move' as const },
-    { id: 'inventory', data: [], effectAllowed: 'move' as const },
-    { id: 'revenue', data: [], effectAllowed: 'move' as const },
-    { id: 'tasks', data: [], effectAllowed: 'move' as const },
-    { id: 'analytics', data: [], effectAllowed: 'move' as const },
-    { id: 'notifications', data: [], effectAllowed: 'move' as const },
+  components: DashboardComponent[] = [
+    { id: 'user-stats-1', type: 'user-stats', data: dummyData.users, effectAllowed: 'move' as const }, // Added type
+    { id: 'customer-list-1', type: 'customer-list', data: dummyData.customers, effectAllowed: 'move' as const }, // Added type
+    { id: 'product-overview-1', type: 'product-overview', data: dummyData.products, effectAllowed: 'move' as const }, // Added type
+    { id: 'sales-chart-1', type: 'sales-chart', data: dummyData.sales, effectAllowed: 'move' as const }, // Added type
+    { id: 'order-stats-1', type: 'order-stats', data: [], effectAllowed: 'move' as const }, // Added type
+    { id: 'inventory-1', type: 'inventory', data: [], effectAllowed: 'move' as const }, // Added type
+    { id: 'revenue-1', type: 'revenue', data: [], effectAllowed: 'move' as const }, // Added type
+    { id: 'tasks-1', type: 'tasks', data: [], effectAllowed: 'move' as const }, // Added type
+    { id: 'analytics-1', type: 'analytics', data: [], effectAllowed: 'move' as const }, // Added type
+    { id: 'notifications-1', type: 'notifications', data: [], effectAllowed: 'move' as const }, // Added type
   ];
+
+  componentCounter = this.components.length + 1;
 
   onDrop(event: DndDropEvent, targetId: string) {
     console.log(`Dropped ${event.data.id} onto ${targetId}`);
@@ -190,5 +217,35 @@ export class AdminDashboardComponent {
 
   onDragEnd(event: DragEvent, id: string) {
     console.log(`Drag ended for ${id}`, event);
+  }
+
+  addComponent(componentType: string) { // Accept componentType argument
+    const newComponentId = `${componentType}-${this.componentCounter++}`;
+    let newData;
+
+    switch (componentType) {
+      case 'user-stats':
+        newData = dummyData.users;
+        break;
+      case 'customer-list':
+        newData = dummyData.customers;
+        break;
+      case 'product-overview':
+        newData = dummyData.products;
+        break;
+      case 'sales-chart':
+        newData = dummyData.sales;
+        break;
+      default:
+        newData = []; // Default data if needed
+        break;
+    }
+
+    this.components.push({
+      id: newComponentId,
+      type: componentType, // Set the type
+      data: Date.now(),
+      effectAllowed: 'move' as const
+    });
   }
 }

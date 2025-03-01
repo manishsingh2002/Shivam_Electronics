@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 @Component({
     selector: 'app-home-page1',
-    imports: [AnimateOnScrollModule,],
+    imports: [AnimateOnScrollModule, AvatarModule, AvatarGroupModule],
     templateUrl: './home-page1.component.html',
     styleUrl: './home-page1.component.scss'
 })
