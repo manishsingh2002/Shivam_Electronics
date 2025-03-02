@@ -29,7 +29,6 @@ import { UpdatePasswordComponent } from '../features/auth/components/update-pass
 export const authRoutes: Routes = [
   {
     path: 'auth',
-    component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },

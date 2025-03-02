@@ -10,7 +10,7 @@ import { SelectModule } from 'primeng/select';
 import { TabViewModule } from 'primeng/tabview';
 import { PrimeIcons } from 'primeng/api';
 import * as lodash from 'lodash';
-
+import { AppMessageService } from '../../../core/services/message.service';
 @Component({
   selector: 'app-customerdetails',
   standalone: true,
@@ -19,6 +19,7 @@ import * as lodash from 'lodash';
   styleUrl: './customerdetails.component.scss',
   providers: [PrimeIcons],
 })
+
 export class CustomerdetailsComponent {
   @HostBinding('class.dark') darkMode = false;
 
@@ -30,6 +31,7 @@ export class CustomerdetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private messageService: AppMessageService, // Inject AppMessageService
     private apiService: ApiService, // Injected class
     private http: HttpClient
   ) { }
@@ -44,7 +46,7 @@ export class CustomerdetailsComponent {
       this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop);
     } else {
       this.customerIDDropdown = [];
-      console.warn('No valid customer dropdown data found');
+      this.messageService.showWarn('Warning', 'No valid customer dropdown data found'); // Use AppMessageService
     }
   }
 
@@ -57,16 +59,25 @@ export class CustomerdetailsComponent {
   }
 
   fetchCustomerData() {
-    this.apiService.getCustomerDataWithId(this.customerId).subscribe(
-      (response: any) => {
-        this.customer = response.data;
-        console.log('Customer Data:', this.customer);
-        this.fetchProductDetails();
+    this.apiService.getCustomerDataWithId(this.customerId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response.status === 'success') {
+          this.customer = response.data;
+          console.log('Customer Data:', this.customer);
+          this.fetchProductDetails();
+        } else if (response.status === 'fail') {
+          this.messageService.showError('Error', response.message || 'Failed to load customer data.'); // Display error message from response, or generic message
+        } else {
+          this.messageService.showError('Error', 'Unexpected response status from server.'); // Handle unexpected status
+          console.error('Unexpected response status:', response); // Log unexpected response for debugging
+        }
       },
-      (error: any) => {
-        console.error('Error fetching customer data:', error);
+      error: (error: any) => {
+        console.error('HTTP Error fetching customer data:', error);
+        this.messageService.showError('Error', 'Failed to load customer data due to a network error.'); // Generic network error message
       }
-    );
+    });
   }
 
   fetchProductDetails() {
@@ -79,6 +90,7 @@ export class CustomerdetailsComponent {
         },
         (error: any) => {
           console.error('Error fetching product details:', error);
+          this.messageService.showError('Error', 'Failed to load product details.'); // Use AppMessageService
         }
       );
     }

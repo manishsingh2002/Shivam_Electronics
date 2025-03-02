@@ -4,7 +4,6 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { Dialog } from 'primeng/dialog';
-import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -15,15 +14,12 @@ import { CommonModule } from '@angular/common';
 import { FileUpload } from 'primeng/fileupload';
 import { SelectModule } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { RadioButton } from 'primeng/radiobutton';
-import { Rating } from 'primeng/rating';
-import { InputNumber } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
-import { SharedGridComponent } from '../../../shared/components/shared-grid/shared-grid.component';
 import { Router } from '@angular/router';
+import { AppMessageService } from '../../../core/services/message.service';
 export interface CartItem {
     customerId: string;
     invoiceIds: string[];
@@ -118,7 +114,7 @@ export class CustomerListComponent {
     constructor(
         private router: Router,
         private apiService: ApiService,
-        private messageService: MessageService,
+        private messageService: AppMessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
     ) { }
@@ -210,7 +206,6 @@ export class CustomerListComponent {
                 return 'success';
         }
     }
-
     deleteSelectedcustomers() {
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete the selectedcustomers?',
@@ -218,19 +213,18 @@ export class CustomerListComponent {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
-                this.apiService.deleteCustomers(ids).subscribe((res: any) => {
-                    this.customers = this.customers.filter(customer => !ids.includes(customer.id))
-                    this.loadDemoData()
-                },
-                    err => console.error('Deletion Error:', err)
-                );
-                this.selectedcustomers = [];
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'customers Deleted',
-                    life: 3000
+                this.apiService.deleteCustomers(ids).subscribe({
+                    next: (res: any) => {
+                        this.customers = this.customers.filter(customer => !ids.includes(customer.id));
+                        this.loadDemoData();
+                        this.messageService.handleResponse(res, 'Customers Deleted', 'Selected customers were successfully deleted.'); // Use handleResponse
+                    },
+                    error: (err) => {
+                        console.error('Deletion Error:', err);
+                        this.messageService.handleError(err, 'Deletion Failed'); // Use handleError for errors
+                    }
                 });
+                this.selectedcustomers = [];
             }
         });
     }
@@ -240,16 +234,16 @@ export class CustomerListComponent {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.apiService.deleteCustomerID(customer._id).subscribe((res: any) => {
-                    this.loadDemoData()
-                    this.messageService.add({
-                        severity: res.status,
-                        summary: res.messages,
-                        detail: 'customer Deleted',
-                        life: 3000
-                    });
-                })
-
+                this.apiService.deleteCustomerID(customer._id).subscribe({
+                    next: (res: any) => {
+                        this.loadDemoData();
+                        this.messageService.handleResponse(res, 'Customer Deleted', `${customer.fullname} successfully deleted.`); // Use handleResponse
+                    },
+                    error: (err) => {
+                        console.error('Deletion Error:', err);
+                        this.messageService.handleError(err, 'Deletion Failed'); // Use handleError for errors
+                    }
+                });
             }
         });
     }
@@ -259,22 +253,12 @@ export class CustomerListComponent {
         if (this.customer.fullname?.trim()) {
             if (this.customer.id) {
                 this.customers[this.findIndexById(this.customer.id)] = this.customer;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'customer Updated',
-                    life: 3000
-                });
+                this.messageService.handleResponse(null, 'Customer Updated', 'Customer details were successfully updated.'); // Use handleResponse for update
             } else {
                 this.customer.id = this.createId();
                 this.customer.email = 'customer-placeholder.svg';
                 this.customers.push(this.customer);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'customer Created',
-                    life: 3000
-                });
+                this.messageService.handleResponse(null, 'Customer Created', 'New customer successfully created.'); // Use handleResponse for create
             }
 
             this.customers = [...this.customers];
@@ -282,4 +266,76 @@ export class CustomerListComponent {
             this.customer = {};
         }
     }
+
+    // deleteSelectedcustomers() {
+    //     this.confirmationService.confirm({
+    //         message: 'Are you sure you want to delete the selectedcustomers?',
+    //         header: 'Confirm',
+    //         icon: 'pi pi-exclamation-triangle',
+    //         accept: () => {
+    //             const ids = this.selectedcustomers ? this.selectedcustomers.map(customer => customer.id) : []; // Extract IDs
+    //             this.apiService.deleteCustomers(ids).subscribe((res: any) => {
+    //                 this.customers = this.customers.filter(customer => !ids.includes(customer.id))
+    //                 this.loadDemoData()
+    //             },
+    //                 err => console.error('Deletion Error:', err)
+    //             );
+    //             this.selectedcustomers = [];
+    //             this.messageService.add({
+    //                 severity: 'success',
+    //                 summary: 'Successful',
+    //                 detail: 'customers Deleted',
+    //                 life: 3000
+    //             });
+    //         }
+    //     });
+    // }
+    // deletecustomer(customer: any) {
+    //     this.confirmationService.confirm({
+    //         message: 'Are you sure you want to delete ' + customer.fullname + '?',
+    //         header: 'Confirm',
+    //         icon: 'pi pi-exclamation-triangle',
+    //         accept: () => {
+    //             this.apiService.deleteCustomerID(customer._id).subscribe((res: any) => {
+    //                 this.loadDemoData()
+    //                 this.messageService.add({
+    //                     severity: res.status,
+    //                     summary: res.messages,
+    //                     detail: 'customer Deleted',
+    //                     life: 3000
+    //                 });
+    //             })
+
+    //         }
+    //     });
+    // }
+
+    // savecustomer() {
+    //     this.submitted = true;
+    //     if (this.customer.fullname?.trim()) {
+    //         if (this.customer.id) {
+    //             this.customers[this.findIndexById(this.customer.id)] = this.customer;
+    //             this.messageService.add({
+    //                 severity: 'success',
+    //                 summary: 'Successful',
+    //                 detail: 'customer Updated',
+    //                 life: 3000
+    //             });
+    //         } else {
+    //             this.customer.id = this.createId();
+    //             this.customer.email = 'customer-placeholder.svg';
+    //             this.customers.push(this.customer);
+    //             this.messageService.add({
+    //                 severity: 'success',
+    //                 summary: 'Successful',
+    //                 detail: 'customer Created',
+    //                 life: 3000
+    //             });
+    //         }
+
+    //         this.customers = [...this.customers];
+    //         this.customerDialog = false;
+    //         this.customer = {};
+    //     }
+    // }
 }

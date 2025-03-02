@@ -31,26 +31,22 @@ export class SignupComponent {
 
   public errorMessage: string | null = null; // To display error messages
 
+
   signUp() {
     if (this.signupForm.valid) {
       this.errorMessage = null;
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (response: any) => {
           if (response && response.token) {
-            this.messageService.showSuccessMessage('success', response.status)
+            this.messageService.handleResponse(response, 'Signup Successful', 'You are now registered.'); // Using handleResponse for success
             this.router.navigate(['/dashboard']);
           } else {
-            this.errorMessage = 'Invalid credentials. Please try again.';
-            this.messageService.handleError(response.status, this.errorMessage)
+            this.messageService.handleError(response.status, 'Signup Failed'); // Using handleError for specific error case
           }
         },
         error: (error) => {
           console.error('Signup Error:', error);
-          this.messageService.handleError(error, "check the credencials")
-          this.errorMessage = 'An error occurred during signup.'; // Display a generic error message
-          if (error?.error?.message) {
-            this.errorMessage = error.error.message;
-          }
+          this.messageService.handleError(error, "Signup Failed"); // Using handleError for general error
         },
       });
     } else {
@@ -63,6 +59,38 @@ export class SignupComponent {
       });
     }
   }
+  // signUp() {
+  //   if (this.signupForm.valid) {
+  //     this.errorMessage = null;
+  //     this.auth.signUp(this.signupForm.value).subscribe({
+  //       next: (response: any) => {
+  //         if (response && response.token) {
+  //           this.messageService.showSuccessMessage('success', response.status)
+  //           this.router.navigate(['/dashboard']);
+  //         } else {
+  //           this.errorMessage = 'Invalid credentials. Please try again.';
+  //           this.messageService.handleError(response.status, this.errorMessage)
+  //         }
+  //       },
+  //       error: (error) => {
+  //         console.error('Signup Error:', error);
+  //         this.messageService.handleError(error, "check the credencials")
+  //         this.errorMessage = 'An error occurred during signup.'; // Display a generic error message
+  //         if (error?.error?.message) {
+  //           this.errorMessage = error.error.message;
+  //         }
+  //       },
+  //     });
+  //   } else {
+  //     // You can optionally mark controls as touched to show validation errors immediately
+  //     Object.values(this.signupForm.controls).forEach(control => {
+  //       if (control.invalid) {
+  //         control.markAsTouched();
+  //         control.updateValueAndValidity({ onlySelf: true });
+  //       }
+  //     });
+  //   }
+  // }
 }
 
 // import { Component } from '@angular/core';
