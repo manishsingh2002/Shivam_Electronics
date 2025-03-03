@@ -31,7 +31,6 @@ export const appRoutes: Routes = [
   // Authentication routes remain separate
   {
     path: 'auth',
-    component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },

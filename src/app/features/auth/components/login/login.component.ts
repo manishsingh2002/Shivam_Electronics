@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit { // Implement OnInit
             this.auth.login(loginDetails).subscribe({
                 next: (response: any) => {
                     if (response && response.data && response.token) {
-                        this.messageService.handleResponse(response.status, 'Request Successful', 'maish');
+                        this.messageService.handleResponse(response.status, 'Login Successful', 'Welcome to Dashboard');
                         this.router.navigate(['/dashboard']);
                     } else {
                         this.errorMessage = 'Invalid credentials. Please try again.';
@@ -49,10 +49,7 @@ export class LoginComponent implements OnInit { // Implement OnInit
                 },
                 error: (error) => {
                     console.error('Login Error:', error);
-                    this.errorMessage = 'An error occurred during login.';
-                    if (error?.error?.message) {
-                        this.errorMessage = error.error.message;
-                    }
+                    this.messageService.handleError(error, 'Login Failed');
                 },
             });
         } else {

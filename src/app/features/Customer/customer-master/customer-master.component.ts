@@ -1,304 +1,336 @@
+import { IftaLabelModule } from 'primeng/iftalabel';
+import { ButtonModule } from 'primeng/button';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ApiService } from '../../../core/services/api.service';
+import { Component, Inject, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { FileUpload } from 'primeng/fileupload';
+import { FocusTrapModule } from 'primeng/focustrap';// import { SupabaseService } from '../../../core/services/supabase.service';
+import lodash from 'lodash'
+
+interface Customer {
+  fullname: string;
+  profileImg: string;
+  email: string;
+  status: string;
+  phoneNumbers: Phone[];
+  addresses: Address[];
+  cart: { items: any[] };
+  guaranteerId: string;
+  totalPurchasedAmount: number;
+  remainingAmount: number;
+  paymentHistory: any[];
+  metadata: any;
+}
+
+interface Phone {
+  number: string;
+  type: string;
+  primary: boolean;
+}
+
+interface Address {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  type: string;
+  isDefault: boolean;
+}
+
+interface DropdownOption {
+  label: string;
+  value: any;
+}
+interface CustomerDropdownOption {
+  fullname: string;
+  _id: any;
+  phoneNumbers: Phone[];
+}
+
+@Component({
+  selector: 'app-customer-master',
+  templateUrl: './customer-master.component.html',
+  styleUrls: ['./customer-master.component.scss'],
+  imports: [CardModule, RouterModule, FocusTrapModule, FormsModule, CommonModule, TagModule, DialogModule, KeyFilterModule, TableModule, RadioButtonModule, InputTextModule, ButtonModule, SelectModule, FileUploadModule, ImageModule,],
+  providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
+})
+
+export class CustomerMasterComponent implements OnInit {
+  selectedFile: File | null = null;
+  imageUrl: string | null = null;
+  bucketName = 'manish';
+  phoneDialogVisible = false;
+  addressDialogVisible = false;
+  newPhoneNumber: Phone = { number: '', type: 'mobile', primary: false };
+  newAddress: Address = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };
+  customerId: string = '12345'; // You should dynamically get this from your application (e.g., logged-in user's customer ID)
+  uploadStatus: string = ''; // For showing the status of the upload
+  customerIDDropdown: CustomerDropdownOption[] = [];
+  selectedGuaranter: CustomerDropdownOption | any = {};
+  isDarkMode: boolean = false;
+  editingPhoneIndex: number = -1; // Track index of phone number being edited
+  editingAddressIndex: number = -1; // Track index of address being edited
+
+  statuses: DropdownOption[] = [
+    { label: 'Active', value: 'active' },
+    { label: 'Inactive', value: 'inactive' },
+    { label: 'Pending', value: 'pending' },
+    { label: 'Suspended', value: 'suspended' },
+    { label: 'Blocked', value: 'blocked' },
+  ];
+
+  phoneTypes: DropdownOption[] = [
+    { label: 'Home', value: 'home' },
+    { label: 'Mobile', value: 'mobile' },
+    { label: 'Work', value: 'work' },
+  ];
+
+  addressTypes: DropdownOption[] = [
+    { label: 'Billing', value: 'billing' },
+    { label: 'Shipping', value: 'shipping' },
+    { label: 'Home', value: 'home' },
+    { label: 'Work', value: 'work' }
+  ];
 
 
-// import { IftaLabelModule } from 'primeng/iftalabel';
-// import { ButtonModule } from 'primeng/button';
-// import { RouterModule } from '@angular/router';
-// import { FormsModule } from '@angular/forms';
-// import { CommonModule, isPlatformBrowser } from '@angular/common';
-// import { ApiService } from '../../../core/services/api.service';
-// import { Component, Inject, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
-// import { CardModule } from 'primeng/card';
-// import { SelectModule } from 'primeng/select';
-// import { FileUploadModule } from 'primeng/fileupload';
-// import { ImageModule } from 'primeng/image';
-// import { InputTextModule } from 'primeng/inputtext';
-// import { TableModule } from 'primeng/table';
-// import { RadioButtonModule } from 'primeng/radiobutton';
-// import { KeyFilterModule } from 'primeng/keyfilter';
-// import { DialogModule } from 'primeng/dialog';
-// import { TagModule } from 'primeng/tag';
-// import { ConfirmationService, MessageService } from 'primeng/api';
-// import { HttpClient } from '@angular/common/http';
-// import { FileUpload } from 'primeng/fileupload';
-// import { FocusTrapModule } from 'primeng/focustrap';// import { SupabaseService } from '../../../core/services/supabase.service';
-// import lodash from 'lodash'
+  customer: Customer = {
+    fullname: '',
+    profileImg: '',
+    email: '',
+    status: '',
+    phoneNumbers: [],
+    addresses: [],
+    cart: { items: [] },
+    guaranteerId: this.selectedGuaranter._id,
+    totalPurchasedAmount: 0,
+    remainingAmount: 0,
+    paymentHistory: [],
+    metadata: {},
+  };
 
-// interface Customer {
-//   fullname: string;
-//   profileImg: string;
-//   email: string;
-//   status: string;
-//   phoneNumbers: Phone[];
-//   addresses: Address[];
-//   cart: { items: any[] };
-//   guaranteerId: string;
-//   totalPurchasedAmount: number;
-//   remainingAmount: number;
-//   paymentHistory: any[];
-//   metadata: any;
-// }
-
-// interface Phone {
-//   number: string;
-//   type: string;
-//   primary: boolean;
-// }
-
-// interface Address {
-//   street: string;
-//   city: string;
-//   state: string;
-//   zipCode: string;
-//   country: string;
-//   type: string;
-//   isDefault: boolean;
-// }
-
-// interface DropdownOption {
-//   label: string;
-//   value: any;
-// }
-// interface CustomerDropdownOption {
-//   fullname: string;
-//   _id: any;
-//   phoneNumbers: Phone[];
-// }
-
-// @Component({
-//   selector: 'app-customer-master',
-//   templateUrl: './customer-master.component.html',
-//   styleUrls: ['./customer-master.component.scss'],
-//   imports: [CardModule, RouterModule, FocusTrapModule, FormsModule, CommonModule, TagModule, DialogModule, KeyFilterModule, TableModule, RadioButtonModule, InputTextModule, ButtonModule, SelectModule, FileUploadModule, ImageModule,],
-//   providers: [ApiService, IftaLabelModule, ConfirmationService, MessageService],
-// })
-
-// export class CustomerMasterComponent implements OnInit {
-//   selectedFile: File | null = null;
-//   imageUrl: string | null = null;
-//   bucketName = 'manish';
-//   phoneDialogVisible = false;
-//   addressDialogVisible = false;
-//   newPhoneNumber: Phone = { number: '', type: 'mobile', primary: false };
-//   newAddress: Address = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };
-//   customerId: string = '12345'; // You should dynamically get this from your application (e.g., logged-in user's customer ID)
-//   uploadStatus: string = ''; // For showing the status of the upload
-//   customerIDDropdown: CustomerDropdownOption[] = [];
-//   selectedGuaranter: CustomerDropdownOption | any = {};
-//   isDarkMode: boolean = false;
-
-//   statuses: DropdownOption[] = [
-//     { label: 'Active', value: 'active' },
-//     { label: 'Inactive', value: 'inactive' },
-//     { label: 'Pending', value: 'pending' },
-//     { label: 'Suspended', value: 'suspended' },
-//     { label: 'Blocked', value: 'blocked' },
-//   ];
-
-//   phoneTypes: DropdownOption[] = [
-//     { label: 'Home', value: 'home' },
-//     { label: 'Mobile', value: 'mobile' },
-//     { label: 'Work', value: 'work' },
-//   ];
-
-//   addressTypes: DropdownOption[] = [
-//     { label: 'Billing', value: 'billing' },
-//     { label: 'Shipping', value: 'shipping' },
-//     { label: 'Home', value: 'home' },
-//     { label: 'Work', value: 'work' }
-//   ];
+  @ViewChild('fileUploader') fileUploader!: FileUpload;
 
 
-//   customer: Customer = {
-//     fullname: '',
-//     profileImg: '',
-//     email: '',
-//     status: '',
-//     phoneNumbers: [],
-//     addresses: [],
-//     cart: { items: [] },
-//     guaranteerId: this.selectedGuaranter._id,
-//     totalPurchasedAmount: 0,
-//     remainingAmount: 0,
-//     paymentHistory: [],
-//     metadata: {},
-//   };
+  constructor(
+    // private supabase: SupabaseService,
+    private ApiService: ApiService,
+    private http: HttpClient,
+    private messageService: MessageService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isDarkMode = (isPlatformBrowser(this.platformId)) && localStorage.getItem('darkMode') === 'true';
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+  }
 
-//   @ViewChild('fileUploader') fileUploader!: FileUpload;
+  ngOnInit() {
+    this.autopopulatedata()
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.autopopulatedata();
+  }
 
-//   constructor(
-//     // private supabase: SupabaseService,
-//     private ApiService: ApiService,
-//     private http: HttpClient,
-//     private messageService: MessageService,
-//     @Inject(PLATFORM_ID) private platformId: Object
-//   ) {
-//     this.isDarkMode = (isPlatformBrowser(this.platformId)) && localStorage.getItem('darkMode') === 'true';
-//     if (this.isDarkMode) {
-//       document.body.classList.add('dark-mode');
-//     }
-//   }
+  autopopulatedata() {
+    const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
 
-//   ngOnInit() {
-//     this.autopopulatedata()
-//   }
+    if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
+      this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
+    } else {
+      this.customerIDDropdown = [];
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'No valid customer data found',
+        life: 3000
+      });
+    }
 
-//   ngOnChanges(changes: SimpleChanges): void {
-//     this.autopopulatedata();
-//   }
+    // Ensure future updates also enforce an array
+    setTimeout(() => {
+      if (!Array.isArray(this.customerIDDropdown)) {
+        console.error('Corrupted Dropdown Data. Resetting...');
+        this.customerIDDropdown = [];
+      }
+    }, 500);
 
-//   autopopulatedata() {
-//     const autopopulate: any = JSON.parse(sessionStorage.getItem('autopopulate') || '{}');
+  }
 
-//     if (autopopulate && Array.isArray(autopopulate.customersdrop)) {
-//       this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
-//     } else {
-//       this.customerIDDropdown = [];
-//       this.messageService.add({
-//         severity: 'info',
-//         summary: 'Info',
-//         detail: 'No valid customer data found',
-//         life: 3000
-//       });
-//     }
+  selectedGuaranterevent(event: any) {
+    this.selectedGuaranter = event.value;
+  }
 
-//     // Ensure future updates also enforce an array
-//     setTimeout(() => {
-//       if (!Array.isArray(this.customerIDDropdown)) {
-//         console.error('Corrupted Dropdown Data. Resetting...');
-//         this.customerIDDropdown = [];
-//       }
-//     }, 500);
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('darkMode', String(this.isDarkMode));
+    }
+  }
 
-//   }
+  // onFileSelected(event: any) {
+  //   this.selectedFile = event.target.files[0] as File;
+  // }
 
-//   selectedGuaranterevent(event: any) {
-//     this.selectedGuaranter = event.value;
-//   }
-
-//   toggleDarkMode() {
-//     this.isDarkMode = !this.isDarkMode;
-//     document.body.classList.toggle('dark-mode', this.isDarkMode);
-//     if (isPlatformBrowser(this.platformId)) {
-//       localStorage.setItem('darkMode', String(this.isDarkMode));
-//     }
-//   }
-
-//   // onFileSelected(event: any) {
-//   //   this.selectedFile = event.target.files[0] as File;
-//   // }
-
-//   getCustomerID() {
-//     const customerId = 'your-customer-id';
-//     this.ApiService.getCustomerDataWithId(customerId)
-//       .subscribe({
-//         next: (customer) => {
-//           this.customer = customer;
-//         },
-//         error: (err) => {
-//           console.error('Error fetching customer:', err);
-//           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load customer data.' });
-//         }
-//       });
-//   }
+  getCustomerID() {
+    const customerId = 'your-customer-id';
+    this.ApiService.getCustomerDataWithId(customerId)
+      .subscribe({
+        next: (customer) => {
+          this.customer = customer;
+        },
+        error: (err) => {
+          console.error('Error fetching customer:', err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load customer data.' });
+        }
+      });
+  }
 
 
-//   handleFileSelect(event?: any) {
-//     const file = event.files[0];
-//     if (file) {
-//       this.uploadStatus = 'Preparing to upload...';
-//       const formData = new FormData();
-//       formData.append('image', file); // Append the selected file to FormData
-//       // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-//       //   (response: any) => {
-//       //     this.uploadStatus = 'Image uploaded successfully!';
-//       //   },
-//       //   (error: any) => {
-//       //     this.uploadStatus = 'Error uploading image.';
-//       //     console.error('Upload Error:', error);
-//       //   }
-//       // );
-//     } else {
-//     }
-//   }
+  handleFileSelect(event?: any) {
+    const file = event.files[0];
+    if (file) {
+      this.uploadStatus = 'Preparing to upload...';
+      const formData = new FormData();
+      formData.append('image', file); // Append the selected file to FormData
+      // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
+      //   (response: any) => {
+      //     this.uploadStatus = 'Image uploaded successfully!';
+      //   },
+      //   (error: any) => {
+      //     this.uploadStatus = 'Error uploading image.';
+      //     console.error('Upload Error:', error);
+      //   }
+      // );
+    } else {
+    }
+  }
 
-//   handleFileUpload(event: any) {
-//   }
+  handleFileUpload(event: any) {
+  }
 
 
 
-//   saveCustomer() {
-//     if (this.validateCustomer()) {
-//       this.customer.guaranteerId = this.selectedGuaranter._id
-//       this.ApiService.createNewCustomer(this.customer).subscribe(
-//         (response: any) => {
-//           const customerId = response.data._id;
-//           this.customerId = customerId;
-//           // this.handleFileSelect();
-//         },
-//         (error) => {
-//           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create customer.' });
-//         }
-//       );
-//     } else {
-//       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please correct the errors in the form.' });
-//     }
-//   }
+  saveCustomer() {
+    if (this.validateCustomer()) {
+      this.customer.guaranteerId = this.selectedGuaranter._id
+      this.ApiService.createNewCustomer(this.customer).subscribe(
+        (response: any) => {
+          const customerId = response.data._id;
+          this.customerId = customerId;
+          // this.handleFileSelect();
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create customer.' });
+        }
+      );
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please correct the errors in the form.' });
+    }
+  }
 
 
-//   validateCustomer(): boolean {
-//     // Basic validation checks
-//     if (!this.customer.fullname) {
-//       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Fullname is required.' });
-//       return false;
-//     }
+  validateCustomer(): boolean {
+    // Basic validation checks
+    if (!this.customer.fullname) {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Fullname is required.' });
+      return false;
+    }
 
-//     if (!this.customer.email || !this.customer.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-//       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter a valid email address.' });
-//       return false;
-//     }
+    if (!this.customer.email || !this.customer.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter a valid email address.' });
+      return false;
+    }
 
-//     return true;
-//   }
+    return true;
+  }
 
-//   showPhoneDialog() {
-//     this.phoneDialogVisible = true;
-//   }
-//   showAddressDialog() {
-//     this.addressDialogVisible = true
-//   }
+  showPhoneDialog() {
+    this.editingPhoneIndex = -1; // Reset to add new phone number
+    this.newPhoneNumber = { number: '', type: 'mobile', primary: false }; // Reset newPhoneNumber
+    this.phoneDialogVisible = true;
+  }
+  showAddressDialog() {
+    this.editingAddressIndex = -1; // Reset to add new address
+    this.newAddress = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false }; // Reset newAddress
+    this.addressDialogVisible = true
+  }
 
-//   addPhoneNumber() {
-//     if (this.newPhoneNumber.number && this.newPhoneNumber.type) {
-//       this.customer.phoneNumbers.push(this.newPhoneNumber);
-//       this.phoneDialogVisible = false;
-//       this.newPhoneNumber = { number: '', type: 'mobile', primary: false };
-//     } else {
-//       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter phone number and type.' });
-//     }
-//   }
+  addPhoneNumber() {
+    if (this.newPhoneNumber.number && this.newPhoneNumber.type) {
+      if (this.editingPhoneIndex > -1) {
+        // Edit existing phone number
+        this.customer.phoneNumbers[this.editingPhoneIndex] = { ...this.newPhoneNumber };
+      } else {
+        // Add new phone number
+        this.customer.phoneNumbers.push({ ...this.newPhoneNumber });
+      }
+      this.phoneDialogVisible = false;
+      this.newPhoneNumber = { number: '', type: 'mobile', primary: false }; // Reset for next entry
+      this.editingPhoneIndex = -1; // Reset editing index
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter phone number and type.' });
+    }
+  }
 
-//   deletePhone(index: number) {
-//     this.customer.phoneNumbers.splice(index, 1);
-//   }
+  deletePhone(index: number) {
+    this.customer.phoneNumbers.splice(index, 1);
+  }
 
-//   addAddress() {
-//     this.addressDialogVisible = true
-//     if (this.newAddress.street && this.newAddress.city) {
-//       this.customer.addresses.push({ ...this.newAddress });
-//       this.addressDialogVisible = false;
-//       this.newAddress = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false };
-//     }
-//   }
+  addAddress() {
+    if (this.newAddress.street && this.newAddress.city) {
+      if (this.editingAddressIndex > -1) {
+        // Edit existing address
+        this.customer.addresses[this.editingAddressIndex] = { ...this.newAddress };
+      } else {
+        // Add new address
+        this.customer.addresses.push({ ...this.newAddress });
+      }
+      this.addressDialogVisible = false;
+      this.newAddress = { street: '', city: '', state: '', zipCode: '', country: '', type: 'home', isDefault: false }; // Reset for next entry
+      this.editingAddressIndex = -1; // Reset editing index
+    }
+  }
 
-//   setDefaultAddress(index: number) {
-//     this.customer.addresses.forEach((address: { isDefault: boolean; }, i: any) => address.isDefault = i === index);
-//   }
 
-//   removeAddress(index: number) {
-//     this.customer.addresses.splice(index, 1);
-//   }
-// }
+  setDefaultAddress(index: number) {
+    this.customer.addresses.forEach((address: { isDefault: boolean; }, i: any) => address.isDefault = i === index);
+  }
+
+  editAddress(index: number) {
+    this.editingAddressIndex = index;
+    this.newAddress = { ...this.customer.addresses[index] };
+    this.addressDialogVisible = true;
+  }
+
+  editPhone(index: number) {
+    this.editingPhoneIndex = index;
+    this.newPhoneNumber = { ...this.customer.phoneNumbers[index] };
+    this.phoneDialogVisible = true;
+  }
+
+
+  removeAddress(index: number) {
+    this.customer.addresses.splice(index, 1);
+  }
+}
+/*
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
@@ -321,6 +353,7 @@ import { HttpClient } from '@angular/common/http';
 import { FileUpload } from 'primeng/fileupload';
 import { FocusTrapModule } from 'primeng/focustrap';// import { SupabaseService } from '../../../core/services/supabase.service';
 import lodash from 'lodash'
+import { AppMessageService } from '../../../core/services/message.service';
 
 interface Customer {
   fullname: string;
@@ -386,6 +419,8 @@ export class CustomerMasterComponent implements OnInit {
   selectedGuaranter: CustomerDropdownOption | any = {};
   isDarkMode: boolean = false;
   customerForm: FormGroup;
+  editingPhoneIndex: number | null = null; // Track index of phone number being edited
+  editingAddressIndex: number | null = null; // Track index of address being edited
 
   statuses: DropdownOption[] = [
     { label: 'Active', value: 'active' },
@@ -431,7 +466,8 @@ export class CustomerMasterComponent implements OnInit {
     private http: HttpClient,
     private messageService: MessageService,
     private fb: FormBuilder, private cdRef: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private appMessageService: AppMessageService
   ) {
     this.isDarkMode = (isPlatformBrowser(this.platformId)) && localStorage.getItem('darkMode') === 'true';
     if (this.isDarkMode) {
@@ -444,7 +480,7 @@ export class CustomerMasterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       status: ['', Validators.required],
       phoneNumbers: this.fb.array([]), // Initialize as empty FormArray
-      addresses: this.fb.array([]),    // Initialize as empty FormArray
+      addresses: this.fb.array([]),     // Initialize as empty FormArray
       guaranteerId: [''],
       totalPurchasedAmount: [0],
       remainingAmount: [0],
@@ -481,7 +517,6 @@ export class CustomerMasterComponent implements OnInit {
   }
 
   populateFormWithCustomerData() {
-    // Patch value to form, including nested FormArrays
     this.customerForm.patchValue({
       fullname: this.customer.fullname,
       profileImg: this.customer.profileImg,
@@ -544,12 +579,7 @@ export class CustomerMasterComponent implements OnInit {
       this.customerIDDropdown = lodash.cloneDeep(autopopulate.customersdrop)
     } else {
       this.customerIDDropdown = [];
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Info',
-        detail: 'No valid customer data found',
-        life: 3000
-      });
+      this.appMessageService.showInfo('Info', 'No valid customer data found'); // Using AppMessageService
     }
 
     // Ensure future updates also enforce an array
@@ -586,7 +616,7 @@ export class CustomerMasterComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error fetching customer:', err);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load customer data.' });
+          this.appMessageService.showError('Error', 'Failed to load customer data.'); // Using AppMessageService
         }
       });
   }
@@ -599,13 +629,13 @@ export class CustomerMasterComponent implements OnInit {
       const formData = new FormData();
       formData.append('image', file); // Append the selected file to FormData
       // this.ApiService.uploadProfileImage(formData, this.customerId).subscribe(
-      //   (response: any) => {
-      //     this.uploadStatus = 'Image uploaded successfully!';
-      //   },
-      //   (error: any) => {
-      //     this.uploadStatus = 'Error uploading image.';
-      //     console.error('Upload Error:', error);
-      //   }
+      //  (response: any) => {
+      //    this.uploadStatus = 'Image uploaded successfully!';
+      //  },
+      //  (error: any) => {
+      //    this.uploadStatus = 'Error uploading image.';
+      //    console.error('Upload Error:', error);
+      //  }
       // );
     } else {
     }
@@ -619,19 +649,19 @@ export class CustomerMasterComponent implements OnInit {
       const formValue = this.customerForm.value;
       formValue.guaranteerId = this.selectedGuaranter._id; // Ensure guaranteerId is included
 
-      this.ApiService.createNewCustomer(formValue).subscribe(
-        (response: any) => {
+      this.ApiService.createNewCustomer(formValue).subscribe({
+        next: (response: any) => {
           const customerId = response.data._id;
           this.customerId = customerId;
           // this.handleFileSelect();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Customer saved successfully.' });
+          this.appMessageService.showSuccessMessage('Success', 'Customer saved successfully.'); // Using AppMessageService
         },
-        (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create customer.' });
+        error: (error) => {
+          this.appMessageService.showError('Error', 'Failed to create customer.'); // Using AppMessageService
         }
-      );
+      });
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please correct the errors in the form.' });
+      this.appMessageService.showWarn('Warning', 'Please correct the errors in the form.'); // Using AppMessageService
       // Optionally, trigger form validation to show errors
       Object.keys(this.customerForm.controls).forEach(field => {
         const control = this.customerForm.get(field);
@@ -644,39 +674,65 @@ export class CustomerMasterComponent implements OnInit {
   showPhoneDialog() {
     this.newPhoneNumberForm.reset(); // Reset form when dialog is opened
     this.phoneDialogVisible = true;
+    this.editingPhoneIndex = null; // Reset editing index
   }
   showAddressDialog() {
     this.newAddressForm.reset(); // Reset form when dialog is opened
-    this.addressDialogVisible = true
+    this.addressDialogVisible = true;
+    this.editingAddressIndex = null; // Reset editing index
   }
 
   addPhoneNumber() {
     if (this.newPhoneNumberForm.valid) {
       const phoneFormArray = this.customerForm.get('phoneNumbers') as FormArray;
-      phoneFormArray.push(this.fb.group(this.newPhoneNumberForm.value));
+      if (this.editingPhoneIndex !== null) {
+        // Editing existing phone number
+        phoneFormArray.at(this.editingPhoneIndex).patchValue(this.newPhoneNumberForm.value);
+        this.editingPhoneIndex = null; // Reset editing index
+        this.appMessageService.showSuccessMessage('Success', 'Phone number updated successfully.');
+      } else {
+        // Adding new phone number
+        phoneFormArray.push(this.fb.group(this.newPhoneNumberForm.value));
+        this.appMessageService.showSuccessMessage('Success', 'Phone number added successfully.');
+      }
+
       this.newPhoneNumberForm.reset({ type: 'mobile', primary: false }); // Reset with defaults
-      this.phoneDialogVisible = true;
+      this.phoneDialogVisible = false;
     } else {
       // Trigger validation to show errors in dialog
       Object.keys(this.newPhoneNumberForm.controls).forEach(field => {
         const control = this.newPhoneNumberForm.get(field);
         control?.markAsTouched({ onlySelf: true });
       });
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter valid phone details.' });
+      this.appMessageService.showWarn('Warning', 'Please enter valid phone details.'); // Using AppMessageService
     }
   }
-  editPhone(i: any) {
-
+  editPhone(index: number) {
+    this.editingPhoneIndex = index;
+    const phoneFormArray = this.customerForm.get('phoneNumbers') as FormArray;
+    this.newPhoneNumberForm.patchValue(phoneFormArray.at(index).value);
+    this.phoneDialogVisible = true;
   }
 
   deletePhone(index: number) {
     this.phoneNumbersFormArray.removeAt(index);
+    this.appMessageService.showSuccessMessage('Success', 'Phone number deleted.');
   }
 
   addAddress() {
     if (this.newAddressForm.valid) {
       const addressFormArray = this.customerForm.get('addresses') as FormArray;
-      addressFormArray.push(this.fb.group(this.newAddressForm.value));
+      if (this.editingAddressIndex !== null) {
+        // Editing existing address
+        addressFormArray.at(this.editingAddressIndex).patchValue(this.newAddressForm.value);
+        this.editingAddressIndex = null; // Reset editing index
+        this.appMessageService.showSuccessMessage('Success', 'Address updated successfully.');
+      } else {
+        // Adding new address
+        addressFormArray.push(this.fb.group(this.newAddressForm.value));
+        this.appMessageService.showSuccessMessage('Success', 'Address added successfully.');
+      }
+
       this.addressDialogVisible = false;
       this.newAddressForm.reset({ type: 'home', isDefault: false }); // Reset with defaults
     } else {
@@ -685,8 +741,15 @@ export class CustomerMasterComponent implements OnInit {
         const control = this.newAddressForm.get(field);
         control?.markAsTouched({ onlySelf: true });
       });
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please enter valid address details.' });
+      this.appMessageService.showWarn('Warning', 'Please enter valid address details.'); // Using AppMessageService
     }
+  }
+
+  editAddress(index: number) {
+    this.editingAddressIndex = index;
+    const addressFormArray = this.customerForm.get('addresses') as FormArray;
+    this.newAddressForm.patchValue(addressFormArray.at(index).value);
+    this.addressDialogVisible = true;
   }
 
 
@@ -696,5 +759,6 @@ export class CustomerMasterComponent implements OnInit {
 
   removeAddress(index: number) {
     this.addressesFormArray.removeAt(index);
+    this.appMessageService.showSuccessMessage('Success', 'Address deleted.');
   }
-}
+}*/
