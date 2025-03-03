@@ -150,19 +150,17 @@ export class ProductListComponent implements OnInit {
             // rate: { lt: '100' } // Filtering: Products with price less than 100 (using $lt operator on backend)
         };
 
-        this.apiService.getAllProductData(filterOptions).subscribe((res: any) => {
-            if (res && res.data) { // Check if res and res.data are defined
-                this.products = res.data;
-                this.cd.markForCheck();
-                console.log(res);
-            } else {
-                console.error('Error loading product data: Invalid response format', res);
-                // Handle error appropriately, maybe show a message to the user
+        this.apiService.getAllProductData(filterOptions).subscribe(
+            (res: any) => {
+                if (res && res.data) {
+                    this.products = res.data;
+                    this.cd.markForCheck();
+                }
+            },
+            (error) => {
+                console.error('API Error:', error);
             }
-        }, (error) => {
-            console.error('Error loading product data:', error);
-            // Handle error appropriately, maybe show a message to the user
-        });
+        );
     }
 
     loadAllData() {

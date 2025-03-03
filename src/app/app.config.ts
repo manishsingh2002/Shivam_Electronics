@@ -11,6 +11,7 @@ import Aura from "@primeng/themes/aura";
 import { definePreset } from "@primeng/themes";
 import { MessageService } from 'primeng/api';
 import { AuthInterceptor, loggingInterceptor } from './core/Interceptors/auth.interceptor';
+import { ErrorInterceptor } from './core/Interceptors/error.interceptor';
 // import { DndModule } from 'ngx-drag-drop';
 // import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import Nora from "@primeng/themes/nora";
@@ -5239,7 +5240,7 @@ const MyPreset = definePreset(Aura, {
 export const appConfig: ApplicationConfig = {
     providers: [
         provideHttpClient(
-            withInterceptors([AuthInterceptor, loggingInterceptor]), // Merged both HTTP configurations
+            withInterceptors([AuthInterceptor, loggingInterceptor, ErrorInterceptor]), // Merged both HTTP configurations
             withFetch()
         ),
         provideZoneChangeDetection({ eventCoalescing: true }),
