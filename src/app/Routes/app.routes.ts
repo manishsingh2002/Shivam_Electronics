@@ -54,6 +54,8 @@ export const appRoutes: Routes = [
           { path: 'adminUser', component: AdminUserComponent },
           { path: 'invoice', component: GstInvoiceComponent },
           { path: 'payment', component: PaymentComponent },
+          { path: '**', component: NotFoundComponent }
+
         ],
       },
 
@@ -91,7 +93,6 @@ export const appRoutes: Routes = [
   },
 
   // Fallback route for 404
-  { path: '**', component: NotFoundComponent }
 ];
 
 

@@ -82,12 +82,12 @@ preview
                     <p-inputicon styleClass="pi pi-search" />
                     <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target?.value, 'contains')"
                         placeholder="Search..." /> -->
-                        <input pInputText type="text" (input)="filterSearch($event)" placeholder="Search..." />
+                    <input pInputText type="text" (input)="filterSearch($event)" placeholder="Search..." />
                 </p-iconfield>
             </div>
         </ng-template>
         <ng-template #header>
-           <tr>
+            <tr>
                 <th style="width: 3rem">
                     <p-tableHeaderCheckbox />
                 </th>
@@ -117,7 +117,7 @@ preview
             </tr>
         </ng-template>
         <ng-template #body let-product>
-         <tr>
+            <tr>
                 <td style="width: 3rem">
                     <p-tableCheckbox [value]="product" />
                 </td>
@@ -151,7 +151,7 @@ preview
     <p-dialog [(visible)]="productDialog" [style]="{ width: 'auto' }" header="Product Details" [modal]="true">
         <ng-template #content>
             <app-product-master [redirectedData]="redirectedProduct"></app-product-master>
-             </ng-template>
+        </ng-template>
 
         <ng-template #footer>
             <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />

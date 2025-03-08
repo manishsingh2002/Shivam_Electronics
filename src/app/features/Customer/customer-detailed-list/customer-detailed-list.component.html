@@ -1,0 +1,256 @@
+<div class="flex flex-col flex-row justify-between items-center mb-4 ">
+  <p-select [(ngModel)]="customerId" [options]="customerIDDropdown" optionLabel="fullname" optionValue="_id"
+    placeholder="Select Customer" class="w-full md:w-64">
+  </p-select>
+  <button (click)="getCustomerDetail()" class="p-button p-button-primary px-4 py-2">Find</button>
+</div>
+
+<div class="card dark:bg-white dark:text-gray">
+  <p-card header="Customer Details" class="bg-gray-900 text-gray dark:bg-white dark:text-gray">
+    <div class="mx-auto max-w-full px-8 py-12">
+      <div class="mx-auto max-w-full text-center">
+        <dl class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          <div class="flex flex-col rounded-lg border border-gray-200 px-6 py-8 text-center dark:border-gray-700">
+            <dt class="order-last text-lg font-medium text-gray-500 dark:text-gray-400">Email</dt>
+            <dd class="text-xl font-semibold text-gray dark:text-gray">{{ customer.fullname }}</dd>
+          </div>
+          <div class="flex flex-col rounded-lg border border-gray-200 px-6 py-8 text-center dark:border-gray-700">
+            <dt class="order-last text-lg font-medium text-gray-500 dark:text-gray-400">Email</dt>
+            <dd class="text-xl font-semibold text-gray dark:text-gray">{{ customer.email }}</dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg border border-gray-200 px-6 py-8 text-center dark:border-gray-700">
+            <dt class="order-last text-lg font-medium text-gray-500 dark:text-gray-400">Status</dt>
+            <dd class="text-xl font-semibold text-gray dark:text-gray">{{ customer.status }}</dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg border border-gray-200 px-6 py-8 text-center dark:border-gray-700">
+            <dt class="order-last text-lg font-medium text-gray-500 dark:text-gray-400">Total Purchased</dt>
+            <dd class="text-xl font-semibold text-gray dark:text-gray">{{ customer.totalPurchasedAmount |
+              currency:'INR' }}</dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg border border-gray-200 px-6 py-8 text-center dark:border-gray-700">
+            <dt class="order-last text-lg font-medium text-gray-500 dark:text-gray-400">Remaining Amount</dt>
+            <dd class="text-xl font-semibold text-gray dark:text-gray">{{ customer.remainingAmount | currency:
+              'USD' }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!--  -->
+    <div class="mt-4">
+      <div class="grid grid-cols-1">
+        <div class="bg-gray-100 dark:bg-white p-4 rounded-lg shadow-md">
+          <p-card header="Personal Details" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                <p-card header="Phone Numbers" class="bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray">
+                  <div class="grid grid-cols-1 gap-4">
+                    <div
+                      class="grid grid-cols-3 gap-2 text-sm font-semibold border-b border-gray-400 dark:border-gray-500 pb-2">
+                      <div>Number</div>
+                      <div>Type</div>
+                      <div>Primary</div>
+                    </div>
+                    <div *ngFor="let phone of customer.phoneNumbers; let i = index"
+                      class="grid grid-cols-3 gap-2 items-center">
+                      <div>{{ phone.number }}</div>
+                      <div>{{ phone.type }}</div>
+                      <div>
+                        <p-checkbox [(ngModel)]="phone.primary" binary="true" [disabled]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+              <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                <p-card header="Addresses" class="bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray">
+                  <div class="grid grid-cols-1 gap-4">
+                    <div
+                      class="grid grid-cols-7 gap-2 text-sm font-semibold border-b border-gray-400 dark:border-gray-500 pb-2">
+                      <div>Street</div>
+                      <div>City</div>
+                      <div>State</div>
+                      <div>ZIP Code</div>
+                      <div>Country</div>
+                      <div>Type</div>
+                      <div>Default</div>
+                    </div>
+                    <div *ngFor="let address of customer.addresses; let i = index"
+                      class="grid grid-cols-7 gap-2 items-center">
+                      <div>{{ address.street }}</div>
+                      <div>{{ address.city }}</div>
+                      <div>{{ address.state }}</div>
+                      <div>{{ address.zipCode }}</div>
+                      <div>{{ address.country }}</div>
+                      <div>{{ address.type }}</div>
+                      <div>
+                        <p-checkbox [(ngModel)]="address.isDefault" binary="true" [disabled]="true"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </p-card>
+              </div>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <p-accordion value="0">
+        <p-accordion-panel value="0">
+          <p-accordion-header>
+            <ng-template #toggleicon let-active="active">
+              @if (active) {
+              <i class="pi pi-minus"></i>
+              } @else {
+              <i class="pi pi-plus"></i>
+              }
+            </ng-template>
+            <span class="flex items-center gap-2 w-full">
+              <i class="pi pi-times" style="font-size: 1.5rem"></i>
+
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+              <span class="font-bold whitespace-nowrap">Cart Details</span>
+            </span>
+          </p-accordion-header>
+          <p-accordion-content>
+            <p-panel header="Cart Item">
+              <p-card header="Cart Items" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray">
+                <p-table [value]="customer.cart.items" dataKey="_id" [tableStyle]="{ width: '100%' }"
+                  [expandedRowKeys]="expandedRows">
+                  <ng-template #header>
+                    <tr>
+                      <th style="width: 5rem"></th>
+                      <th pSortableColumn="productId.title">Product Name <p-sortIcon field="productId.title" /></th>
+                      <th>Image</th>
+                      <th pSortableColumn="productId.price">Price <p-sortIcon field="productId.price" /></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template #body let-item let-expanded="expanded">
+                    <tr>
+                      <td>
+                        <p-button type="button" pRipple [pRowToggler]="item" [text]="true" [rounded]="true"
+                          [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                      </td>
+                      <td>{{ item.productId.title }}</td>
+                      <td><img
+                          [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.productId.thumbnail"
+                          [alt]="item.productId.title" width="50" class="shadow-lg" /></td>
+                      <td>{{ item.productId.price | currency : 'USD' }}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template #expandedrow let-item>
+                    <tr>
+                      <td colspan="4">
+                        <div class="p-4">
+                          <h5>Invoices for {{ item.productId.title }}</h5>
+                          <p-table [value]="item.invoiceIds" dataKey="_id">
+                            <ng-template #header>
+                    <tr>
+                      <th pSortableColumn="invoiceNumber">Invoice # <p-sortIcon field="invoiceNumber" /></th>
+                      <th pSortableColumn="invoiceDate">Date <p-sortIcon field="invoiceDate" /></th>
+                      <th pSortableColumn="totalAmount">Amount <p-sortIcon field="totalAmount" /></th>
+                      <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+                      <th pSortableColumn="status">Download <p-sortIcon field="status" /></th>
+
+                    </tr>
+                  </ng-template>
+                  <ng-template #body let-invoice>
+                    <tr>
+                      <td>{{ invoice.invoiceNumber }}</td>
+                      <td>{{ invoice.invoiceDate | date }}</td>
+                      <td>{{ invoice.totalAmount | currency : 'USD' }}</td>
+                      <td>
+                        <p-tag [value]="invoice.status" [severity]="getStatusSeverity(invoice.status)" />
+                      </td>
+
+                      <td>
+                        <i (click)="openInvoiceDialog(invoice._id)" class="pi pi-file-pdf"
+                          style="font-size: 1.5rem; cursor: pointer;"></i>
+                      </td>
+
+
+                    </tr>
+                  </ng-template>
+                  <ng-template #emptymessage>
+                    <tr>
+                      <td colspan="4">There are no invoices for this product yet.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    </p-table>
+  </p-card>
+  </p-panel>
+  </p-accordion-content>
+  </p-accordion-panel>
+  </p-accordion>
+</div>
+
+<div class="mt-4">
+
+  <p-accordion value="0">
+    <p-accordion-panel value="0">
+      <p-accordion-header>
+        <ng-template #toggleicon let-active="active">
+          @if (active) {
+          <i class="pi pi-minus"></i>
+          } @else {
+          <i class="pi pi-plus"></i>
+          }
+        </ng-template>
+        <span class="flex items-center gap-2 w-full">
+          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+          <span class="font-bold whitespace-nowrap">Payment</span>
+        </span>
+      </p-accordion-header>
+      <p-accordion-content>
+        <p-panel header="Payment History">
+          <p-card header="Payment History" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray">
+            <p-table [value]="customer.paymentHistory" dataKey="_id">
+              <ng-template #header>
+                <tr>
+                  <th pSortableColumn="transactionId">Transaction ID <p-sortIcon field="transactionId" /></th>
+                  <th pSortableColumn="amount">Amount <p-sortIcon field="amount" /></th>
+                  <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+                  <th pSortableColumn="createdAt">Date <p-sortIcon field="createdAt" /></th>
+                </tr>
+              </ng-template>
+              <ng-template #body let-payment>
+                <tr>
+                  <td>{{ payment.transactionId }}</td>
+                  <td>{{ payment.amount | currency: 'USD' }}</td>
+                  <td>{{ payment.status }}</td>
+                  <td>{{ payment.createdAt | date }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-card>
+        </p-panel>
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+</div>
+</p-card>
+
+</div>
+
+<p-dialog [(visible)]="display" modal="true" header="Detailed View (Invoice)" appendTo="body"
+  [style]="{ width: '80vw', height: '80vh' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true">
+  <ng-container *ngComponentOutlet="dynamicComponent; inputs: { Id: Id }"></ng-container> <ng-container
+    *ngIf="!dynamicComponent">
+    <div>
+      <p>Loading component...</p>
+    </div>
+  </ng-container>
+  <button pButton type="button" (click)="display = false" label="Close">Close</button>
+</p-dialog>

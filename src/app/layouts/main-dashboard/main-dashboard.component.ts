@@ -23,7 +23,7 @@ export class MainDashboardComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noSidebarRoutes = ['/login'];
+        const noSidebarRoutes = ['/auth/login'];
         this.showHeaderAndSidebar = !noSidebarRoutes.includes(this.router.url);
       }
     });

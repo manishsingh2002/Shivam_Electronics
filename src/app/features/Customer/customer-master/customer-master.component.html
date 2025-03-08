@@ -329,17 +329,21 @@
           <div class="mt-4 flex flex-col space-y-2">
             <label for="guaranteer" class="block text-sm font-medium text-gray-300 mb-1">Guaranteer Name</label>
             <p-select id="guaranteer" (onChange)="selectedGuaranterevent($event)" [options]="customerIDDropdown"
-              optionLabel="fullname" [(ngModel)]="selectedGuaranter"
+              optionLabel="fullname"
               class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select>
 
-            <!-- <p-select (onClick)="selectedGuaranterevent($event)" optionLabel="fullname" [(ngModel)]="selectedGuaranter"
-              class=" border border-gray-600 rounded-md p-2 bg-gray-800 text-white"></p-select> -->
-            <div id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"
-              autocomplete="off">{{selectedGuaranter.fullname}}</div>
-            <div *ngFor="let item of selectedGuaranter.phoneNumbers">
-              <div id="guaranteer" type="text"
-                class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white" autocomplete="off">
-                {{item.number}}</div>
+            <div class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white">
+              {{ selectedGuaranter.fullname }}
+            </div>
+
+            <div *ngIf="selectedGuaranter.phoneNumbers && selectedGuaranter.phoneNumbers.length > 0">
+              <label class="block text-sm font-medium text-gray-300 mb-1">Guarantor Phone Numbers</label>
+              <ul>
+                <li *ngFor="let item of selectedGuaranter.phoneNumbers"
+                  class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white">
+                  {{ item.number }}
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -351,7 +355,6 @@
               [(ngModel)]="selectedGuaranter.fullname" autocomplete="off">
             <p id="guaranteer" type="text" class="w-full border border-gray-600 rounded-md p-2 bg-gray-800 text-white"
               [(ngModel)]="selectedGuaranter.phoneNumbers[0].number" autocomplete="off">
-
           </div> -->
         </div>
       </div>
@@ -378,146 +381,72 @@
           </div>
 
           Phone Numbers Card
-          <!-- <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
             <p-card header="Phone Numbers" class="bg-gray-900 text-white">
-              <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3"
-                class="mt-4 bg-gray-900 text-white">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Number</th>
-                    <th>Type</th>
-                    <th>Primary</th>
-                    <th>Actions</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-phone let-i="index">
-                  <tr>
-                    <td>{{ phone.number }}</td>
-                    <td>{{ phone.type }}</td>
-                    <td><p-tableCheckbox [(ngModel)]="phone.primary" /></td>
-                    <td>
-                      <button pButton (click)="editPhone(i)" icon="pi pi-pencil"
-                        class="p-button-rounded p-button-text p-button-sm"></button>
-                      <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-sm"
-                        (click)="deletePhone(i)"></button>
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
+              <div class="grid grid-cols-1 gap-4">
+                <div class="grid grid-cols-4 gap-2 text-sm font-semibold border-b border-gray-700 pb-2">
+                  <div>Number</div>
+                  <div>Type</div>
+                  <div>Primary</div>
+                  <div>Actions</div>
+                </div>
+                <div *ngFor="let phone of customer.phoneNumbers; let i = index"
+                  class="grid grid-cols-4 gap-2 items-center">
+                  <div>{{ phone.number }}</div>
+                  <div>{{ phone.type }}</div>
+                  <div>
+                    <p-checkbox [(ngModel)]="phone.primary" binary="true"></p-checkbox>
+                  </div>
+                  <div class="flex gap-2">
+                    <button pButton (click)="editPhone(i)" icon="pi pi-pencil"
+                      class="p-button-rounded p-button-text p-button-sm"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-sm"
+                      (click)="deletePhone(i)"></button>
+                  </div>
+                </div>
+              </div>
               <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"
-                class="mt-2 p-button-sm bg-blue-600 hover:bg-blue-700"></button>
+                class="mt-4 p-button-sm bg-blue-600 hover:bg-blue-700"></button>
             </p-card>
           </div>
-          Addresses Card
+
           <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
             <p-card header="Addresses" class="bg-gray-900 text-white">
-              <p-table [value]="customer.addresses" [paginator]="true" [rows]="3" class="mt-4 bg-gray-900 text-white">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Street</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>ZIP Code</th>
-                    <th>Country</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                    <th>Actions</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-address let-i="index">
-                  <tr>
-                    <td>{{ address.street }}</td>
-                    <td>{{ address.city }}</td>
-                    <td>{{ address.state }}</td>
-                    <td>{{ address.zipCode }}</td>
-                    <td>{{ address.country }}</td>
-                    <td>{{ address.type }}</td>
-                    <td><p-tableCheckbox [(ngModel)]="address.isDefault" /></td>
-                    <td>
-                      <button pButton (click)="editAddress(i)" icon="pi pi-pencil"
-                        class="p-button-rounded p-button-text p-button-sm"></button>
-                      <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-sm"
-                        (click)="removeAddress(i)"></button>
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
-              <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 mt-2"
-                (click)="addAddress()">Add Address</button>
+              <div class="grid grid-cols-1 gap-4">
+                <div class="grid grid-cols-8 gap-2 text-sm font-semibold border-b border-gray-700 pb-2">
+                  <div>Street</div>
+                  <div>City</div>
+                  <div>State</div>
+                  <div>ZIP Code</div>
+                  <div>Country</div>
+                  <div>Type</div>
+                  <div>Default</div>
+                  <div>Actions</div>
+                </div>
+                <div *ngFor="let address of customer.addresses; let i = index"
+                  class="grid grid-cols-8 gap-2 items-center">
+                  <div>{{ address.street }}</div>
+                  <div>{{ address.city }}</div>
+                  <div>{{ address.state }}</div>
+                  <div>{{ address.zipCode }}</div>
+                  <div>{{ address.country }}</div>
+                  <div>{{ address.type }}</div>
+                  <div>
+                    <p-checkbox [(ngModel)]="address.isDefault" binary="true" [disabled]="true"></p-checkbox>
+                  </div>
+                  <div class="flex gap-2">
+                    <button pButton (click)="editAddress(i)" icon="pi pi-pencil"
+                      class="p-button-rounded p-button-text p-button-sm"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-sm"
+                      (click)="removeAddress(i)"></button>
+                  </div>
+                </div>
+              </div>
+              <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 mt-4"
+                (click)="showAddressDialog()">Add
+                Address</button>
             </p-card>
-          </div> -->
-          <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-                        <p-card header="Phone Numbers" class="bg-gray-900 text-white">
-                            <p-table [value]="customer.phoneNumbers" [paginator]="true" [rows]="3"                
-                class="mt-4 bg-gray-900 text-white">
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th>Number</th>
-                                        <th>Type</th>
-                                        <th>Primary</th>
-                                        <th>Actions</th>
-                                      </tr>
-                                  </ng-template>
-                                <ng-template pTemplate="body" let-phone let-i="index">
-                                    <tr>
-                                        <td>{{ phone.number }}</td>
-                                        <td>{{ phone.type }}</td>
-                                        <td><p-tableCheckbox [(ngModel)]="phone.primary" /></td>
-                                        <td>
-                                            <button pButton (click)="editPhone(i)" icon="pi pi-pencil"                  
-                              class="p-button-rounded p-button-text p-button-sm"></button>
-                                            <button pButton icon="pi pi-trash"
-                        class="p-button-rounded p-button-text p-button-sm"                        
-                        (click)="deletePhone(i)"></button>
-                                          </td>
-                                      </tr>
-                                  </ng-template>
-                              </p-table>
-                            <button pButton label="Add Phone Number" icon="pi pi-plus" (click)="showPhoneDialog()"      
-                          class="mt-2 p-button-sm bg-blue-600 hover:bg-blue-700"></button>
-                          </p-card>
-                      </div>
-                    Addresses Card
-                    <div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-                        <p-card header="Addresses" class="bg-gray-900 text-white">
-                            <p-table [value]="customer.addresses" [paginator]="true" [rows]="3"
-                class="mt-4 bg-gray-900 text-white">
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th>Street</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>ZIP Code</th>
-                                        <th>Country</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Actions</th>
-                                      </tr>
-                                  </ng-template>
-                                <ng-template pTemplate="body" let-address let-i="index">
-                                    <tr>
-                                        <td>{{ address.street }}</td>
-                                        <td>{{ address.city }}</td>
-                                        <td>{{ address.state }}</td>
-                                        <td>{{ address.zipCode }}</td>
-                                        <td>{{ address.country }}</td>
-                                        <td>{{ address.type }}</td>
-                                        <td><p-tableCheckbox [(ngModel)]="address.isDefault" /></td>
-                                        <td>
-                                            <button pButton (click)="editAddress(i)" icon="pi pi-pencil"                
-                                class="p-button-rounded p-button-text p-button-sm"></button>
-                                            <button pButton icon="pi pi-trash"
-                        class="p-button-rounded p-button-text p-button-sm"                        
-                        (click)="removeAddress(i)"></button>
-                                          </td>
-                                      </tr>
-                                  </ng-template>
-                              </p-table>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 mt-2"          
-                      (click)="showAddressDialog()">Add Address</button>
-                          </p-card>
-                      </div>
-
+          </div>
         </div>
       </div>
 
@@ -671,6 +600,13 @@
     </p-dialog>
   </div>
 </section>
+
+
+
+
+
+
+<!--  -->
 <!-- <section class="body-font " [ngClass]="{'dark-mode': isDarkMode}">
   <div pFocusTrap class="container px-5 py-1 mx-auto flex flex-wrap">
     <div class="flex w-full mb-8 flex-wrap justify-between items-center">

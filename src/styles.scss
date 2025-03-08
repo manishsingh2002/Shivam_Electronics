@@ -67,3 +67,6 @@ main {
 :host ::ng-deep .p-inputtext{ /*for view encapsulation*/
   color: black;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

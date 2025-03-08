@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ApiService } from '../../../core/services/api.service';
@@ -11,8 +11,9 @@ import * as QRCode from 'qrcode';
   templateUrl: './invoice-print.component.html',
   styleUrl: './invoice-print.component.scss'
 })
-export class InvoicePrintComponent implements OnInit {
-  @Input() Id: any; // Input to receive invoice data
+
+export class InvoicePrintComponent implements OnInit, OnChanges {
+  @Input() Id: any;
   invoiceData: any
   ngOnInit(): void {
     if (!this.Id) {
@@ -21,6 +22,15 @@ export class InvoicePrintComponent implements OnInit {
       this.getInvoiceWithId()
     }
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.Id) {
+      console.error('Invoice data is required for PrintableInvoiceComponent');
+    } else {
+      this.getInvoiceWithId()
+    }
+    console.log(this.Id);
   }
 
   constructor(private apiService: ApiService) { }

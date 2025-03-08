@@ -19,7 +19,7 @@ export function AuthInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
   const user = authService.getItem('userKey') as string | null;
 
   // Skip adding headers for login or signup requests
-  if (req.url.includes('/login') || req.url.includes('/signup')) {
+  if (req.url.includes('/auth/login') || req.url.includes('/signup')) {
     return next(req);
   }
 

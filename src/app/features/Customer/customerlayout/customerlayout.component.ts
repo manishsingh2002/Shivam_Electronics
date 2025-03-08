@@ -10,6 +10,7 @@ import { CustomerdetailsComponent } from '../customerdetails/customerdetails.com
 import { SellersComponent } from '../../Seller/sellers/sellers.component';
 import { SellersDetailsComponent } from '../../Seller/sellers-details/sellers-details.component';
 import { SellersListsComponent } from '../../Seller/sellers-lists/sellers-lists.component';
+import { CustomerDetailedListComponent } from '../customer-detailed-list/customer-detailed-list.component';
 @Component({
   selector: 'app-customerlayout',
   imports: [CommonModule, RouterModule, SelectButtonModule, FormsModule],
@@ -21,7 +22,8 @@ export class CustomerlayoutComponent {
   componentNavItems: any[] = [
     { label: 'Customer Master', component: CustomerMasterComponent },
     { label: 'Customer List', component: CustomerListComponent },
-    { label: 'customerDetails', component: CustomerdetailsComponent },
+    // { label: 'customerDetails', component: CustomerdetailsComponent },
+    { label: 'customer Details lsit', component: CustomerDetailedListComponent },
     { label: 'Seller Mater', component: SellersComponent },
     { label: 'Seller details', component: SellersDetailsComponent },
     { label: 'Seller List', component: SellersListsComponent },

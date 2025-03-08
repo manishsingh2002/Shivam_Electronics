@@ -143,7 +143,7 @@ export class AuthService {
     }
     this.userSubject.next(null);
     this.userDataSubject.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 }
