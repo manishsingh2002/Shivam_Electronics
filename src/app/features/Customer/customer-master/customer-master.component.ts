@@ -247,7 +247,6 @@ export class CustomerMasterComponent implements OnInit {
 
 
   validateCustomer(): boolean {
-    // Basic validation checks
     if (!this.customer.fullname) {
       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Fullname is required.' });
       return false;
