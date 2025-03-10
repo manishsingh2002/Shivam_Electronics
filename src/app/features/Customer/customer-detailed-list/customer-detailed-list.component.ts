@@ -37,6 +37,7 @@ export class CustomerDetailedListComponent {
   Id: any;
   dynamicComponent: any;
 
+
   constructor(private apiService: ApiService, private cdr: ChangeDetectorRef) { }
 
 
@@ -45,11 +46,17 @@ export class CustomerDetailedListComponent {
     this.autopopulatedata();
   }
 
+
   getInvoice(id: any) {
     this.display = !this.display
     this.Id = id
   }
 
+  expandedItems: { [key: string]: boolean } = {};
+
+  toggleInvoiceAccordion(itemId: string) {
+    this.expandedItems[itemId] = !this.expandedItems[itemId];
+  }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
