@@ -5,46 +5,55 @@ import { DrawerModule } from 'primeng/drawer';
 import { CommonModule } from '@angular/common';
 import { TieredMenu } from 'primeng/tieredmenu';
 import { MenuItem } from 'primeng/api';
-import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-
 import { Ripple } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
 import { StyleClass } from 'primeng/styleclass';
 import { Drawer } from 'primeng/drawer';
+import { ThemeService } from '../../core/services/theme.service';
+
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [
     TieredMenu,
     ButtonModule,
     CommonModule,
-    DrawerModule, AvatarModule,
+    DrawerModule,
+    AvatarModule,
     InputTextModule,
     RouterModule,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  shownotificationdropdown: boolean = false;
-  appsdropdown: boolean = false;
-  openUserDrop: boolean = false;
-  visible: boolean = false;
-  position: string = 'topright';
+  shownotificationdropdown = false;
+  appsdropdown = false;
+  openUserDrop = false;
+  visible = false;
+  position = 'topright';
+  themeLabel = 'Dark Mode';
 
-  notificationdropdown() {
-    this.shownotificationdropdown = !this.shownotificationdropdown;
+  @ViewChild('drawerRef') drawerRef!: Drawer;
+
+  constructor(private themeService: ThemeService) {
+    this.themeLabel = localStorage.getItem('theme') === 'dark' ? 'Light Mode' : 'Dark Mode';
   }
 
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+    this.themeLabel = this.themeLabel === 'Dark Mode' ? 'Light Mode' : 'Dark Mode';
+  }
 
-  toggleDarkMode() {
-    const element = document.querySelector('html');
-    element?.classList.toggle('my-app-dark');
+  toggleNotificationDropdown() {
+    this.shownotificationdropdown = !this.shownotificationdropdown;
   }
 
   toggleAppDropDown() {
     this.appsdropdown = !this.appsdropdown;
   }
+
   openUserDropDown() {
     this.openUserDrop = !this.openUserDrop;
   }
@@ -53,89 +62,98 @@ export class HeaderComponent {
     this.position = position;
     this.visible = true;
   }
-  Admin: MenuItem[] | undefined;
-
-  ngOnInit() {
-    this.getmenuitem()
-  }
-  @ViewChild('drawerRef') drawerRef!: Drawer;
 
   closeCallback(e: Event): void {
     this.drawerRef.close(e);
   }
 
-  getmenuitem() {
-    this.Admin = [
+  menuItems: MenuItem[] = [];
+
+  ngOnInit() {
+    this.getMenuItems();
+  }
+
+  getMenuItems() {
+    this.menuItems = [
+      {
+        label: 'Dashboard',
+        icon: 'pi pi-home',
+        routerLink: ['/dashboard']
+      },
       {
         label: 'Admin',
+        icon: 'pi pi-users',
+        items: [
+          {
+            label: 'Users',
+            icon: 'pi pi-user',
+            routerLink: ['/admin/users']
+          },
+          {
+            label: 'Invoice',
+            icon: 'pi pi-file-invoice',
+            routerLink: ['/admin/invoice']
+          },
+          {
+            label: 'Payment',
+            icon: 'pi pi-credit-card',
+            routerLink: ['/admin/payment']
+          }
+        ]
+      },
+      {
+        label: 'Customers',
+        icon: 'pi pi-user-plus',
+        items: [
+          {
+            label: 'List',
+            icon: 'pi pi-list',
+            routerLink: ['/customers/list']
+          },
+          {
+            label: 'Master',
+            icon: 'pi pi-cog',
+            routerLink: ['/customers/master']
+          },
+          {
+            label: 'Details',
+            icon: 'pi pi-info-circle',
+            routerLink: ['/customers/details']
+          }
+        ]
+      },
+      {
+        label: 'Invoices',
         icon: 'pi pi-file',
         items: [
           {
-            label: 'Billing',
+            label: 'View',
+            icon: 'pi pi-eye',
+            routerLink: ['/invoices/view']
+          },
+          {
+            label: 'Create',
             icon: 'pi pi-plus',
-            items: [
-              {
-                label: 'invoice',
-                icon: 'pi pi-file',
-                routerLink: ['/admin/gst-invoice'],
-              },
-              {
-                label: 'Image',
-                icon: 'pi pi-image',
-              },
-              {
-                label: 'Video',
-                icon: 'pi pi-video',
-              },
-            ],
-          },
-          {
-            label: 'Open',
-            icon: 'pi pi-folder-open',
-          },
-          {
-            label: 'Print',
-            icon: 'pi pi-print',
-          },
-        ],
+            routerLink: ['/invoices/create']
+          }
+        ]
       },
       {
-        label: 'Edit',
-        icon: 'pi pi-file-edit',
+        label: 'Products',
+        icon: 'pi pi-box',
         items: [
           {
-            label: 'Copy',
-            icon: 'pi pi-copy',
+            label: 'List',
+            icon: 'pi pi-list',
+            routerLink: ['/products/list']
           },
           {
-            label: 'Delete',
-            icon: 'pi pi-times',
-          },
-        ],
-      },
-      {
-        label: 'Search',
-        icon: 'pi pi-search',
-      },
-      {
-        separator: true,
-      },
-      {
-        label: 'Share',
-        icon: 'pi pi-share-alt',
-        items: [
-          {
-            label: 'Slack',
-            icon: 'pi pi-slack',
-          },
-          {
-            label: 'Whatsapp',
-            icon: 'pi pi-whatsapp',
-          },
-        ],
-      },
+            label: 'Master',
+            icon: 'pi pi-cog',
+            routerLink: ['/products/master']
+          }
+        ]
+      }
     ];
   }
-
 }
-

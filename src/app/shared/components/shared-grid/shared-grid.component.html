@@ -1,3 +1,164 @@
+<!-- <div class="card">
+  <p-toolbar class="w-full">
+    <ng-template #start>
+      <div class="flex space-x-4 items-center">
+        <label for="theme" class="text-sm font-medium">Theme:</label>
+        <p-select id="theme"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="baseTheme">
+          <option *ngFor="let baseTheme of baseThemes" [ngValue]="baseTheme.value">
+            {{ baseTheme.id }}
+          </option>
+        </select>
+
+        <label for="icons" class="text-sm font-medium">Icons:</label>
+        <select id="icons"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="iconSet">
+          <option *ngFor="let iconSet of iconSets" [ngValue]="iconSet.value">
+            {{ iconSet.id }}
+          </option>
+        </select>
+
+        <label for="color" class="text-sm font-medium">Color Scheme:</label>
+        <select id="color"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="colorScheme">
+          <option *ngFor="let colorScheme of colorSchemes" [ngValue]="colorScheme.value">
+            {{ colorScheme.id }}
+          </option>
+        </select>
+      </div>
+    </ng-template>
+
+    <ng-template #end>
+      <button (click)="exportToCSV()"
+        class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
+        Export CSV
+      </button>
+    </ng-template>
+  </p-toolbar>
+</div>
+<div class="ag-grid-container">
+  <div class="ag-theme-quartz-dark rounded-lg shadow-lg overflow-hidden w-full mt-4">
+    <div class="relative w-full h-[500px]">
+      <ag-grid-angular style="height: 100%; width: 100%;" [rowData]="rowData" [columnDefs]="columnDefs" [theme]="theme"
+        [defaultColDef]="defaultColDef" [pagination]="true" [rowSelection]="rowSelection"
+        [rowClassRules]="rowClassrules" (cellValueChanged)="onCellValueChanged($event)"
+        (rowSelected)="onRowSelected($event)" (cellClicked)="onCellClicked($event)" (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div> -->
+
+<!-- version 2 -->
+
+<!-- <div class="card ">
+  <p-toolbar class="w-full">
+    <ng-template #start>
+      <div class="flex space-x-4 items-center">
+        <p-select id="theme" [options]="baseThemes" optionLabel="id" optionValue="value"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="baseTheme">
+        </p-select>
+
+        <p-select id="icons" optionLabel="id" optionValue="value" [options]="iconSets"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="iconSet">
+        </p-select>
+
+        <p-select id="color" optionLabel="id" optionValue="value" [options]="colorSchemes"
+          class="p-dropdown rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          [(ngModel)]="colorScheme">
+        </p-select>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</div>
+<div class="ag-grid-container">
+  <div class="ag-theme-quartz-dark rounded-lg shadow-lg overflow-hidden w-full mt-4">
+    <div class="relative w-full h-[500px]">
+      <ag-grid-angular style="height: 100%; width: 100%;" [rowData]="rowData" [columnDefs]="columnDefs" [theme]="theme"
+        [defaultColDef]="defaultColDef" [pagination]="true" [rowSelection]="rowSelection"
+        [rowClassRules]="rowClassrules" (cellValueChanged)="onCellValueChanged($event)"
+        (rowSelected)="onRowSelected($event)" (cellClicked)="onCellClicked($event)" (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div> -->
+
+<!-- version 3 -->
+
+<div class="card" style="background: var(--background); color: var(--text-color); border-color: var(--border-color)">
+  <p-toolbar class="w-full">
+    <ng-template #start>
+      <div class="flex space-x-4 items-center">
+        <p-select id="theme" [options]="baseThemes" optionLabel="id" optionValue="value"
+          class="p-dropdown rounded-md border border-[var(--border-color)] bg-[var(--background)] text-[var(--text-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-sm"
+          [(ngModel)]="baseTheme">
+        </p-select>
+
+        <p-select id="icons" [options]="iconSets" optionLabel="id" optionValue="value"
+          class="p-dropdown rounded-md border border-[var(--border-color)] bg-[var(--background)] text-[var(--text-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-sm"
+          [(ngModel)]="iconSet">
+        </p-select>
+
+        <p-select id="color" [options]="colorSchemes" optionLabel="id" optionValue="value"
+          class="p-dropdown rounded-md border border-[var(--border-color)] bg-[var(--background)] text-[var(--text-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-sm"
+          [(ngModel)]="colorScheme">
+        </p-select>
+      </div>
+    </ng-template>
+
+    <!-- <ng-template #end>
+      <button (click)="exportToCSV()"
+        class="p-button bg-[var(--primary-color)] text-white px-6 py-2 rounded-md hover:brightness-90 transition duration-300">
+        Export CSV
+      </button>
+    </ng-template> -->
+  </p-toolbar>
+</div>
+
+<!-- <div class="ag-grid-container"> -->
+<div class="ag-theme-quartz-dark rounded-lg shadow-lg overflow-hidden w-full mt-4"
+  style="background: var(--background); color: var(--text-color); border-color: var(--border-color)">
+  <div class="relative w-full h-[500px]">
+    <ag-grid-angular style="height: 100%; width: 100%;" [rowData]="rowData" [columnDefs]="columnDefs" [theme]="theme"
+      [defaultColDef]="defaultColDef" [pagination]="true" [rowSelection]="rowSelection" [rowClassRules]="rowClassrules"
+      (cellValueChanged)="onCellValueChanged($event)" (rowSelected)="onRowSelected($event)"
+      (cellClicked)="onCellClicked($event)" (gridReady)="onGridReady($event)">
+    </ag-grid-angular>
+  </div>
+  <!-- </div> -->
+</div>
+
+<!-- / -->
+<!-- <div class="card">
+  <p-toolbar class="w-full">
+    <ng-template #start>
+      <div class="flex space-x-4">
+        <select id="theme" class="p-dropdown" [(ngModel)]="baseTheme">
+          <option *ngFor="let baseTheme of baseThemes" [ngValue]="baseTheme.value">
+            {{ baseTheme.id }}
+          </option>
+        </select>
+
+        <select id="icons" class="p-dropdown" [(ngModel)]="iconSet">
+          <option *ngFor="let iconSet of iconSets" [ngValue]="iconSet.value">
+            {{ iconSet.id }}
+          </option>
+        </select>
+
+        <select id="color" class="p-dropdown" [(ngModel)]="colorScheme">
+          <option *ngFor="let colorScheme of colorSchemes" [ngValue]="colorScheme.value">
+            {{ colorScheme.id }}
+          </option>
+        </select>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</div> -->
+
 <!-- 
    <div style="height: 100%; display: flex; flex-direction: column">
       <p style="flex: 0 1 0%">
@@ -46,7 +207,35 @@
   </div>
 </div>
 </div> -->
-<div class="ag-grid-container">
+<!-- working -->
+<!-- <div class="ag-grid-container">
+  <div class="card">
+    <p-toolbar>
+      <ng-template #start>
+        <div class="flex justify-end mt-4">
+          <button (click)="exportToCSV()"
+            class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
+            Export CSV
+          </button>
+        </div>
+      </ng-template>
+      <ng-template #center>
+        <select style="margin-right: 16px" [(ngModel)]="baseTheme">
+          <option *ngFor="let baseTheme of baseThemes" [ngValue]="baseTheme.value">
+            {{ baseTheme.id }}
+          </option>
+        </select>
+      </ng-template>
+      <ng-template #end>
+        Color scheme:
+        <select style="margin-right: 16px" [(ngModel)]="colorScheme">
+          <option *ngFor="let colorScheme of colorSchemes" [ngValue]="colorScheme.value">
+            {{ colorScheme.id }}
+          </option>
+        </select>
+      </ng-template>
+    </p-toolbar>
+  </div>
   <div class="ag-theme-quartz-dark rounded-lg shadow-lg overflow-hidden w-full">
     <div class="relative w-full h-[500px]">
       <ag-grid-angular style="height: 100vh" [rowData]="rowData" [columnDefs]="columnDefs" [theme]="theme"
@@ -56,39 +245,12 @@
       </ag-grid-angular>
     </div>
   </div>
-</div>
-<!-- [paginationPageSizeSelector]="pagesizeselector" -->
-
-<!-- <div class="flex justify-end mt-4">
-      <button 
-        (click)="exportToCSV()" 
-        class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
-        Export CSV
-      </button>
-    </div> -->
+</div> -->
 
 
-<!-- Export Button -->
-<!-- <div class="ag-theme-quartz-dark rounded-lg shadow-lg overflow-hidden w-full">
-    <div class="relative w-full h-[500px]">
-      <ag-grid-angular
-        style="height: 100%;"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        [theme]="theme"
-        [defaultColDef]="defaultColDef"
-        [pagination]="true"
-        rowSelection="multiple"
-        (cellValueChanged)="onCellValueChanged($event)"
-        (gridReady)="onGridReady($event)">
-      </ag-grid-angular>
-    </div>
-  
-    <div class="flex justify-end mt-4">
-      <button 
-        (click)="exportToCSV()" 
-        class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
-        Export CSV
-      </button>
-    </div>
-  </div> -->
+<!-- <ng-template #end>
+  <button (click)="exportToCSV()"
+    class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition duration-300">
+    Export CSV
+  </button>
+</ng-template> -->

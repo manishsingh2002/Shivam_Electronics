@@ -16,41 +16,43 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  footer {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  aside {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 1rem;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .main-content {
-    display: flex;
-  }
-  /* Global styles (styles.css or styles.scss) - Use with caution */
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+aside {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 1rem;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.main-content {
+  display: flex;
+}
+
+/* Global styles (styles.css or styles.scss) - Use with caution */
 .p-inputtext {
-  color: black; /* Or #000; */
+  color: black;
+  /* Or #000; */
 }
 
 /* More specific approach (recommended) - Add a class to a parent element */
@@ -60,13 +62,60 @@ main {
 
 /* Targeting inputs inside p-floatLabel */
 .p-floatlabel .p-inputtext {
-    color: black;
-}
-
-/* Component-specific styles (my-component.component.scss) - Best practice */
-:host ::ng-deep .p-inputtext{ /*for view encapsulation*/
   color: black;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Component-specific styles (my-component.component.scss) - Best practice */
+:host ::ng-deep .p-inputtext {
+  /*for view encapsulation*/
+  color: black;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --text-color: #212529;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --border-color: #dee2e6;
+}
+
+[data-theme="dark"] {
+  --background: #1e1e1e;
+  --text-color: #ffffff;
+  --primary-color: #0d6efd;
+  --secondary-color: #adb5bd;
+  --border-color: #444;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+.p-card,
+.p-dialog,
+.p-toolbar,
+.p-table {
+  background: var(--background);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.p-button {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.p-button.p-button-secondary {
+  background: var(--secondary-color);
+}

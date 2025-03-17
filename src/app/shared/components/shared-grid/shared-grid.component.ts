@@ -27,12 +27,12 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
-
-ModuleRegistry.registerModules([AllCommunityModule]); // ✅ FIXED: Now passing an array
+import { ToolbarModule } from 'primeng/toolbar';
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
   selector: 'app-shared-grid',
-  imports: [AgGridAngular, FormsModule, CommonModule, SelectModule],
+  imports: [AgGridAngular, FormsModule, ToolbarModule, CommonModule, SelectModule],
   templateUrl: './shared-grid.component.html',
   styleUrls: ['./shared-grid.component.scss'],
   standalone: true // Make it a standalone component for easier use
@@ -62,14 +62,14 @@ export class SharedGridComponent implements OnInit, OnChanges {
     // flex: 1,//to set col size
   };
 
-  theme = themeQuartz.withPart(colorSchemeDark).withParams({
-    fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
-    headerFontFamily: 'Kanit, sans-serif',
-    cellFontFamily: 'DM Sans, sans-serif',
-    wrapperBorder: false,
-    headerRowBorder: false,
-    columnBorder: { style: 'dashed', color: '#9696C8' },
-  });
+  // theme = themeQuartz.withPart(colorSchemeDark).withParams({
+  //   fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
+  //   headerFontFamily: 'Kanit, sans-serif',
+  //   cellFontFamily: 'DM Sans, sans-serif',
+  //   wrapperBorder: false,
+  //   headerRowBorder: false,
+  //   columnBorder: { style: 'dashed', color: '#9696C8' },
+  // });
 
   rowSelection: any;
 
@@ -170,16 +170,25 @@ export class SharedGridComponent implements OnInit, OnChanges {
   ];
   iconSet = null;
 
-  // get theme() {
-  //   let theme = this.baseTheme;
-  //   if (this.iconSet) {
-  //     theme = theme.withPart(this.iconSet);
-  //   }
-  //   if (this.colorScheme) {
-  //     theme = theme.withPart(this.colorScheme);
-  //   }
-  //   return theme;
-  // }
+  get theme() {
+    let theme = this.baseTheme;
+
+    if (this.iconSet) {
+      theme = theme.withPart(this.iconSet);
+    }
+    if (this.colorScheme) {
+      theme = theme.withPart(this.colorScheme);
+    }
+
+    return theme.withParams({
+      fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
+      headerFontFamily: 'Kanit, sans-serif',
+      cellFontFamily: 'DM Sans, sans-serif',
+      wrapperBorder: true,
+      headerRowBorder: true,
+      columnBorder: { style: 'dashed', color: '#9696C8' },
+    });
+  }
 
 
 }
