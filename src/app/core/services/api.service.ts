@@ -6,14 +6,6 @@ import { AuthService } from './auth.service';
 import { ErrorhandlingService } from './errorhandling.service';
 import { environment } from '../../../environments/environment';
 
-// ...
-
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -25,10 +17,25 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authService: AuthService, private errorhandler: ErrorhandlingService) { }
 
+  private createHttpParams(filterParams?: any): HttpParams {
+    let params = new HttpParams();
+    if (filterParams) {
+      Object.entries(filterParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params = params.set(key, value as string);
+        }
+      });
+    }
+    return params;
+  }
+
+
+  // 
   private handleError(operation = 'operation', error: HttpErrorResponse) {
-    console.error(`${operation} failed: ${error.message}`);
+    console.error(`${operation} failed: $ {error.message}`);
     return throwError(() => error);
   }
+
 
   // === User Authentication Methods ===
   getUserData(): Observable<any> {
@@ -74,29 +81,14 @@ export class ApiService {
   }
 
   // -----------------------------------------------------------------------------------------------------------------------------------------------------------
-  getAllProductData(filterParams?: any): Observable<Product[]> {
-    let params = new HttpParams();
-
-    if (filterParams) {
-      Object.keys(filterParams).forEach(key => {
-        if (filterParams[key] !== undefined) {
-          params = params.set(key, filterParams[key]);
-        }
-      });
-    }
-
-    return this.http.get<Product[]>(`${this.baseUrl}/v1/products`, { params: params })
+  getAllProductData(filterParams?: any): Observable<any> {
+    return this.http.get<any[]>(`${this.baseUrl}/v1/products`, { params: this.createHttpParams(filterParams) })
       .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error as HttpErrorResponse)));
   }
 
-  // getAllProductData(): Observable<Product[]> {
-  //   return this.http
-  //     .get<Product[]>(`${this.baseUrl}/v1/products`)
-  //     .pipe(catchError((error) => this.errorhandler.handleError('getAllProductData', error)));
-  // }
 
-  getProductDataWithId(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/v1/products/${id}`).pipe(catchError((error) => this.errorhandler.handleError('getProductDataWithId', error)));
+  getProductDataWithId(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/v1/products/${id}`).pipe(catchError((error) => this.errorhandler.handleError('getProductDataWithId', error)));
   }
 
   createNewProduct(data: any): Observable<any> {
@@ -106,6 +98,15 @@ export class ApiService {
   updateProduct(productId: string, data: any): Observable<any> {
     return this.http.patch(`${this.baseUrl}/v1/products/${productId}`, data).pipe(catchError((error) => this.errorhandler.handleError('updateProduct', error)));
   }
+
+
+  deleteSingleProduct(id: any): Observable<any> {
+    const endpoint = `${this.baseUrl}/v1/products/${id}`
+    return this.http
+      .delete(endpoint)
+      .pipe(catchError((error) => this.errorhandler.handleError('deletecustomer', error)));
+  }
+
 
   deleteProduct(productIds: string[]): Observable<any> {
     const endpoint = `${this.baseUrl}/v1/products/deletemany`;
@@ -168,6 +169,11 @@ export class ApiService {
     const body = { ids: customerIds };
     return this.http.delete(endpoint, { body: body }).pipe(catchError((error) => this.errorhandler.handleError('deleteProduct', error)));
   }
+
+  getCustomerDropDown(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/v1/customers/customerDropDown`).pipe(catchError((error) => this.errorhandler.handleError('getCustomerDropDown', error)));
+  }
+
 
   // -=================================== seller ================================
 

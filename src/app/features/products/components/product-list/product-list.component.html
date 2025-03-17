@@ -70,6 +70,8 @@ preview
                 customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
             <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
         </ng-template>
+
+
     </p-toolbar>
     <p-table #dt [value]="products" [rows]="10" [columns]="cols" [paginator]="true"
         [globalFilterFields]="['title', 'country.name', 'representative.name', 'status']"
@@ -154,8 +156,8 @@ preview
         </ng-template>
 
         <ng-template #footer>
-            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-            <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
+            <!-- <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" /> -->
+            <!-- <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" /> -->
         </ng-template>
     </p-dialog>
 

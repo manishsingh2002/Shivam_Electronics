@@ -76,6 +76,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import { ProductMasterComponent } from "../product-master/product-master.component";
+import { AppMessageService } from '../../../../core/services/message.service';
 interface Column {
     field: string;
     header: string;
@@ -108,6 +109,7 @@ export class ProductListComponent implements OnInit {
     constructor(
         // private productService: ProductService,
         private apiService: ApiService,
+        private message: AppMessageService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
@@ -145,7 +147,7 @@ export class ProductListComponent implements OnInit {
             limit: 50,       // Pagination: Number of results per page
             sort: 'price,-name',  // Sorting: Sort by price ascending, then name descending
             // fields: 'name,price,category,ratingsAverage', // Field Limiting: Select specific fields
-            // category: 'Electronics,Clothing', // Filtering: Products in 'Electronics' OR 'Clothing' categories (using $in operator on backend)
+            category: 'manish', // Filtering: Products in 'Electronics' OR 'Clothing' categories (using $in operator on backend)
             // ratingsAverage: { gte: '4.5' }, // Filtering: Products with ratingsAverage greater than or equal to 4.5 (using $gte operator on backend)
             // rate: { lt: '100' } // Filtering: Products with price less than 100 (using $lt operator on backend)
         };
@@ -199,10 +201,10 @@ export class ProductListComponent implements OnInit {
             accept: () => {
                 const ids = this.selectedProducts ? this.selectedProducts.map(product => product.id) : []; // Extract IDs
                 this.apiService.deleteProduct(ids).subscribe(
-                    res => {
+                    (res: any) => {
                         this.products = this.products.filter(product => !ids.includes(product.id));
                     },
-                    err => console.error('Deletion Error:', err)
+                    (err: any) => console.error('Deletion Error:', err)
                 );
                 this.selectedProducts = [];
                 this.messageService.add({
@@ -226,38 +228,14 @@ export class ProductListComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter((val) => val.id !== product.id);
-                this.product = {};
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Deleted',
-                    life: 3000
-                });
+                this.apiService.deleteSingleProduct(product).subscribe((res: any) => {
+                    this.message.showInfo('delete', res.message)
+                })
             }
         });
     }
 
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
-            }
-        }
 
-        return index;
-    }
-
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
     getSeverity(status: string) {
         switch (status) {
             case 'INSTOCK':
@@ -268,35 +246,6 @@ export class ProductListComponent implements OnInit {
                 return 'danger';
             default:
                 return 'success';
-        }
-    }
-    saveProduct() {
-        this.submitted = true;
-
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Updated',
-                    life: 3000
-                });
-            } else {
-                this.product.id = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                this.products.push(this.product);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Created',
-                    life: 3000
-                });
-            }
-
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
         }
     }
 }

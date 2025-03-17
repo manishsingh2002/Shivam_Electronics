@@ -8,7 +8,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
 import { AdminUserComponent } from './../../adminDashboard/admin-user/admin-user.component';
 import { GstInvoiceComponent } from '../../features/Invoice/gst-invoice/gst-invoice.component';
-import { PaymentComponent } from '../payment/payment.component';
+import { PaymentComponent } from '../../features/Payment/payment/payment.component';
 import { AdminReportsComponent } from '../admin-reports/admin-reports.component';
 
 @Component({

@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from '../adminDashboard/admin-layout/admin-layout.component';
 import { AdminUserComponent } from '../adminDashboard/admin-user/admin-user.component';
 import { GstInvoiceComponent } from '../features/Invoice/gst-invoice/gst-invoice.component';
-import { PaymentComponent } from '../adminDashboard/payment/payment.component';
+import { PaymentComponent } from '../features/Payment/payment/payment.component';
 import { NotFoundComponent } from '../shared/components/notfound';
 import { AuthLayoutComponent } from '../features/auth/auth-layout.component';
 import { LoginComponent } from '../features/auth/components/login/login.component';

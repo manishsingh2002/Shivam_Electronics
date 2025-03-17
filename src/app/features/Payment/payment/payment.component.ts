@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SplitterModule } from 'primeng/splitter';
 import { SelectModule } from 'primeng/select';
-import { ApiService } from '../../core/services/api.service';
+import { ApiService } from '../../../core/services/api.service';
 import lodash from 'lodash';
 @Component({
   selector: 'app-payment',
@@ -64,10 +64,10 @@ export class PaymentComponent {
   fetchCustomerData() {
     this.paymentData.customerId = this.customerId
     this.ApiService.getCustomerDataWithId(this.customerId).subscribe(
-      (response) => {
+      (response: { data: any; }) => {
         this.customer = response.data;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching customer data:', error);
       }
     );
@@ -95,7 +95,7 @@ export class PaymentComponent {
       updatedAt: new Date().toISOString()
     };
 
-    this.ApiService.createNewpayment(formData).subscribe((res) => {
+    this.ApiService.createNewpayment(formData).subscribe((res: any) => {
     })
   }
 }

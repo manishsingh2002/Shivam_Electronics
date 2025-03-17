@@ -6,11 +6,19 @@
       <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedcustomers()"
         [disabled]="!selectedcustomers || !selectedcustomers.length" />
     </ng-template>
+    <ng-template>
+      <p-select [options]="this.customersdropdowndata" optionLabel="fullname"></p-select>
+      <p-select [options]="this.customersdropdowndata" optionLabel="email"></p-select>
+      <!-- <p-select [options]="this.customersdropdowndata" optionLabel="email"></p-select> -->
+
+    </ng-template>
     <ng-template #end>
       <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" auto
         customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
       <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
     </ng-template>
+
+
   </p-toolbar>
   <p-table #dt [scrollable]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
     scrollHeight="450px" [value]="customers" [rows]="10" [columns]="cols" [paginator]="true"
@@ -86,10 +94,10 @@
     <ng-template #content>
       <!-- <app-customer-master [redirectedData]="redirectedcustomer"></app-customer-master>-->
     </ng-template>
-    <ng-template #footer>
+    <!-- <ng-template #footer>
       <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-      <p-button label="Save" icon="pi pi-check" (click)="savecustomer()" />
-    </ng-template>
+      <p-button label="Save" icon="pi pi-check" />
+    </ng-template> -->
   </p-dialog>
 
   <p-confirmDialog [style]="{ width: '450px' }" />
