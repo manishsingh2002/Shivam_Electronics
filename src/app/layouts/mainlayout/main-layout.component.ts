@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-main-layout',
   template: `
-    <div class="min-h-full flex flex-col">
+    <!-- <div class="min-h-full flex flex-col">
       <app-header
         class="fixed top-0 left-0 w-full bg-white z-20 shadow-md"
       ></app-header>
@@ -16,7 +16,21 @@ import { RouterModule } from '@angular/router';
           </div>
         </main>
       </div>
-    </div>
+    </div> -->
+    <div class="min-h-screen flex flex-col">
+  <!-- Fixed Header -->
+  <app-header class="fixed top-0 left-0 w-full bg-white z-20 shadow-md"></app-header>
+
+  <!-- Main Content -->
+  <div class="flex flex-1 pt-[64px] overflow-hidden">
+    <main class="w-full px-1 py-2 flex-grow overflow-y-scroll hide-scrollbar">
+      <div class="mx-auto w-full py-2">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>
+
   `,
   styleUrl: './main-layout.component.scss',
   imports: [RouterModule, HeaderComponent],

@@ -10,41 +10,52 @@
 //   padding: 20px;
 // }
 aside {
-  background-color: #f3f4f6; /* Light grey background */
-  padding-top: 16px; /* Space from the top */
-  height: calc(
-    100vh - 64px
-  ); /* Sidebar height adjusted based on header height */
-  width: 80px; /* Sidebar width */
+  background-color: #f3f4f6;
+  /* Light grey background */
+  padding-top: 16px;
+  /* Space from the top */
+  height: calc(100vh - 64px);
+  /* Sidebar height adjusted based on header height */
+  width: 80px;
+  /* Sidebar width */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the sidebar */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for the sidebar */
   position: fixed;
-  top: 64px; /* Align with the header */
+  top: 64px;
+  /* Align with the header */
   left: 0;
   z-index: 10;
 }
 
 aside svg {
-  width: 24px; /* Consistent icon size */
-  height: 24px; /* Consistent icon size */
-  fill: #4b5563; /* Default icon color (gray) */
-  margin-bottom: 16px; /* Space between icons */
+  width: 24px;
+  /* Consistent icon size */
+  height: 24px;
+  /* Consistent icon size */
+  fill: #4b5563;
+  /* Default icon color (gray) */
+  margin-bottom: 16px;
+  /* Space between icons */
   cursor: pointer;
   transition: transform 0.3s ease, fill 0.3s ease;
 }
 
 /* Hover Effect for Icons */
 aside svg:hover {
-  transform: scale(1.1); /* Slight zoom effect */
-  fill: #1f2937; /* Darker icon color on hover */
+  transform: scale(1.1);
+  /* Slight zoom effect */
+  fill: #1f2937;
+  /* Darker icon color on hover */
 }
 
 /* Adding a small rounded border effect on the sidebar */
 aside svg:active {
-  transform: scale(0.95); /* Slight shrink on click */
+  transform: scale(0.95);
+  /* Slight shrink on click */
 }
 
 /* You can add more space or align items if needed */
@@ -54,15 +65,18 @@ aside svg:active {
 
 /* Optional: Change the sidebar background on hover */
 aside:hover {
-  background-color: #e5e7eb; /* Darken background on hover */
+  background-color: #e5e7eb;
+  /* Darken background on hover */
 }
 
 .dock-window {
   position: fixed;
-  top: 64px; /* Align dock below header */
+  top: 64px;
+  /* Align dock below header */
   left: 0;
   z-index: 10;
-  height: calc(100vh - 64px); /* Full screen height minus the header */
+  height: calc(100vh - 64px);
+  /* Full screen height minus the header */
   overflow-y: auto;
 }
 
@@ -70,4 +84,37 @@ p-dock {
   position: fixed;
   top: 64px;
   left: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* Prevents scrolling */
+}
+
+.min-h-screen {
+  height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+  /* Ensure no scrollbar appears */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.hide-scrollbar {
+  -ms-overflow-style: none;
 }
