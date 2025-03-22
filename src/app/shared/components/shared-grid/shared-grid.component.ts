@@ -2,7 +2,7 @@
 
 
 import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { CellValueChangedEvent, ColDef, GridApi, GridReadyEvent, RowSelectedEvent, CellClickedEvent } from 'ag-grid-community';
+import { CellValueChangedEvent, ColDef, GridApi, GridReadyEvent, RowSelectedEvent, CellClickedEvent, GridOptions } from 'ag-grid-community';
 // import { AllCommunityModule, ModuleRegistry, themeQuartz, colorSchemeDark } from 'ag-grid-community';
 import {
   AllCommunityModule,
@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ToolbarComponent } from "../../SharedComponent/toolbar/toolbar.component";
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
@@ -61,6 +62,7 @@ export class SharedGridComponent implements OnInit, OnChanges {
     floatingFilter: true,//enable input for search
     // flex: 1,//to set col size
   };
+  theme = themeQuartz;
 
   // theme = themeQuartz.withPart(colorSchemeDark).withParams({
   //   fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
@@ -71,9 +73,28 @@ export class SharedGridComponent implements OnInit, OnChanges {
   //   columnBorder: { style: 'dashed', color: '#9696C8' },
   // });
 
-  rowSelection: any;
+  // get theme() {
+  // let theme = themeQuartz;
+  // theme = theme.withPart(iconSetQuartzBold);
+  // theme = theme.withPart(colorSchemeDarkBlue);
+  // return theme.withParams({
+  //   fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
+  //   headerFontFamily: 'Kanit, sans-serif',
+  //   cellFontFamily: 'DM Sans, sans-serif',
+  //   wrapperBorder: true,
+  //   headerRowBorder: true,
+  //   columnBorder: { style: 'dashed', color: '#9696C8' },
+  // });
+  // }
 
+  rowSelection: any;
+  @Input() gridHeight: any;
+  @Input() gridWidth: any
+  @Input() padding: any
   ngOnInit(): void {
+    this.gridHeight = this.gridHeight ? this.gridHeight : '600px'
+    this.gridWidth = this.gridWidth ? this.gridWidth : '100%'
+    this.padding = this.padding ? this.padding : '0 10px'
 
     if (!this.column || this.column.length === 0) {
       this.columnDefs = this.generateDefaultColumns(this.rowData);
@@ -141,6 +162,48 @@ export class SharedGridComponent implements OnInit, OnChanges {
     this.gridReady.emit(params); // Also emit gridReady when Grid API is ready
   }
 
+
+  // gridOptions: GridOptions = {
+  //   theme: 'ag-theme-my-custom-theme', // Apply your custom theme
+  // };
+  // get theme() {
+  //   let theme = themeQuartz;
+  //   // if (this.iconSet) {
+  //   // theme = theme.withPart(this.iconSet);
+  //   theme = theme.withPart(iconSetQuartzBold);
+  //   // }
+  //   // if (this.colorScheme) {
+  //   // theme = theme.withPart(this.colorScheme);
+  //   theme = theme.withPart(colorSchemeDarkBlue);
+  //   // }
+
+  //   return theme.withParams({
+  //     fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
+  //     headerFontFamily: 'Kanit, sans-serif',
+  //     cellFontFamily: 'DM Sans, sans-serif',
+  //     wrapperBorder: true,
+  //     headerRowBorder: true,
+  //     columnBorder: { style: 'dashed', color: '#9696C8' },
+  //   });
+  // }
+
+
+}
+
+//
+//
+/*
+value gettter in aggrid to handle the data with multiple col
+ex=  valueGetter:(o:any)=>o.col1+o.col2
+
+
+// value formatter to convert to string
+ex = valueFormatter:(i:any)=>'rupee'+i.value.toString()
+*/
+
+
+// best thermes
+/*
   baseThemes = [
     { id: "themeQuartz", value: themeQuartz },
     { id: "themeBalham", value: themeBalham },
@@ -169,37 +232,4 @@ export class SharedGridComponent implements OnInit, OnChanges {
     { id: "iconSetMaterial", value: iconSetMaterial },
   ];
   iconSet = null;
-
-  get theme() {
-    let theme = this.baseTheme;
-
-    if (this.iconSet) {
-      theme = theme.withPart(this.iconSet);
-    }
-    if (this.colorScheme) {
-      theme = theme.withPart(this.colorScheme);
-    }
-
-    return theme.withParams({
-      fontFamily: 'IBM Plex Sans, DM Sans, Kanit, sans-serif',
-      headerFontFamily: 'Kanit, sans-serif',
-      cellFontFamily: 'DM Sans, sans-serif',
-      wrapperBorder: true,
-      headerRowBorder: true,
-      columnBorder: { style: 'dashed', color: '#9696C8' },
-    });
-  }
-
-
-}
-
-//
-// 
-/*
-value gettter in aggrid to handle the data with multiple col
-ex=  valueGetter:(o:any)=>o.col1+o.col2
-
-
-// value formatter to convert to string 
-ex = valueFormatter:(i:any)=>'rupee'+i.value.toString()
-*/ 
+*/

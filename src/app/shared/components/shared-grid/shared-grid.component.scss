@@ -1,426 +1,32 @@
-// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// // @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-// html,
-// body {
-//   height: 100%;
-//   margin: 0;
-//   padding: 0;
-//   overflow: hidden;
-//   /* Prevent unwanted scrolling */
-// }
+// // html,
+// // body {
+// //   height: 100%;
+// //   margin: 0;
+// //   padding: 0;
+// //   overflow: hidden;
+// //   /* Prevent unwanted scrolling */
+// // }
 
-// .ag-grid-container {
-//   position: relative;
-//   width: 100%;
-//   height: 80vh;
-//   /* Ensure correct height */
-//   background: #121212;
-//   /* AMOLED dark */
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   border-radius: 16px;
-//   box-sizing: border-box;
-//   /* Ensures padding doesn't add extra size */
-//   padding: 4px;
-//   /* Adjust for border fix */
-// }
+// // .ag-grid-container {
+// //   position: relative;
+// //   width: 100%;
+// //   height: 80vh;
+// //   /* Ensure correct height */
+// //   background: #121212;
+// //   /* AMOLED dark */
+// //   display: flex;
+// //   flex-direction: column;
+// //   justify-content: center;
+// //   border-radius: 16px;
+// //   box-sizing: border-box;
+// //   /* Ensures padding doesn't add extra size */
+// //   padding: 4px;
+// //   /* Adjust for border fix */
+// // }
 
-// /* ✅ Fix Gradient Border Overlap */
-// .ag-grid-container::before {
-//   content: "";
-//   position: absolute;
-//   inset: 0;
-//   padding: 4px;
-//   border-radius: 10px;
-//   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
-//   background-size: 300% 300%;
-//   animation: gradient-border-animation 4s linear infinite;
-
-//   /* Fix for Browser Compatibility */
-//   -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
-//   mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
-
-//   -webkit-mask-composite: xor;
-//   mask-composite: exclude;
-// }
-
-// @keyframes gradient-border-animation {
-//   0% {
-//     background-position: 0% 50%;
-//   }
-
-//   50% {
-//     background-position: 100% 50%;
-//   }
-
-//   100% {
-//     background-position: 0% 50%;
-//   }
-// }
-
-// /* ✅ Fix AG Grid Height Inside the Container */
-// .ag-theme-quartz-dark {
-//   --ag-font-family: 'IBM Plex Sans', sans-serif;
-//   --ag-header-font-family: 'Kanit', sans-serif;
-//   --ag-cell-font-family: 'DM Sans', sans-serif;
-//   --ag-font-size: 14px;
-//   --ag-header-font-size: 16px;
-//   --ag-row-height: 48px;
-
-//   /* Sleek Borders */
-//   --ag-borders: 1px solid rgba(255, 255, 255, 0.1);
-//   --ag-border-radius: 12px;
-
-//   /* Ensure AG Grid fully fits the container */
-//   width: 100%;
-//   height: calc(100% - 8px);
-//   /* Subtract border padding */
-//   flex-grow: 1;
-//   min-height: 0;
-// }
-
-// .card {
-//   margin-bottom: 20px;
-//   /* Add some space below the card */
-// }
-
-// .p-toolbar {
-//   padding: 1rem;
-//   border: 1px solid var(--surface-d);
-//   /* Add a border for better definition */
-//   background-color: var(--surface-c);
-//   /* Use a softer background color */
-//   border-radius: 4px;
-//   /* Add rounded corners */
-// }
-
-// .p-toolbar-group-start,
-// .p-toolbar-group-end {
-//   display: flex;
-//   align-items: center;
-//   /* Vertically align items */
-// }
-
-// .p-toolbar-group-start>* {
-//   margin-right: 1rem;
-//   /* Add spacing between elements in the start group */
-// }
-
-// .p-toolbar-group-start>*:last-child {
-//   margin-right: 0;
-//   /* Remove right margin for the last element */
-// }
-
-// /* Style the labels */
-// .p-toolbar label {
-//   font-weight: bold;
-//   color: var(--text-color-secondary);
-//   /* Use a slightly darker text color */
-// }
-
-// /* Style the p-dropdown (which renders as a <select> with PrimeNG styling) */
-// .p-dropdown {
-//   appearance: none;
-//   /* Remove default browser styling */
-//   padding: 0.5rem 1rem;
-//   border: 1px solid var(--surface-border);
-//   /* Use the PrimeNG border color */
-//   border-radius: 4px;
-//   background-color: var(--surface-a);
-//   color: var(--text-color);
-//   font-size: 1rem;
-//   line-height: 1.5;
-//   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-// }
-
-// .p-dropdown:hover {
-//   border-color: var(--primary-color);
-//   /* Change border color on hover */
-// }
-
-// .p-dropdown:focus {
-//   outline: 0;
-//   border-color: var(--primary-color);
-//   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
-//   /* Add a subtle focus shadow */
-// }
-
-// /* Style the options within the dropdown (optional, but can be adjusted) */
-// .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-//   padding: 0.5rem 1rem;
-//   color: var(--text-color);
-// }
-
-// .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
-//   background-color: var(--surface-b);
-//   color: var(--primary-color);
-// }
-
-// /* Style the Export CSV button to have similar visual cues as PrimeNG components */
-// .p-toolbar .bg-blue-500 {
-//   background-color: var(--blue-500) !important;
-//   /* Use PrimeNG's blue color */
-//   color: var(--surface-0) !important;
-//   /* White text */
-//   padding: 0.5rem 1rem !important;
-//   /* Adjust padding */
-//   border: none;
-//   border-radius: 4px;
-//   font-size: 1rem;
-//   cursor: pointer;
-//   transition: background-color 0.15s ease-in-out;
-// }
-
-// .p-toolbar .bg-blue-500:hover {
-//   background-color: var(--blue-600) !important;
-//   /* Darker shade on hover */
-// }
-
-// .p-toolbar .bg-blue-500:focus {
-//   outline: none;
-//   box-shadow: 0 0 0 0.2rem rgba(var(--blue-500-rgb), 0.5);
-// }
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  /* Prevent horizontal scrollbar if needed */
-}
-
-.ag-header-cell-filtered {
-  background-color: #1b6d8544;
-}
-
-.ag-grid-container {
-  position: relative;
-  width: 100%;
-  padding: 0;
-  /* Remove padding */
-  /* Decrease grid height by another 50px */
-  height: calc(100vh - 80px -
-      /* Assuming navbar height is 60px */
-      (0.5rem * 2) -
-      /* Toolbar padding (top and bottom) */
-      (1px * 1) -
-      /* Toolbar border (top) */
-      (1px * 1) -
-      /* Toolbar border (bottom) */
-      20px -
-      /* Margin below the card containing the toolbar */
-      8px -
-      /* Account for ag-theme-quartz-dark border padding */
-      50px
-      /* Decrease height by 50px */
-    );
-  background: #f8f9fa;
-  /* Classic light gray background */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  /* Align items to the top */
-  border-radius: 8px;
-  /* Apply a small curve */
-  box-sizing: border-box;
-  /* padding: 4px;  Keep if you prefer inner spacing */
-  border: 1px solid #dee2e6;
-  /* Classic light gray border */
-}
-
-/* ✅ Fix Gradient Border Overlap */
-// .ag-grid-container::before {
-//   content: "";
-//   position: absolute;
-//   inset: 0;
-//   padding: 4px;
-//   border-radius: 10px;
-//   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
-//   background-size: 300% 300%;
-//   animation: gradient-border-animation 4s linear infinite;
-
-//   /* Fix for Browser Compatibility */
-//   -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
-//   mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
-
-//   -webkit-mask-composite: xor;
-//   mask-composite: exclude;
-// }
-
-@keyframes gradient-border-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ✅ Fix AG Grid Height Inside the Container */
-.ag-theme-quartz-dark {
-  --ag-font-family: 'IBM Plex Sans', sans-serif;
-  --ag-header-font-family: 'Kanit', sans-serif;
-  --ag-cell-font-family: 'DM Sans', sans-serif;
-  --ag-font-size: 14px;
-  --ag-header-font-size: 16px;
-  --ag-row-height: 48px;
-
-  /* Sleek Borders */
-  --ag-borders: 1px solid rgba(0, 0, 0, 0.1);
-  /* Darker border for contrast */
-  --ag-border-radius: 6px;
-  /* Slightly smaller border radius */
-
-  /* Ensure AG Grid fully fits the container and enables internal scrolling */
-  width: 100%;
-  height: 100%;
-  /* Make the AG Grid take up the full height of its container */
-  flex-grow: 1;
-  min-height: 0;
-  overflow: auto;
-  /* Enable internal scrolling for the data */
-  border-radius: inherit;
-  /* Inherit border-radius from the container */
-}
-
-.card {
-  margin-bottom: 20px;
-}
-
-.p-toolbar {
-  height: 40px;
-  padding: 0px; // padding: 0 0.5rem;
-  border: 1px solid var(--surface-d);
-  background-color: var(--surface-c);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-}
-
-.p-toolbar-group-start,
-.p-toolbar-group-end {
-  display: flex;
-  align-items: center;
-}
-
-.p-toolbar-group-start>* {
-  margin-right: 0.75rem;
-}
-
-.p-toolbar-group-start>*:last-child {
-  margin-right: 0;
-}
-
-.p-toolbar label {
-  font-weight: bold;
-  color: var(--text-color-secondary);
-  font-size: 0.75rem;
-}
-
-.p-dropdown {
-  appearance: none;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--surface-border);
-  border-radius: 4px;
-  background-color: var(--surface-a);
-  color: var(--text-color);
-  font-size: 0.75rem;
-  line-height: 1.5;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  height: auto;
-}
-
-.p-dropdown:hover {
-  border-color: var(--primary-color);
-}
-
-.p-dropdown:focus {
-  outline: 0;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
-}
-
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-  // padding: 0.5rem 1rem;
-  color: var(--text-color);
-  font-size: 0.75rem;
-}
-
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
-  background-color: var(--surface-b);
-  color: var(--primary-color);
-}
-
-.p-toolbar .p-button {
-  padding: 0.15rem 0.5rem !important;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.75rem !important;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
-  height: auto;
-}
-
-.p-toolbar .p-button:hover {
-  filter: brightness(90%);
-}
-
-.p-toolbar .p-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.5);
-}
-
-// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-// html,
-// body {
-//   height: 100%;
-//   margin: 0;
-//   padding: 0;
-//   overflow-x: hidden;
-//   /* Prevent horizontal scrollbar if needed */
-// }
-
-// .ag-grid-container {
-//   position: relative;
-//   width: 100%;
-//   padding: 0;
-//   /* Remove padding */
-//   /* Decrease grid height by another 50px */
-//   height: calc(100vh - 80px -
-//       /* Assuming navbar height is 60px */
-//       (0.5rem * 2) -
-//       /* Toolbar padding (top and bottom) */
-//       (1px * 1) -
-//       /* Toolbar border (top) */
-//       (1px * 1) -
-//       /* Toolbar border (bottom) */
-//       20px -
-//       /* Margin below the card containing the toolbar */
-//       8px -
-//       /* Account for ag-theme-quartz-dark border padding */
-//       50px
-//       /* Decrease height by 50px */
-//     );
-//   background: #121212;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   border-radius: 16px;
-//   box-sizing: border-box;
-//   padding: 4px;
-// }
-
-// /* ✅ Fix Gradient Border Overlap */
+// // /* ✅ Fix Gradient Border Overlap */
 // // .ag-grid-container::before {
 // //   content: "";
 // //   position: absolute;
@@ -439,128 +45,869 @@ body {
 // //   mask-composite: exclude;
 // // }
 
-// @keyframes gradient-border-animation {
-//   0% {
-//     background-position: 0% 50%;
-//   }
+// // @keyframes gradient-border-animation {
+// //   0% {
+// //     background-position: 0% 50%;
+// //   }
 
-//   50% {
-//     background-position: 100% 50%;
-//   }
+// //   50% {
+// //     background-position: 100% 50%;
+// //   }
 
-//   100% {
-//     background-position: 0% 50%;
-//   }
+// //   100% {
+// //     background-position: 0% 50%;
+// //   }
+// // }
+
+// // /* ✅ Fix AG Grid Height Inside the Container */
+// // .ag-theme-quartz-dark {
+// //   --ag-font-family: 'IBM Plex Sans', sans-serif;
+// //   --ag-header-font-family: 'Kanit', sans-serif;
+// //   --ag-cell-font-family: 'DM Sans', sans-serif;
+// //   --ag-font-size: 14px;
+// //   --ag-header-font-size: 16px;
+// //   --ag-row-height: 48px;
+
+// //   /* Sleek Borders */
+// //   --ag-borders: 1px solid rgba(255, 255, 255, 0.1);
+// //   --ag-border-radius: 12px;
+
+// //   /* Ensure AG Grid fully fits the container */
+// //   width: 100%;
+// //   height: calc(100% - 8px);
+// //   /* Subtract border padding */
+// //   flex-grow: 1;
+// //   min-height: 0;
+// // }
+
+// // .card {
+// //   margin-bottom: 20px;
+// //   /* Add some space below the card */
+// // }
+
+// // .p-toolbar {
+// //   padding: 1rem;
+// //   border: 1px solid var(--surface-d);
+// //   /* Add a border for better definition */
+// //   background-color: var(--surface-c);
+// //   /* Use a softer background color */
+// //   border-radius: 4px;
+// //   /* Add rounded corners */
+// // }
+
+// // .p-toolbar-group-start,
+// // .p-toolbar-group-end {
+// //   display: flex;
+// //   align-items: center;
+// //   /* Vertically align items */
+// // }
+
+// // .p-toolbar-group-start>* {
+// //   margin-right: 1rem;
+// //   /* Add spacing between elements in the start group */
+// // }
+
+// // .p-toolbar-group-start>*:last-child {
+// //   margin-right: 0;
+// //   /* Remove right margin for the last element */
+// // }
+
+// // /* Style the labels */
+// // .p-toolbar label {
+// //   font-weight: bold;
+// //   color: var(--text-color-secondary);
+// //   /* Use a slightly darker text color */
+// // }
+
+// // /* Style the p-dropdown (which renders as a <select> with PrimeNG styling) */
+// // .p-dropdown {
+// //   appearance: none;
+// //   /* Remove default browser styling */
+// //   padding: 0.5rem 1rem;
+// //   border: 1px solid var(--surface-border);
+// //   /* Use the PrimeNG border color */
+// //   border-radius: 4px;
+// //   background-color: var(--surface-a);
+// //   color: var(--text-color);
+// //   font-size: 1rem;
+// //   line-height: 1.5;
+// //   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+// // }
+
+// // .p-dropdown:hover {
+// //   border-color: var(--primary-color);
+// //   /* Change border color on hover */
+// // }
+
+// // .p-dropdown:focus {
+// //   outline: 0;
+// //   border-color: var(--primary-color);
+// //   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+// //   /* Add a subtle focus shadow */
+// // }
+
+// // /* Style the options within the dropdown (optional, but can be adjusted) */
+// // .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+// //   padding: 0.5rem 1rem;
+// //   color: var(--text-color);
+// // }
+
+// // .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+// //   background-color: var(--surface-b);
+// //   color: var(--primary-color);
+// // }
+
+// // /* Style the Export CSV button to have similar visual cues as PrimeNG components */
+// // .p-toolbar .bg-blue-500 {
+// //   background-color: var(--blue-500) !important;
+// //   /* Use PrimeNG's blue color */
+// //   color: var(--surface-0) !important;
+// //   /* White text */
+// //   padding: 0.5rem 1rem !important;
+// //   /* Adjust padding */
+// //   border: none;
+// //   border-radius: 4px;
+// //   font-size: 1rem;
+// //   cursor: pointer;
+// //   transition: background-color 0.15s ease-in-out;
+// // }
+
+// // .p-toolbar .bg-blue-500:hover {
+// //   background-color: var(--blue-600) !important;
+// //   /* Darker shade on hover */
+// // }
+
+// // .p-toolbar .bg-blue-500:focus {
+// //   outline: none;
+// //   box-shadow: 0 0 0 0.2rem rgba(var(--blue-500-rgb), 0.5);
+// // }
+
+// // @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// // html,
+// // body {
+// //   height: 100%;
+// //   margin: 0;
+// //   padding: 0;
+// //   overflow-x: hidden;
+// //   /* Prevent horizontal scrollbar if needed */
+// // }
+
+// // .ag-header-cell-filtered {
+// //   background-color: #1b6d8544;
+// // }
+
+// // .ag-grid-container {
+// //   position: relative;
+// //   width: 100%;
+// //   padding: 0;
+// //   /* Remove padding */
+// //   /* Decrease grid height by another 50px */
+// //   height: calc(100vh - 80px -
+// //       /* Assuming navbar height is 60px */
+// //       (0.5rem * 2) -
+// //       /* Toolbar padding (top and bottom) */
+// //       (1px * 1) -
+// //       /* Toolbar border (top) */
+// //       (1px * 1) -
+// //       /* Toolbar border (bottom) */
+// //       20px -
+// //       /* Margin below the card containing the toolbar */
+// //       8px -
+// //       /* Account for ag-theme-quartz-dark border padding */
+// //       50px
+// //       /* Decrease height by 50px */
+// //     );
+// //   background: #f8f9fa;
+// //   /* Classic light gray background */
+// //   display: flex;
+// //   flex-direction: column;
+// //   justify-content: flex-start;
+// //   /* Align items to the top */
+// //   border-radius: 8px;
+// //   /* Apply a small curve */
+// //   box-sizing: border-box;
+// //   /* padding: 4px;  Keep if you prefer inner spacing */
+// //   border: 1px solid #dee2e6;
+// //   /* Classic light gray border */
+// // }
+
+// // /* ✅ Fix Gradient Border Overlap */
+// // // .ag-grid-container::before {
+// // //   content: "";
+// // //   position: absolute;
+// // //   inset: 0;
+// // //   padding: 4px;
+// // //   border-radius: 10px;
+// // //   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
+// // //   background-size: 300% 300%;
+// // //   animation: gradient-border-animation 4s linear infinite;
+
+// // //   /* Fix for Browser Compatibility */
+// // //   -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+// // //   mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+
+// // //   -webkit-mask-composite: xor;
+// // //   mask-composite: exclude;
+// // // }
+
+// // @keyframes gradient-border-animation {
+// //   0% {
+// //     background-position: 0% 50%;
+// //   }
+
+// //   50% {
+// //     background-position: 100% 50%;
+// //   }
+
+// //   100% {
+// //     background-position: 0% 50%;
+// //   }
+// // }
+
+// // /* ✅ Fix AG Grid Height Inside the Container */
+// // .ag-theme-quartz-dark {
+// //   --ag-font-family: 'IBM Plex Sans', sans-serif;
+// //   --ag-header-font-family: 'Kanit', sans-serif;
+// //   --ag-cell-font-family: 'DM Sans', sans-serif;
+// //   --ag-font-size: 14px;
+// //   --ag-header-font-size: 16px;
+// //   --ag-row-height: 48px;
+
+// //   /* Sleek Borders */
+// //   --ag-borders: 1px solid rgba(0, 0, 0, 0.1);
+// //   /* Darker border for contrast */
+// //   --ag-border-radius: 6px;
+// //   /* Slightly smaller border radius */
+
+// //   /* Ensure AG Grid fully fits the container and enables internal scrolling */
+// //   width: 100%;
+// //   height: 100%;
+// //   /* Make the AG Grid take up the full height of its container */
+// //   flex-grow: 1;
+// //   min-height: 0;
+// //   overflow: auto;
+// //   /* Enable internal scrolling for the data */
+// //   border-radius: inherit;
+// //   /* Inherit border-radius from the container */
+// // }
+
+// // .card {
+// //   margin-bottom: 20px;
+// // }
+
+// // .p-toolbar {
+// //   height: 40px;
+// //   padding: 0px; // padding: 0 0.5rem;
+// //   border: 1px solid var(--surface-d);
+// //   background-color: var(--surface-c);
+// //   border-radius: 4px;
+// //   display: flex;
+// //   align-items: center;
+// // }
+
+// // .p-toolbar-group-start,
+// // .p-toolbar-group-end {
+// //   display: flex;
+// //   align-items: center;
+// // }
+
+// // .p-toolbar-group-start>* {
+// //   margin-right: 0.75rem;
+// // }
+
+// // .p-toolbar-group-start>*:last-child {
+// //   margin-right: 0;
+// // }
+
+// // .p-toolbar label {
+// //   font-weight: bold;
+// //   color: var(--text-color-secondary);
+// //   font-size: 0.75rem;
+// // }
+
+// // .p-dropdown {
+// //   appearance: none;
+// //   padding: 0.15rem 0.5rem;
+// //   border: 1px solid var(--surface-border);
+// //   border-radius: 4px;
+// //   background-color: var(--surface-a);
+// //   color: var(--text-color);
+// //   font-size: 0.75rem;
+// //   line-height: 1.5;
+// //   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+// //   height: auto;
+// // }
+
+// // .p-dropdown:hover {
+// //   border-color: var(--primary-color);
+// // }
+
+// // .p-dropdown:focus {
+// //   outline: 0;
+// //   border-color: var(--primary-color);
+// //   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+// // }
+
+// // .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+// //   // padding: 0.5rem 1rem;
+// //   color: var(--text-color);
+// //   font-size: 0.75rem;
+// // }
+
+// // .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+// //   background-color: var(--surface-b);
+// //   color: var(--primary-color);
+// // }
+
+// // .p-toolbar .p-button {
+// //   padding: 0.15rem 0.5rem !important;
+// //   border: none;
+// //   border-radius: 4px;
+// //   font-size: 0.75rem !important;
+// //   cursor: pointer;
+// //   transition: background-color 0.15s ease-in-out;
+// //   height: auto;
+// // }
+
+// // .p-toolbar .p-button:hover {
+// //   filter: brightness(90%);
+// // }
+
+// // .p-toolbar .p-button:focus {
+// //   outline: none;
+// //   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.5);
+// // }
+
+// // // @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// // // html,
+// // // body {
+// // //   height: 100%;
+// // //   margin: 0;
+// // //   padding: 0;
+// // //   overflow-x: hidden;
+// // //   /* Prevent horizontal scrollbar if needed */
+// // // }
+
+// // // .ag-grid-container {
+// // //   position: relative;
+// // //   width: 100%;
+// // //   padding: 0;
+// // //   /* Remove padding */
+// // //   /* Decrease grid height by another 50px */
+// // //   height: calc(100vh - 80px -
+// // //       /* Assuming navbar height is 60px */
+// // //       (0.5rem * 2) -
+// // //       /* Toolbar padding (top and bottom) */
+// // //       (1px * 1) -
+// // //       /* Toolbar border (top) */
+// // //       (1px * 1) -
+// // //       /* Toolbar border (bottom) */
+// // //       20px -
+// // //       /* Margin below the card containing the toolbar */
+// // //       8px -
+// // //       /* Account for ag-theme-quartz-dark border padding */
+// // //       50px
+// // //       /* Decrease height by 50px */
+// // //     );
+// // //   background: #121212;
+// // //   display: flex;
+// // //   flex-direction: column;
+// // //   justify-content: center;
+// // //   border-radius: 16px;
+// // //   box-sizing: border-box;
+// // //   padding: 4px;
+// // // }
+
+// // // /* ✅ Fix Gradient Border Overlap */
+// // // // .ag-grid-container::before {
+// // // //   content: "";
+// // // //   position: absolute;
+// // // //   inset: 0;
+// // // //   padding: 4px;
+// // // //   border-radius: 10px;
+// // // //   background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
+// // // //   background-size: 300% 300%;
+// // // //   animation: gradient-border-animation 4s linear infinite;
+
+// // // //   /* Fix for Browser Compatibility */
+// // // //   -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+// // // //   mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+
+// // // //   -webkit-mask-composite: xor;
+// // // //   mask-composite: exclude;
+// // // // }
+
+// // // @keyframes gradient-border-animation {
+// // //   0% {
+// // //     background-position: 0% 50%;
+// // //   }
+
+// // //   50% {
+// // //     background-position: 100% 50%;
+// // //   }
+
+// // //   100% {
+// // //     background-position: 0% 50%;
+// // //   }
+// // // }
+
+// // // /* ✅ Fix AG Grid Height Inside the Container */
+// // // .ag-theme-quartz-dark {
+// // //   --ag-font-family: 'IBM Plex Sans', sans-serif;
+// // //   --ag-header-font-family: 'Kanit', sans-serif;
+// // //   --ag-cell-font-family: 'DM Sans', sans-serif;
+// // //   --ag-font-size: 14px;
+// // //   --ag-header-font-size: 16px;
+// // //   --ag-row-height: 48px;
+
+// // //   /* Sleek Borders */
+// // //   --ag-borders: 1px solid rgba(255, 255, 255, 0.1);
+// // //   --ag-border-radius: 12px;
+
+// // //   /* Ensure AG Grid fully fits the container and enables internal scrolling */
+// // //   width: 100%;
+// // //   height: 100%;
+// // //   /* Make the AG Grid take up the full height of its container */
+// // //   flex-grow: 1;
+// // //   min-height: 0;
+// // //   overflow: auto;
+// // //   /* Enable internal scrolling for the data */
+// // //   border-radius: inherit;
+// // //   /* Inherit border-radius from the container */
+// // // }
+
+// // // .card {
+// // //   margin-bottom: 20px;
+// // // }
+
+// // // .p-toolbar {
+// // //   height: 40px;
+// // //   padding: 0 0.5rem;
+// // //   border: 1px solid var(--surface-d);
+// // //   background-color: var(--surface-c);
+// // //   border-radius: 4px;
+// // //   display: flex;
+// // //   align-items: center;
+// // // }
+
+// // // .p-toolbar-group-start,
+// // // .p-toolbar-group-end {
+// // //   display: flex;
+// // //   align-items: center;
+// // // }
+
+// // // .p-toolbar-group-start>* {
+// // //   margin-right: 0.75rem;
+// // // }
+
+// // // .p-toolbar-group-start>*:last-child {
+// // //   margin-right: 0;
+// // // }
+
+// // // .p-toolbar label {
+// // //   font-weight: bold;
+// // //   color: var(--text-color-secondary);
+// // //   font-size: 0.75rem;
+// // // }
+
+// // // .p-dropdown {
+// // //   appearance: none;
+// // //   padding: 0.15rem 0.5rem;
+// // //   border: 1px solid var(--surface-border);
+// // //   border-radius: 4px;
+// // //   background-color: var(--surface-a);
+// // //   color: var(--text-color);
+// // //   font-size: 0.75rem;
+// // //   line-height: 1.5;
+// // //   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+// // //   height: auto;
+// // // }
+
+// // // .p-dropdown:hover {
+// // //   border-color: var(--primary-color);
+// // // }
+
+// // // .p-dropdown:focus {
+// // //   outline: 0;
+// // //   border-color: var(--primary-color);
+// // //   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+// // // }
+
+// // // .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+// // //   padding: 0.5rem 1rem;
+// // //   color: var(--text-color);
+// // //   font-size: 0.75rem;
+// // // }
+
+// // // .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+// // //   background-color: var(--surface-b);
+// // //   color: var(--primary-color);
+// // // }
+
+// // // .p-toolbar .p-button {
+// // //   padding: 0.15rem 0.5rem !important;
+// // //   border: none;
+// // //   border-radius: 4px;
+// // //   font-size: 0.75rem !important;
+// // //   cursor: pointer;
+// // //   transition: background-color 0.15s ease-in-out;
+// // //   height: auto;
+// // // }
+
+// // // .p-toolbar .p-button:hover {
+// // //   filter: brightness(90%);
+// // // }
+
+// // // .p-toolbar .p-button:focus {
+// // //   outline: none;
+// // //   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.5);
+// // // }
+// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Kanit:wght@400;600&display=swap');
+
+// html,
+// body {
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+//   overflow-x: hidden;
+//   font-family: 'DM Sans', sans-serif;
 // }
 
-// /* ✅ Fix AG Grid Height Inside the Container */
 // .ag-theme-quartz-dark {
 //   --ag-font-family: 'IBM Plex Sans', sans-serif;
 //   --ag-header-font-family: 'Kanit', sans-serif;
 //   --ag-cell-font-family: 'DM Sans', sans-serif;
 //   --ag-font-size: 14px;
 //   --ag-header-font-size: 16px;
-//   --ag-row-height: 48px;
+//   --ag-row-height: 50px;
 
-//   /* Sleek Borders */
-//   --ag-borders: 1px solid rgba(255, 255, 255, 0.1);
 //   --ag-border-radius: 12px;
+//   --ag-borders: 1px solid rgba(255, 255, 255, 0.1);
 
-//   /* Ensure AG Grid fully fits the container and enables internal scrolling */
 //   width: 100%;
 //   height: 100%;
-//   /* Make the AG Grid take up the full height of its container */
-//   flex-grow: 1;
 //   min-height: 0;
 //   overflow: auto;
-//   /* Enable internal scrolling for the data */
 //   border-radius: inherit;
-//   /* Inherit border-radius from the container */
 // }
 
-// .card {
-//   margin-bottom: 20px;
+// /* Glassmorphism Effect for Grid Container */
+// .ag-grid-container {
+//   position: relative;
+//   width: 100%;
+//   height: calc(100vh - 100px);
+//   background: rgba(255, 255, 255, 0.1);
+//   backdrop-filter: blur(12px);
+//   -webkit-backdrop-filter: blur(12px);
+//   border-radius: 12px;
+//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+//   padding: 16px;
+//   display: flex;
+//   flex-direction: column;
 // }
 
+// /* Styling for AG Grid Header */
+// .ag-header {
+//   background: rgba(0, 0, 0, 0.3) !important;
+//   color: #fff;
+//   font-weight: 600;
+// }
+
+// /* Row Hover Effect */
+// .ag-row:hover {
+//   background-color: rgba(255, 255, 255, 0.2) !important;
+// }
+
+// /* Table Borders */
+// .ag-root-wrapper {
+//   border-radius: 12px;
+//   border: 1px solid rgba(255, 255, 255, 0.2);
+// }
+
+// /* Toolbar Styling */
 // .p-toolbar {
-//   height: 40px;
-//   padding: 0 0.5rem;
-//   border: 1px solid var(--surface-d);
-//   background-color: var(--surface-c);
-//   border-radius: 4px;
+//   background: rgba(255, 255, 255, 0.1);
+//   border: 1px solid rgba(255, 255, 255, 0.2);
+//   backdrop-filter: blur(10px);
+//   padding: 8px 16px;
+//   border-radius: 8px;
 //   display: flex;
 //   align-items: center;
 // }
 
-// .p-toolbar-group-start,
-// .p-toolbar-group-end {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .p-toolbar-group-start>* {
-//   margin-right: 0.75rem;
-// }
-
-// .p-toolbar-group-start>*:last-child {
-//   margin-right: 0;
-// }
-
-// .p-toolbar label {
-//   font-weight: bold;
-//   color: var(--text-color-secondary);
-//   font-size: 0.75rem;
-// }
-
+// /* Dropdown Styling */
 // .p-dropdown {
-//   appearance: none;
-//   padding: 0.15rem 0.5rem;
-//   border: 1px solid var(--surface-border);
-//   border-radius: 4px;
-//   background-color: var(--surface-a);
-//   color: var(--text-color);
-//   font-size: 0.75rem;
-//   line-height: 1.5;
-//   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-//   height: auto;
+//   background: rgba(255, 255, 255, 0.2);
+//   color: #fff;
+//   border-radius: 8px;
+//   border: none;
+//   padding: 6px 12px;
 // }
 
 // .p-dropdown:hover {
-//   border-color: var(--primary-color);
+//   background: rgba(255, 255, 255, 0.3);
 // }
 
-// .p-dropdown:focus {
-//   outline: 0;
-//   border-color: var(--primary-color);
-//   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+// /* Button Styling */
+// .p-button {
+//   background: linear-gradient(90deg, #ff6a00, #ee0979);
+//   color: white;
+//   border-radius: 6px;
+//   padding: 6px 12px;
 // }
 
-// .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-//   padding: 0.5rem 1rem;
-//   color: var(--text-color);
-//   font-size: 0.75rem;
-// }
-
-// .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
-//   background-color: var(--surface-b);
-//   color: var(--primary-color);
-// }
-
-// .p-toolbar .p-button {
-//   padding: 0.15rem 0.5rem !important;
-//   border: none;
-//   border-radius: 4px;
-//   font-size: 0.75rem !important;
-//   cursor: pointer;
-//   transition: background-color 0.15s ease-in-out;
-//   height: auto;
-// }
-
-// .p-toolbar .p-button:hover {
+// .p-button:hover {
 //   filter: brightness(90%);
 // }
 
-// .p-toolbar .p-button:focus {
-//   outline: none;
-//   box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.5);
+
+// /* my-custom-theme.scss */
+
+// /* Base styles */
+// .ag-theme-my-custom-theme {
+//   --ag-foreground-color: #e0e0e0;
+//   /* Light gray text */
+//   --ag-background-color: #212121;
+//   /* Dark gray background */
+//   --ag-header-foreground-color: #fff;
+//   /* White header text */
+//   --ag-header-background-color: #37474f;
+//   /* Darker blue header background */
+//   --ag-odd-row-background-color: #263238;
+//   /* Slightly lighter row background */
+//   --ag-border-color: #424242;
+//   /* Darker border color */
+//   --ag-font-family: 'DM Sans, sans-serif';
+//   --ag-font-size: 14px;
+//   --ag-header-font-family: 'Kanit, sans-serif';
+//   --ag-header-font-size: 16px;
+//   --ag-cell-font-family: 'IBM Plex Sans, sans-serif';
+//   --ag-cell-font-size: 14px;
 // }
+
+// /* Header styles */
+// .ag-theme-my-custom-theme .ag-header {
+//   background-color: var(--ag-header-background-color);
+//   color: var(--ag-header-foreground-color);
+//   font-family: var(--ag-header-font-family);
+//   font-size: var(--ag-header-font-size);
+// }
+
+// /* Cell styles */
+// .ag-theme-my-custom-theme .ag-cell {
+//   color: var(--ag-foreground-color);
+//   font-family: var(--ag-cell-font-family);
+//   font-size: var(--ag-cell-font-size);
+//   border-bottom: 1px solid var(--ag-border-color);
+// }
+
+// /* Row styles */
+// .ag-theme-my-custom-theme .ag-row-odd {
+//   background-color: var(--ag-odd-row-background-color);
+// }
+
+// /* Border styles */
+// .ag-theme-my-custom-theme .ag-cell,
+// .ag-theme-my-custom-theme .ag-header-cell {
+//   border-right: 1px dashed #9696C8;
+// }
+
+// .ag-theme-my-custom-theme .ag-header-row {
+//   border-bottom: 2px solid var(--ag-border-color);
+// }
+
+// .ag-theme-my-custom-theme .ag-root-wrapper {
+//   border: 1px solid var(--ag-border-color);
+// }
+
+// /* Pagination styles */
+// .ag-theme-my-custom-theme .ag-paging-panel {
+//   background-color: var(--ag-background-color);
+//   border-top: 1px solid var(--ag-border-color);
+// }
+
+// .ag-theme-my-custom-theme .ag-paging-button {
+//   color: var(--ag-foreground-color);
+// }
+
+// .ag-theme-my-custom-theme .ag-paging-row-summary {
+//   color: var(--ag-foreground-color);
+// }
+
+// /* Selection styles */
+
+// .ag-theme-my-custom-theme .ag-row-selected {
+//   background-color: #1565c0;
+//   /* Blue when selected */
+//   color: #fff;
+// }
+
+/* Modern AG Grid Dark Theme Styling */
+
+/* Container styling */
+
+.ag-grid-container {
+  position: relative;
+  width: var(--grid-width, 100%);
+  height: var(--grid-height, calc(100vh - 100px));
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  // padding: 16px 24px;
+  /* Added padding from both sides (16px top/bottom, 24px left/right) */
+  display: flex;
+  flex-direction: column;
+}
+
+.ag-grid-container {
+  --ag-background-color: #1a1a2e;
+  --ag-foreground-color: #e6e6fa;
+  --ag-border-color: #3a3a5c;
+  --ag-secondary-border-color: #4a4a77;
+  --ag-header-background-color: #252542;
+  --ag-odd-row-background-color: rgba(74, 74, 119, 0.1);
+  --ag-header-foreground-color: #d1d1f6;
+  --ag-disabled-foreground-color: rgba(230, 230, 250, 0.5);
+  --ag-alpine-active-color: #7b7bcd;
+  --ag-selected-row-background-color: rgba(123, 123, 205, 0.2);
+  --ag-row-hover-color: rgba(123, 123, 205, 0.1);
+  --ag-column-hover-color: rgba(123, 123, 205, 0.1);
+  --ag-input-focus-border-color: #7b7bcd;
+  --ag-range-selection-border-color: #7b7bcd;
+  --ag-range-selection-background-color: rgba(123, 123, 205, 0.2);
+
+  /* Font settings */
+  --ag-font-family: 'IBM Plex Sans', 'DM Sans', 'Kanit', sans-serif;
+  --ag-font-size: 14px;
+  --ag-cell-horizontal-padding: 16px;
+
+  /* Border radius for modern look */
+  --ag-border-radius: 8px;
+
+  /* Card shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-radius: var(--ag-border-radius);
+  overflow: hidden;
+}
+
+/* Row styling */
+.ag-row {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(74, 74, 119, 0.15);
+  transition: background-color 0.2s ease;
+}
+
+.ag-row-hover {
+  background-color: var(--ag-row-hover-color) !important;
+}
+
+.ag-row-selected {
+  background-color: var(--ag-selected-row-background-color) !important;
+}
+
+/* Header styling */
+.ag-header {
+  border-bottom: 2px solid var(--ag-border-color);
+}
+
+.ag-header-cell {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 500;
+  padding: 16px var(--ag-cell-horizontal-padding);
+}
+
+.ag-header-cell:hover {
+  background-color: rgba(74, 74, 119, 0.2);
+}
+
+/* Cell styling */
+.ag-cell {
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  padding: 12px var(--ag-cell-horizontal-padding);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-cell-focus {
+  border: 1px solid var(--ag-alpine-active-color) !important;
+}
+
+/* Column separator */
+.ag-cell-with-dashed-border {
+  border-right: 1px dashed #9696C8;
+}
+
+/* Pagination controls */
+.ag-paging-panel {
+  color: var(--ag-foreground-color);
+  font-family: var(--ag-font-family);
+  background-color: var(--ag-header-background-color);
+  padding: 12px 20px;
+  border-top: 1px solid var(--ag-border-color);
+}
+
+.ag-paging-button {
+  background-color: transparent;
+  border: 1px solid var(--ag-border-color);
+  border-radius: 4px;
+  color: var(--ag-foreground-color);
+  padding: 4px 10px;
+  transition: all 0.2s ease;
+}
+
+.ag-paging-button:hover:not(.ag-disabled) {
+  background-color: var(--ag-alpine-active-color);
+  border-color: var(--ag-alpine-active-color);
+  color: white;
+}
+
+/* Checkboxes */
+.ag-checkbox-input-wrapper {
+  border-radius: 4px;
+  border: 1px solid var(--ag-border-color);
+  background-color: transparent;
+}
+
+.ag-checkbox-input-wrapper.ag-checked {
+  background-color: var(--ag-alpine-active-color);
+  border-color: var(--ag-alpine-active-color);
+}
+
+/* Filter popup */
+.ag-menu {
+  background-color: var(--ag-background-color);
+  border: 1px solid var(--ag-border-color);
+  border-radius: var(--ag-border-radius);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for row changes */
+.ag-row-animation {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(74, 74, 119, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(123, 123, 205, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(123, 123, 205, 0.7);
+}

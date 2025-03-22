@@ -7,9 +7,11 @@ import { DialogboxComponent } from '../../../shared/AGGridcomponents/dialogbox/d
 import { HomePageComponent } from '../../../layouts/dashboard/home-page/home-page.component';
 import { InvoiceDetailCardComponent } from '../invoice-detailsview/invoice-detailsview.component';
 import { InvoicePrintComponent } from '../invoice-print/invoice-print.component';
+import { ToolbarComponent } from "../../../shared/SharedComponent/toolbar/toolbar.component";
+
 @Component({
   selector: 'app-invoice-view',
-  imports: [SharedGridComponent],
+  imports: [SharedGridComponent, ToolbarComponent, ToolbarComponent],
   templateUrl: './invoice-view.component.html',
   styleUrl: './invoice-view.component.scss'
 })
