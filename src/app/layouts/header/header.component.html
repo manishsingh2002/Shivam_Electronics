@@ -5,9 +5,10 @@
       <span class="sr-only">Home</span>
       Shivam Electronics
     </a>
+    <!-- menu.toggle($event), -->
     <a class="block text-teal-600 dark:text-teal-300">
       <span class="sr-only">Home</span>
-      <button (click)="[menu.toggle($event),showPanel()]" type="button"
+      <button (click)="[showPanel()]" type="button"
         class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
         <span class="sr-only">Open user menu</span>
@@ -18,7 +19,7 @@
             fill="currentColor" />
         </svg>
       </button>
-      <p-tieredmenu #menu [model]="menuItems" [popup]="true" />
+      <!-- <p-tieredmenu #me nu [model]="menuItems" [popup]="true" /> -->
     </a>
 
     <div class="flex flex-1 items-center justify-end md:justify-between">
@@ -43,6 +44,8 @@
   </div>
 </header>
 
+
+<!-- sidebar drawer -->
 <div class="card flex justify-start" styleClass="w-62 md:w-63">
   <p-drawer [(visible)]="visibles" [modal]="true">
     <ng-template #header>

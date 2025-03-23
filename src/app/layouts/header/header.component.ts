@@ -12,11 +12,11 @@ import { StyleClass } from 'primeng/styleclass';
 import { Drawer } from 'primeng/drawer';
 import { ThemeService } from '../../core/services/theme.service';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { ToolbarComponent } from "../../shared/SharedComponent/toolbar/toolbar.component";
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    TieredMenu,
     ButtonModule,
     CommonModule,
     DrawerModule,
