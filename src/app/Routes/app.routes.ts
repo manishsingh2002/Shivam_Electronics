@@ -154,7 +154,13 @@ export const appRoutes: Routes = [
       { path: 'dashboard', component: MainDashboardComponent },
       {
         path: 'admin',
-        children: [{ path: 'adminDashboard', component: AdminDashboardComponent }],
+        children: [
+          { path: 'adminDashboard', component: AdminDashboardComponent },
+          { path: 'users', component: AdminUserComponent },
+          { path: 'payment', component: PaymentComponent },
+          // { path: 'adminDashboard', component: AdminDashboardComponent },
+
+        ],
       },
       {
         path: 'payment',

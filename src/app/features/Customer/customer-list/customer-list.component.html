@@ -1,4 +1,17 @@
-<div class="card">
+<app-common-header [title]="'Customer List'"></app-common-header>
+<div class="container mx-auto mt-4">
+  <app-shared-grid
+    [gridHeight]="'520px'"
+    [gridWidth]="'100%'"
+    [padding]="'0'"
+    [data]="data" 
+    [rowSelectionMode]="rowSelectionMode"
+    [column]="column"
+    (eventFromGrid)="eventFromGrid($event)"
+    >
+  </app-shared-grid>
+</div>
+<!-- <div class="card">
   <p-toast />
   <p-toolbar styleClass="mb-6">
     <ng-template #start>
@@ -9,16 +22,12 @@
     <ng-template>
       <p-select [options]="this.customersdropdowndata" optionLabel="fullname"></p-select>
       <p-select [options]="this.customersdropdowndata" optionLabel="email"></p-select>
-      <!-- <p-select [options]="this.customersdropdowndata" optionLabel="email"></p-select> -->
-
     </ng-template>
     <ng-template #end>
       <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" auto
         customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
       <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
     </ng-template>
-
-
   </p-toolbar>
   <p-table #dt [scrollable]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
     scrollHeight="450px" [value]="customers" [rows]="10" [columns]="cols" [paginator]="true"
@@ -49,7 +58,6 @@
         <th pSortableColumn="guaranteerId" style="min-width: 10rem">
           guaranteerId <p-sortIcon field="guaranteerId" />
         </th>
-        <!-- <th pSortableColumn="ratingAverage" style="min-width: 12rem">    Rating     <p-sortIcon field="ratingAverage" /> </th> -->
         <th pSortableColumn="status" style="min-width: 12rem">
           Status <p-sortIcon field="status" />
         </th>
@@ -92,170 +100,9 @@
   </p-table>
   <p-dialog [(visible)]="customerDialog" [style]="{ width: 'auto' }" header="customer Details" [modal]="true">
     <ng-template #content>
-      <!-- <app-customer-master [redirectedData]="redirectedcustomer"></app-customer-master>-->
     </ng-template>
-    <!-- <ng-template #footer>
-      <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-      <p-button label="Save" icon="pi pi-check" />
-    </ng-template> -->
+
   </p-dialog>
 
   <p-confirmDialog [style]="{ width: '450px' }" />
-</div>
-
-<!-- <body class="bg-gray-900">
-  <div class="w-full h-screen p-4">
-      <div class="flex flex-wrap h-full">
-          Treehouses Section
-          <div class="w-full lg:w-2/5 h-2/5 lg:h-full relative">
-              <img alt="A spherical treehouse suspended among tall trees in a forest" class="w-full h-full object-cover rounded-lg" src="https://storage.googleapis.com/a1aa/image/-XymGELQMIU2ugEfFAHiluOqAbhd4dGZ8ierC_B6dkI.jpg"/>
-              <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 rounded-b-lg">
-                  <p class="text-white text-lg font-semibold">Personal info</p>
-              </div>
-          </div>
-          
-          Right Section
-          <div class="w-full lg:w-3/5 h-3/5 lg:h-full flex flex-wrap">
-            
-            <div class="w-full h-1/2 relative">
-              <div class="w-full h-full object-cover rounded-lg bg-gray-800 p-4 overflow-hidden">
-                  <app-shared-grid [data]="this.customers" [column]="column" (dataChanged)="handleDataChange($event)"></app-shared-grid>
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 rounded-b-lg">
-                  <p class="text-white text-lg font-semibold">Customers data</p>
-              </div>
-          </div>
-              Mansions Section
-              <div class="w-full lg:w-1/2 h-1/2 relative">
-                  <img alt="A large mansion with ivy-covered walls and a well-maintained garden" class="w-full h-full object-cover rounded-lg" src="https://storage.googleapis.com/a1aa/image/iWSaiZBXrnWyCo-lCIXbyPmqJsQB8ocSGyUTMsOZmeQ.jpg"/>
-                  <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 rounded-b-lg">
-                      <p class="text-white text-lg font-semibold">Mansions</p>
-                  </div>
-              </div>
-              
-              Lakefront Cottages Section
-              <div class="w-full lg:w-1/2 h-1/2 relative">
-                  <img alt="A lakefront cottage with a triangular roof, surrounded by trees and overlooking a lake" class="w-full h-full object-cover rounded-lg" src="https://storage.googleapis.com/a1aa/image/CVcWKkUuf9cebftQ_MtjOVj5WiF8bIi3C0zQ4GHNCRE.jpg"/>
-                  <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 rounded-b-lg">
-                      <p class="text-white text-lg font-semibold">Lakefront cottages</p>
-                  </div>
-              </div>
-              
-              Designer Homes Section with Grid
-              
-          </div>
-      </div>
-  </div>
-</body> -->
-
-<!-- <div class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6" *ngFor="let customer of customers">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-    Customer Information Section
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-4 border-b pb-2 dark:border-gray-700">Customer Details</h2>
-      
-      <div class="space-y-4">
-        <div>
-          <label class="font-semibold">Full Name:</label>
-          <p class="dark:text-gray-300">{{ customer?.fullname }}</p>
-        </div>
-        
-        <div>
-          <label class="font-semibold">Email:</label>
-          <p class="dark:text-gray-300">{{ customer?.email }}</p>
-        </div>
-        
-        <div>
-          <label class="font-semibold">Status:</label>
-          <span [class]="'px-2 py-1 rounded-full text-sm ' + getStatusClass(customer?.status)">
-            {{ customer?.status }}
-          </span>
-        </div>
-      
-      </div>
-    </div>
-
-    Financial Information Section
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-4 border-b pb-2 dark:border-gray-700">Financial Overview</h2>
-      
-      <div class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="font-semibold">Total Purchased:</label>
-            <p class="text-xl dark:text-green-400">
-              {{ customer?.totalPurchasedAmount | currency }}
-            </p>
-          </div>
-          <div>
-            <label class="font-semibold">Remaining Balance:</label>
-            <p class="text-xl dark:text-red-400">
-              {{ customer?.remainingAmount | currency }}
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <label class="font-semibold">Payment History:</label>
-          <div class="space-y-2 mt-2 max-h-40 overflow-y-auto">
-            <div *ngFor="let payment of customer?.paymentHistory" 
-                 class="p-2 rounded bg-gray-50 dark:bg-gray-700">
-              {{ payment.amount | currency }} - {{ payment.createdAt | date }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    Contact Information Section
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-4 border-b pb-2 dark:border-gray-700">Contact Information</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <h3 class="font-semibold mb-2">Phone Numbers</h3>
-          <ul class="space-y-2">
-            <li *ngFor="let phone of customer?.phoneNumbers" 
-                class="p-2 rounded bg-gray-50 dark:bg-gray-700">
-              {{ phone.number }} ({{ phone.type }})
-              <span *ngIf="phone.primary" class="text-xs text-blue-500 ml-2">Primary</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-semibold mb-2">Addresses</h3>
-          <ul class="space-y-2">
-            <li *ngFor="let address of customer?.addresses" 
-                class="p-2 rounded bg-gray-50 dark:bg-gray-700">
-              <p>{{ address.street }}</p>
-              <p>{{ address.city }}, {{ address.state }} {{ address.zipCode }}</p>
-              <p class="text-sm text-gray-500 dark:text-gray-400">
-                {{ address.type }} <span *ngIf="address.isDefault">(Default)</span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    Cart and Invoices Section
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 class="text-2xl font-bold mb-4 border-b pb-2 dark:border-gray-700">Cart & Invoices</h2>
-      
-      <div class="space-y-4">
-        <div *ngFor="let item of customer?.cart?.items" class="p-4 rounded bg-gray-50 dark:bg-gray-700">
-          <h3 class="font-semibold">customer: {{ item.customerId?.name }}</h3>
-          <div class="mt-2">
-            <h4 class="text-sm font-semibold">Invoices:</h4>
-            <ul class="space-y-1 mt-1">
-              <li *ngFor="let invoice of item.invoiceIds" class="text-sm">
-                {{ invoice.amount | currency }} - {{ invoice.createdAt | date }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div> -->

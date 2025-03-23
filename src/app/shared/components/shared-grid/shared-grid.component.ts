@@ -92,9 +92,9 @@ export class SharedGridComponent implements OnInit, OnChanges {
   @Input() gridWidth: any
   @Input() padding: any
   ngOnInit(): void {
-    this.gridHeight = this.gridHeight ? this.gridHeight : '600px'
+    this.gridHeight = this.gridHeight ? this.gridHeight : '500px'
     this.gridWidth = this.gridWidth ? this.gridWidth : '100%'
-    this.padding = this.padding ? this.padding : '0 10px'
+    this.padding = this.padding ? this.padding : '0 0px'
 
     if (!this.column || this.column.length === 0) {
       this.columnDefs = this.generateDefaultColumns(this.rowData);

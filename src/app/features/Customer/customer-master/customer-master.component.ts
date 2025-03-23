@@ -7,7 +7,7 @@ import { ApiService } from '../../../core/services/api.service';
 import { Component, Inject, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
-import { FileUploadModule } from 'primeng/fileupload';
+import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -20,7 +20,6 @@ import { HttpClient } from '@angular/common/http';
 import { FileUpload } from 'primeng/fileupload';
 import { FocusTrapModule } from 'primeng/focustrap';// import { SupabaseService } from '../../../core/services/supabase.service';
 import lodash from 'lodash'
-
 interface Customer {
   fullname: string;
   profileImg: string;
@@ -125,7 +124,22 @@ export class CustomerMasterComponent implements OnInit {
 
   @ViewChild('fileUploader') fileUploader!: FileUpload;
 
+  uploadedFiles: any[] = [];
 
+
+  // onUpload(event:UploadEvent) {
+  //     for(let file of event?.files) {
+  //         this.uploadedFiles.push(file);
+  //     }
+  //   }
+  onUpload(event: any) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+    this.fileUploader.clear();
+  }
+
+  
   constructor(
     // private supabase: SupabaseService,
     private ApiService: ApiService,

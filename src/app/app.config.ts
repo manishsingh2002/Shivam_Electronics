@@ -15,7 +15,8 @@ import { ErrorInterceptor } from './core/Interceptors/error.interceptor';
 // import { DndModule } from 'ngx-drag-drop';
 // import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import Nora from "@primeng/themes/nora";
-const MyPreset = definePreset(Aura, {
+const MyPreset = definePreset(Aura,
+     {
     primitive: {
         borderRadius: {
             none: "0",
@@ -5252,6 +5253,9 @@ export const appConfig: ApplicationConfig = {
         providePrimeNG({
             theme: {
                 preset: MyPreset,
+                options: {
+                    darkModeSelector: 'none' // or 'none' to disable dark mode entirely
+                  }
             },
         }),
     ],
